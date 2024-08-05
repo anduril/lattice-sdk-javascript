@@ -1,5 +1,5 @@
 {
-  "name": "anduril-javascript",
+  "name": "@anduril/anduril-javascript",
   "version": "1.0.0",
   "description": "The Anduril SDK vended in Javascript",
   "repository": {
