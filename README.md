@@ -22,7 +22,7 @@ Create a file in the package directory
 
 ### Index.ts
 
-```
+```ts
 import { EntityManagerAPI } from "@anduril/anduril-javascript/src/anduril/entitymanager/v1/entity_manager_api.pub_connect";
 import { createGrpcTransport } from "@connectrpc/connect-node";
 import { createPromiseClient } from "@connectrpc/connect";
