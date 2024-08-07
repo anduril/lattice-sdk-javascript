@@ -1,6 +1,6 @@
 {
   "name": "@anduril/anduril-javascript",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "The Anduril SDK vended in Javascript",
   "repository": {
     "type": "git",
