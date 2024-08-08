@@ -6,6 +6,7 @@
 import type { Any, BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Principal, Relations, StatusUpdate, Task, TaskEntity, TaskEvent, TaskView } from "./task.pub_pb.js";
+import type { CancelRequest, CompleteRequest, ExecuteRequest } from "./task_api.pub_pb.js";
 
 /**
  * Request to create a Task.
@@ -339,6 +340,14 @@ export declare class StreamTasksRequest extends Message<StreamTasksRequest> {
    */
   heartbeatPeriodMillis: number;
 
+  /**
+   * Optional flag to only include tasks created or updated after the stream is initiated, and not any previous preexisting tasks.
+   * If unset, the stream will include any new tasks and task updates, as well as all preexisting tasks.
+   *
+   * @generated from field: bool exclude_preexisting_tasks = 4;
+   */
+  excludePreexistingTasks: boolean;
+
   constructor(data?: PartialMessage<StreamTasksRequest>);
 
   static readonly runtime: typeof proto3;
@@ -387,6 +396,88 @@ export declare class StreamTasksResponse extends Message<StreamTasksResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamTasksResponse;
 
   static equals(a: StreamTasksResponse | PlainMessage<StreamTasksResponse> | undefined, b: StreamTasksResponse | PlainMessage<StreamTasksResponse> | undefined): boolean;
+}
+
+/**
+ * Request for streaming Tasks ready for agent execution.
+ *
+ * @generated from message anduril.taskmanager.v1.ListenAsAgentRequest
+ */
+export declare class ListenAsAgentRequest extends Message<ListenAsAgentRequest> {
+  /**
+   * Selector criteria to determine which Agent Tasks the agent receives
+   *
+   * @generated from oneof anduril.taskmanager.v1.ListenAsAgentRequest.agent_selector
+   */
+  agentSelector: {
+    /**
+     * The requesting agent will only receive Agent Tasks in the stream that have any of these specified entity ids as the task's assignee
+     *
+     * @generated from field: anduril.taskmanager.v1.EntityIds entity_ids = 1;
+     */
+    value: EntityIds;
+    case: "entityIds";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<ListenAsAgentRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.taskmanager.v1.ListenAsAgentRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListenAsAgentRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListenAsAgentRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListenAsAgentRequest;
+
+  static equals(a: ListenAsAgentRequest | PlainMessage<ListenAsAgentRequest> | undefined, b: ListenAsAgentRequest | PlainMessage<ListenAsAgentRequest> | undefined): boolean;
+}
+
+/**
+ * Response for streaming Tasks ready for agent execution.
+ *
+ * @generated from message anduril.taskmanager.v1.ListenAsAgentResponse
+ */
+export declare class ListenAsAgentResponse extends Message<ListenAsAgentResponse> {
+  /**
+   * Action for agent to execute
+   *
+   * @generated from oneof anduril.taskmanager.v1.ListenAsAgentResponse.request
+   */
+  request: {
+    /**
+     * @generated from field: anduril.taskmanager.v1.ExecuteRequest execute_request = 1;
+     */
+    value: ExecuteRequest;
+    case: "executeRequest";
+  } | {
+    /**
+     * @generated from field: anduril.taskmanager.v1.CancelRequest cancel_request = 2;
+     */
+    value: CancelRequest;
+    case: "cancelRequest";
+  } | {
+    /**
+     * @generated from field: anduril.taskmanager.v1.CompleteRequest complete_request = 3;
+     */
+    value: CompleteRequest;
+    case: "completeRequest";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<ListenAsAgentResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.taskmanager.v1.ListenAsAgentResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListenAsAgentResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListenAsAgentResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListenAsAgentResponse;
+
+  static equals(a: ListenAsAgentResponse | PlainMessage<ListenAsAgentResponse> | undefined, b: ListenAsAgentResponse | PlainMessage<ListenAsAgentResponse> | undefined): boolean;
 }
 
 /**
@@ -447,5 +538,31 @@ export declare class Heartbeat extends Message<Heartbeat> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Heartbeat;
 
   static equals(a: Heartbeat | PlainMessage<Heartbeat> | undefined, b: Heartbeat | PlainMessage<Heartbeat> | undefined): boolean;
+}
+
+/**
+ * Entity IDs wrapper.
+ *
+ * @generated from message anduril.taskmanager.v1.EntityIds
+ */
+export declare class EntityIds extends Message<EntityIds> {
+  /**
+   * @generated from field: repeated string entity_ids = 1;
+   */
+  entityIds: string[];
+
+  constructor(data?: PartialMessage<EntityIds>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.taskmanager.v1.EntityIds";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EntityIds;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EntityIds;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EntityIds;
+
+  static equals(a: EntityIds | PlainMessage<EntityIds> | undefined, b: EntityIds | PlainMessage<EntityIds> | undefined): boolean;
 }
 

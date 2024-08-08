@@ -8,6 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const { Any, proto3, Timestamp } = require("@bufbuild/protobuf");
 const { Principal, Relations, StatusUpdate, Task, TaskEntity, TaskEvent, TaskView } = require("./task.pub_pb.js");
+const { CancelRequest, CompleteRequest, ExecuteRequest } = require("./task_api.pub_pb.js");
 
 /**
  * Request to create a Task.
@@ -126,6 +127,7 @@ const StreamTasksRequest = proto3.makeMessageType(
     { no: 1, name: "rate_limit", kind: "message", T: RateLimit },
     { no: 2, name: "views", kind: "enum", T: proto3.getEnumType(TaskView), repeated: true },
     { no: 3, name: "heartbeat_period_millis", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "exclude_preexisting_tasks", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
@@ -139,6 +141,32 @@ const StreamTasksResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "task_event", kind: "message", T: TaskEvent },
     { no: 2, name: "heartbeat", kind: "message", T: Heartbeat },
+  ],
+);
+
+/**
+ * Request for streaming Tasks ready for agent execution.
+ *
+ * @generated from message anduril.taskmanager.v1.ListenAsAgentRequest
+ */
+const ListenAsAgentRequest = proto3.makeMessageType(
+  "anduril.taskmanager.v1.ListenAsAgentRequest",
+  () => [
+    { no: 1, name: "entity_ids", kind: "message", T: EntityIds, oneof: "agent_selector" },
+  ],
+);
+
+/**
+ * Response for streaming Tasks ready for agent execution.
+ *
+ * @generated from message anduril.taskmanager.v1.ListenAsAgentResponse
+ */
+const ListenAsAgentResponse = proto3.makeMessageType(
+  "anduril.taskmanager.v1.ListenAsAgentResponse",
+  () => [
+    { no: 1, name: "execute_request", kind: "message", T: ExecuteRequest, oneof: "request" },
+    { no: 2, name: "cancel_request", kind: "message", T: CancelRequest, oneof: "request" },
+    { no: 3, name: "complete_request", kind: "message", T: CompleteRequest, oneof: "request" },
   ],
 );
 
@@ -164,6 +192,18 @@ const Heartbeat = proto3.makeMessageType(
   ],
 );
 
+/**
+ * Entity IDs wrapper.
+ *
+ * @generated from message anduril.taskmanager.v1.EntityIds
+ */
+const EntityIds = proto3.makeMessageType(
+  "anduril.taskmanager.v1.EntityIds",
+  () => [
+    { no: 1, name: "entity_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
 
 exports.CreateTaskRequest = CreateTaskRequest;
 exports.CreateTaskResponse = CreateTaskResponse;
@@ -175,5 +215,8 @@ exports.UpdateStatusRequest = UpdateStatusRequest;
 exports.UpdateStatusResponse = UpdateStatusResponse;
 exports.StreamTasksRequest = StreamTasksRequest;
 exports.StreamTasksResponse = StreamTasksResponse;
+exports.ListenAsAgentRequest = ListenAsAgentRequest;
+exports.ListenAsAgentResponse = ListenAsAgentResponse;
 exports.RateLimit = RateLimit;
 exports.Heartbeat = Heartbeat;
+exports.EntityIds = EntityIds;
