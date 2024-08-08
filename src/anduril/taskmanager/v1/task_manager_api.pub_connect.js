@@ -6,7 +6,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 
-const { CreateTaskRequest, CreateTaskResponse, GetTaskRequest, GetTaskResponse, StreamTasksRequest, StreamTasksResponse, UpdateStatusRequest, UpdateStatusResponse, UpdateTaskRequest, UpdateTaskResponse } = require("./task_manager_api.pub_pb.js");
+const { CreateTaskRequest, CreateTaskResponse, GetTaskRequest, GetTaskResponse, ListenAsAgentRequest, ListenAsAgentResponse, StreamTasksRequest, StreamTasksResponse, UpdateStatusRequest, UpdateStatusResponse, UpdateTaskRequest, UpdateTaskResponse } = require("./task_manager_api.pub_pb.js");
 const { MethodKind } = require("@bufbuild/protobuf");
 
 /**
@@ -68,6 +68,7 @@ const TaskManagerAPI = {
     },
     /**
      * Stream all existing live (not yet done) Tasks and any new updates.
+     * Intended for clients to gain visibility into real time updates for live Tasks.
      *
      * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.StreamTasks
      */
@@ -75,6 +76,18 @@ const TaskManagerAPI = {
       name: "StreamTasks",
       I: StreamTasksRequest,
       O: StreamTasksResponse,
+      kind: MethodKind.ServerStreaming,
+    },
+    /**
+     * Stream Tasks ready for RPC Agent execution that match agent selector (ex: entity_ids).
+     * Intended for use by Taskable Agents that need to receive Tasks ready for execution by RPC (no Flux access)
+     *
+     * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.ListenAsAgent
+     */
+    listenAsAgent: {
+      name: "ListenAsAgent",
+      I: ListenAsAgentRequest,
+      O: ListenAsAgentResponse,
       kind: MethodKind.ServerStreaming,
     },
   }
