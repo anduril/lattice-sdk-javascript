@@ -9,6 +9,7 @@ import type { Entity, Provenance } from "./entity.pub_pb.js";
 import type { Statement } from "./filter.pub_pb.js";
 import type { RateLimit } from "./rate_limit.pub_pb.js";
 import type { OverrideStatus } from "./types.pub_pb.js";
+import type { RelationshipType } from "./relationship.pub_pb.js";
 
 /**
  * The type of entity event.
@@ -501,6 +502,172 @@ export declare class DeleteEntityResponse extends Message<DeleteEntityResponse> 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteEntityResponse;
 
   static equals(a: DeleteEntityResponse | PlainMessage<DeleteEntityResponse> | undefined, b: DeleteEntityResponse | PlainMessage<DeleteEntityResponse> | undefined): boolean;
+}
+
+/**
+ * The set of relationships to add to an entity. Relationships are specified from the primary entity to the
+ * other entity specified in the relationship request(s).
+ *
+ * @generated from message anduril.entitymanager.v1.RelateEntityRequest
+ */
+export declare class RelateEntityRequest extends Message<RelateEntityRequest> {
+  /**
+   * The entity onto which relationships are being added.
+   *
+   * @generated from field: string entity_id = 1;
+   */
+  entityId: string;
+
+  /**
+   * The relationships to add to the entity.
+   *
+   * @generated from field: repeated anduril.entitymanager.v1.RelationshipRequest relationships = 2;
+   */
+  relationships: RelationshipRequest[];
+
+  constructor(data?: PartialMessage<RelateEntityRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.RelateEntityRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RelateEntityRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RelateEntityRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RelateEntityRequest;
+
+  static equals(a: RelateEntityRequest | PlainMessage<RelateEntityRequest> | undefined, b: RelateEntityRequest | PlainMessage<RelateEntityRequest> | undefined): boolean;
+}
+
+/**
+ * A request for a relationship on an entity. Forms a partial of the entitymanager.v1.Relationship message.
+ *
+ * @generated from message anduril.entitymanager.v1.RelationshipRequest
+ */
+export declare class RelationshipRequest extends Message<RelationshipRequest> {
+  /**
+   * The entity ID to which this entity is related.
+   *
+   * @generated from field: string related_entity_id = 1;
+   */
+  relatedEntityId: string;
+
+  /**
+   * If RelationshipID is empty, a new relationship is created. Otherwise, the service will attempt
+   * to update an already existing relationship on the entity.
+   *
+   * @generated from field: string relationship_id = 2;
+   */
+  relationshipId: string;
+
+  /**
+   * The relationship type
+   *
+   * @generated from field: anduril.entitymanager.v1.RelationshipType relationship_type = 3;
+   */
+  relationshipType?: RelationshipType;
+
+  constructor(data?: PartialMessage<RelationshipRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.RelationshipRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RelationshipRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RelationshipRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RelationshipRequest;
+
+  static equals(a: RelationshipRequest | PlainMessage<RelationshipRequest> | undefined, b: RelationshipRequest | PlainMessage<RelationshipRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.RelateEntityResponse
+ */
+export declare class RelateEntityResponse extends Message<RelateEntityResponse> {
+  /**
+   * Newly related entity object with only Relationships component present.
+   *
+   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
+   */
+  entity?: Entity;
+
+  constructor(data?: PartialMessage<RelateEntityResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.RelateEntityResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RelateEntityResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RelateEntityResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RelateEntityResponse;
+
+  static equals(a: RelateEntityResponse | PlainMessage<RelateEntityResponse> | undefined, b: RelateEntityResponse | PlainMessage<RelateEntityResponse> | undefined): boolean;
+}
+
+/**
+ * The relationships to remove from an entity.
+ *
+ * @generated from message anduril.entitymanager.v1.UnrelateEntityRequest
+ */
+export declare class UnrelateEntityRequest extends Message<UnrelateEntityRequest> {
+  /**
+   * The entity from which relationships are being removed.
+   *
+   * @generated from field: string entity_id = 1;
+   */
+  entityId: string;
+
+  /**
+   * The relationships to delete on the entity, specified as relationship id.
+   *
+   * @generated from field: repeated string relationship_ids = 2;
+   */
+  relationshipIds: string[];
+
+  constructor(data?: PartialMessage<UnrelateEntityRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.UnrelateEntityRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UnrelateEntityRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UnrelateEntityRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UnrelateEntityRequest;
+
+  static equals(a: UnrelateEntityRequest | PlainMessage<UnrelateEntityRequest> | undefined, b: UnrelateEntityRequest | PlainMessage<UnrelateEntityRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.UnrelateEntityResponse
+ */
+export declare class UnrelateEntityResponse extends Message<UnrelateEntityResponse> {
+  /**
+   * Updated entity object with only Relationships component present.
+   *
+   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
+   */
+  entity?: Entity;
+
+  constructor(data?: PartialMessage<UnrelateEntityResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.UnrelateEntityResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UnrelateEntityResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UnrelateEntityResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UnrelateEntityResponse;
+
+  static equals(a: UnrelateEntityResponse | PlainMessage<UnrelateEntityResponse> | undefined, b: UnrelateEntityResponse | PlainMessage<UnrelateEntityResponse> | undefined): boolean;
 }
 
 /**

@@ -37,6 +37,8 @@ const AltIdType = proto3.makeEnum(
     {no: 18, name: "ALT_ID_TYPE_DODAAC", localName: "DODAAC"},
     {no: 19, name: "ALT_ID_TYPE_UIC", localName: "UIC"},
     {no: 20, name: "ALT_ID_TYPE_NORAD_CAT_ID", localName: "NORAD_CAT_ID"},
+    {no: 23, name: "ALT_ID_TYPE_UNOOSA_NAME", localName: "UNOOSA_NAME"},
+    {no: 24, name: "ALT_ID_TYPE_UNOOSA_ID", localName: "UNOOSA_ID"},
   ],
 );
 

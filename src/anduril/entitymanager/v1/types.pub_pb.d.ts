@@ -167,6 +167,29 @@ export declare enum AltIdType {
    * @generated from enum value: ALT_ID_TYPE_NORAD_CAT_ID = 20;
    */
   NORAD_CAT_ID = 20,
+
+  /**
+   * Space object name. If populated, use names from the UN Office
+   * of Outer Space Affairs designator index, otherwise set field to UNKNOWN.
+   *
+   * @generated from enum value: ALT_ID_TYPE_UNOOSA_NAME = 23;
+   */
+  UNOOSA_NAME = 23,
+
+  /**
+   * Space object identifier. If populated, use the international spacecraft designator
+   * as published in the UN Office of Outer Space Affairs designator index, otherwise set to UNKNOWN.
+   * Recommended values have the format YYYYNNNP{PP}, where:
+   *  YYYY = Year of launch.
+   *  NNN = Three-digit serial number of launch
+   *  in year YYYY (with leading zeros).
+   *  P{PP} = At least one capital letter for the
+   *  identification of the part brought
+   *  into space by the launch.
+   *
+   * @generated from enum value: ALT_ID_TYPE_UNOOSA_ID = 24;
+   */
+  UNOOSA_ID = 24,
 }
 
 /**

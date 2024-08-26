@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { DeleteEntityRequest, DeleteEntityResponse, GetEntityRequest, GetEntityResponse, OverrideEntityRequest, OverrideEntityResponse, PublishEntitiesRequest, PublishEntitiesResponse, PutEntityRequest, PutEntityResponse, RemoveEntityOverrideRequest, RemoveEntityOverrideResponse, StreamEntityComponentsRequest, StreamEntityComponentsResponse } from "./entity_manager_api.pub_pb.js";
+import { DeleteEntityRequest, DeleteEntityResponse, GetEntityRequest, GetEntityResponse, OverrideEntityRequest, OverrideEntityResponse, PublishEntitiesRequest, PublishEntitiesResponse, PutEntityRequest, PutEntityResponse, RelateEntityRequest, RelateEntityResponse, RemoveEntityOverrideRequest, RemoveEntityOverrideResponse, StreamEntityComponentsRequest, StreamEntityComponentsResponse, UnrelateEntityRequest, UnrelateEntityResponse } from "./entity_manager_api.pub_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -99,6 +99,29 @@ export declare const EntityManagerAPI: {
       readonly name: "DeleteEntity",
       readonly I: typeof DeleteEntityRequest,
       readonly O: typeof DeleteEntityResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Creates or Updates relationships on an Entity. All relationships that are being added in the request
+     * succeed or fail as a batch (i.e. if any one relationship is invalid, the request will fail).
+     *
+     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.RelateEntity
+     */
+    readonly relateEntity: {
+      readonly name: "RelateEntity",
+      readonly I: typeof RelateEntityRequest,
+      readonly O: typeof RelateEntityResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Deletes relationships on an Entity.
+     *
+     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.UnrelateEntity
+     */
+    readonly unrelateEntity: {
+      readonly name: "UnrelateEntity",
+      readonly I: typeof UnrelateEntityRequest,
+      readonly O: typeof UnrelateEntityResponse,
       readonly kind: MethodKind.Unary,
     },
   }

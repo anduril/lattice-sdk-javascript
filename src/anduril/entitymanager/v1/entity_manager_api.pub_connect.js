@@ -6,7 +6,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 
-const { DeleteEntityRequest, DeleteEntityResponse, GetEntityRequest, GetEntityResponse, OverrideEntityRequest, OverrideEntityResponse, PublishEntitiesRequest, PublishEntitiesResponse, PutEntityRequest, PutEntityResponse, RemoveEntityOverrideRequest, RemoveEntityOverrideResponse, StreamEntityComponentsRequest, StreamEntityComponentsResponse } = require("./entity_manager_api.pub_pb.js");
+const { DeleteEntityRequest, DeleteEntityResponse, GetEntityRequest, GetEntityResponse, OverrideEntityRequest, OverrideEntityResponse, PublishEntitiesRequest, PublishEntitiesResponse, PutEntityRequest, PutEntityResponse, RelateEntityRequest, RelateEntityResponse, RemoveEntityOverrideRequest, RemoveEntityOverrideResponse, StreamEntityComponentsRequest, StreamEntityComponentsResponse, UnrelateEntityRequest, UnrelateEntityResponse } = require("./entity_manager_api.pub_pb.js");
 const { MethodKind } = require("@bufbuild/protobuf");
 
 /**
@@ -102,6 +102,29 @@ const EntityManagerAPI = {
       name: "DeleteEntity",
       I: DeleteEntityRequest,
       O: DeleteEntityResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Creates or Updates relationships on an Entity. All relationships that are being added in the request
+     * succeed or fail as a batch (i.e. if any one relationship is invalid, the request will fail).
+     *
+     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.RelateEntity
+     */
+    relateEntity: {
+      name: "RelateEntity",
+      I: RelateEntityRequest,
+      O: RelateEntityResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * Deletes relationships on an Entity.
+     *
+     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.UnrelateEntity
+     */
+    unrelateEntity: {
+      name: "UnrelateEntity",
+      I: UnrelateEntityRequest,
+      O: UnrelateEntityResponse,
       kind: MethodKind.Unary,
     },
   }
