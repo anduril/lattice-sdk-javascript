@@ -138,6 +138,7 @@ const TaskError = proto3.makeMessageType(
   () => [
     { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(ErrorCode) },
     { no: 2, name: "message", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "error_details", kind: "message", T: Any },
   ],
 );
 

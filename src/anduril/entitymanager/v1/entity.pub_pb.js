@@ -29,6 +29,7 @@ const { Schedules } = require("./schedule.pub_pb.js");
 const { Health } = require("./health_status.pub_pb.js");
 const { GroupDetails } = require("./group.pub_pb.js");
 const { Supplies } = require("./supplies.pub_pb.js");
+const { Orbit } = require("./orbit.pub_pb.js");
 const { AltIdType, OverrideStatus, OverrideType, Source, UInt32Range } = require("./types.pub_pb.js");
 
 /**
@@ -108,6 +109,7 @@ const Entity = proto3.makeMessageType(
     { no: 40, name: "group_details", kind: "message", T: GroupDetails },
     { no: 41, name: "team_status", kind: "message", T: TeamStatus },
     { no: 42, name: "supplies", kind: "message", T: Supplies },
+    { no: 46, name: "orbit", kind: "message", T: Orbit },
   ],
 );
 
@@ -268,6 +270,7 @@ const OriginalData = proto3.makeMessageType(
  * It is composed of two lines that are each a fixed width of 69 characters.
  *
  * @generated from message anduril.entitymanager.v1.OriginalData.TLE
+ * @deprecated
  */
 const OriginalData_TLE = proto3.makeMessageType(
   "anduril.entitymanager.v1.OriginalData.TLE",

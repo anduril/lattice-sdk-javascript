@@ -59,14 +59,6 @@ export declare class Ontology extends Message<Ontology> {
   descriptors: string[];
 
   /**
-   * KRN: Knowledge Resource Name
-   * A string that references the ontology of the entity defined in KnowledgeGraph.
-   *
-   * @generated from field: string krn = 5;
-   */
-  krn: string;
-
-  /**
    * A string that describes the asset's high-level type with natural language. These values include, but are not
    * limited to the AIR/SURFACE/SUBSURFACE/LAND/SPACE PLATFORM TYPE values found in MIL-STD 6016F.
    * Examples include "FIGHTER", "TANK", "AIRCRAFT CARRIER", "UAV".

@@ -27,6 +27,7 @@ import type { Schedules } from "./schedule.pub_pb.js";
 import type { Health } from "./health_status.pub_pb.js";
 import type { GroupDetails } from "./group.pub_pb.js";
 import type { Supplies } from "./supplies.pub_pb.js";
+import type { Orbit } from "./orbit.pub_pb.js";
 import type { AltIdType, OverrideStatus, OverrideType, Source, UInt32Range } from "./types.pub_pb.js";
 
 /**
@@ -398,6 +399,13 @@ export declare class Entity extends Message<Entity> {
    * @generated from field: anduril.entitymanager.v1.Supplies supplies = 42;
    */
   supplies?: Supplies;
+
+  /**
+   * Orbit information for space objects
+   *
+   * @generated from field: anduril.entitymanager.v1.Orbit orbit = 46;
+   */
+  orbit?: Orbit;
 
   constructor(data?: PartialMessage<Entity>);
 
@@ -884,7 +892,8 @@ export declare class OriginalData extends Message<OriginalData> {
   url: string;
 
   /**
-   * @generated from field: anduril.entitymanager.v1.OriginalData.TLE tle = 2;
+   * @generated from field: anduril.entitymanager.v1.OriginalData.TLE tle = 2 [deprecated = true];
+   * @deprecated
    */
   tle?: OriginalData_TLE;
 
@@ -908,6 +917,7 @@ export declare class OriginalData extends Message<OriginalData> {
  * It is composed of two lines that are each a fixed width of 69 characters.
  *
  * @generated from message anduril.entitymanager.v1.OriginalData.TLE
+ * @deprecated
  */
 export declare class OriginalData_TLE extends Message<OriginalData_TLE> {
   /**

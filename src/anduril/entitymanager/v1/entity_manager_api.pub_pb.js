@@ -11,6 +11,7 @@ const { Entity, Provenance } = require("./entity.pub_pb.js");
 const { Statement } = require("./filter.pub_pb.js");
 const { RateLimit } = require("./rate_limit.pub_pb.js");
 const { OverrideStatus } = require("./types.pub_pb.js");
+const { RelationshipType } = require("./relationship.pub_pb.js");
 
 /**
  * The type of entity event.
@@ -183,6 +184,67 @@ const DeleteEntityResponse = proto3.makeMessageType(
 );
 
 /**
+ * The set of relationships to add to an entity. Relationships are specified from the primary entity to the
+ * other entity specified in the relationship request(s).
+ *
+ * @generated from message anduril.entitymanager.v1.RelateEntityRequest
+ */
+const RelateEntityRequest = proto3.makeMessageType(
+  "anduril.entitymanager.v1.RelateEntityRequest",
+  () => [
+    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "relationships", kind: "message", T: RelationshipRequest, repeated: true },
+  ],
+);
+
+/**
+ * A request for a relationship on an entity. Forms a partial of the entitymanager.v1.Relationship message.
+ *
+ * @generated from message anduril.entitymanager.v1.RelationshipRequest
+ */
+const RelationshipRequest = proto3.makeMessageType(
+  "anduril.entitymanager.v1.RelationshipRequest",
+  () => [
+    { no: 1, name: "related_entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "relationship_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "relationship_type", kind: "message", T: RelationshipType },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.RelateEntityResponse
+ */
+const RelateEntityResponse = proto3.makeMessageType(
+  "anduril.entitymanager.v1.RelateEntityResponse",
+  () => [
+    { no: 1, name: "entity", kind: "message", T: Entity },
+  ],
+);
+
+/**
+ * The relationships to remove from an entity.
+ *
+ * @generated from message anduril.entitymanager.v1.UnrelateEntityRequest
+ */
+const UnrelateEntityRequest = proto3.makeMessageType(
+  "anduril.entitymanager.v1.UnrelateEntityRequest",
+  () => [
+    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "relationship_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.UnrelateEntityResponse
+ */
+const UnrelateEntityResponse = proto3.makeMessageType(
+  "anduril.entitymanager.v1.UnrelateEntityResponse",
+  () => [
+    { no: 1, name: "entity", kind: "message", T: Entity },
+  ],
+);
+
+/**
  * Event representing some type of entity change.
  *
  * @generated from message anduril.entitymanager.v1.EntityEvent
@@ -224,5 +286,10 @@ exports.RemoveEntityOverrideRequest = RemoveEntityOverrideRequest;
 exports.RemoveEntityOverrideResponse = RemoveEntityOverrideResponse;
 exports.DeleteEntityRequest = DeleteEntityRequest;
 exports.DeleteEntityResponse = DeleteEntityResponse;
+exports.RelateEntityRequest = RelateEntityRequest;
+exports.RelationshipRequest = RelationshipRequest;
+exports.RelateEntityResponse = RelateEntityResponse;
+exports.UnrelateEntityRequest = UnrelateEntityRequest;
+exports.UnrelateEntityResponse = UnrelateEntityResponse;
 exports.EntityEvent = EntityEvent;
 exports.Heartbeat = Heartbeat;

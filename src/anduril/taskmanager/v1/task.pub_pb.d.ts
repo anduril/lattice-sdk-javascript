@@ -443,6 +443,13 @@ export declare class TaskError extends Message<TaskError> {
    */
   message: string;
 
+  /**
+   * Any additional details regarding this error.
+   *
+   * @generated from field: google.protobuf.Any error_details = 3;
+   */
+  errorDetails?: Any;
+
   constructor(data?: PartialMessage<TaskError>);
 
   static readonly runtime: typeof proto3;
