@@ -20,7 +20,6 @@ import type { Classification } from "./classification.pub_pb.js";
 import type { TaskCatalog } from "../../tasks/v2/catalog.pub_pb.js";
 import type { Media } from "./media.pub_pb.js";
 import type { Relationships } from "./relationship.pub_pb.js";
-import type { PrototypeExtensions } from "./prototype.pub_pb.js";
 import type { Dimensions } from "./dimensions.pub_pb.js";
 import type { RouteDetails } from "./route_details.pub_pb.js";
 import type { Schedules } from "./schedule.pub_pb.js";
@@ -337,19 +336,6 @@ export declare class Entity extends Message<Entity> {
    * @generated from field: anduril.entitymanager.v1.VisualDetails visual_details = 34;
    */
   visualDetails?: VisualDetails;
-
-  /**
-   * A generic component that should only be used by Anduril employees as a way of ferrying data without modelling it as a full component. USE WITH CAUTION!!
-   * The following should be considered before use:
-   * If you have the time available, liaise with the battlespace team (#battlespace-team) to determine if this should be modelled on an existing/new component
-   * You're responsible for handling key conflicts
-   * Any data on here is not supported by the battlespace awareness team
-   * The intention is for this to be used by short-lived prototypes where you may not have conviction in it's longevity
-   * 🙏
-   *
-   * @generated from field: anduril.entitymanager.v1.PrototypeExtensions prototype_extensions = 35;
-   */
-  prototypeExtensions?: PrototypeExtensions;
 
   /**
    * Physical dimensions of the entity
