@@ -22,7 +22,6 @@ const { Classification } = require("./classification.pub_pb.js");
 const { TaskCatalog } = require("../../tasks/v2/catalog.pub_pb.js");
 const { Media } = require("./media.pub_pb.js");
 const { Relationships } = require("./relationship.pub_pb.js");
-const { PrototypeExtensions } = require("./prototype.pub_pb.js");
 const { Dimensions } = require("./dimensions.pub_pb.js");
 const { RouteDetails } = require("./route_details.pub_pb.js");
 const { Schedules } = require("./schedule.pub_pb.js");
@@ -101,7 +100,6 @@ const Entity = proto3.makeMessageType(
     { no: 32, name: "media", kind: "message", T: Media },
     { no: 33, name: "relationships", kind: "message", T: Relationships },
     { no: 34, name: "visual_details", kind: "message", T: VisualDetails },
-    { no: 35, name: "prototype_extensions", kind: "message", T: PrototypeExtensions },
     { no: 36, name: "dimensions", kind: "message", T: Dimensions },
     { no: 37, name: "route_details", kind: "message", T: RouteDetails },
     { no: 38, name: "schedules", kind: "message", T: Schedules },
