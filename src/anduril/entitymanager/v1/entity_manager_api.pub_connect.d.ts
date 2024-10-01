@@ -3,11 +3,11 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { DeleteEntityRequest, DeleteEntityResponse, GetEntityRequest, GetEntityResponse, OverrideEntityRequest, OverrideEntityResponse, PublishEntitiesRequest, PublishEntitiesResponse, PutEntityRequest, PutEntityResponse, RelateEntityRequest, RelateEntityResponse, RemoveEntityOverrideRequest, RemoveEntityOverrideResponse, StreamEntityComponentsRequest, StreamEntityComponentsResponse, UnrelateEntityRequest, UnrelateEntityResponse } from "./entity_manager_api.pub_pb.js";
+import { GetEntityRequest, GetEntityResponse, OverrideEntityRequest, OverrideEntityResponse, PublishEntitiesRequest, PublishEntitiesResponse, PublishEntityRequest, PublishEntityResponse, RemoveEntityOverrideRequest, RemoveEntityOverrideResponse, StreamEntityComponentsRequest, StreamEntityComponentsResponse } from "./entity_manager_api.pub_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
- * The EntityManager provides a UI centric data model for understanding the entities in a battle space.
+ * The Entity Manager provides a UI centric data model for understanding the entities in a battle space.
  *
  * Every object in a battle space is represented as an "Entity". Each Entity is essentially an ID, with a life cycle,
  * and a collection of data components. Each data component is a separate protobuf message definition.
@@ -21,6 +21,32 @@ export declare const EntityManagerAPI: {
   readonly typeName: "anduril.entitymanager.v1.EntityManagerAPI",
   readonly methods: {
     /**
+     * Unary RPC to publish an entity for ingest into Entity Manager. This is the preferred RPC to integrate entities
+     * and should be used by most integrations to publish high- or low-update rate entities. Entities created with this
+     * method are "owned" by the originator: other sources, such as the UI, may not edit or delete these entities.
+     * Entities are validated at RPC call time and an error is returned if the entity is invalid.
+     *
+     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.PublishEntity
+     */
+    readonly publishEntity: {
+      readonly name: "PublishEntity",
+      readonly I: typeof PublishEntityRequest,
+      readonly O: typeof PublishEntityResponse,
+      readonly kind: MethodKind.Unary,
+    },
+    /**
+     * Create or Update one or more Entities. Prefer PublishEntity instead. The same caveats of PublishEntity apply.
+     * This RPC does not return error messages for invalid entities or any other feedback from the server.
+     *
+     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.PublishEntities
+     */
+    readonly publishEntities: {
+      readonly name: "PublishEntities",
+      readonly I: typeof PublishEntitiesRequest,
+      readonly O: typeof PublishEntitiesResponse,
+      readonly kind: MethodKind.ClientStreaming,
+    },
+    /**
      * Get a entity based on an entityId.
      *
      * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.GetEntity
@@ -32,44 +58,10 @@ export declare const EntityManagerAPI: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Returns a stream of entity with specified components populated.
-     *
-     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.StreamEntityComponents
-     */
-    readonly streamEntityComponents: {
-      readonly name: "StreamEntityComponents",
-      readonly I: typeof StreamEntityComponentsRequest,
-      readonly O: typeof StreamEntityComponentsResponse,
-      readonly kind: MethodKind.ServerStreaming,
-    },
-    /**
-     * Create or Update an Entity. This should be used by low update rate situations where Entity Manager is
-     * the source of truth, rather than an aggregator. The canonical example is a manually created entity.
-     * Entities created in this fashion are stored as a Base entity, overrides on top are still possible.
-     *
-     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.PutEntity
-     */
-    readonly putEntity: {
-      readonly name: "PutEntity",
-      readonly I: typeof PutEntityRequest,
-      readonly O: typeof PutEntityResponse,
-      readonly kind: MethodKind.Unary,
-    },
-    /**
-     * Create or Update one or more Entities. This should be used during high update rate situations where the originator
-     * is both the aggregator and source of truth for the published entities, and the originator does not have
-     * the ability to directly publish to Flux.
-     *
-     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.PublishEntities
-     */
-    readonly publishEntities: {
-      readonly name: "PublishEntities",
-      readonly I: typeof PublishEntitiesRequest,
-      readonly O: typeof PublishEntitiesResponse,
-      readonly kind: MethodKind.ClientStreaming,
-    },
-    /**
-     * Override an Entity Component. Only fields marked with overridable can be overwritten.
+     * Override an Entity Component. An override is a definitive change to entity data. Any authorized user of service
+     * can override overridable components on any entity. Only fields marked with overridable can be overridden.
+     * When setting an override, the user or service setting the override is asserting that they are certain of the change
+     * and the truth behind it.
      *
      * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.OverrideEntity
      */
@@ -91,38 +83,15 @@ export declare const EntityManagerAPI: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Delete an Entity - only works on entities created by PutEntity.
+     * Returns a stream of entity with specified components populated.
      *
-     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.DeleteEntity
+     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.StreamEntityComponents
      */
-    readonly deleteEntity: {
-      readonly name: "DeleteEntity",
-      readonly I: typeof DeleteEntityRequest,
-      readonly O: typeof DeleteEntityResponse,
-      readonly kind: MethodKind.Unary,
-    },
-    /**
-     * Creates or Updates relationships on an Entity. All relationships that are being added in the request
-     * succeed or fail as a batch (i.e. if any one relationship is invalid, the request will fail).
-     *
-     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.RelateEntity
-     */
-    readonly relateEntity: {
-      readonly name: "RelateEntity",
-      readonly I: typeof RelateEntityRequest,
-      readonly O: typeof RelateEntityResponse,
-      readonly kind: MethodKind.Unary,
-    },
-    /**
-     * Deletes relationships on an Entity.
-     *
-     * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.UnrelateEntity
-     */
-    readonly unrelateEntity: {
-      readonly name: "UnrelateEntity",
-      readonly I: typeof UnrelateEntityRequest,
-      readonly O: typeof UnrelateEntityResponse,
-      readonly kind: MethodKind.Unary,
+    readonly streamEntityComponents: {
+      readonly name: "StreamEntityComponents",
+      readonly I: typeof StreamEntityComponentsRequest,
+      readonly O: typeof StreamEntityComponentsResponse,
+      readonly kind: MethodKind.ServerStreaming,
     },
   }
 };

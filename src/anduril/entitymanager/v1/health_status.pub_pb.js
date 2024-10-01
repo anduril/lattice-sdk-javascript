@@ -40,6 +40,21 @@ const HealthStatus = proto3.makeEnum(
 );
 
 /**
+ * Alerts are categorized into one of three levels - Warnings, Cautions, and Advisories (WCAs).
+ *
+ * @generated from enum anduril.entitymanager.v1.AlertLevel
+ */
+const AlertLevel = proto3.makeEnum(
+  "anduril.entitymanager.v1.AlertLevel",
+  [
+    {no: 0, name: "ALERT_LEVEL_INVALID", localName: "INVALID"},
+    {no: 1, name: "ALERT_LEVEL_ADVISORY", localName: "ADVISORY"},
+    {no: 2, name: "ALERT_LEVEL_CAUTION", localName: "CAUTION"},
+    {no: 3, name: "ALERT_LEVEL_WARNING", localName: "WARNING"},
+  ],
+);
+
+/**
  * A message describing the component's health status.
  *
  * @generated from message anduril.entitymanager.v1.ComponentMessage
@@ -80,12 +95,46 @@ const Health = proto3.makeMessageType(
     { no: 2, name: "health_status", kind: "enum", T: proto3.getEnumType(HealthStatus) },
     { no: 3, name: "components", kind: "message", T: ComponentHealth, repeated: true },
     { no: 4, name: "update_time", kind: "message", T: Timestamp },
+    { no: 5, name: "active_alerts", kind: "message", T: Alert, repeated: true },
+  ],
+);
+
+/**
+ * An alert informs operators of critical events related to system performance and mission
+ * execution. An alert is produced as a result of one or more alert conditions.
+ *
+ * @generated from message anduril.entitymanager.v1.Alert
+ */
+const Alert = proto3.makeMessageType(
+  "anduril.entitymanager.v1.Alert",
+  () => [
+    { no: 1, name: "alert_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "level", kind: "enum", T: proto3.getEnumType(AlertLevel) },
+    { no: 4, name: "activated_time", kind: "message", T: Timestamp },
+    { no: 5, name: "active_conditions", kind: "message", T: AlertCondition, repeated: true },
+  ],
+);
+
+/**
+ * A condition which may trigger an alert.
+ *
+ * @generated from message anduril.entitymanager.v1.AlertCondition
+ */
+const AlertCondition = proto3.makeMessageType(
+  "anduril.entitymanager.v1.AlertCondition",
+  () => [
+    { no: 1, name: "condition_code", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
 
 exports.ConnectionStatus = ConnectionStatus;
 exports.HealthStatus = HealthStatus;
+exports.AlertLevel = AlertLevel;
 exports.ComponentMessage = ComponentMessage;
 exports.ComponentHealth = ComponentHealth;
 exports.Health = Health;
+exports.Alert = Alert;
+exports.AlertCondition = AlertCondition;

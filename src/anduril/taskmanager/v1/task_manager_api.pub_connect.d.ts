@@ -3,12 +3,12 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CreateTaskRequest, CreateTaskResponse, GetTaskRequest, GetTaskResponse, ListenAsAgentRequest, ListenAsAgentResponse, StreamTasksRequest, StreamTasksResponse, UpdateStatusRequest, UpdateStatusResponse, UpdateTaskRequest, UpdateTaskResponse } from "./task_manager_api.pub_pb.js";
+import { CreateTaskRequest, CreateTaskResponse, GetTaskRequest, GetTaskResponse, ListenAsAgentRequest, ListenAsAgentResponse, QueryTasksRequest, QueryTasksResponse, UpdateStatusRequest, UpdateStatusResponse } from "./task_manager_api.pub_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
  * Task Manager is a service that performs state management associated with Tasks, and also the execution of Tasks
- *  on their designated agents.
+ * on their designated agents.
  *
  * @generated from service anduril.taskmanager.v1.TaskManagerAPI
  */
@@ -38,18 +38,14 @@ export declare const TaskManagerAPI: {
       readonly kind: MethodKind.Unary,
     },
     /**
-     * Update definition of a Task, only works on Tasks that are not DONE or CANCEL_REQUESTED. Notes:
-     *  * send the current task_version in Task, API will increment definition_version, and reset status_version to 1.
-     *  * previous definition_version will have status set to REPLACED.
-     *  * depending on assignee, replacing the definition will either update if capable on backend,
-     *     or cancel previous and issue new.
+     * Find Tasks that match request criteria.
      *
-     * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.UpdateTask
+     * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.QueryTasks
      */
-    readonly updateTask: {
-      readonly name: "UpdateTask",
-      readonly I: typeof UpdateTaskRequest,
-      readonly O: typeof UpdateTaskResponse,
+    readonly queryTasks: {
+      readonly name: "QueryTasks",
+      readonly I: typeof QueryTasksRequest,
+      readonly O: typeof QueryTasksResponse,
       readonly kind: MethodKind.Unary,
     },
     /**
@@ -62,18 +58,6 @@ export declare const TaskManagerAPI: {
       readonly I: typeof UpdateStatusRequest,
       readonly O: typeof UpdateStatusResponse,
       readonly kind: MethodKind.Unary,
-    },
-    /**
-     * Stream all existing live (not yet done) Tasks and any new updates.
-     * Intended for clients to gain visibility into real time updates for live Tasks.
-     *
-     * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.StreamTasks
-     */
-    readonly streamTasks: {
-      readonly name: "StreamTasks",
-      readonly I: typeof StreamTasksRequest,
-      readonly O: typeof StreamTasksResponse,
-      readonly kind: MethodKind.ServerStreaming,
     },
     /**
      * Stream Tasks ready for RPC Agent execution that match agent selector (ex: entity_ids).

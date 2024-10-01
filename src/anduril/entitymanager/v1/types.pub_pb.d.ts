@@ -60,15 +60,14 @@ export declare enum AltIdType {
   ASSET_ID = 5,
 
   /**
-   * deprecated, do not use
+   * Use for Link 16 track identifiers for non-JTIDS Unit (JU) entities, such as assets (STN) and tracks (RefTN). Values range from AA000 to ZZ777.
    *
-   * @generated from enum value: ALT_ID_TYPE_LINK16_TRACK_NUMBER = 6 [deprecated = true];
-   * @deprecated
+   * @generated from enum value: ALT_ID_TYPE_LINK16_TRACK_NUMBER = 6;
    */
   LINK16_TRACK_NUMBER = 6,
 
   /**
-   * a Link 16 track number. This will allow a link 16 asset (STN) or track (RefTN) to be identified.
+   * Use for Link 16 JTIDS Unit (JU) identifiers. Applicable to assets representing JUs, with values ranging from 00001 to 77777.
    *
    * @generated from enum value: ALT_ID_TYPE_LINK16_JU = 7;
    */

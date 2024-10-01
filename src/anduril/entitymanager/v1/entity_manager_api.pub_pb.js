@@ -8,10 +8,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const { proto3, Timestamp } = require("@bufbuild/protobuf");
 const { Entity, Provenance } = require("./entity.pub_pb.js");
+const { OverrideStatus } = require("./types.pub_pb.js");
 const { Statement } = require("./filter.pub_pb.js");
 const { RateLimit } = require("./rate_limit.pub_pb.js");
-const { OverrideStatus } = require("./types.pub_pb.js");
-const { RelationshipType } = require("./relationship.pub_pb.js");
 
 /**
  * The type of entity event.
@@ -31,72 +30,21 @@ const EventType = proto3.makeEnum(
 );
 
 /**
- * @generated from message anduril.entitymanager.v1.GetEntityRequest
+ * @generated from message anduril.entitymanager.v1.PublishEntityRequest
  */
-const GetEntityRequest = proto3.makeMessageType(
-  "anduril.entitymanager.v1.GetEntityRequest",
-  () => [
-    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message anduril.entitymanager.v1.GetEntityResponse
- */
-const GetEntityResponse = proto3.makeMessageType(
-  "anduril.entitymanager.v1.GetEntityResponse",
+const PublishEntityRequest = proto3.makeMessageType(
+  "anduril.entitymanager.v1.PublishEntityRequest",
   () => [
     { no: 1, name: "entity", kind: "message", T: Entity },
   ],
 );
 
 /**
- * @generated from message anduril.entitymanager.v1.StreamEntityComponentsRequest
+ * @generated from message anduril.entitymanager.v1.PublishEntityResponse
  */
-const StreamEntityComponentsRequest = proto3.makeMessageType(
-  "anduril.entitymanager.v1.StreamEntityComponentsRequest",
-  () => [
-    { no: 1, name: "components_to_include", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 2, name: "include_all_components", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 3, name: "filter", kind: "message", T: Statement },
-    { no: 4, name: "rate_limit", kind: "message", T: RateLimit },
-    { no: 5, name: "heartbeat_period_millis", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-    { no: 6, name: "preexisting_only", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-  ],
-);
-
-/**
- * response stream will be fed all matching pre-existing live entities as CREATED, plus any new events ongoing.
- *
- * @generated from message anduril.entitymanager.v1.StreamEntityComponentsResponse
- */
-const StreamEntityComponentsResponse = proto3.makeMessageType(
-  "anduril.entitymanager.v1.StreamEntityComponentsResponse",
-  () => [
-    { no: 1, name: "entity_event", kind: "message", T: EntityEvent },
-    { no: 2, name: "heartbeat", kind: "message", T: Heartbeat },
-  ],
-);
-
-/**
- * @generated from message anduril.entitymanager.v1.PutEntityRequest
- */
-const PutEntityRequest = proto3.makeMessageType(
-  "anduril.entitymanager.v1.PutEntityRequest",
-  () => [
-    { no: 1, name: "entity", kind: "message", T: Entity },
-    { no: 2, name: "unique_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message anduril.entitymanager.v1.PutEntityResponse
- */
-const PutEntityResponse = proto3.makeMessageType(
-  "anduril.entitymanager.v1.PutEntityResponse",
-  () => [
-    { no: 1, name: "entity", kind: "message", T: Entity },
-  ],
+const PublishEntityResponse = proto3.makeMessageType(
+  "anduril.entitymanager.v1.PublishEntityResponse",
+  [],
 );
 
 /**
@@ -118,6 +66,26 @@ const PublishEntitiesRequest = proto3.makeMessageType(
 const PublishEntitiesResponse = proto3.makeMessageType(
   "anduril.entitymanager.v1.PublishEntitiesResponse",
   [],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.GetEntityRequest
+ */
+const GetEntityRequest = proto3.makeMessageType(
+  "anduril.entitymanager.v1.GetEntityRequest",
+  () => [
+    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.GetEntityResponse
+ */
+const GetEntityResponse = proto3.makeMessageType(
+  "anduril.entitymanager.v1.GetEntityResponse",
+  () => [
+    { no: 1, name: "entity", kind: "message", T: Entity },
+  ],
 );
 
 /**
@@ -164,83 +132,30 @@ const RemoveEntityOverrideResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message anduril.entitymanager.v1.DeleteEntityRequest
+ * @generated from message anduril.entitymanager.v1.StreamEntityComponentsRequest
  */
-const DeleteEntityRequest = proto3.makeMessageType(
-  "anduril.entitymanager.v1.DeleteEntityRequest",
+const StreamEntityComponentsRequest = proto3.makeMessageType(
+  "anduril.entitymanager.v1.StreamEntityComponentsRequest",
   () => [
-    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "components_to_include", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "include_all_components", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "filter", kind: "message", T: Statement },
+    { no: 4, name: "rate_limit", kind: "message", T: RateLimit },
+    { no: 5, name: "heartbeat_period_millis", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: "preexisting_only", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
 /**
- * void response but with placeholder for future optional fields.
+ * response stream will be fed all matching pre-existing live entities as CREATED, plus any new events ongoing.
  *
- * @generated from message anduril.entitymanager.v1.DeleteEntityResponse
+ * @generated from message anduril.entitymanager.v1.StreamEntityComponentsResponse
  */
-const DeleteEntityResponse = proto3.makeMessageType(
-  "anduril.entitymanager.v1.DeleteEntityResponse",
-  [],
-);
-
-/**
- * The set of relationships to add to an entity. Relationships are specified from the primary entity to the
- * other entity specified in the relationship request(s).
- *
- * @generated from message anduril.entitymanager.v1.RelateEntityRequest
- */
-const RelateEntityRequest = proto3.makeMessageType(
-  "anduril.entitymanager.v1.RelateEntityRequest",
+const StreamEntityComponentsResponse = proto3.makeMessageType(
+  "anduril.entitymanager.v1.StreamEntityComponentsResponse",
   () => [
-    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "relationships", kind: "message", T: RelationshipRequest, repeated: true },
-  ],
-);
-
-/**
- * A request for a relationship on an entity. Forms a partial of the entitymanager.v1.Relationship message.
- *
- * @generated from message anduril.entitymanager.v1.RelationshipRequest
- */
-const RelationshipRequest = proto3.makeMessageType(
-  "anduril.entitymanager.v1.RelationshipRequest",
-  () => [
-    { no: 1, name: "related_entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "relationship_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "relationship_type", kind: "message", T: RelationshipType },
-  ],
-);
-
-/**
- * @generated from message anduril.entitymanager.v1.RelateEntityResponse
- */
-const RelateEntityResponse = proto3.makeMessageType(
-  "anduril.entitymanager.v1.RelateEntityResponse",
-  () => [
-    { no: 1, name: "entity", kind: "message", T: Entity },
-  ],
-);
-
-/**
- * The relationships to remove from an entity.
- *
- * @generated from message anduril.entitymanager.v1.UnrelateEntityRequest
- */
-const UnrelateEntityRequest = proto3.makeMessageType(
-  "anduril.entitymanager.v1.UnrelateEntityRequest",
-  () => [
-    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "relationship_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-  ],
-);
-
-/**
- * @generated from message anduril.entitymanager.v1.UnrelateEntityResponse
- */
-const UnrelateEntityResponse = proto3.makeMessageType(
-  "anduril.entitymanager.v1.UnrelateEntityResponse",
-  () => [
-    { no: 1, name: "entity", kind: "message", T: Entity },
+    { no: 1, name: "entity_event", kind: "message", T: EntityEvent },
+    { no: 2, name: "heartbeat", kind: "message", T: Heartbeat },
   ],
 );
 
@@ -272,24 +187,17 @@ const Heartbeat = proto3.makeMessageType(
 
 
 exports.EventType = EventType;
-exports.GetEntityRequest = GetEntityRequest;
-exports.GetEntityResponse = GetEntityResponse;
-exports.StreamEntityComponentsRequest = StreamEntityComponentsRequest;
-exports.StreamEntityComponentsResponse = StreamEntityComponentsResponse;
-exports.PutEntityRequest = PutEntityRequest;
-exports.PutEntityResponse = PutEntityResponse;
+exports.PublishEntityRequest = PublishEntityRequest;
+exports.PublishEntityResponse = PublishEntityResponse;
 exports.PublishEntitiesRequest = PublishEntitiesRequest;
 exports.PublishEntitiesResponse = PublishEntitiesResponse;
+exports.GetEntityRequest = GetEntityRequest;
+exports.GetEntityResponse = GetEntityResponse;
 exports.OverrideEntityRequest = OverrideEntityRequest;
 exports.OverrideEntityResponse = OverrideEntityResponse;
 exports.RemoveEntityOverrideRequest = RemoveEntityOverrideRequest;
 exports.RemoveEntityOverrideResponse = RemoveEntityOverrideResponse;
-exports.DeleteEntityRequest = DeleteEntityRequest;
-exports.DeleteEntityResponse = DeleteEntityResponse;
-exports.RelateEntityRequest = RelateEntityRequest;
-exports.RelationshipRequest = RelationshipRequest;
-exports.RelateEntityResponse = RelateEntityResponse;
-exports.UnrelateEntityRequest = UnrelateEntityRequest;
-exports.UnrelateEntityResponse = UnrelateEntityResponse;
+exports.StreamEntityComponentsRequest = StreamEntityComponentsRequest;
+exports.StreamEntityComponentsResponse = StreamEntityComponentsResponse;
 exports.EntityEvent = EntityEvent;
 exports.Heartbeat = Heartbeat;

@@ -176,6 +176,7 @@ const Tracked = proto3.makeMessageType(
 const Provenance = proto3.makeMessageType(
   "anduril.entitymanager.v1.Provenance",
   () => [
+    { no: 7, name: "feed_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "integration_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "data_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 1, name: "source", kind: "enum", T: proto3.getEnumType(Source) },

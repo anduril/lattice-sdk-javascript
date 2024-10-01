@@ -5,7 +5,7 @@
 
 import type { Any, BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { Principal, Relations, StatusUpdate, Task, TaskEntity, TaskEvent, TaskView } from "./task.pub_pb.js";
+import type { Principal, Relations, Status, StatusUpdate, Task, TaskEntity, TaskView } from "./task.pub_pb.js";
 import type { CancelRequest, CompleteRequest, ExecuteRequest } from "./task_api.pub_pb.js";
 
 /**
@@ -190,69 +190,189 @@ export declare class GetTaskResponse extends Message<GetTaskResponse> {
 }
 
 /**
- * Request to update a Task.
+ * Request to query for Tasks. Returns the each latest Task by Status ID and Version ID by default with no filters.
  *
- * @generated from message anduril.taskmanager.v1.UpdateTaskRequest
+ * @generated from message anduril.taskmanager.v1.QueryTasksRequest
  */
-export declare class UpdateTaskRequest extends Message<UpdateTaskRequest> {
+export declare class QueryTasksRequest extends Message<QueryTasksRequest> {
   /**
-   * New Task definition.
+   * If present matches Tasks with this parent Task ID.
+   * Note: this is mutually exclusive with all other query parameters, i.e., either provide parent Task ID, or
+   *  any of the remaining parameters, but not both.
    *
-   * @generated from field: anduril.taskmanager.v1.Task task = 1;
+   * @generated from field: string parent_task_id = 1;
    */
-  task?: Task;
+  parentTaskId: string;
 
   /**
-   * If set, execution of this Task is managed elsewhere, not by task-manager.
-   * In other words, Task Manager will not attempt to update the assigned agent with execution instructions.
-   * We note that this will also override the existing is_executed_elsewhere value in the Task
-   * object provided in this request.
+   * If set, returns results starting from the given page token.
    *
-   * @generated from field: bool is_executed_elsewhere = 7;
+   * @generated from field: string page_token = 3;
    */
-  isExecutedElsewhere: boolean;
+  pageToken: string;
 
-  constructor(data?: PartialMessage<UpdateTaskRequest>);
+  /**
+   * Filters on provided status types in the filter.
+   *
+   * @generated from field: anduril.taskmanager.v1.QueryTasksRequest.StatusFilter status_filter = 4;
+   */
+  statusFilter?: QueryTasksRequest_StatusFilter;
+
+  /**
+   * If provided, only provides Tasks updated within the time range.
+   *
+   * @generated from field: anduril.taskmanager.v1.QueryTasksRequest.TimeRange update_time_range = 5;
+   */
+  updateTimeRange?: QueryTasksRequest_TimeRange;
+
+  /**
+   * Optional filter for view of a Task.
+   * If not set, defaults to TASK_VIEW_MANAGER.
+   *
+   * @generated from field: anduril.taskmanager.v1.TaskView view = 6;
+   */
+  view: TaskView;
+
+  constructor(data?: PartialMessage<QueryTasksRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.taskmanager.v1.UpdateTaskRequest";
+  static readonly typeName = "anduril.taskmanager.v1.QueryTasksRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateTaskRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryTasksRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateTaskRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryTasksRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateTaskRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryTasksRequest;
 
-  static equals(a: UpdateTaskRequest | PlainMessage<UpdateTaskRequest> | undefined, b: UpdateTaskRequest | PlainMessage<UpdateTaskRequest> | undefined): boolean;
+  static equals(a: QueryTasksRequest | PlainMessage<QueryTasksRequest> | undefined, b: QueryTasksRequest | PlainMessage<QueryTasksRequest> | undefined): boolean;
 }
 
 /**
- * Response to an Update Task request.
+ * The type of filter.
  *
- * @generated from message anduril.taskmanager.v1.UpdateTaskResponse
+ * @generated from enum anduril.taskmanager.v1.QueryTasksRequest.FilterType
  */
-export declare class UpdateTaskResponse extends Message<UpdateTaskResponse> {
+export declare enum QueryTasksRequest_FilterType {
   /**
-   * the updated task
-   *
-   * @generated from field: anduril.taskmanager.v1.Task task = 1;
+   * @generated from enum value: FILTER_TYPE_INVALID = 0;
    */
-  task?: Task;
+  INVALID = 0,
 
-  constructor(data?: PartialMessage<UpdateTaskResponse>);
+  /**
+   * @generated from enum value: FILTER_TYPE_INCLUSIVE = 1;
+   */
+  INCLUSIVE = 1,
+
+  /**
+   * @generated from enum value: FILTER_TYPE_EXCLUSIVE = 2;
+   */
+  EXCLUSIVE = 2,
+}
+
+/**
+ * A time range query for Tasks.
+ *
+ * @generated from message anduril.taskmanager.v1.QueryTasksRequest.TimeRange
+ */
+export declare class QueryTasksRequest_TimeRange extends Message<QueryTasksRequest_TimeRange> {
+  /**
+   * If provided, returns Tasks only updated after this time.
+   *
+   * @generated from field: google.protobuf.Timestamp update_start_time = 1;
+   */
+  updateStartTime?: Timestamp;
+
+  /**
+   * If provided, returns Tasks only updated before this time.
+   *
+   * @generated from field: google.protobuf.Timestamp update_end_time = 2;
+   */
+  updateEndTime?: Timestamp;
+
+  constructor(data?: PartialMessage<QueryTasksRequest_TimeRange>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.taskmanager.v1.UpdateTaskResponse";
+  static readonly typeName = "anduril.taskmanager.v1.QueryTasksRequest.TimeRange";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateTaskResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryTasksRequest_TimeRange;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateTaskResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryTasksRequest_TimeRange;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateTaskResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryTasksRequest_TimeRange;
 
-  static equals(a: UpdateTaskResponse | PlainMessage<UpdateTaskResponse> | undefined, b: UpdateTaskResponse | PlainMessage<UpdateTaskResponse> | undefined): boolean;
+  static equals(a: QueryTasksRequest_TimeRange | PlainMessage<QueryTasksRequest_TimeRange> | undefined, b: QueryTasksRequest_TimeRange | PlainMessage<QueryTasksRequest_TimeRange> | undefined): boolean;
+}
+
+/**
+ * A filter for statuses.
+ *
+ * @generated from message anduril.taskmanager.v1.QueryTasksRequest.StatusFilter
+ */
+export declare class QueryTasksRequest_StatusFilter extends Message<QueryTasksRequest_StatusFilter> {
+  /**
+   * Statuses to be part of the filter.
+   *
+   * @generated from field: repeated anduril.taskmanager.v1.Status status = 1;
+   */
+  status: Status[];
+
+  /**
+   * The type of filter to apply.
+   *
+   * @generated from field: anduril.taskmanager.v1.QueryTasksRequest.FilterType filter_type = 2;
+   */
+  filterType: QueryTasksRequest_FilterType;
+
+  constructor(data?: PartialMessage<QueryTasksRequest_StatusFilter>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.taskmanager.v1.QueryTasksRequest.StatusFilter";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryTasksRequest_StatusFilter;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryTasksRequest_StatusFilter;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryTasksRequest_StatusFilter;
+
+  static equals(a: QueryTasksRequest_StatusFilter | PlainMessage<QueryTasksRequest_StatusFilter> | undefined, b: QueryTasksRequest_StatusFilter | PlainMessage<QueryTasksRequest_StatusFilter> | undefined): boolean;
+}
+
+/**
+ * Response to a Query Task request.
+ *
+ * @generated from message anduril.taskmanager.v1.QueryTasksResponse
+ */
+export declare class QueryTasksResponse extends Message<QueryTasksResponse> {
+  /**
+   * Tasks matching the Query Task request.
+   *
+   * @generated from field: repeated anduril.taskmanager.v1.Task tasks = 1;
+   */
+  tasks: Task[];
+
+  /**
+   * Page token to the next page of Tasks.
+   *
+   * @generated from field: string page_token = 2;
+   */
+  pageToken: string;
+
+  constructor(data?: PartialMessage<QueryTasksResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.taskmanager.v1.QueryTasksResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QueryTasksResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QueryTasksResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QueryTasksResponse;
+
+  static equals(a: QueryTasksResponse | PlainMessage<QueryTasksResponse> | undefined, b: QueryTasksResponse | PlainMessage<QueryTasksResponse> | undefined): boolean;
 }
 
 /**
@@ -309,93 +429,6 @@ export declare class UpdateStatusResponse extends Message<UpdateStatusResponse> 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateStatusResponse;
 
   static equals(a: UpdateStatusResponse | PlainMessage<UpdateStatusResponse> | undefined, b: UpdateStatusResponse | PlainMessage<UpdateStatusResponse> | undefined): boolean;
-}
-
-/**
- * Request to Stream Tasks. Returns all live Tasks (aka all not-DONE Tasks).
- *
- * @generated from message anduril.taskmanager.v1.StreamTasksRequest
- */
-export declare class StreamTasksRequest extends Message<StreamTasksRequest> {
-  /**
-   * Optional rate limiting on StreamTasksResponses.
-   *
-   * @generated from field: anduril.taskmanager.v1.RateLimit rate_limit = 1;
-   */
-  rateLimit?: RateLimit;
-
-  /**
-   * Optional additional views of a Task.
-   * If not set, defaults to TASK_VIEW_MANAGER.
-   *
-   * @generated from field: repeated anduril.taskmanager.v1.TaskView views = 2;
-   */
-  views: TaskView[];
-
-  /**
-   * Optional period (in milliseconds) at which a Heartbeat message will be sent on the
-   * message stream. If this field is unset then no Heartbeat messages are sent.
-   *
-   * @generated from field: uint32 heartbeat_period_millis = 3;
-   */
-  heartbeatPeriodMillis: number;
-
-  /**
-   * Optional flag to only include tasks created or updated after the stream is initiated, and not any previous preexisting tasks.
-   * If unset, the stream will include any new tasks and task updates, as well as all preexisting tasks.
-   *
-   * @generated from field: bool exclude_preexisting_tasks = 4;
-   */
-  excludePreexistingTasks: boolean;
-
-  constructor(data?: PartialMessage<StreamTasksRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.taskmanager.v1.StreamTasksRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamTasksRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamTasksRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamTasksRequest;
-
-  static equals(a: StreamTasksRequest | PlainMessage<StreamTasksRequest> | undefined, b: StreamTasksRequest | PlainMessage<StreamTasksRequest> | undefined): boolean;
-}
-
-/**
- * Response stream will be fed all matching pre-existing live Tasks, plus any new events ongoing.
- *
- * @generated from message anduril.taskmanager.v1.StreamTasksResponse
- */
-export declare class StreamTasksResponse extends Message<StreamTasksResponse> {
-  /**
-   * Task event associated with the streaming request.
-   *
-   * @generated from field: anduril.taskmanager.v1.TaskEvent task_event = 1;
-   */
-  taskEvent?: TaskEvent;
-
-  /**
-   * Heartbeat message signaling liveliness of the stream.
-   *
-   * @generated from field: anduril.taskmanager.v1.Heartbeat heartbeat = 2;
-   */
-  heartbeat?: Heartbeat;
-
-  constructor(data?: PartialMessage<StreamTasksResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.taskmanager.v1.StreamTasksResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamTasksResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamTasksResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamTasksResponse;
-
-  static equals(a: StreamTasksResponse | PlainMessage<StreamTasksResponse> | undefined, b: StreamTasksResponse | PlainMessage<StreamTasksResponse> | undefined): boolean;
 }
 
 /**
