@@ -78,6 +78,39 @@ export declare enum HealthStatus {
 }
 
 /**
+ * Alerts are categorized into one of three levels - Warnings, Cautions, and Advisories (WCAs).
+ *
+ * @generated from enum anduril.entitymanager.v1.AlertLevel
+ */
+export declare enum AlertLevel {
+  /**
+   * @generated from enum value: ALERT_LEVEL_INVALID = 0;
+   */
+  INVALID = 0,
+
+  /**
+   * For conditions that require awareness and may require subsequent response.
+   *
+   * @generated from enum value: ALERT_LEVEL_ADVISORY = 1;
+   */
+  ADVISORY = 1,
+
+  /**
+   * For conditions that require immediate awareness and subsequent response.
+   *
+   * @generated from enum value: ALERT_LEVEL_CAUTION = 2;
+   */
+  CAUTION = 2,
+
+  /**
+   * For conditions that require immediate awareness and response.
+   *
+   * @generated from enum value: ALERT_LEVEL_WARNING = 3;
+   */
+  WARNING = 3,
+}
+
+/**
  * A message describing the component's health status.
  *
  * @generated from message anduril.entitymanager.v1.ComponentMessage
@@ -204,6 +237,18 @@ export declare class Health extends Message<Health> {
    */
   updateTime?: Timestamp;
 
+  /**
+   * Active alerts indicate a critical change in system state sent by the asset
+   * that must be made known to an operator or consumer of the common operating picture.
+   * Alerts are different from ComponentHealth messages--an active alert does not necessarily
+   * indicate a component is in an unhealthy state. For example, an asset may trigger
+   * an active alert based on fuel levels running low. Alerts should be removed from this list when their conditions
+   * are cleared. In other words, only active alerts should be reported here.
+   *
+   * @generated from field: repeated anduril.entitymanager.v1.Alert active_alerts = 5;
+   */
+  activeAlerts: Alert[];
+
   constructor(data?: PartialMessage<Health>);
 
   static readonly runtime: typeof proto3;
@@ -217,5 +262,103 @@ export declare class Health extends Message<Health> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Health;
 
   static equals(a: Health | PlainMessage<Health> | undefined, b: Health | PlainMessage<Health> | undefined): boolean;
+}
+
+/**
+ * An alert informs operators of critical events related to system performance and mission
+ * execution. An alert is produced as a result of one or more alert conditions.
+ *
+ * @generated from message anduril.entitymanager.v1.Alert
+ */
+export declare class Alert extends Message<Alert> {
+  /**
+   * Short, machine-readable code that describes this alert. This code is intended to provide systems off-asset
+   * with a lookup key to retrieve more detailed information about the alert.
+   *
+   * @generated from field: string alert_code = 1;
+   */
+  alertCode: string;
+
+  /**
+   * Human-readable description of this alert. The description is intended for display in the UI for human
+   * understanding and should not be used for machine processing. If the description is fixed and the vehicle controller
+   * provides no dynamic substitutions, then prefer lookup based on alert_code.
+   *
+   * @generated from field: string description = 2;
+   */
+  description: string;
+
+  /**
+   * Alert level (Warning, Caution, or Advisory).
+   *
+   * @generated from field: anduril.entitymanager.v1.AlertLevel level = 3;
+   */
+  level: AlertLevel;
+
+  /**
+   * Time at which this alert was activated.
+   *
+   * @generated from field: google.protobuf.Timestamp activated_time = 4;
+   */
+  activatedTime?: Timestamp;
+
+  /**
+   * Set of conditions which have activated this alert.
+   *
+   * @generated from field: repeated anduril.entitymanager.v1.AlertCondition active_conditions = 5;
+   */
+  activeConditions: AlertCondition[];
+
+  constructor(data?: PartialMessage<Alert>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.Alert";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Alert;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Alert;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Alert;
+
+  static equals(a: Alert | PlainMessage<Alert> | undefined, b: Alert | PlainMessage<Alert> | undefined): boolean;
+}
+
+/**
+ * A condition which may trigger an alert.
+ *
+ * @generated from message anduril.entitymanager.v1.AlertCondition
+ */
+export declare class AlertCondition extends Message<AlertCondition> {
+  /**
+   * Short, machine-readable code that describes this condition. This code is intended to provide systems off-asset
+   * with a lookup key to retrieve more detailed information about the condition.
+   *
+   * @generated from field: string condition_code = 1;
+   */
+  conditionCode: string;
+
+  /**
+   * Human-readable description of this condition. The description is intended for display in the UI for human
+   * understanding and should not be used for machine processing. If the description is fixed and the vehicle controller
+   * provides no dynamic substitutions, then prefer lookup based on condition_code.
+   *
+   * @generated from field: string description = 2;
+   */
+  description: string;
+
+  constructor(data?: PartialMessage<AlertCondition>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.AlertCondition";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AlertCondition;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AlertCondition;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AlertCondition;
+
+  static equals(a: AlertCondition | PlainMessage<AlertCondition> | undefined, b: AlertCondition | PlainMessage<AlertCondition> | undefined): boolean;
 }
 

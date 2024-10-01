@@ -598,7 +598,17 @@ export declare class Tracked extends Message<Tracked> {
  */
 export declare class Provenance extends Message<Provenance> {
   /**
+   * A feed is a 1:1 or Many:1 mapping between a data type from a specific vendor
+   * and an output stream of entities. The feed_name identifies the feed definition
+   * in the Feeds API and must be globally unique per feed.
+   *
+   * @generated from field: string feed_name = 7;
+   */
+  feedName: string;
+
+  /**
    * Name of the integration that produced this entity
+   * To be deprecated soon in favor of feed_name
    *
    * @generated from field: string integration_name = 5;
    */
@@ -606,6 +616,7 @@ export declare class Provenance extends Message<Provenance> {
 
   /**
    * Source data type of this entity. Examples: ADSB, Link16, etc.
+   * To be deprecated soon in favor of feed_name
    *
    * @generated from field: string data_type = 6;
    */
@@ -626,7 +637,9 @@ export declare class Provenance extends Message<Provenance> {
   sourceId: string;
 
   /**
-   * Main update timer for the entity with the exception of overrides
+   * The time, according to the source system, that the data in the entity was last modified. Generally, this should
+   * be the time that the source-reported time of validity of the data in the entity. This field must be
+   * updated with every change to the entity or else Entity Manager will discard the update.
    *
    * @generated from field: google.protobuf.Timestamp source_update_time = 2;
    */

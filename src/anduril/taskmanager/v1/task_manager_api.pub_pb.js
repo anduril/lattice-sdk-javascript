@@ -7,7 +7,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const { Any, proto3, Timestamp } = require("@bufbuild/protobuf");
-const { Principal, Relations, StatusUpdate, Task, TaskEntity, TaskEvent, TaskView } = require("./task.pub_pb.js");
+const { Principal, Relations, Status, StatusUpdate, Task, TaskEntity, TaskView } = require("./task.pub_pb.js");
 const { CancelRequest, CompleteRequest, ExecuteRequest } = require("./task_api.pub_pb.js");
 
 /**
@@ -68,27 +68,73 @@ const GetTaskResponse = proto3.makeMessageType(
 );
 
 /**
- * Request to update a Task.
+ * Request to query for Tasks. Returns the each latest Task by Status ID and Version ID by default with no filters.
  *
- * @generated from message anduril.taskmanager.v1.UpdateTaskRequest
+ * @generated from message anduril.taskmanager.v1.QueryTasksRequest
  */
-const UpdateTaskRequest = proto3.makeMessageType(
-  "anduril.taskmanager.v1.UpdateTaskRequest",
+const QueryTasksRequest = proto3.makeMessageType(
+  "anduril.taskmanager.v1.QueryTasksRequest",
   () => [
-    { no: 1, name: "task", kind: "message", T: Task },
-    { no: 7, name: "is_executed_elsewhere", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 1, name: "parent_task_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "page_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "status_filter", kind: "message", T: QueryTasksRequest_StatusFilter },
+    { no: 5, name: "update_time_range", kind: "message", T: QueryTasksRequest_TimeRange },
+    { no: 6, name: "view", kind: "enum", T: proto3.getEnumType(TaskView) },
   ],
 );
 
 /**
- * Response to an Update Task request.
+ * The type of filter.
  *
- * @generated from message anduril.taskmanager.v1.UpdateTaskResponse
+ * @generated from enum anduril.taskmanager.v1.QueryTasksRequest.FilterType
  */
-const UpdateTaskResponse = proto3.makeMessageType(
-  "anduril.taskmanager.v1.UpdateTaskResponse",
+const QueryTasksRequest_FilterType = proto3.makeEnum(
+  "anduril.taskmanager.v1.QueryTasksRequest.FilterType",
+  [
+    {no: 0, name: "FILTER_TYPE_INVALID", localName: "INVALID"},
+    {no: 1, name: "FILTER_TYPE_INCLUSIVE", localName: "INCLUSIVE"},
+    {no: 2, name: "FILTER_TYPE_EXCLUSIVE", localName: "EXCLUSIVE"},
+  ],
+);
+
+/**
+ * A time range query for Tasks.
+ *
+ * @generated from message anduril.taskmanager.v1.QueryTasksRequest.TimeRange
+ */
+const QueryTasksRequest_TimeRange = proto3.makeMessageType(
+  "anduril.taskmanager.v1.QueryTasksRequest.TimeRange",
   () => [
-    { no: 1, name: "task", kind: "message", T: Task },
+    { no: 1, name: "update_start_time", kind: "message", T: Timestamp },
+    { no: 2, name: "update_end_time", kind: "message", T: Timestamp },
+  ],
+  {localName: "QueryTasksRequest_TimeRange"},
+);
+
+/**
+ * A filter for statuses.
+ *
+ * @generated from message anduril.taskmanager.v1.QueryTasksRequest.StatusFilter
+ */
+const QueryTasksRequest_StatusFilter = proto3.makeMessageType(
+  "anduril.taskmanager.v1.QueryTasksRequest.StatusFilter",
+  () => [
+    { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(Status), repeated: true },
+    { no: 2, name: "filter_type", kind: "enum", T: proto3.getEnumType(QueryTasksRequest_FilterType) },
+  ],
+  {localName: "QueryTasksRequest_StatusFilter"},
+);
+
+/**
+ * Response to a Query Task request.
+ *
+ * @generated from message anduril.taskmanager.v1.QueryTasksResponse
+ */
+const QueryTasksResponse = proto3.makeMessageType(
+  "anduril.taskmanager.v1.QueryTasksResponse",
+  () => [
+    { no: 1, name: "tasks", kind: "message", T: Task, repeated: true },
+    { no: 2, name: "page_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -113,34 +159,6 @@ const UpdateStatusResponse = proto3.makeMessageType(
   "anduril.taskmanager.v1.UpdateStatusResponse",
   () => [
     { no: 1, name: "task", kind: "message", T: Task },
-  ],
-);
-
-/**
- * Request to Stream Tasks. Returns all live Tasks (aka all not-DONE Tasks).
- *
- * @generated from message anduril.taskmanager.v1.StreamTasksRequest
- */
-const StreamTasksRequest = proto3.makeMessageType(
-  "anduril.taskmanager.v1.StreamTasksRequest",
-  () => [
-    { no: 1, name: "rate_limit", kind: "message", T: RateLimit },
-    { no: 2, name: "views", kind: "enum", T: proto3.getEnumType(TaskView), repeated: true },
-    { no: 3, name: "heartbeat_period_millis", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
-    { no: 4, name: "exclude_preexisting_tasks", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-  ],
-);
-
-/**
- * Response stream will be fed all matching pre-existing live Tasks, plus any new events ongoing.
- *
- * @generated from message anduril.taskmanager.v1.StreamTasksResponse
- */
-const StreamTasksResponse = proto3.makeMessageType(
-  "anduril.taskmanager.v1.StreamTasksResponse",
-  () => [
-    { no: 1, name: "task_event", kind: "message", T: TaskEvent },
-    { no: 2, name: "heartbeat", kind: "message", T: Heartbeat },
   ],
 );
 
@@ -209,12 +227,13 @@ exports.CreateTaskRequest = CreateTaskRequest;
 exports.CreateTaskResponse = CreateTaskResponse;
 exports.GetTaskRequest = GetTaskRequest;
 exports.GetTaskResponse = GetTaskResponse;
-exports.UpdateTaskRequest = UpdateTaskRequest;
-exports.UpdateTaskResponse = UpdateTaskResponse;
+exports.QueryTasksRequest = QueryTasksRequest;
+exports.QueryTasksRequest_FilterType = QueryTasksRequest_FilterType;
+exports.QueryTasksRequest_TimeRange = QueryTasksRequest_TimeRange;
+exports.QueryTasksRequest_StatusFilter = QueryTasksRequest_StatusFilter;
+exports.QueryTasksResponse = QueryTasksResponse;
 exports.UpdateStatusRequest = UpdateStatusRequest;
 exports.UpdateStatusResponse = UpdateStatusResponse;
-exports.StreamTasksRequest = StreamTasksRequest;
-exports.StreamTasksResponse = StreamTasksResponse;
 exports.ListenAsAgentRequest = ListenAsAgentRequest;
 exports.ListenAsAgentResponse = ListenAsAgentResponse;
 exports.RateLimit = RateLimit;

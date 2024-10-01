@@ -6,12 +6,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 
-const { CreateTaskRequest, CreateTaskResponse, GetTaskRequest, GetTaskResponse, ListenAsAgentRequest, ListenAsAgentResponse, StreamTasksRequest, StreamTasksResponse, UpdateStatusRequest, UpdateStatusResponse, UpdateTaskRequest, UpdateTaskResponse } = require("./task_manager_api.pub_pb.js");
+const { CreateTaskRequest, CreateTaskResponse, GetTaskRequest, GetTaskResponse, ListenAsAgentRequest, ListenAsAgentResponse, QueryTasksRequest, QueryTasksResponse, UpdateStatusRequest, UpdateStatusResponse } = require("./task_manager_api.pub_pb.js");
 const { MethodKind } = require("@bufbuild/protobuf");
 
 /**
  * Task Manager is a service that performs state management associated with Tasks, and also the execution of Tasks
- *  on their designated agents.
+ * on their designated agents.
  *
  * @generated from service anduril.taskmanager.v1.TaskManagerAPI
  */
@@ -41,18 +41,14 @@ const TaskManagerAPI = {
       kind: MethodKind.Unary,
     },
     /**
-     * Update definition of a Task, only works on Tasks that are not DONE or CANCEL_REQUESTED. Notes:
-     *  * send the current task_version in Task, API will increment definition_version, and reset status_version to 1.
-     *  * previous definition_version will have status set to REPLACED.
-     *  * depending on assignee, replacing the definition will either update if capable on backend,
-     *     or cancel previous and issue new.
+     * Find Tasks that match request criteria.
      *
-     * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.UpdateTask
+     * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.QueryTasks
      */
-    updateTask: {
-      name: "UpdateTask",
-      I: UpdateTaskRequest,
-      O: UpdateTaskResponse,
+    queryTasks: {
+      name: "QueryTasks",
+      I: QueryTasksRequest,
+      O: QueryTasksResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -65,18 +61,6 @@ const TaskManagerAPI = {
       I: UpdateStatusRequest,
       O: UpdateStatusResponse,
       kind: MethodKind.Unary,
-    },
-    /**
-     * Stream all existing live (not yet done) Tasks and any new updates.
-     * Intended for clients to gain visibility into real time updates for live Tasks.
-     *
-     * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.StreamTasks
-     */
-    streamTasks: {
-      name: "StreamTasks",
-      I: StreamTasksRequest,
-      O: StreamTasksResponse,
-      kind: MethodKind.ServerStreaming,
     },
     /**
      * Stream Tasks ready for RPC Agent execution that match agent selector (ex: entity_ids).

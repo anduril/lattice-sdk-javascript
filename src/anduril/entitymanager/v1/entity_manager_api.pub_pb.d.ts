@@ -6,10 +6,9 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Entity, Provenance } from "./entity.pub_pb.js";
+import type { OverrideStatus } from "./types.pub_pb.js";
 import type { Statement } from "./filter.pub_pb.js";
 import type { RateLimit } from "./rate_limit.pub_pb.js";
-import type { OverrideStatus } from "./types.pub_pb.js";
-import type { RelationshipType } from "./relationship.pub_pb.js";
 
 /**
  * The type of entity event.
@@ -56,6 +55,113 @@ export declare enum EventType {
    * @generated from enum value: EVENT_TYPE_POST_EXPIRY_OVERRIDE = 5;
    */
   POST_EXPIRY_OVERRIDE = 5,
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.PublishEntityRequest
+ */
+export declare class PublishEntityRequest extends Message<PublishEntityRequest> {
+  /**
+   * Stream of fully formed entities to publish
+   * Required fields per entity:
+   *   * expiry_time - must be in the future, but less than 30 days from now
+   *   * provenance.data_type [if using deprecated provenance.source, migrate to data_type.]
+   *   * provenance.source_update_time (can be earlier than rpc call if data entered is older)
+   *   * aliases.name
+   *   * ontology.template
+   * any additional required fields will be determined by template, see com.anduril.entitymanager.v1.Template
+   * if an entity_id is provided, will treat as update, otherwise create
+   *
+   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
+   */
+  entity?: Entity;
+
+  constructor(data?: PartialMessage<PublishEntityRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.PublishEntityRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishEntityRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishEntityRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishEntityRequest;
+
+  static equals(a: PublishEntityRequest | PlainMessage<PublishEntityRequest> | undefined, b: PublishEntityRequest | PlainMessage<PublishEntityRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.PublishEntityResponse
+ */
+export declare class PublishEntityResponse extends Message<PublishEntityResponse> {
+  constructor(data?: PartialMessage<PublishEntityResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.PublishEntityResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishEntityResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishEntityResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishEntityResponse;
+
+  static equals(a: PublishEntityResponse | PlainMessage<PublishEntityResponse> | undefined, b: PublishEntityResponse | PlainMessage<PublishEntityResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.PublishEntitiesRequest
+ */
+export declare class PublishEntitiesRequest extends Message<PublishEntitiesRequest> {
+  /**
+   * Required fields:
+   *   * expiry_time - must be in the future, but less than 30 days from now
+   *   * provenance.data_type
+   *   * provenance.source_update_time (can be earlier than rpc call if data entered is older)
+   *   * aliases.name
+   * any additional required fields will be determined by template, see com.anduril.entitymanager.v1.Template
+   * if an entity_id is provided, will treat as update, otherwise create
+   *
+   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
+   */
+  entity?: Entity;
+
+  constructor(data?: PartialMessage<PublishEntitiesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.PublishEntitiesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishEntitiesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishEntitiesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishEntitiesRequest;
+
+  static equals(a: PublishEntitiesRequest | PlainMessage<PublishEntitiesRequest> | undefined, b: PublishEntitiesRequest | PlainMessage<PublishEntitiesRequest> | undefined): boolean;
+}
+
+/**
+ * After the stream is closed the server will return an empty message indicating success. If any streamed message
+ * caused an error then the stream is immediately terminated and an error code is returned.
+ *
+ * @generated from message anduril.entitymanager.v1.PublishEntitiesResponse
+ */
+export declare class PublishEntitiesResponse extends Message<PublishEntitiesResponse> {
+  constructor(data?: PartialMessage<PublishEntitiesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.PublishEntitiesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishEntitiesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishEntitiesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishEntitiesResponse;
+
+  static equals(a: PublishEntitiesResponse | PlainMessage<PublishEntitiesResponse> | undefined, b: PublishEntitiesResponse | PlainMessage<PublishEntitiesResponse> | undefined): boolean;
 }
 
 /**
@@ -108,233 +214,6 @@ export declare class GetEntityResponse extends Message<GetEntityResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetEntityResponse;
 
   static equals(a: GetEntityResponse | PlainMessage<GetEntityResponse> | undefined, b: GetEntityResponse | PlainMessage<GetEntityResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message anduril.entitymanager.v1.StreamEntityComponentsRequest
- */
-export declare class StreamEntityComponentsRequest extends Message<StreamEntityComponentsRequest> {
-  /**
-   * lower_snake_cased component names to include in response events, e.g. location. Only included components will
-   * populate.
-   *
-   * @generated from field: repeated string components_to_include = 1;
-   */
-  componentsToInclude: string[];
-
-  /**
-   * subscribe to all components. This should only be used in cases where you want all components (e.g. latticectl) and
-   * if you're using it for other services please reach out first. Setting both components_to_include and
-   * include_all_components is invalid and will be rejected.
-   *
-   * @generated from field: bool include_all_components = 2;
-   */
-  includeAllComponents: boolean;
-
-  /**
-   * The root node of a statement filter "tree".
-   * If provided, only entities matching the filter criteria will be streamed. The filter is applied dynamically so if a
-   * new entity matches, it will be included, and if an entity updates to no longer match, it will be excluded.
-   *
-   * @generated from field: anduril.entitymanager.v1.Statement filter = 3;
-   */
-  filter?: Statement;
-
-  /**
-   * optional rate-limiting / down-sampling parameters, see RateLimit message for details.
-   *
-   * @generated from field: anduril.entitymanager.v1.RateLimit rate_limit = 4;
-   */
-  rateLimit?: RateLimit;
-
-  /**
-   * The period (in milliseconds) at which a Heartbeat message will be sent on the
-   * message stream. If this field is set to 0 then no Heartbeat messages are sent.
-   *
-   * @generated from field: uint32 heartbeat_period_millis = 5;
-   */
-  heartbeatPeriodMillis: number;
-
-  /**
-   * subscribe to a finite stream of preexisting events which closes when there are no additional pre-existing events to
-   * process. Respects the filter specified on the StreamEntityComponentsRequest.
-   *
-   * @generated from field: bool preexisting_only = 6;
-   */
-  preexistingOnly: boolean;
-
-  constructor(data?: PartialMessage<StreamEntityComponentsRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.StreamEntityComponentsRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamEntityComponentsRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamEntityComponentsRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamEntityComponentsRequest;
-
-  static equals(a: StreamEntityComponentsRequest | PlainMessage<StreamEntityComponentsRequest> | undefined, b: StreamEntityComponentsRequest | PlainMessage<StreamEntityComponentsRequest> | undefined): boolean;
-}
-
-/**
- * response stream will be fed all matching pre-existing live entities as CREATED, plus any new events ongoing.
- *
- * @generated from message anduril.entitymanager.v1.StreamEntityComponentsResponse
- */
-export declare class StreamEntityComponentsResponse extends Message<StreamEntityComponentsResponse> {
-  /**
-   * @generated from field: anduril.entitymanager.v1.EntityEvent entity_event = 1;
-   */
-  entityEvent?: EntityEvent;
-
-  /**
-   * @generated from field: anduril.entitymanager.v1.Heartbeat heartbeat = 2;
-   */
-  heartbeat?: Heartbeat;
-
-  constructor(data?: PartialMessage<StreamEntityComponentsResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.StreamEntityComponentsResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamEntityComponentsResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamEntityComponentsResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamEntityComponentsResponse;
-
-  static equals(a: StreamEntityComponentsResponse | PlainMessage<StreamEntityComponentsResponse> | undefined, b: StreamEntityComponentsResponse | PlainMessage<StreamEntityComponentsResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message anduril.entitymanager.v1.PutEntityRequest
- */
-export declare class PutEntityRequest extends Message<PutEntityRequest> {
-  /**
-   * The entity to put.
-   * Required fields:
-   *   * expiry_time - must be in the future, but less than 30 days from now
-   *   * provenance.data_type
-   *   * provenance.source_update_time (can be earlier than rpc call if data entered is older)
-   *   * aliases.name
-   *   * ontology.template
-   * any additional required fields will be determined by template, see com.anduril.entitymanager.v1.Template
-   * if an entity_id is provided, will treat as update, otherwise create
-   *
-   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
-   */
-  entity?: Entity;
-
-  /**
-   * An optional unique identifier for this entity supplied by integration.
-   * If provided, EntityId will be determined via consistent hash with provenance.data_type + unique_id
-   *
-   * @generated from field: string unique_id = 2;
-   */
-  uniqueId: string;
-
-  constructor(data?: PartialMessage<PutEntityRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.PutEntityRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PutEntityRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PutEntityRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PutEntityRequest;
-
-  static equals(a: PutEntityRequest | PlainMessage<PutEntityRequest> | undefined, b: PutEntityRequest | PlainMessage<PutEntityRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message anduril.entitymanager.v1.PutEntityResponse
- */
-export declare class PutEntityResponse extends Message<PutEntityResponse> {
-  /**
-   * The updated entity.
-   * Automatically updated fields:
-   *   * is_live - always reset to true
-   *   * entity_id - new GUID on create
-   *   * created_time - set on create
-   *
-   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
-   */
-  entity?: Entity;
-
-  constructor(data?: PartialMessage<PutEntityResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.PutEntityResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PutEntityResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PutEntityResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PutEntityResponse;
-
-  static equals(a: PutEntityResponse | PlainMessage<PutEntityResponse> | undefined, b: PutEntityResponse | PlainMessage<PutEntityResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message anduril.entitymanager.v1.PublishEntitiesRequest
- */
-export declare class PublishEntitiesRequest extends Message<PublishEntitiesRequest> {
-  /**
-   * Stream of fully formed entities to publish
-   * Required fields per entity:
-   *   * expiry_time - must be in the future, but less than 30 days from now
-   *   * provenance.data_type
-   *   * provenance.source_update_time (can be earlier than rpc call if data entered is older)
-   *   * aliases.name
-   *   * ontology.template
-   * any additional required fields will be determined by template, see com.anduril.entitymanager.v1.Template
-   * if an entity_id is provided, will treat as update, otherwise create
-   *
-   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
-   */
-  entity?: Entity;
-
-  constructor(data?: PartialMessage<PublishEntitiesRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.PublishEntitiesRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishEntitiesRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishEntitiesRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishEntitiesRequest;
-
-  static equals(a: PublishEntitiesRequest | PlainMessage<PublishEntitiesRequest> | undefined, b: PublishEntitiesRequest | PlainMessage<PublishEntitiesRequest> | undefined): boolean;
-}
-
-/**
- * After the stream is closed the server will return an empty message indicating success. If any streamed message
- * caused an error then the stream is immediately terminated and an error code is returned.
- *
- * @generated from message anduril.entitymanager.v1.PublishEntitiesResponse
- */
-export declare class PublishEntitiesResponse extends Message<PublishEntitiesResponse> {
-  constructor(data?: PartialMessage<PublishEntitiesResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.PublishEntitiesResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublishEntitiesResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublishEntitiesResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublishEntitiesResponse;
-
-  static equals(a: PublishEntitiesResponse | PlainMessage<PublishEntitiesResponse> | undefined, b: PublishEntitiesResponse | PlainMessage<PublishEntitiesResponse> | undefined): boolean;
 }
 
 /**
@@ -460,214 +339,102 @@ export declare class RemoveEntityOverrideResponse extends Message<RemoveEntityOv
 }
 
 /**
- * @generated from message anduril.entitymanager.v1.DeleteEntityRequest
+ * @generated from message anduril.entitymanager.v1.StreamEntityComponentsRequest
  */
-export declare class DeleteEntityRequest extends Message<DeleteEntityRequest> {
+export declare class StreamEntityComponentsRequest extends Message<StreamEntityComponentsRequest> {
   /**
-   * @generated from field: string entity_id = 1;
+   * lower_snake_cased component names to include in response events, e.g. location. Only included components will
+   * populate.
+   *
+   * @generated from field: repeated string components_to_include = 1;
    */
-  entityId: string;
+  componentsToInclude: string[];
 
-  constructor(data?: PartialMessage<DeleteEntityRequest>);
+  /**
+   * subscribe to all components. This should only be used in cases where you want all components (e.g. latticectl) and
+   * if you're using it for other services please reach out first. Setting both components_to_include and
+   * include_all_components is invalid and will be rejected.
+   *
+   * @generated from field: bool include_all_components = 2;
+   */
+  includeAllComponents: boolean;
+
+  /**
+   * The root node of a statement filter "tree".
+   * If provided, only entities matching the filter criteria will be streamed. The filter is applied dynamically so if a
+   * new entity matches, it will be included, and if an entity updates to no longer match, it will be excluded.
+   *
+   * @generated from field: anduril.entitymanager.v1.Statement filter = 3;
+   */
+  filter?: Statement;
+
+  /**
+   * optional rate-limiting / down-sampling parameters, see RateLimit message for details.
+   *
+   * @generated from field: anduril.entitymanager.v1.RateLimit rate_limit = 4;
+   */
+  rateLimit?: RateLimit;
+
+  /**
+   * The period (in milliseconds) at which a Heartbeat message will be sent on the
+   * message stream. If this field is set to 0 then no Heartbeat messages are sent.
+   *
+   * @generated from field: uint32 heartbeat_period_millis = 5;
+   */
+  heartbeatPeriodMillis: number;
+
+  /**
+   * subscribe to a finite stream of preexisting events which closes when there are no additional pre-existing events to
+   * process. Respects the filter specified on the StreamEntityComponentsRequest.
+   *
+   * @generated from field: bool preexisting_only = 6;
+   */
+  preexistingOnly: boolean;
+
+  constructor(data?: PartialMessage<StreamEntityComponentsRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.DeleteEntityRequest";
+  static readonly typeName = "anduril.entitymanager.v1.StreamEntityComponentsRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteEntityRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamEntityComponentsRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteEntityRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamEntityComponentsRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteEntityRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamEntityComponentsRequest;
 
-  static equals(a: DeleteEntityRequest | PlainMessage<DeleteEntityRequest> | undefined, b: DeleteEntityRequest | PlainMessage<DeleteEntityRequest> | undefined): boolean;
+  static equals(a: StreamEntityComponentsRequest | PlainMessage<StreamEntityComponentsRequest> | undefined, b: StreamEntityComponentsRequest | PlainMessage<StreamEntityComponentsRequest> | undefined): boolean;
 }
 
 /**
- * void response but with placeholder for future optional fields.
+ * response stream will be fed all matching pre-existing live entities as CREATED, plus any new events ongoing.
  *
- * @generated from message anduril.entitymanager.v1.DeleteEntityResponse
+ * @generated from message anduril.entitymanager.v1.StreamEntityComponentsResponse
  */
-export declare class DeleteEntityResponse extends Message<DeleteEntityResponse> {
-  constructor(data?: PartialMessage<DeleteEntityResponse>);
+export declare class StreamEntityComponentsResponse extends Message<StreamEntityComponentsResponse> {
+  /**
+   * @generated from field: anduril.entitymanager.v1.EntityEvent entity_event = 1;
+   */
+  entityEvent?: EntityEvent;
+
+  /**
+   * @generated from field: anduril.entitymanager.v1.Heartbeat heartbeat = 2;
+   */
+  heartbeat?: Heartbeat;
+
+  constructor(data?: PartialMessage<StreamEntityComponentsResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.DeleteEntityResponse";
+  static readonly typeName = "anduril.entitymanager.v1.StreamEntityComponentsResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteEntityResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): StreamEntityComponentsResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteEntityResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): StreamEntityComponentsResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteEntityResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): StreamEntityComponentsResponse;
 
-  static equals(a: DeleteEntityResponse | PlainMessage<DeleteEntityResponse> | undefined, b: DeleteEntityResponse | PlainMessage<DeleteEntityResponse> | undefined): boolean;
-}
-
-/**
- * The set of relationships to add to an entity. Relationships are specified from the primary entity to the
- * other entity specified in the relationship request(s).
- *
- * @generated from message anduril.entitymanager.v1.RelateEntityRequest
- */
-export declare class RelateEntityRequest extends Message<RelateEntityRequest> {
-  /**
-   * The entity onto which relationships are being added.
-   *
-   * @generated from field: string entity_id = 1;
-   */
-  entityId: string;
-
-  /**
-   * The relationships to add to the entity.
-   *
-   * @generated from field: repeated anduril.entitymanager.v1.RelationshipRequest relationships = 2;
-   */
-  relationships: RelationshipRequest[];
-
-  constructor(data?: PartialMessage<RelateEntityRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.RelateEntityRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RelateEntityRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RelateEntityRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RelateEntityRequest;
-
-  static equals(a: RelateEntityRequest | PlainMessage<RelateEntityRequest> | undefined, b: RelateEntityRequest | PlainMessage<RelateEntityRequest> | undefined): boolean;
-}
-
-/**
- * A request for a relationship on an entity. Forms a partial of the entitymanager.v1.Relationship message.
- *
- * @generated from message anduril.entitymanager.v1.RelationshipRequest
- */
-export declare class RelationshipRequest extends Message<RelationshipRequest> {
-  /**
-   * The entity ID to which this entity is related.
-   *
-   * @generated from field: string related_entity_id = 1;
-   */
-  relatedEntityId: string;
-
-  /**
-   * If RelationshipID is empty, a new relationship is created. Otherwise, the service will attempt
-   * to update an already existing relationship on the entity.
-   *
-   * @generated from field: string relationship_id = 2;
-   */
-  relationshipId: string;
-
-  /**
-   * The relationship type
-   *
-   * @generated from field: anduril.entitymanager.v1.RelationshipType relationship_type = 3;
-   */
-  relationshipType?: RelationshipType;
-
-  constructor(data?: PartialMessage<RelationshipRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.RelationshipRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RelationshipRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RelationshipRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RelationshipRequest;
-
-  static equals(a: RelationshipRequest | PlainMessage<RelationshipRequest> | undefined, b: RelationshipRequest | PlainMessage<RelationshipRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message anduril.entitymanager.v1.RelateEntityResponse
- */
-export declare class RelateEntityResponse extends Message<RelateEntityResponse> {
-  /**
-   * Newly related entity object with only Relationships component present.
-   *
-   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
-   */
-  entity?: Entity;
-
-  constructor(data?: PartialMessage<RelateEntityResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.RelateEntityResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RelateEntityResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RelateEntityResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RelateEntityResponse;
-
-  static equals(a: RelateEntityResponse | PlainMessage<RelateEntityResponse> | undefined, b: RelateEntityResponse | PlainMessage<RelateEntityResponse> | undefined): boolean;
-}
-
-/**
- * The relationships to remove from an entity.
- *
- * @generated from message anduril.entitymanager.v1.UnrelateEntityRequest
- */
-export declare class UnrelateEntityRequest extends Message<UnrelateEntityRequest> {
-  /**
-   * The entity from which relationships are being removed.
-   *
-   * @generated from field: string entity_id = 1;
-   */
-  entityId: string;
-
-  /**
-   * The relationships to delete on the entity, specified as relationship id.
-   *
-   * @generated from field: repeated string relationship_ids = 2;
-   */
-  relationshipIds: string[];
-
-  constructor(data?: PartialMessage<UnrelateEntityRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.UnrelateEntityRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UnrelateEntityRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UnrelateEntityRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UnrelateEntityRequest;
-
-  static equals(a: UnrelateEntityRequest | PlainMessage<UnrelateEntityRequest> | undefined, b: UnrelateEntityRequest | PlainMessage<UnrelateEntityRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message anduril.entitymanager.v1.UnrelateEntityResponse
- */
-export declare class UnrelateEntityResponse extends Message<UnrelateEntityResponse> {
-  /**
-   * Updated entity object with only Relationships component present.
-   *
-   * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
-   */
-  entity?: Entity;
-
-  constructor(data?: PartialMessage<UnrelateEntityResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.UnrelateEntityResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UnrelateEntityResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UnrelateEntityResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UnrelateEntityResponse;
-
-  static equals(a: UnrelateEntityResponse | PlainMessage<UnrelateEntityResponse> | undefined, b: UnrelateEntityResponse | PlainMessage<UnrelateEntityResponse> | undefined): boolean;
+  static equals(a: StreamEntityComponentsResponse | PlainMessage<StreamEntityComponentsResponse> | undefined, b: StreamEntityComponentsResponse | PlainMessage<StreamEntityComponentsResponse> | undefined): boolean;
 }
 
 /**
