@@ -1,16 +1,16 @@
 {
-  "name": "@anduril/anduril-javascript",
+  "name": "@anduril/lattice-sdk-javascript",
   "version": "1.0.11",
-  "description": "The Anduril SDK vended in Javascript",
+  "description": "The Lattice SDK vended in Javascript",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anduril/anduril-javascript.git"
+    "url": "git+https://github.com/anduril/lattice-sdk-javascript.git"
   },
   "author": "Anduril Industries Inc.",
   "bugs": {
-    "url": "https://github.com/anduril/anduril-javascript/issues"
+    "url": "https://github.com/anduril/lattice-sdk-javascript/issues"
   },
-  "homepage": "https://github.com/anduril/anduril-javascript#readme",
+  "homepage": "https://github.com/anduril/lattice-sdk-javascript#readme",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
