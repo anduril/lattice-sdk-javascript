@@ -1,6 +1,6 @@
 {
   "name": "@anduril/lattice-sdk-javascript",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "The Lattice SDK vended in Javascript",
   "repository": {
     "type": "git",
