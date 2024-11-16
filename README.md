@@ -1,6 +1,6 @@
-# Anduril SDK Javascript
+# Lattice SDK Javascript
 
-The official [Anduril](https://www.anduril.com/) client library.
+The official [Anduril](https://www.anduril.com/) Lattice SDK for Javascript.
 
 ## Requirements
 
@@ -27,7 +27,7 @@ Create a file in the package directory
 ```json
 {
   "dependencies": {
-    "@anduril/anduril-javascript": "1.0.6",
+    "@anduril/lattice-sdk-javascript": "1.0.6",
     "@connectrpc/connect-node": "1.4.0"
   }
 }
@@ -41,11 +41,11 @@ Index.ts
 import { EntityManagerAPI } from "@anduril/anduril-javascript/src/anduril/entitymanager/v1/entity_manager_api.pub_connect.js";
 import { createGrpcTransport } from "@connectrpc/connect-node";
 import { createPromiseClient } from "@connectrpc/connect";
-import { Entity } from "@anduril/anduril-javascript/src/anduril/entitymanager/v1/entity.pub_pb.js";
+import { Entity } from "@anduril/lattice-sdk-javascript/src/anduril/entitymanager/v1/entity.pub_pb.js";
 
 const transport = createGrpcTransport({
   // Requests will be made to <baseUrl>/<package>.<service>/method
-  baseUrl: "https://desert-guardian.anduril.com",
+  baseUrl: "https://${YOUR_BASE_URL}",
 
   // You have to tell the Node.js http API which HTTP version to use.
   httpVersion: "2",
@@ -71,7 +71,7 @@ void main();
 
 ## Support
 
-For support with this library please [file an issue](https://github.com/anduril/anduril-javascript/issues/new) or reach out to your Anduril representative. 
+For support with this library please [file an issue](https://github.com/anduril/lattice-sdk-javascript/issues/new) or reach out to your Anduril representative. 
 
 
 
