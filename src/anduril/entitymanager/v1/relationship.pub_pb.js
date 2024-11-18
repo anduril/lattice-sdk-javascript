@@ -10,7 +10,7 @@ const { proto3, Timestamp } = require("@bufbuild/protobuf");
 const { Sensors } = require("./sensors.pub_pb.js");
 
 /**
- * The relationships between this entity and other entities in the battlespace.
+ * The relationships between this entity and other entities in the common operational picture.
  *
  * @generated from message anduril.entitymanager.v1.Relationships
  */
@@ -43,23 +43,11 @@ const Relationship = proto3.makeMessageType(
 const RelationshipType = proto3.makeMessageType(
   "anduril.entitymanager.v1.RelationshipType",
   () => [
-    { no: 1, name: "tether", kind: "message", T: Tether, oneof: "type" },
     { no: 2, name: "tracked_by", kind: "message", T: TrackedBy, oneof: "type" },
-    { no: 3, name: "configure", kind: "message", T: Configure, oneof: "type" },
     { no: 4, name: "group_child", kind: "message", T: GroupChild, oneof: "type" },
     { no: 5, name: "group_parent", kind: "message", T: GroupParent, oneof: "type" },
     { no: 6, name: "merged_from", kind: "message", T: MergedFrom, oneof: "type" },
   ],
-);
-
-/**
- * A tether relationship indicates that this entity should take the position of the other entity.
- *
- * @generated from message anduril.entitymanager.v1.Tether
- */
-const Tether = proto3.makeMessageType(
-  "anduril.entitymanager.v1.Tether",
-  [],
 );
 
 /**
@@ -74,16 +62,6 @@ const TrackedBy = proto3.makeMessageType(
     { no: 1, name: "actively_tracking_sensors", kind: "message", T: Sensors },
     { no: 2, name: "last_measurement_timestamp", kind: "message", T: Timestamp },
   ],
-);
-
-/**
- * A configure relationship indicates that this entity is a configuration on other entity.
- *
- * @generated from message anduril.entitymanager.v1.Configure
- */
-const Configure = proto3.makeMessageType(
-  "anduril.entitymanager.v1.Configure",
-  [],
 );
 
 /**
@@ -125,9 +103,7 @@ const MergedFrom = proto3.makeMessageType(
 exports.Relationships = Relationships;
 exports.Relationship = Relationship;
 exports.RelationshipType = RelationshipType;
-exports.Tether = Tether;
 exports.TrackedBy = TrackedBy;
-exports.Configure = Configure;
 exports.GroupChild = GroupChild;
 exports.GroupParent = GroupParent;
 exports.MergedFrom = MergedFrom;

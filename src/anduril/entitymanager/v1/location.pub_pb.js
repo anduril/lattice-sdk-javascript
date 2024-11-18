@@ -26,7 +26,11 @@ const Location = proto3.makeMessageType(
 );
 
 /**
- * WGS84 position.
+ * WGS84 position. Position includes four altitude references.
+ * The data model does not currently support Mean Sea Level (MSL) references,
+ * such as the Earth Gravitational Model 1996 (EGM-96) and the Earth Gravitational Model 2008 (EGM-08).
+ * If the only altitude reference available to your integration is MSL, convert it to
+ * Height Above Ellipsoid (HAE) and populate the altitude_hae_meters field.
  *
  * @generated from message anduril.entitymanager.v1.Position
  */
@@ -72,8 +76,6 @@ const ErrorEllipse = proto3.makeMessageType(
 );
 
 /**
- * Overrides anduril.type.Pose.
- *
  * @generated from message anduril.entitymanager.v1.Pose
  */
 const Pose = proto3.makeMessageType(

@@ -8,8 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const { BoolValue, DoubleValue, Int32Value, proto3, Timestamp } = require("@bufbuild/protobuf");
 const { Location, LocationUncertainty } = require("./location.pub_pb.js");
-const { GeoDetails, GeoPolygon, GeoShape } = require("./geoentity.pub_pb.js");
-const { Correlated } = require("./correlations.pub_pb.js");
+const { GeoDetails, GeoShape } = require("./geoentity.pub_pb.js");
 const { MilView, Ontology } = require("./ontology.pub_pb.js");
 const { Sensors } = require("./sensors.pub_pb.js");
 const { Payloads } = require("./payloads.pub_pb.js");
@@ -17,10 +16,8 @@ const { PowerState } = require("./power.pub_pb.js");
 const { TargetPriority } = require("./target_priority.pub_pb.js");
 const { LineOfBearing, Signal } = require("./signal.pub_pb.js");
 const { TransponderCodes } = require("./transponder_codes.pub_pb.js");
-const { ContactDetails } = require("./contact_details.pub_pb.js");
 const { Classification } = require("./classification.pub_pb.js");
 const { TaskCatalog } = require("../../tasks/v2/catalog.pub_pb.js");
-const { Media } = require("./media.pub_pb.js");
 const { Relationships } = require("./relationship.pub_pb.js");
 const { Dimensions } = require("./dimensions.pub_pb.js");
 const { RouteDetails } = require("./route_details.pub_pb.js");
@@ -30,37 +27,40 @@ const { GroupDetails } = require("./group.pub_pb.js");
 const { Supplies } = require("./supplies.pub_pb.js");
 const { Orbit } = require("./orbit.pub_pb.js");
 const { AltIdType, OverrideStatus, OverrideType, Source, UInt32Range } = require("./types.pub_pb.js");
+const { Color } = require("../../type/color.pub_pb.js");
 
 /**
- * Indicates whether an entity can be deleted with the DeleteEntity API call
+ * The type of correlation indicating how it was made.
  *
- * @generated from enum anduril.entitymanager.v1.Deletable
+ * @generated from enum anduril.entitymanager.v1.CorrelationType
  */
-const Deletable = proto3.makeEnum(
-  "anduril.entitymanager.v1.Deletable",
+const CorrelationType = proto3.makeEnum(
+  "anduril.entitymanager.v1.CorrelationType",
   [
-    {no: 0, name: "DELETABLE_INVALID", localName: "INVALID"},
-    {no: 1, name: "DELETABLE_TRUE", localName: "TRUE"},
-    {no: 2, name: "DELETABLE_FALSE", localName: "FALSE"},
-    {no: 3, name: "DELETABLE_REQUEST", localName: "REQUEST"},
+    {no: 0, name: "CORRELATION_TYPE_INVALID", localName: "INVALID"},
+    {no: 1, name: "CORRELATION_TYPE_MANUAL", localName: "MANUAL"},
+    {no: 2, name: "CORRELATION_TYPE_AUTOMATED", localName: "AUTOMATED"},
   ],
 );
 
 /**
- * @generated from enum anduril.entitymanager.v1.InteractivityMode
+ * The replication mode of the correlation indicating how the correlation will be replication to
+ * other nodes in the mesh.
+ *
+ * @generated from enum anduril.entitymanager.v1.CorrelationReplicationMode
  */
-const InteractivityMode = proto3.makeEnum(
-  "anduril.entitymanager.v1.InteractivityMode",
+const CorrelationReplicationMode = proto3.makeEnum(
+  "anduril.entitymanager.v1.CorrelationReplicationMode",
   [
-    {no: 0, name: "INTERACTIVITY_MODE_INVALID", localName: "INVALID"},
-    {no: 1, name: "INTERACTIVITY_MODE_DEFAULT", localName: "DEFAULT"},
-    {no: 2, name: "INTERACTIVITY_MODE_DISABLED_ON_MAP", localName: "DISABLED_ON_MAP"},
+    {no: 0, name: "CORRELATION_REPLICATION_MODE_INVALID", localName: "INVALID"},
+    {no: 1, name: "CORRELATION_REPLICATION_MODE_LOCAL", localName: "LOCAL"},
+    {no: 2, name: "CORRELATION_REPLICATION_MODE_GLOBAL", localName: "GLOBAL"},
   ],
 );
 
 /**
- * An entity object represents a single entity within the Lattice operational environment, and it contains
- * all data associated with that entity, such as its name, ID, and any other relevant components.
+ * The entity object represents a single known object within the Lattice operational environment. It contains
+ * all data associated with the entity, such as its name, ID, and other relevant components.
  *
  * @generated from message anduril.entitymanager.v1.Entity
  */
@@ -72,16 +72,14 @@ const Entity = proto3.makeMessageType(
     { no: 3, name: "is_live", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "created_time", kind: "message", T: Timestamp },
     { no: 5, name: "expiry_time", kind: "message", T: Timestamp },
-    { no: 43, name: "no_expiry", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 19, name: "status", kind: "message", T: Status },
     { no: 6, name: "location", kind: "message", T: Location },
     { no: 15, name: "location_uncertainty", kind: "message", T: LocationUncertainty },
-    { no: 17, name: "geopolygon", kind: "message", T: GeoPolygon },
     { no: 23, name: "geo_shape", kind: "message", T: GeoShape },
     { no: 24, name: "geo_details", kind: "message", T: GeoDetails },
     { no: 7, name: "aliases", kind: "message", T: Aliases },
     { no: 8, name: "tracked", kind: "message", T: Tracked },
-    { no: 9, name: "correlated", kind: "message", T: Correlated },
+    { no: 47, name: "correlation", kind: "message", T: Correlation },
     { no: 10, name: "mil_view", kind: "message", T: MilView },
     { no: 11, name: "ontology", kind: "message", T: Ontology },
     { no: 20, name: "sensors", kind: "message", T: Sensors },
@@ -90,14 +88,11 @@ const Entity = proto3.makeMessageType(
     { no: 12, name: "provenance", kind: "message", T: Provenance },
     { no: 13, name: "overrides", kind: "message", T: Overrides },
     { no: 14, name: "indicators", kind: "message", T: Indicators },
-    { no: 18, name: "original_data", kind: "message", T: OriginalData },
     { no: 22, name: "target_priority", kind: "message", T: TargetPriority },
     { no: 25, name: "signal", kind: "message", T: Signal },
     { no: 26, name: "transponder_codes", kind: "message", T: TransponderCodes },
-    { no: 27, name: "contact", kind: "message", T: ContactDetails },
     { no: 29, name: "data_classification", kind: "message", T: Classification },
     { no: 31, name: "task_catalog", kind: "message", T: TaskCatalog },
-    { no: 32, name: "media", kind: "message", T: Media },
     { no: 33, name: "relationships", kind: "message", T: Relationships },
     { no: 34, name: "visual_details", kind: "message", T: VisualDetails },
     { no: 36, name: "dimensions", kind: "message", T: Dimensions },
@@ -105,21 +100,8 @@ const Entity = proto3.makeMessageType(
     { no: 38, name: "schedules", kind: "message", T: Schedules },
     { no: 39, name: "health", kind: "message", T: Health },
     { no: 40, name: "group_details", kind: "message", T: GroupDetails },
-    { no: 41, name: "team_status", kind: "message", T: TeamStatus },
     { no: 42, name: "supplies", kind: "message", T: Supplies },
     { no: 46, name: "orbit", kind: "message", T: Orbit },
-  ],
-);
-
-/**
- * We need a proto containing a list of Entities for marshalling/unmarshalling
- *
- * @generated from message anduril.entitymanager.v1.Entities
- */
-const Entities = proto3.makeMessageType(
-  "anduril.entitymanager.v1.Entities",
-  () => [
-    { no: 1, name: "entities", kind: "message", T: Entity, repeated: true },
   ],
 );
 
@@ -157,11 +139,9 @@ const Aliases = proto3.makeMessageType(
 const Tracked = proto3.makeMessageType(
   "anduril.entitymanager.v1.Tracked",
   () => [
-    { no: 1, name: "track_quality", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 2, name: "track_quality_wrapper", kind: "message", T: Int32Value },
     { no: 3, name: "sensor_hits", kind: "message", T: Int32Value },
     { no: 4, name: "number_of_objects", kind: "message", T: UInt32Range },
-    { no: 5, name: "sensor_details", kind: "message", T: Sensors },
     { no: 6, name: "radar_cross_section", kind: "message", T: DoubleValue },
     { no: 7, name: "last_measurement_time", kind: "message", T: Timestamp },
     { no: 9, name: "line_of_bearing", kind: "message", T: LineOfBearing },
@@ -176,7 +156,6 @@ const Tracked = proto3.makeMessageType(
 const Provenance = proto3.makeMessageType(
   "anduril.entitymanager.v1.Provenance",
   () => [
-    { no: 7, name: "feed_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "integration_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "data_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 1, name: "source", kind: "enum", T: proto3.getEnumType(Source) },
@@ -198,7 +177,6 @@ const Indicators = proto3.makeMessageType(
     { no: 2, name: "exercise", kind: "message", T: BoolValue },
     { no: 3, name: "emergency", kind: "message", T: BoolValue },
     { no: 4, name: "c2", kind: "message", T: BoolValue },
-    { no: 5, name: "deletable", kind: "enum", T: proto3.getEnumType(Deletable) },
     { no: 6, name: "egressable", kind: "message", T: BoolValue },
     { no: 7, name: "starred", kind: "message", T: BoolValue },
   ],
@@ -213,7 +191,6 @@ const Overrides = proto3.makeMessageType(
   "anduril.entitymanager.v1.Overrides",
   () => [
     { no: 2, name: "override", kind: "message", T: Override, repeated: true },
-    { no: 1, name: "provenance", kind: "message", T: OverrideProvenance, repeated: true },
   ],
 );
 
@@ -236,51 +213,6 @@ const Override = proto3.makeMessageType(
 );
 
 /**
- * The provenance of a particular override within the entity.
- *
- * @generated from message anduril.entitymanager.v1.OverrideProvenance
- * @deprecated
- */
-const OverrideProvenance = proto3.makeMessageType(
-  "anduril.entitymanager.v1.OverrideProvenance",
-  () => [
-    { no: 1, name: "field_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "source_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "provenance", kind: "message", T: Provenance },
-  ],
-);
-
-/**
- * A component that references the primary original data source. For example, this would allow the original NITF file
- * data that was ingested to be retrieved.
- *
- * @generated from message anduril.entitymanager.v1.OriginalData
- */
-const OriginalData = proto3.makeMessageType(
-  "anduril.entitymanager.v1.OriginalData",
-  () => [
-    { no: 1, name: "url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "tle", kind: "message", T: OriginalData_TLE },
-  ],
-);
-
-/**
- * A TLE is a space industry standard for representing the characteristics of an object on orbit.
- * It is composed of two lines that are each a fixed width of 69 characters.
- *
- * @generated from message anduril.entitymanager.v1.OriginalData.TLE
- * @deprecated
- */
-const OriginalData_TLE = proto3.makeMessageType(
-  "anduril.entitymanager.v1.OriginalData.TLE",
-  () => [
-    { no: 1, name: "line1", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "line2", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-  {localName: "OriginalData_TLE"},
-);
-
-/**
  * An alternate id for an Entity.
  *
  * @generated from message anduril.entitymanager.v1.AlternateId
@@ -288,7 +220,6 @@ const OriginalData_TLE = proto3.makeMessageType(
 const AlternateId = proto3.makeMessageType(
   "anduril.entitymanager.v1.AlternateId",
   () => [
-    { no: 1, name: "source", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "type", kind: "enum", T: proto3.getEnumType(AltIdType) },
   ],
@@ -303,7 +234,6 @@ const VisualDetails = proto3.makeMessageType(
   "anduril.entitymanager.v1.VisualDetails",
   () => [
     { no: 1, name: "range_rings", kind: "message", T: RangeRings },
-    { no: 2, name: "interactivity_mode", kind: "enum", T: proto3.getEnumType(InteractivityMode) },
   ],
 );
 
@@ -318,25 +248,94 @@ const RangeRings = proto3.makeMessageType(
     { no: 1, name: "min_distance_m", kind: "message", T: DoubleValue },
     { no: 2, name: "max_distance_m", kind: "message", T: DoubleValue },
     { no: 3, name: "ring_count", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "ring_line_color", kind: "message", T: Color },
   ],
 );
 
 /**
- * If present, signifies the entity can participate in collaborative autonomous teaming.
- * Any status about team membership will be reported here.
+ * Available for Entities that are a correlated (N to 1) set of entities. This will be present on
+ * each entity in the set.
  *
- * @generated from message anduril.entitymanager.v1.TeamStatus
+ * @generated from message anduril.entitymanager.v1.Correlation
  */
-const TeamStatus = proto3.makeMessageType(
-  "anduril.entitymanager.v1.TeamStatus",
-  [],
+const Correlation = proto3.makeMessageType(
+  "anduril.entitymanager.v1.Correlation",
+  () => [
+    { no: 1, name: "primary", kind: "message", T: PrimaryCorrelation, oneof: "correlation" },
+    { no: 2, name: "secondary", kind: "message", T: SecondaryCorrelation, oneof: "correlation" },
+    { no: 3, name: "decorrelation", kind: "message", T: Decorrelation },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.PrimaryCorrelation
+ */
+const PrimaryCorrelation = proto3.makeMessageType(
+  "anduril.entitymanager.v1.PrimaryCorrelation",
+  () => [
+    { no: 1, name: "secondary_entity_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.SecondaryCorrelation
+ */
+const SecondaryCorrelation = proto3.makeMessageType(
+  "anduril.entitymanager.v1.SecondaryCorrelation",
+  () => [
+    { no: 1, name: "primary_entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "metadata", kind: "message", T: CorrelationMetadata },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.Decorrelation
+ */
+const Decorrelation = proto3.makeMessageType(
+  "anduril.entitymanager.v1.Decorrelation",
+  () => [
+    { no: 1, name: "all", kind: "message", T: DecorrelatedAll },
+    { no: 2, name: "decorrelated_entities", kind: "message", T: DecorrelatedSingle, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.DecorrelatedAll
+ */
+const DecorrelatedAll = proto3.makeMessageType(
+  "anduril.entitymanager.v1.DecorrelatedAll",
+  () => [
+    { no: 1, name: "metadata", kind: "message", T: CorrelationMetadata },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.DecorrelatedSingle
+ */
+const DecorrelatedSingle = proto3.makeMessageType(
+  "anduril.entitymanager.v1.DecorrelatedSingle",
+  () => [
+    { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "metadata", kind: "message", T: CorrelationMetadata },
+  ],
+);
+
+/**
+ * @generated from message anduril.entitymanager.v1.CorrelationMetadata
+ */
+const CorrelationMetadata = proto3.makeMessageType(
+  "anduril.entitymanager.v1.CorrelationMetadata",
+  () => [
+    { no: 1, name: "provenance", kind: "message", T: Provenance },
+    { no: 2, name: "replication_mode", kind: "enum", T: proto3.getEnumType(CorrelationReplicationMode) },
+    { no: 3, name: "type", kind: "enum", T: proto3.getEnumType(CorrelationType) },
+  ],
 );
 
 
-exports.Deletable = Deletable;
-exports.InteractivityMode = InteractivityMode;
+exports.CorrelationType = CorrelationType;
+exports.CorrelationReplicationMode = CorrelationReplicationMode;
 exports.Entity = Entity;
-exports.Entities = Entities;
 exports.Status = Status;
 exports.Aliases = Aliases;
 exports.Tracked = Tracked;
@@ -344,10 +343,13 @@ exports.Provenance = Provenance;
 exports.Indicators = Indicators;
 exports.Overrides = Overrides;
 exports.Override = Override;
-exports.OverrideProvenance = OverrideProvenance;
-exports.OriginalData = OriginalData;
-exports.OriginalData_TLE = OriginalData_TLE;
 exports.AlternateId = AlternateId;
 exports.VisualDetails = VisualDetails;
 exports.RangeRings = RangeRings;
-exports.TeamStatus = TeamStatus;
+exports.Correlation = Correlation;
+exports.PrimaryCorrelation = PrimaryCorrelation;
+exports.SecondaryCorrelation = SecondaryCorrelation;
+exports.Decorrelation = Decorrelation;
+exports.DecorrelatedAll = DecorrelatedAll;
+exports.DecorrelatedSingle = DecorrelatedSingle;
+exports.CorrelationMetadata = CorrelationMetadata;

@@ -15,22 +15,8 @@ const { proto3 } = require("@bufbuild/protobuf");
  */
 const GroupDetails = proto3.makeMessageType(
   "anduril.entitymanager.v1.GroupDetails",
-  () => [
-    { no: 1, name: "team", kind: "message", T: Team, oneof: "group_type" },
-  ],
-);
-
-/**
- * Describes a Team group type. Comprised of autonomous assets where an asset
- * in a Team can only be a part of a single Team at a time.
- *
- * @generated from message anduril.entitymanager.v1.Team
- */
-const Team = proto3.makeMessageType(
-  "anduril.entitymanager.v1.Team",
   [],
 );
 
 
 exports.GroupDetails = GroupDetails;
-exports.Team = Team;

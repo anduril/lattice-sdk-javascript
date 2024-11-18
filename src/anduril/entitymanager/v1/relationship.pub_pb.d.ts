@@ -8,7 +8,7 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Sensors } from "./sensors.pub_pb.js";
 
 /**
- * The relationships between this entity and other entities in the battlespace.
+ * The relationships between this entity and other entities in the common operational picture.
  *
  * @generated from message anduril.entitymanager.v1.Relationships
  */
@@ -86,22 +86,10 @@ export declare class RelationshipType extends Message<RelationshipType> {
    */
   type: {
     /**
-     * @generated from field: anduril.entitymanager.v1.Tether tether = 1;
-     */
-    value: Tether;
-    case: "tether";
-  } | {
-    /**
      * @generated from field: anduril.entitymanager.v1.TrackedBy tracked_by = 2;
      */
     value: TrackedBy;
     case: "trackedBy";
-  } | {
-    /**
-     * @generated from field: anduril.entitymanager.v1.Configure configure = 3;
-     */
-    value: Configure;
-    case: "configure";
   } | {
     /**
      * @generated from field: anduril.entitymanager.v1.GroupChild group_child = 4;
@@ -135,27 +123,6 @@ export declare class RelationshipType extends Message<RelationshipType> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RelationshipType;
 
   static equals(a: RelationshipType | PlainMessage<RelationshipType> | undefined, b: RelationshipType | PlainMessage<RelationshipType> | undefined): boolean;
-}
-
-/**
- * A tether relationship indicates that this entity should take the position of the other entity.
- *
- * @generated from message anduril.entitymanager.v1.Tether
- */
-export declare class Tether extends Message<Tether> {
-  constructor(data?: PartialMessage<Tether>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.Tether";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Tether;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Tether;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Tether;
-
-  static equals(a: Tether | PlainMessage<Tether> | undefined, b: Tether | PlainMessage<Tether> | undefined): boolean;
 }
 
 /**
@@ -193,27 +160,6 @@ export declare class TrackedBy extends Message<TrackedBy> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TrackedBy;
 
   static equals(a: TrackedBy | PlainMessage<TrackedBy> | undefined, b: TrackedBy | PlainMessage<TrackedBy> | undefined): boolean;
-}
-
-/**
- * A configure relationship indicates that this entity is a configuration on other entity.
- *
- * @generated from message anduril.entitymanager.v1.Configure
- */
-export declare class Configure extends Message<Configure> {
-  constructor(data?: PartialMessage<Configure>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.Configure";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Configure;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Configure;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Configure;
-
-  static equals(a: Configure | PlainMessage<Configure> | undefined, b: Configure | PlainMessage<Configure> | undefined): boolean;
 }
 
 /**

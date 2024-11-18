@@ -32,7 +32,6 @@ const MilView = proto3.makeMessageType(
 const Ontology = proto3.makeMessageType(
   "anduril.entitymanager.v1.Ontology",
   () => [
-    { no: 1, name: "descriptors", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 3, name: "platform_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "specific_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "template", kind: "enum", T: proto3.getEnumType(Template) },

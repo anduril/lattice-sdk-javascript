@@ -8,7 +8,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 const { DoubleValue, FloatValue, proto3 } = require("@bufbuild/protobuf");
 const { Position } = require("./location.pub_pb.js");
-const { Color } = require("../../type/color.pub_pb.js");
 
 /**
  * The type of geo entity.
@@ -32,167 +31,6 @@ const GeoType = proto3.makeEnum(
 );
 
 /**
- * Type of an emergency.
- *
- * @generated from enum anduril.entitymanager.v1.EmergencyType
- */
-const EmergencyType = proto3.makeEnum(
-  "anduril.entitymanager.v1.EmergencyType",
-  [
-    {no: 0, name: "EMERGENCY_TYPE_INVALID", localName: "INVALID"},
-    {no: 1, name: "EMERGENCY_TYPE_DOWN_AIRCRAFT", localName: "DOWN_AIRCRAFT"},
-    {no: 2, name: "EMERGENCY_TYPE_MAN_IN_WATER", localName: "MAN_IN_WATER"},
-    {no: 3, name: "EMERGENCY_TYPE_DITCHING", localName: "DITCHING"},
-    {no: 4, name: "EMERGENCY_TYPE_BAILOUT", localName: "BAILOUT"},
-    {no: 5, name: "EMERGENCY_TYPE_DISTRESSED_VEHICLE", localName: "DISTRESSED_VEHICLE"},
-    {no: 6, name: "EMERGENCY_TYPE_GROUND_INCIDENT", localName: "GROUND_INCIDENT"},
-    {no: 7, name: "EMERGENCY_TYPE_MEDICAL", localName: "MEDICAL"},
-    {no: 8, name: "EMERGENCY_TYPE_ISOLATED_PERSON", localName: "ISOLATED_PERSON"},
-  ],
-);
-
-/**
- * @generated from enum anduril.entitymanager.v1.ControlAreaType
- */
-const ControlAreaType = proto3.makeEnum(
-  "anduril.entitymanager.v1.ControlAreaType",
-  [
-    {no: 0, name: "CONTROL_AREA_TYPE_INVALID", localName: "INVALID"},
-    {no: 1, name: "CONTROL_AREA_TYPE_KEEP_IN_ZONE", localName: "KEEP_IN_ZONE"},
-    {no: 2, name: "CONTROL_AREA_TYPE_KEEP_OUT_ZONE", localName: "KEEP_OUT_ZONE"},
-    {no: 3, name: "CONTROL_AREA_TYPE_DITCH_ZONE", localName: "DITCH_ZONE"},
-    {no: 4, name: "CONTROL_AREA_TYPE_OBSERVATION_EXCLUSION", localName: "OBSERVATION_EXCLUSION"},
-    {no: 5, name: "CONTROL_AREA_TYPE_OBSERVATION_INCLUSION", localName: "OBSERVATION_INCLUSION"},
-    {no: 6, name: "CONTROL_AREA_TYPE_OBSERVATION_PRIORITY", localName: "OBSERVATION_PRIORITY"},
-  ],
-);
-
-/**
- * @generated from enum anduril.entitymanager.v1.FSCMDetailType
- */
-const FSCMDetailType = proto3.makeEnum(
-  "anduril.entitymanager.v1.FSCMDetailType",
-  [
-    {no: 0, name: "FSCM_DETAIL_TYPE_INVALID"},
-    {no: 1, name: "FSCM_DETAIL_TYPE_DEAD_SPACE_AREA"},
-    {no: 2, name: "FSCM_DETAIL_TYPE_NO_FIRE_AREA"},
-    {no: 3, name: "FSCM_DETAIL_TYPE_FREE_FIRE_AREA"},
-    {no: 4, name: "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_AREA"},
-    {no: 5, name: "FSCM_DETAIL_TYPE_SAFE_FIRE_AREA"},
-    {no: 6, name: "FSCM_DETAIL_TYPE_AIRSPACE_COORDINATION_AREA"},
-    {no: 7, name: "FSCM_DETAIL_TYPE_FORWARD_EDGE_OF_THE_BATTLE_AREA"},
-    {no: 8, name: "FSCM_DETAIL_TYPE_FIRE_SUPPORT_AREA"},
-    {no: 9, name: "FSCM_DETAIL_TYPE_PATROL_RECONNAISSANCE"},
-    {no: 10, name: "FSCM_DETAIL_TYPE_ZONE_OF_RESPONSIBILITY"},
-    {no: 11, name: "FSCM_DETAIL_TYPE_PRIORITY_CALL_FOR_FIRE_ZONE"},
-    {no: 12, name: "FSCM_DETAIL_TYPE_CENSORED_ZONE"},
-    {no: 13, name: "FSCM_DETAIL_TYPE_ZONE_OF_ACTION"},
-    {no: 14, name: "FSCM_DETAIL_TYPE_CRITICAL_FRIENDLY_ZONE"},
-    {no: 15, name: "FSCM_DETAIL_TYPE_PLATOON_AREA_HAZARD"},
-    {no: 16, name: "FSCM_DETAIL_TYPE_TARGET_AREA_HAZARD"},
-    {no: 17, name: "FSCM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE"},
-    {no: 18, name: "FSCM_DETAIL_TYPE_AIR_CORRIDOR"},
-    {no: 19, name: "FSCM_DETAIL_TYPE_RESTRICTIVE_FIRE_LINE"},
-    {no: 20, name: "FSCM_DETAIL_TYPE_COORDINATED_FIRE_LINE_NO_FIRE_LINE"},
-    {no: 21, name: "FSCM_DETAIL_TYPE_BOUNDARY_LINE"},
-    {no: 22, name: "FSCM_DETAIL_TYPE_FORWARD_LINE"},
-    {no: 23, name: "FSCM_DETAIL_TYPE_FIRE_SUPPORT_LINE"},
-    {no: 24, name: "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE"},
-    {no: 25, name: "FSCM_DETAIL_TYPE_LINE_OF_CONTACT"},
-    {no: 26, name: "FSCM_DETAIL_TYPE_LINE_OF_DEPARTURE_LINE_OF_CONTACT"},
-    {no: 27, name: "FSCM_DETAIL_TYPE_ZONE_OF_FIRE"},
-  ],
-);
-
-/**
- * @generated from enum anduril.entitymanager.v1.ACMDetailType
- */
-const ACMDetailType = proto3.makeEnum(
-  "anduril.entitymanager.v1.ACMDetailType",
-  [
-    {no: 0, name: "ACM_DETAIL_TYPE_INVALID"},
-    {no: 1, name: "ACM_DETAIL_TYPE_AIR_CORRIDOR"},
-    {no: 2, name: "ACM_DETAIL_TYPE_MINIMUM_RISK_ROUTE"},
-    {no: 3, name: "ACM_DETAIL_TYPE_TEMPORARY_MINIMUM_RISK_ROUTE"},
-    {no: 4, name: "ACM_DETAIL_TYPE_TRANSIT_ROUTE"},
-    {no: 5, name: "ACM_DETAIL_TYPE_LOW_LEVEL_TRANSIT_ROUTE"},
-    {no: 6, name: "ACM_DETAIL_TYPE_SPECIAL_CORRIDOR"},
-    {no: 7, name: "ACM_DETAIL_TYPE_STANDARD_USE_ARMY_AIRCRAFT_FLIGHT_ROUTE"},
-    {no: 8, name: "ACM_DETAIL_TYPE_RESTRICTED_OPERATIONS_ZONE"},
-    {no: 9, name: "ACM_DETAIL_TYPE_AIR_TO_AIR_REFUELING_AREA"},
-    {no: 10, name: "ACM_DETAIL_TYPE_AIRBORNE_COMMAND_AND_CONTROL_AREA"},
-    {no: 11, name: "ACM_DETAIL_TYPE_AIRBORNE_EARLY_WARNING_AREA"},
-    {no: 12, name: "ACM_DETAIL_TYPE_CLOSE_AIR_SUPPORT_AREA"},
-    {no: 13, name: "ACM_DETAIL_TYPE_COMBAT_AIR_PATROL"},
-    {no: 14, name: "ACM_DETAIL_TYPE_DROP_ZONE"},
-    {no: 15, name: "ACM_DETAIL_TYPE_ELECTRONIC_COMBAT"},
-    {no: 16, name: "ACM_DETAIL_TYPE_LANDING_ZONE"},
-    {no: 17, name: "ACM_DETAIL_TYPE_PICKUP_ZONE"},
-    {no: 18, name: "ACM_DETAIL_TYPE_RECONNAISSANCE_AREA"},
-    {no: 19, name: "ACM_DETAIL_TYPE_SPECIAL_OPERATIONS_FORCE_AREA"},
-    {no: 20, name: "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MISSILE_SYSTEM"},
-    {no: 21, name: "ACM_DETAIL_TYPE_SURFACE_TO_SURFACE_MUNITIONS"},
-    {no: 22, name: "ACM_DETAIL_TYPE_UNMANNED_AIRCRAFT_AREA"},
-    {no: 23, name: "ACM_DETAIL_TYPE_COORDINATING_ALTITUDE"},
-    {no: 24, name: "ACM_DETAIL_TYPE_COORDINATION_LEVEL"},
-    {no: 25, name: "ACM_DETAIL_TYPE_HIGH_DENSITY_AIRSPACE_CONTROL_ZONE"},
-    {no: 26, name: "ACM_DETAIL_TYPE_NO_FLY_AREA"},
-    {no: 27, name: "ACM_DETAIL_TYPE_TRANSIT_CORRIDOR"},
-    {no: 28, name: "ACM_DETAIL_TYPE_RETURN_TO_FORCE"},
-  ],
-);
-
-/**
- * @generated from enum anduril.entitymanager.v1.AmmoRestrictionType
- */
-const AmmoRestrictionType = proto3.makeEnum(
-  "anduril.entitymanager.v1.AmmoRestrictionType",
-  [
-    {no: 0, name: "AMMO_RESTRICTION_TYPE_INVALID", localName: "INVALID"},
-    {no: 1, name: "AMMO_RESTRICTION_TYPE_HIGH_EXPLOSIVE_MUNITIONS", localName: "HIGH_EXPLOSIVE_MUNITIONS"},
-    {no: 2, name: "AMMO_RESTRICTION_TYPE_IMPROVED_CONVENTIONAL_MUNITIONS", localName: "IMPROVED_CONVENTIONAL_MUNITIONS"},
-    {no: 3, name: "AMMO_RESTRICTION_TYPE_CHEMICAL_MUNITIONS", localName: "CHEMICAL_MUNITIONS"},
-    {no: 4, name: "AMMO_RESTRICTION_TYPE_NUCLEAR_MUNITIONS", localName: "NUCLEAR_MUNITIONS"},
-    {no: 5, name: "AMMO_RESTRICTION_TYPE_WHITE_PHOSPHORUS_MUNITIONS", localName: "WHITE_PHOSPHORUS_MUNITIONS"},
-    {no: 6, name: "AMMO_RESTRICTION_TYPE_ILLUMINATION_MUNITIONS", localName: "ILLUMINATION_MUNITIONS"},
-    {no: 7, name: "AMMO_RESTRICTION_TYPE_TERMINAL_HOMING_MUNITIONS", localName: "TERMINAL_HOMING_MUNITIONS"},
-    {no: 8, name: "AMMO_RESTRICTION_TYPE_FASCAM_MUNITIONS", localName: "FASCAM_MUNITIONS"},
-    {no: 9, name: "AMMO_RESTRICTION_TYPE_SMOKE_MUNITIONS", localName: "SMOKE_MUNITIONS"},
-    {no: 10, name: "AMMO_RESTRICTION_TYPE_ALL_MUNITIONS", localName: "ALL_MUNITIONS"},
-  ],
-);
-
-/**
- * @generated from enum anduril.entitymanager.v1.RestrictiveMeasureType
- */
-const RestrictiveMeasureType = proto3.makeEnum(
-  "anduril.entitymanager.v1.RestrictiveMeasureType",
-  [
-    {no: 0, name: "RESTRICTIVE_MEASURE_TYPE_INVALID", localName: "INVALID"},
-    {no: 1, name: "RESTRICTIVE_MEASURE_TYPE_STAY_INSIDE_AREA", localName: "STAY_INSIDE_AREA"},
-    {no: 2, name: "RESTRICTIVE_MEASURE_TYPE_STAY_OUTSIDE_AREA", localName: "STAY_OUTSIDE_AREA"},
-    {no: 3, name: "RESTRICTIVE_MEASURE_TYPE_STAY_ABOVE_AREA", localName: "STAY_ABOVE_AREA"},
-    {no: 4, name: "RESTRICTIVE_MEASURE_TYPE_STAY_BELOW_AREA", localName: "STAY_BELOW_AREA"},
-    {no: 5, name: "RESTRICTIVE_MEASURE_TYPE_STAY_NORTH_OF_LINE", localName: "STAY_NORTH_OF_LINE"},
-    {no: 6, name: "RESTRICTIVE_MEASURE_TYPE_STAY_EAST_OF_LINE", localName: "STAY_EAST_OF_LINE"},
-    {no: 7, name: "RESTRICTIVE_MEASURE_TYPE_STAY_SOUTH_OF_LINE", localName: "STAY_SOUTH_OF_LINE"},
-    {no: 8, name: "RESTRICTIVE_MEASURE_TYPE_STAY_WEST_OF_LINE", localName: "STAY_WEST_OF_LINE"},
-  ],
-);
-
-/**
- * @generated from enum anduril.entitymanager.v1.MCMDetailType
- */
-const MCMDetailType = proto3.makeEnum(
-  "anduril.entitymanager.v1.MCMDetailType",
-  [
-    {no: 0, name: "MCM_DETAIL_TYPE_INVALID"},
-    {no: 1, name: "MCM_DETAIL_TYPE_NAMED_AREA_OF_INTEREST"},
-    {no: 2, name: "MCM_DETAIL_TYPE_TARGET_AREA_OF_INTEREST"},
-  ],
-);
-
-/**
  * A component that describes a geo-entity.
  *
  * @generated from message anduril.entitymanager.v1.GeoDetails
@@ -201,25 +39,6 @@ const GeoDetails = proto3.makeMessageType(
   "anduril.entitymanager.v1.GeoDetails",
   () => [
     { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(GeoType) },
-    { no: 2, name: "emergency", kind: "message", T: EmergencyDetails, oneof: "type_details" },
-    { no: 4, name: "fscm", kind: "message", T: FSCMDetails, oneof: "type_details" },
-    { no: 5, name: "control_area", kind: "message", T: ControlAreaDetails, oneof: "type_details" },
-    { no: 6, name: "acm", kind: "message", T: ACMDetails, oneof: "type_details" },
-    { no: 7, name: "mcm", kind: "message", T: MCMDetails, oneof: "type_details" },
-    { no: 3, name: "visual_details", kind: "message", T: GeoVisualDetails },
-  ],
-);
-
-/**
- * Details specific to a geo-entity of emergency type.
- *
- * @generated from message anduril.entitymanager.v1.EmergencyDetails
- */
-const EmergencyDetails = proto3.makeMessageType(
-  "anduril.entitymanager.v1.EmergencyDetails",
-  () => [
-    { no: 1, name: "emergency_type", kind: "enum", T: proto3.getEnumType(EmergencyType) },
-    { no: 2, name: "personnel_involved", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ],
 );
 
@@ -338,95 +157,9 @@ const GeoPolygonPosition = proto3.makeMessageType(
   ],
 );
 
-/**
- * Details specific to displaying a geo-entity
- *
- * @generated from message anduril.entitymanager.v1.GeoVisualDetails
- */
-const GeoVisualDetails = proto3.makeMessageType(
-  "anduril.entitymanager.v1.GeoVisualDetails",
-  () => [
-    { no: 1, name: "fill_color", kind: "message", T: Color },
-    { no: 2, name: "line_color", kind: "message", T: Color },
-  ],
-);
-
-/**
- * Details specific to a geo-entity of Fire Support Coordination Measure (FSCM) type
- *
- * @generated from message anduril.entitymanager.v1.FSCMDetails
- */
-const FSCMDetails = proto3.makeMessageType(
-  "anduril.entitymanager.v1.FSCMDetails",
-  () => [
-    { no: 1, name: "fscm_type", kind: "enum", T: proto3.getEnumType(FSCMDetailType) },
-    { no: 2, name: "fscm_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "firing_authority", kind: "message", T: FiringAuthority },
-    { no: 4, name: "ammo_restriction_type", kind: "enum", T: proto3.getEnumType(AmmoRestrictionType) },
-    { no: 5, name: "restrictive_measure_type", kind: "enum", T: proto3.getEnumType(RestrictiveMeasureType) },
-    { no: 6, name: "ammo_restrict_types", kind: "enum", T: proto3.getEnumType(AmmoRestrictionType), repeated: true },
-    { no: 7, name: "is_ground", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-  ],
-);
-
-/**
- * @generated from message anduril.entitymanager.v1.ACMDetails
- */
-const ACMDetails = proto3.makeMessageType(
-  "anduril.entitymanager.v1.ACMDetails",
-  () => [
-    { no: 1, name: "acm_type", kind: "enum", T: proto3.getEnumType(ACMDetailType) },
-    { no: 2, name: "acm_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message anduril.entitymanager.v1.MCMDetails
- */
-const MCMDetails = proto3.makeMessageType(
-  "anduril.entitymanager.v1.MCMDetails",
-  () => [
-    { no: 1, name: "mcm_type", kind: "enum", T: proto3.getEnumType(MCMDetailType) },
-    { no: 2, name: "mcm_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * Lists the entities that have authority to execute fires into, or through, this FSCM
- *
- * @generated from message anduril.entitymanager.v1.FiringAuthority
- */
-const FiringAuthority = proto3.makeMessageType(
-  "anduril.entitymanager.v1.FiringAuthority",
-  () => [
-    { no: 1, name: "entity_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-  ],
-);
-
-/**
- * Details specific to a geo-entity of the GEO_TYPE_CONTROL_AREA type,
- * representing an autonomous asset Control Area.
- *
- * @generated from message anduril.entitymanager.v1.ControlAreaDetails
- */
-const ControlAreaDetails = proto3.makeMessageType(
-  "anduril.entitymanager.v1.ControlAreaDetails",
-  () => [
-    { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(ControlAreaType) },
-  ],
-);
-
 
 exports.GeoType = GeoType;
-exports.EmergencyType = EmergencyType;
-exports.ControlAreaType = ControlAreaType;
-exports.FSCMDetailType = FSCMDetailType;
-exports.ACMDetailType = ACMDetailType;
-exports.AmmoRestrictionType = AmmoRestrictionType;
-exports.RestrictiveMeasureType = RestrictiveMeasureType;
-exports.MCMDetailType = MCMDetailType;
 exports.GeoDetails = GeoDetails;
-exports.EmergencyDetails = EmergencyDetails;
 exports.GeoShape = GeoShape;
 exports.GeoPoint = GeoPoint;
 exports.GeoLine = GeoLine;
@@ -435,9 +168,3 @@ exports.GeoEllipse = GeoEllipse;
 exports.GeoEllipsoid = GeoEllipsoid;
 exports.LinearRing = LinearRing;
 exports.GeoPolygonPosition = GeoPolygonPosition;
-exports.GeoVisualDetails = GeoVisualDetails;
-exports.FSCMDetails = FSCMDetails;
-exports.ACMDetails = ACMDetails;
-exports.MCMDetails = MCMDetails;
-exports.FiringAuthority = FiringAuthority;
-exports.ControlAreaDetails = ControlAreaDetails;

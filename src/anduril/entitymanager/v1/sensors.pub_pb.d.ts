@@ -195,7 +195,8 @@ export declare class Sensor extends Message<Sensor> {
   /**
    * DEPRECATED -- use `fields_of_view` instead. This field will be marked deprecated and no longer populated by 11/26/2023.
    *
-   * @generated from field: anduril.entitymanager.v1.FieldOfView field_of_view = 4;
+   * @generated from field: anduril.entitymanager.v1.FieldOfView field_of_view = 4 [deprecated = true];
+   * @deprecated
    */
   fieldOfView?: FieldOfView;
 
