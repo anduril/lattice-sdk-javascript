@@ -6,8 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Location, LocationUncertainty } from "./location.pub_pb.js";
-import type { GeoDetails, GeoPolygon, GeoShape } from "./geoentity.pub_pb.js";
-import type { Correlated } from "./correlations.pub_pb.js";
+import type { GeoDetails, GeoShape } from "./geoentity.pub_pb.js";
 import type { MilView, Ontology } from "./ontology.pub_pb.js";
 import type { Sensors } from "./sensors.pub_pb.js";
 import type { Payloads } from "./payloads.pub_pb.js";
@@ -15,10 +14,8 @@ import type { PowerState } from "./power.pub_pb.js";
 import type { TargetPriority } from "./target_priority.pub_pb.js";
 import type { LineOfBearing, Signal } from "./signal.pub_pb.js";
 import type { TransponderCodes } from "./transponder_codes.pub_pb.js";
-import type { ContactDetails } from "./contact_details.pub_pb.js";
 import type { Classification } from "./classification.pub_pb.js";
 import type { TaskCatalog } from "../../tasks/v2/catalog.pub_pb.js";
-import type { Media } from "./media.pub_pb.js";
 import type { Relationships } from "./relationship.pub_pb.js";
 import type { Dimensions } from "./dimensions.pub_pb.js";
 import type { RouteDetails } from "./route_details.pub_pb.js";
@@ -28,120 +25,121 @@ import type { GroupDetails } from "./group.pub_pb.js";
 import type { Supplies } from "./supplies.pub_pb.js";
 import type { Orbit } from "./orbit.pub_pb.js";
 import type { AltIdType, OverrideStatus, OverrideType, Source, UInt32Range } from "./types.pub_pb.js";
+import type { Color } from "../../type/color.pub_pb.js";
 
 /**
- * Indicates whether an entity can be deleted with the DeleteEntity API call
+ * The type of correlation indicating how it was made.
  *
- * @generated from enum anduril.entitymanager.v1.Deletable
+ * @generated from enum anduril.entitymanager.v1.CorrelationType
  */
-export declare enum Deletable {
+export declare enum CorrelationType {
   /**
-   * @generated from enum value: DELETABLE_INVALID = 0;
+   * @generated from enum value: CORRELATION_TYPE_INVALID = 0;
    */
   INVALID = 0,
 
   /**
-   * Entity can immediately be deleted.
+   * The correlation was made manually by a human.
+   * Manual is higher precedence than automated assuming the same replication mode.
    *
-   * @generated from enum value: DELETABLE_TRUE = 1;
+   * @generated from enum value: CORRELATION_TYPE_MANUAL = 1;
    */
-  TRUE = 1,
+  MANUAL = 1,
 
   /**
-   * Entity is from another source that is known to not allow entities to be deleted
+   * The correlation was automatically made by a service or some other automated process.
+   * Automated is lower precedence than manual assuming the same replication mode.
    *
-   * @generated from enum value: DELETABLE_FALSE = 2;
+   * @generated from enum value: CORRELATION_TYPE_AUTOMATED = 2;
    */
-  FALSE = 2,
-
-  /**
-   * Entity is from another source that requires the source to accept the request. The DeleteEntity API call
-   * will work asynchronously in this case.
-   *
-   * @generated from enum value: DELETABLE_REQUEST = 3;
-   */
-  REQUEST = 3,
+  AUTOMATED = 2,
 }
 
 /**
- * @generated from enum anduril.entitymanager.v1.InteractivityMode
+ * The replication mode of the correlation indicating how the correlation will be replication to
+ * other nodes in the mesh.
+ *
+ * @generated from enum anduril.entitymanager.v1.CorrelationReplicationMode
  */
-export declare enum InteractivityMode {
+export declare enum CorrelationReplicationMode {
   /**
-   * @generated from enum value: INTERACTIVITY_MODE_INVALID = 0;
+   * @generated from enum value: CORRELATION_REPLICATION_MODE_INVALID = 0;
    */
   INVALID = 0,
 
   /**
-   * @generated from enum value: INTERACTIVITY_MODE_DEFAULT = 1;
+   * The correlation is local only to the originating node and will not be distributed to other
+   * nodes in the mesh. In the case of conflicts, this correlation will override ones coming from
+   * other nodes. Local is always higher precedence than global regardless of the correlation type.
+   *
+   * @generated from enum value: CORRELATION_REPLICATION_MODE_LOCAL = 1;
    */
-  DEFAULT = 1,
+  LOCAL = 1,
 
   /**
-   * @generated from enum value: INTERACTIVITY_MODE_DISABLED_ON_MAP = 2;
+   * The correlation is distributed globally across all nodes in the mesh. Because an entity can
+   * only be part of one correlation, this is based on last-write-wins semantics, however, the
+   * correlation will also be stored locally in the originating node preventing any overrides.
+   * Global is always lower precedence than local regardless of the correlation type.
+   *
+   * @generated from enum value: CORRELATION_REPLICATION_MODE_GLOBAL = 2;
    */
-  DISABLED_ON_MAP = 2,
+  GLOBAL = 2,
 }
 
 /**
- * An entity object represents a single entity within the Lattice operational environment, and it contains
- * all data associated with that entity, such as its name, ID, and any other relevant components.
+ * The entity object represents a single known object within the Lattice operational environment. It contains
+ * all data associated with the entity, such as its name, ID, and other relevant components.
  *
  * @generated from message anduril.entitymanager.v1.Entity
  */
 export declare class Entity extends Message<Entity> {
   /**
-   * A Globally Unique Identifier (GUID) for your entity. If blank, the Entity API creates
-   * an entity and automatically generates a new ID for the entity.
+   * A Globally Unique Identifier (GUID) for your entity. If this field is empty, the Entity API
+   * automatically generates an ID when it creates the entity.
    *
    * @generated from field: string entity_id = 1;
    */
   entityId: string;
 
   /**
-   * Helpful, human-readable entity description mainly used for debugging purposes and human
-   * traceability. If blank, the Entity API generates one for you.
+   * A human-readable entity description that's helpful for debugging purposes and human
+   * traceability. If this field is empty, the Entity API generates one for you.
    *
    * @generated from field: string description = 2;
    */
   description: string;
 
   /**
-   * Indicates an active asset receiving updates. This is a required field for publishing an entity.
-   * It needs to be set to true when publishing an entity.
+   * Indicates the entity is active and should have lifecycle state of CREATE or UPDATE.
+   * Set this field to true when publishing an entity.
    *
    * @generated from field: bool is_live = 3;
    */
   isLive: boolean;
 
   /**
-   * Time when the asset enters the system. If blank, the Entity API uses a current timestamp.
-   * For example, when a drone is first powered on, it might report it's boot time as the created time.
+   * The time when the entity was first known to the entity producer. If this field is empty, the Entity API uses the
+   * current timestamp of when the entity is first received.
+   * For example, when a drone is first powered on, it might report its startup time as the created time.
+   * The timestamp doesn't change for the lifetime of an entity.
    *
    * @generated from field: google.protobuf.Timestamp created_time = 4;
    */
   createdTime?: Timestamp;
 
   /**
-   * A future time that expires an entity and updates the isLive flag.
+   * Future time that expires an entity and updates the is_live flag.
    * For entities that are constantly updating, the expiry time also updates.
-   * Note in some cases this may differ from isLive.
+   * In some cases, this may differ from is_live.
    * Example: Entities with tasks exported to an external system must remain
-   * active, even after they expire.
-   * This is a required field for publishing an entity via Flux or PublishEntities rpc. When publishing
-   * an entity, this timestamp must be in the future, but less than 30 days from the current time.
+   * active even after they expire.
+   * This field is required when publishing a prepopulated entity.
+   * The expiry time must be in the future, but less than 30 days from the current time.
    *
    * @generated from field: google.protobuf.Timestamp expiry_time = 5;
    */
   expiryTime?: Timestamp;
-
-  /**
-   * To indicate that this entity should not expire. Only to be set to `true` on entities published
-   * via PutEntity call. Entities published via Flux or PublishEntities rpc with `no_expiry == true` will be rejected.
-   *
-   * @generated from field: bool no_expiry = 43;
-   */
-  noExpiry: boolean;
 
   /**
    * Human-readable descriptions of what the entity is currently doing.
@@ -151,26 +149,18 @@ export declare class Entity extends Message<Entity> {
   status?: Status;
 
   /**
-   * Geospatial data related to the entity, including it's position, kinematics and orientation.
+   * Geospatial data related to the entity, including its position, kinematics, and orientation.
    *
    * @generated from field: anduril.entitymanager.v1.Location location = 6;
    */
   location?: Location;
 
   /**
-   * Uncertainty of the entity's position and kinematics.
+   * Indicates uncertainty of the entity's position and kinematics.
    *
    * @generated from field: anduril.entitymanager.v1.LocationUncertainty location_uncertainty = 15;
    */
   locationUncertainty?: LocationUncertainty;
-
-  /**
-   * Deprecated: do not use, use geo_shape instead
-   *
-   * @generated from field: anduril.entitymanager.v1.GeoPolygon geopolygon = 17 [deprecated = true];
-   * @deprecated
-   */
-  geopolygon?: GeoPolygon;
 
   /**
    * Geospatial representation of the entity, including entities that cover an area rather than a fixed point.
@@ -187,122 +177,107 @@ export declare class Entity extends Message<Entity> {
   geoDetails?: GeoDetails;
 
   /**
-   * Naming of the entity as well as identifiers that other systems use to reference the same entity.
+   * Entity name displayed in the Lattice UI side panel. Also includes identifiers that other systems can use to reference the same entity.
    *
    * @generated from field: anduril.entitymanager.v1.Aliases aliases = 7;
    */
   aliases?: Aliases;
 
   /**
-   * If this entity is tracked by another, this component contains data related to how it's being tracked.
+   * If this entity is tracked by another entity, this component contains data related to how it's being tracked.
    *
    * @generated from field: anduril.entitymanager.v1.Tracked tracked = 8;
    */
   tracked?: Tracked;
 
   /**
-   * If this entity has been correlated to another one, this component contains the status of the correlation, the primary entity
-   * and the correlation scores.
+   * If this entity has been correlated or decorrelated to another one, this component contains information on the correlation or decorrelation.
    *
-   * @generated from field: anduril.entitymanager.v1.Correlated correlated = 9;
+   * @generated from field: anduril.entitymanager.v1.Correlation correlation = 47;
    */
-  correlated?: Correlated;
+  correlation?: Correlation;
 
   /**
-   * Military view of the entity
+   * Military view of the entity.
    *
    * @generated from field: anduril.entitymanager.v1.MilView mil_view = 10;
    */
   milView?: MilView;
 
   /**
-   * A standardized representation of the entity
+   * A standardized representation of the entity.
    *
    * @generated from field: anduril.entitymanager.v1.Ontology ontology = 11;
    */
   ontology?: Ontology;
 
   /**
-   * Details of Sensors that are available on an entity
+   * Details an entity's available sensors.
    *
    * @generated from field: anduril.entitymanager.v1.Sensors sensors = 20;
    */
   sensors?: Sensors;
 
   /**
-   * Details of payloads that are available on an entity
+   * Details an entity's available payloads.
    *
    * @generated from field: anduril.entitymanager.v1.Payloads payloads = 21;
    */
   payloads?: Payloads;
 
   /**
-   * Details of the power source on an entity
+   * Details the entity's power source.
    *
    * @generated from field: anduril.entitymanager.v1.PowerState power_state = 30;
    */
   powerState?: PowerState;
 
   /**
-   * The primary data source provenance for this entity
+   * The primary data source provenance for this entity.
    *
    * @generated from field: anduril.entitymanager.v1.Provenance provenance = 12;
    */
   provenance?: Provenance;
 
   /**
-   * Provenance of override data
+   * Provenance of override data.
    *
    * @generated from field: anduril.entitymanager.v1.Overrides overrides = 13;
    */
   overrides?: Overrides;
 
   /**
-   * Indicators of an entity's state that describes properties of the entity as well as what operations can be performed on the entity (eg.
-   * can it be deleted)
+   * Describes an entity's specific characteristics and the operations that can be performed on the entity.
+   * For example, "simulated" informs the operator that the entity is from a simulation, and "deletable"
+   * informs the operator (and system) that the delete operation is valid against the entity.
    *
    * @generated from field: anduril.entitymanager.v1.Indicators indicators = 14;
    */
   indicators?: Indicators;
 
   /**
-   * A component that references the primary original data source. For example, this would allow the original NITF file
-   * data that was ingested to be retrieved.
-   *
-   * @generated from field: anduril.entitymanager.v1.OriginalData original_data = 18;
-   */
-  originalData?: OriginalData;
-
-  /**
-   * The prioritization associated with an entity such as if it's a threat or a high value target.
+   * The prioritization associated with an entity, such as if it's a threat or a high-value target.
    *
    * @generated from field: anduril.entitymanager.v1.TargetPriority target_priority = 22;
    */
   targetPriority?: TargetPriority;
 
   /**
-   * A component that describes an entity's signal characteristics. Primarily used if the entity is a signal of interest
+   * Describes an entity's signal characteristics, primarily used when an entity is a signal of interest.
    *
    * @generated from field: anduril.entitymanager.v1.Signal signal = 25;
    */
   signal?: Signal;
 
   /**
-   * A message describing any transponder codes associated with Mode 1, 2, 3, 4, 5, S interrogations. These are related to ADS-B modes
+   * A message describing any transponder codes associated with Mode 1, 2, 3, 4, 5, S interrogations. These are related to ADS-B modes.
    *
    * @generated from field: anduril.entitymanager.v1.TransponderCodes transponder_codes = 26;
    */
   transponderCodes?: TransponderCodes;
 
   /**
-   * Contains details on how to make out-of-band contact with an entity, such as via a phone or email
-   *
-   * @generated from field: anduril.entitymanager.v1.ContactDetails contact = 27;
-   */
-  contact?: ContactDetails;
-
-  /**
-   * A component that describes an entity's security classification levels both at an overall classification level for the entity as well as on a per
+   * Describes an entity's security classification levels at an overall classification level and on a per
    * field level.
    *
    * @generated from field: anduril.entitymanager.v1.Classification data_classification = 29;
@@ -315,13 +290,6 @@ export declare class Entity extends Message<Entity> {
    * @generated from field: anduril.tasks.v2.TaskCatalog task_catalog = 31;
    */
   taskCatalog?: TaskCatalog;
-
-  /**
-   * Media associated with an entity such as videos, images or thumbnails.
-   *
-   * @generated from field: anduril.entitymanager.v1.Media media = 32;
-   */
-  media?: Media;
 
   /**
    * The relationships between this entity and other entities in the battlespace.
@@ -338,7 +306,7 @@ export declare class Entity extends Message<Entity> {
   visualDetails?: VisualDetails;
 
   /**
-   * Physical dimensions of the entity
+   * Physical dimensions of the entity.
    *
    * @generated from field: anduril.entitymanager.v1.Dimensions dimensions = 36;
    */
@@ -352,42 +320,35 @@ export declare class Entity extends Message<Entity> {
   routeDetails?: RouteDetails;
 
   /**
-   * Schedules associated with this entity
+   * Schedules associated with this entity.
    *
    * @generated from field: anduril.entitymanager.v1.Schedules schedules = 38;
    */
   schedules?: Schedules;
 
   /**
-   * Health metrics or status reported by the entity
+   * Health metrics or connection status reported by the entity.
    *
    * @generated from field: anduril.entitymanager.v1.Health health = 39;
    */
   health?: Health;
 
   /**
-   * Details for the group associated with this entity
+   * Details for the group associated with this entity.
    *
    * @generated from field: anduril.entitymanager.v1.GroupDetails group_details = 40;
    */
   groupDetails?: GroupDetails;
 
   /**
-   * Describes an entity's collaborative autonomous teaming status, if any.
-   *
-   * @generated from field: anduril.entitymanager.v1.TeamStatus team_status = 41;
-   */
-  teamStatus?: TeamStatus;
-
-  /**
-   * Contains relevant supply information for the entity (e.g., munitions and fuel)
+   * Contains relevant supply information for the entity, such as munitions and fuel.
    *
    * @generated from field: anduril.entitymanager.v1.Supplies supplies = 42;
    */
   supplies?: Supplies;
 
   /**
-   * Orbit information for space objects
+   * Orbit information for space objects.
    *
    * @generated from field: anduril.entitymanager.v1.Orbit orbit = 46;
    */
@@ -409,40 +370,13 @@ export declare class Entity extends Message<Entity> {
 }
 
 /**
- * We need a proto containing a list of Entities for marshalling/unmarshalling
- *
- * @generated from message anduril.entitymanager.v1.Entities
- */
-export declare class Entities extends Message<Entities> {
-  /**
-   * @generated from field: repeated anduril.entitymanager.v1.Entity entities = 1;
-   */
-  entities: Entity[];
-
-  constructor(data?: PartialMessage<Entities>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.Entities";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Entities;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Entities;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Entities;
-
-  static equals(a: Entities | PlainMessage<Entities> | undefined, b: Entities | PlainMessage<Entities> | undefined): boolean;
-}
-
-/**
  * Contains status of entities.
  *
  * @generated from message anduril.entitymanager.v1.Status
  */
 export declare class Status extends Message<Status> {
   /**
-   * A string that describes the activity that the entity is performing. These values
-   * include, but are not limited to the AIR/SURFACE/SUBSURFACE/LAND/SPACE ACTIVITY values found in MIL-STD 6016F.
+   * A string that describes the activity that the entity is performing.
    * Examples include "RECONNAISSANCE", "INTERDICTION", "ELECTRONIC WARFARE (EW)", "RETURN TO BASE (RTB)", "PREPARING
    * FOR LAUNCH".
    *
@@ -451,7 +385,7 @@ export declare class Status extends Message<Status> {
   platformActivity: string;
 
   /**
-   * A string that describes the role the entity is currently performing. E.g. "Team Member", "Commander" or
+   * A human-readable string that describes the role the entity is currently performing. E.g. "Team Member", "Commander".
    *
    * @generated from field: string role = 2;
    */
@@ -512,14 +446,6 @@ export declare class Aliases extends Message<Aliases> {
  */
 export declare class Tracked extends Message<Tracked> {
   /**
-   * deprecated in favor of track_quality_wrapper to better indicate when TQ is actually missing vs 0 which is valid
-   *
-   * @generated from field: uint32 track_quality = 1 [deprecated = true];
-   * @deprecated
-   */
-  trackQuality: number;
-
-  /**
    * Quality score, 0-15, nil if none
    *
    * @generated from field: google.protobuf.Int32Value track_quality_wrapper = 2;
@@ -544,14 +470,6 @@ export declare class Tracked extends Message<Tracked> {
    * @generated from field: anduril.entitymanager.v1.UInt32Range number_of_objects = 4;
    */
   numberOfObjects?: UInt32Range;
-
-  /**
-   * deprecated. data from sensors actively tracking the entity are placed in the TrackedBy relationship.
-   *
-   * @generated from field: anduril.entitymanager.v1.Sensors sensor_details = 5 [deprecated = true];
-   * @deprecated
-   */
-  sensorDetails?: Sensors;
 
   /**
    * The radar cross section (RCS) is a measure of how detectable an object is by radar. A large RCS indicates an object is more easily
@@ -598,17 +516,7 @@ export declare class Tracked extends Message<Tracked> {
  */
 export declare class Provenance extends Message<Provenance> {
   /**
-   * A feed is a 1:1 or Many:1 mapping between a data type from a specific vendor
-   * and an output stream of entities. The feed_name identifies the feed definition
-   * in the Feeds API and must be globally unique per feed.
-   *
-   * @generated from field: string feed_name = 7;
-   */
-  feedName: string;
-
-  /**
    * Name of the integration that produced this entity
-   * To be deprecated soon in favor of feed_name
    *
    * @generated from field: string integration_name = 5;
    */
@@ -616,7 +524,6 @@ export declare class Provenance extends Message<Provenance> {
 
   /**
    * Source data type of this entity. Examples: ADSB, Link16, etc.
-   * To be deprecated soon in favor of feed_name
    *
    * @generated from field: string data_type = 6;
    */
@@ -694,11 +601,6 @@ export declare class Indicators extends Message<Indicators> {
   c2?: boolean;
 
   /**
-   * @generated from field: anduril.entitymanager.v1.Deletable deletable = 5;
-   */
-  deletable: Deletable;
-
-  /**
    * Indicates the Entity should be egressed to external sources.
    * Integrations choose how the egressing happens (e.g. if an Entity needs fuzzing).
    *
@@ -738,14 +640,6 @@ export declare class Overrides extends Message<Overrides> {
    * @generated from field: repeated anduril.entitymanager.v1.Override override = 2;
    */
   override: Override[];
-
-  /**
-   * Deprecated: do not use
-   *
-   * @generated from field: repeated anduril.entitymanager.v1.OverrideProvenance provenance = 1 [deprecated = true];
-   * @deprecated
-   */
-  provenance: OverrideProvenance[];
 
   constructor(data?: PartialMessage<Overrides>);
 
@@ -834,130 +728,11 @@ export declare class Override extends Message<Override> {
 }
 
 /**
- * The provenance of a particular override within the entity.
- *
- * @generated from message anduril.entitymanager.v1.OverrideProvenance
- * @deprecated
- */
-export declare class OverrideProvenance extends Message<OverrideProvenance> {
-  /**
-   * proto field path which is the string representation of a field.
-   * example: correlated.primary_entity_id would be primary_entity_id in correlated component
-   *
-   * @generated from field: string field_path = 1;
-   */
-  fieldPath: string;
-
-  /**
-   * Deprecated: do not use
-   *
-   * @generated from field: string source_id = 2 [deprecated = true];
-   * @deprecated
-   */
-  sourceId: string;
-
-  /**
-   * @generated from field: anduril.entitymanager.v1.Provenance provenance = 3;
-   */
-  provenance?: Provenance;
-
-  constructor(data?: PartialMessage<OverrideProvenance>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.OverrideProvenance";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OverrideProvenance;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OverrideProvenance;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OverrideProvenance;
-
-  static equals(a: OverrideProvenance | PlainMessage<OverrideProvenance> | undefined, b: OverrideProvenance | PlainMessage<OverrideProvenance> | undefined): boolean;
-}
-
-/**
- * A component that references the primary original data source. For example, this would allow the original NITF file
- * data that was ingested to be retrieved.
- *
- * @generated from message anduril.entitymanager.v1.OriginalData
- */
-export declare class OriginalData extends Message<OriginalData> {
-  /**
-   * The URL is a reference to the data's location so it can be retrieved after being converted to an entity.
-   *
-   * @generated from field: string url = 1;
-   */
-  url: string;
-
-  /**
-   * @generated from field: anduril.entitymanager.v1.OriginalData.TLE tle = 2 [deprecated = true];
-   * @deprecated
-   */
-  tle?: OriginalData_TLE;
-
-  constructor(data?: PartialMessage<OriginalData>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.OriginalData";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OriginalData;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OriginalData;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OriginalData;
-
-  static equals(a: OriginalData | PlainMessage<OriginalData> | undefined, b: OriginalData | PlainMessage<OriginalData> | undefined): boolean;
-}
-
-/**
- * A TLE is a space industry standard for representing the characteristics of an object on orbit.
- * It is composed of two lines that are each a fixed width of 69 characters.
- *
- * @generated from message anduril.entitymanager.v1.OriginalData.TLE
- * @deprecated
- */
-export declare class OriginalData_TLE extends Message<OriginalData_TLE> {
-  /**
-   * @generated from field: string line1 = 1;
-   */
-  line1: string;
-
-  /**
-   * @generated from field: string line2 = 2;
-   */
-  line2: string;
-
-  constructor(data?: PartialMessage<OriginalData_TLE>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.OriginalData.TLE";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): OriginalData_TLE;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): OriginalData_TLE;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): OriginalData_TLE;
-
-  static equals(a: OriginalData_TLE | PlainMessage<OriginalData_TLE> | undefined, b: OriginalData_TLE | PlainMessage<OriginalData_TLE> | undefined): boolean;
-}
-
-/**
  * An alternate id for an Entity.
  *
  * @generated from message anduril.entitymanager.v1.AlternateId
  */
 export declare class AlternateId extends Message<AlternateId> {
-  /**
-   * deprecated in favor of type
-   *
-   * @generated from field: string source = 1 [deprecated = true];
-   * @deprecated
-   */
-  source: string;
-
   /**
    * @generated from field: string id = 2;
    */
@@ -995,14 +770,6 @@ export declare class VisualDetails extends Message<VisualDetails> {
    * @generated from field: anduril.entitymanager.v1.RangeRings range_rings = 1;
    */
   rangeRings?: RangeRings;
-
-  /**
-   * Control the operator's ability to interact with the entity on the UI (disable hover/click on map, etc.)
-   * Not a security/access flag
-   *
-   * @generated from field: anduril.entitymanager.v1.InteractivityMode interactivity_mode = 2;
-   */
-  interactivityMode: InteractivityMode;
 
   constructor(data?: PartialMessage<VisualDetails>);
 
@@ -1046,6 +813,13 @@ export declare class RangeRings extends Message<RangeRings> {
    */
   ringCount: number;
 
+  /**
+   * The color of range rings, specified in hex string.
+   *
+   * @generated from field: anduril.type.Color ring_line_color = 4;
+   */
+  ringLineColor?: Color;
+
   constructor(data?: PartialMessage<RangeRings>);
 
   static readonly runtime: typeof proto3;
@@ -1062,24 +836,263 @@ export declare class RangeRings extends Message<RangeRings> {
 }
 
 /**
- * If present, signifies the entity can participate in collaborative autonomous teaming.
- * Any status about team membership will be reported here.
+ * Available for Entities that are a correlated (N to 1) set of entities. This will be present on
+ * each entity in the set.
  *
- * @generated from message anduril.entitymanager.v1.TeamStatus
+ * @generated from message anduril.entitymanager.v1.Correlation
  */
-export declare class TeamStatus extends Message<TeamStatus> {
-  constructor(data?: PartialMessage<TeamStatus>);
+export declare class Correlation extends Message<Correlation> {
+  /**
+   * If an entity is correlated, it is either the primary or a secondary.
+   *
+   * @generated from oneof anduril.entitymanager.v1.Correlation.correlation
+   */
+  correlation: {
+    /**
+     * This entity is the primary of a correlation meaning that it serves as the representative
+     * entity of the correlation set.
+     *
+     * @generated from field: anduril.entitymanager.v1.PrimaryCorrelation primary = 1;
+     */
+    value: PrimaryCorrelation;
+    case: "primary";
+  } | {
+    /**
+     * This entity is a secondary of a correlation meaning that it will be represented by the
+     * primary of the correlation set.
+     *
+     * @generated from field: anduril.entitymanager.v1.SecondaryCorrelation secondary = 2;
+     */
+    value: SecondaryCorrelation;
+    case: "secondary";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * If present, this entity was explicitly decorrelated from one or more entities.
+   * An entity can be both correlated and decorrelated as long as they are disjoint sets.
+   * An example would be if a user in the UI decides that two tracks are not actually the
+   * same despite an automatic correlator having correlated them. The user would then
+   * decorrelate the two tracks and this decorrelation would be preserved preventing the
+   * correlator from re-correlating them at a later time.
+   *
+   * @generated from field: anduril.entitymanager.v1.Decorrelation decorrelation = 3;
+   */
+  decorrelation?: Decorrelation;
+
+  constructor(data?: PartialMessage<Correlation>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "anduril.entitymanager.v1.TeamStatus";
+  static readonly typeName = "anduril.entitymanager.v1.Correlation";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TeamStatus;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Correlation;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TeamStatus;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Correlation;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TeamStatus;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Correlation;
 
-  static equals(a: TeamStatus | PlainMessage<TeamStatus> | undefined, b: TeamStatus | PlainMessage<TeamStatus> | undefined): boolean;
+  static equals(a: Correlation | PlainMessage<Correlation> | undefined, b: Correlation | PlainMessage<Correlation> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.PrimaryCorrelation
+ */
+export declare class PrimaryCorrelation extends Message<PrimaryCorrelation> {
+  /**
+   * The secondary entity IDs part of this correlation.
+   *
+   * @generated from field: repeated string secondary_entity_ids = 1;
+   */
+  secondaryEntityIds: string[];
+
+  constructor(data?: PartialMessage<PrimaryCorrelation>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.PrimaryCorrelation";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PrimaryCorrelation;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PrimaryCorrelation;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PrimaryCorrelation;
+
+  static equals(a: PrimaryCorrelation | PlainMessage<PrimaryCorrelation> | undefined, b: PrimaryCorrelation | PlainMessage<PrimaryCorrelation> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.SecondaryCorrelation
+ */
+export declare class SecondaryCorrelation extends Message<SecondaryCorrelation> {
+  /**
+   * The primary of this correlation.
+   *
+   * @generated from field: string primary_entity_id = 1;
+   */
+  primaryEntityId: string;
+
+  /**
+   * Metadata about the correlation.
+   *
+   * @generated from field: anduril.entitymanager.v1.CorrelationMetadata metadata = 2;
+   */
+  metadata?: CorrelationMetadata;
+
+  constructor(data?: PartialMessage<SecondaryCorrelation>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.SecondaryCorrelation";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SecondaryCorrelation;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SecondaryCorrelation;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SecondaryCorrelation;
+
+  static equals(a: SecondaryCorrelation | PlainMessage<SecondaryCorrelation> | undefined, b: SecondaryCorrelation | PlainMessage<SecondaryCorrelation> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.Decorrelation
+ */
+export declare class Decorrelation extends Message<Decorrelation> {
+  /**
+   * This will be specified if this entity was decorrelated against all other entities.
+   *
+   * @generated from field: anduril.entitymanager.v1.DecorrelatedAll all = 1;
+   */
+  all?: DecorrelatedAll;
+
+  /**
+   * A list of decorrelated entities that have been explicitly decorrelated against this entity
+   * which prevents lower precedence correlations from overriding it in the future.
+   * For example, if an operator in the UI decorrelated tracks A and B, any automated
+   * correlators would be unable to correlate them since manual decorrelations have
+   * higher precedence than automatic ones. Precedence is determined by both correlation
+   * type and replication mode.
+   *
+   * @generated from field: repeated anduril.entitymanager.v1.DecorrelatedSingle decorrelated_entities = 2;
+   */
+  decorrelatedEntities: DecorrelatedSingle[];
+
+  constructor(data?: PartialMessage<Decorrelation>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.Decorrelation";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Decorrelation;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Decorrelation;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Decorrelation;
+
+  static equals(a: Decorrelation | PlainMessage<Decorrelation> | undefined, b: Decorrelation | PlainMessage<Decorrelation> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.DecorrelatedAll
+ */
+export declare class DecorrelatedAll extends Message<DecorrelatedAll> {
+  /**
+   * Metadata about the decorrelation.
+   *
+   * @generated from field: anduril.entitymanager.v1.CorrelationMetadata metadata = 1;
+   */
+  metadata?: CorrelationMetadata;
+
+  constructor(data?: PartialMessage<DecorrelatedAll>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.DecorrelatedAll";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DecorrelatedAll;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DecorrelatedAll;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DecorrelatedAll;
+
+  static equals(a: DecorrelatedAll | PlainMessage<DecorrelatedAll> | undefined, b: DecorrelatedAll | PlainMessage<DecorrelatedAll> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.DecorrelatedSingle
+ */
+export declare class DecorrelatedSingle extends Message<DecorrelatedSingle> {
+  /**
+   * The entity that was decorrelated against.
+   *
+   * @generated from field: string entity_id = 1;
+   */
+  entityId: string;
+
+  /**
+   * Metadata about the decorrelation.
+   *
+   * @generated from field: anduril.entitymanager.v1.CorrelationMetadata metadata = 2;
+   */
+  metadata?: CorrelationMetadata;
+
+  constructor(data?: PartialMessage<DecorrelatedSingle>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.DecorrelatedSingle";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DecorrelatedSingle;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DecorrelatedSingle;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DecorrelatedSingle;
+
+  static equals(a: DecorrelatedSingle | PlainMessage<DecorrelatedSingle> | undefined, b: DecorrelatedSingle | PlainMessage<DecorrelatedSingle> | undefined): boolean;
+}
+
+/**
+ * @generated from message anduril.entitymanager.v1.CorrelationMetadata
+ */
+export declare class CorrelationMetadata extends Message<CorrelationMetadata> {
+  /**
+   * Who or what added this entity to the (de)correlation.
+   *
+   * @generated from field: anduril.entitymanager.v1.Provenance provenance = 1;
+   */
+  provenance?: Provenance;
+
+  /**
+   * Indicates how the correlation will be distributed. Because a correlation is composed of
+   * multiple secondaries, each of which may have been correlated with different replication
+   * modes, the distribution of the correlation is composed of distributions of the individual
+   * entities within the correlation set.
+   * For example, if there are two secondary entities A and B correlated against a primary C,
+   * with A having been correlated globally and B having been correlated locally, then the
+   * correlation set that is distributed globally than what is known locally in the node.
+   *
+   * @generated from field: anduril.entitymanager.v1.CorrelationReplicationMode replication_mode = 2;
+   */
+  replicationMode: CorrelationReplicationMode;
+
+  /**
+   * What type of (de)correlation was this entity added with.
+   *
+   * @generated from field: anduril.entitymanager.v1.CorrelationType type = 3;
+   */
+  type: CorrelationType;
+
+  constructor(data?: PartialMessage<CorrelationMetadata>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "anduril.entitymanager.v1.CorrelationMetadata";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CorrelationMetadata;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CorrelationMetadata;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CorrelationMetadata;
+
+  static equals(a: CorrelationMetadata | PlainMessage<CorrelationMetadata> | undefined, b: CorrelationMetadata | PlainMessage<CorrelationMetadata> | undefined): boolean;
 }
 

@@ -52,8 +52,6 @@ const Payload = proto3.makeMessageType(
 );
 
 /**
- * The configuration for this capability, published on the CAPABILITY_TOPIC_PAYLOAD_CONFIGURATION topic id.
- *
  * @generated from message anduril.entitymanager.v1.PayloadConfiguration
  */
 const PayloadConfiguration = proto3.makeMessageType(

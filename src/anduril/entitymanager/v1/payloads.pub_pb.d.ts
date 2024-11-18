@@ -102,8 +102,6 @@ export declare class Payload extends Message<Payload> {
 }
 
 /**
- * The configuration for this capability, published on the CAPABILITY_TOPIC_PAYLOAD_CONFIGURATION topic id.
- *
  * @generated from message anduril.entitymanager.v1.PayloadConfiguration
  */
 export declare class PayloadConfiguration extends Message<PayloadConfiguration> {

@@ -51,16 +51,7 @@ export declare class MilView extends Message<MilView> {
  */
 export declare class Ontology extends Message<Ontology> {
   /**
-   * DEPRECATED: list of possible descriptors in preferred order.
-   *
-   * @generated from field: repeated string descriptors = 1 [deprecated = true];
-   * @deprecated
-   */
-  descriptors: string[];
-
-  /**
-   * A string that describes the asset's high-level type with natural language. These values include, but are not
-   * limited to the AIR/SURFACE/SUBSURFACE/LAND/SPACE PLATFORM TYPE values found in MIL-STD 6016F.
+   * A string that describes the entity's high-level type with natural language.
    * Examples include "FIGHTER", "TANK", "AIRCRAFT CARRIER", "UAV".
    *
    * @generated from field: string platform_type = 3;
@@ -68,8 +59,7 @@ export declare class Ontology extends Message<Ontology> {
   platformType: string;
 
   /**
-   * A string that describes the asset's exact model or type. These values include, but are not
-   * limited to the AIR/SURFACE/SUBSURFACE/LAND/SPACE SPECIFIC TYPE values found in MIL-STD 6016F.
+   * A string that describes the entity's exact model or type.
    * Examples include "F-16", "NASAMS-LCHR", "ARLEIGH BURKE DDG", "GHOST".
    *
    * @generated from field: string specific_type = 4;

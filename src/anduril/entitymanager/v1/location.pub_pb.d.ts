@@ -14,7 +14,7 @@ import type { ENU, Quaternion } from "../../type/coords.pub_pb.js";
  */
 export declare class Location extends Message<Location> {
   /**
-   * see Position definition for details. We opt not to use anduril type for altitude clarity.
+   * see Position definition for details.
    *
    * @generated from field: anduril.entitymanager.v1.Position position = 1;
    */
@@ -64,7 +64,11 @@ export declare class Location extends Message<Location> {
 }
 
 /**
- * WGS84 position.
+ * WGS84 position. Position includes four altitude references.
+ * The data model does not currently support Mean Sea Level (MSL) references,
+ * such as the Earth Gravitational Model 1996 (EGM-96) and the Earth Gravitational Model 2008 (EGM-08).
+ * If the only altitude reference available to your integration is MSL, convert it to
+ * Height Above Ellipsoid (HAE) and populate the altitude_hae_meters field.
  *
  * @generated from message anduril.entitymanager.v1.Position
  */
@@ -92,8 +96,9 @@ export declare class Position extends Message<Position> {
   altitudeHaeMeters?: number;
 
   /**
-   * Altitude as AGL (Above Ground Level) if the upstream data source has this value set. If the value is not set from the upstream, this value is
-   * not set.
+   * Altitude as AGL (Above Ground Level) if the upstream data source has this value set. This value represents the
+   * entity's height above the terrain. This is typically measured with a radar altimeter or by using a terrain tile
+   * set lookup. If the value is not set from the upstream, this value is not set.
    *
    * @generated from field: google.protobuf.DoubleValue altitude_agl_meters = 4;
    */
@@ -108,7 +113,7 @@ export declare class Position extends Message<Position> {
   altitudeAsfMeters?: number;
 
   /**
-   * Depth in meters measures the depth of the entity from the surface of the water through sensor measurements based on differential pressure
+   * The depth of the entity from the surface of the water through sensor measurements based on differential pressure
    * between the interior and exterior of the vessel. If the value is not set from the upstream, this value is not set.
    *
    * @generated from field: google.protobuf.DoubleValue pressure_depth_meters = 6;
@@ -137,14 +142,16 @@ export declare class Position extends Message<Position> {
  */
 export declare class LocationUncertainty extends Message<LocationUncertainty> {
   /**
-   * Positional covariance represented by the upper triangle of the covariance matrix.
+   * Positional covariance represented by the upper triangle of the covariance matrix. It is valid to populate
+   * only the diagonal of the matrix if the full covariance matrix is unknown.
    *
    * @generated from field: anduril.entitymanager.v1.TMat3 position_enu_cov = 1;
    */
   positionEnuCov?: TMat3;
 
   /**
-   * Velocity covariance represented by the upper triangle of the covariance matrix.
+   * Velocity covariance represented by the upper triangle of the covariance matrix. It is valid to populate
+   * only the diagonal of the matrix if the full covariance matrix is unknown.
    *
    * @generated from field: anduril.entitymanager.v1.TMat3 velocity_enu_cov = 2;
    */
@@ -222,8 +229,6 @@ export declare class ErrorEllipse extends Message<ErrorEllipse> {
 }
 
 /**
- * Overrides anduril.type.Pose.
- *
  * @generated from message anduril.entitymanager.v1.Pose
  */
 export declare class Pose extends Message<Pose> {
