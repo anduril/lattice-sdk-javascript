@@ -167,7 +167,6 @@ const System = proto3.makeMessageType(
   () => [
     { no: 1, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "asset_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "manages_own_scheduling", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
@@ -227,7 +226,7 @@ const TaskVersion = proto3.makeMessageType(
 );
 
 /**
- * a Task status update that could come in via RPC or Flux.
+ * a Task status update
  *
  * @generated from message anduril.taskmanager.v1.StatusUpdate
  */
@@ -242,7 +241,7 @@ const StatusUpdate = proto3.makeMessageType(
 );
 
 /**
- * Flux message representing a Task create or update.
+ * Message representing a Task create or update.
  *
  * @generated from message anduril.taskmanager.v1.DefinitionUpdate
  */
@@ -254,14 +253,13 @@ const DefinitionUpdate = proto3.makeMessageType(
 );
 
 /**
- * Owner designates the networked flux node responsible for linear writes of a Task data.
+ * Owner designates the entity responsible for writes of Task data.
  *
  * @generated from message anduril.taskmanager.v1.Owner
  */
 const Owner = proto3.makeMessageType(
   "anduril.taskmanager.v1.Owner",
   () => [
-    { no: 1, name: "asset_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
@@ -311,7 +309,6 @@ const Team = proto3.makeMessageType(
 const Agent = proto3.makeMessageType(
   "anduril.taskmanager.v1.Agent",
   () => [
-    { no: 1, name: "asset_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );

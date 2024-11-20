@@ -166,11 +166,6 @@ export declare class AltitudeConstraint extends Message<AltitudeConstraint> {
  */
 export declare class Agent extends Message<Agent> {
   /**
-   * @generated from field: string asset_id = 1;
-   */
-  assetId: string;
-
-  /**
    * @generated from field: string entity_id = 2;
    */
   entityId: string;

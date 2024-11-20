@@ -60,14 +60,14 @@ export declare enum AltIdType {
   ASSET_ID = 5,
 
   /**
-   * Use for Link 16 track identifiers for non-JTIDS Unit (JU) entities, such as assets (STN) and tracks (RefTN). Values range from AA000 to ZZ777.
+   * Use for Link 16 track identifiers for non-JTIDS Unit entities.
    *
    * @generated from enum value: ALT_ID_TYPE_LINK16_TRACK_NUMBER = 6;
    */
   LINK16_TRACK_NUMBER = 6,
 
   /**
-   * Use for Link 16 JTIDS Unit (JU) identifiers. Applicable to assets representing JUs, with values ranging from 00001 to 77777.
+   * Use for Link 16 JTIDS Unit identifiers.
    *
    * @generated from enum value: ALT_ID_TYPE_LINK16_JU = 7;
    */
@@ -143,7 +143,7 @@ export declare enum AltIdType {
   IBS_GID = 17,
 
   /**
-   * Department of Defense Activity Address Code uniquely identifies a unit, activity, or organization with the DoDAAD. A single unit could have multiple DoDAACs
+   * Department of Defense Activity Address Code.
    *
    * @generated from enum value: ALT_ID_TYPE_DODAAC = 18;
    */
@@ -157,10 +157,7 @@ export declare enum AltIdType {
   UIC = 19,
 
   /**
-   * A NORAD Satellite Catalog Number, a 9-digit number uniquely representing orbital objects around Earth. This is
-   * the standard ID used for satellites by the DOD.
-   * Note that there is ongoing work to replace the 9-digit number with a 9-digit alphanumeric sequence to accommodate
-   * ever-increasing numbers of satellites (and space debris). Treat the accompanied ID field as alphanumeric instead
+   * A NORAD Satellite Catalog Number, a 9-digit number uniquely representing orbital objects around Earth.
    * of strictly numeric.
    *
    * @generated from enum value: ALT_ID_TYPE_NORAD_CAT_ID = 20;

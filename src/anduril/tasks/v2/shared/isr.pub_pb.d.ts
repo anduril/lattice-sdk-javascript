@@ -790,20 +790,6 @@ export declare class Monitor extends Message<Monitor> {
    */
   objective?: Objective;
 
-  /**
-   * Identifies track to monitor.
-   *
-   * @generated from field: string track_id = 2;
-   */
-  trackId: string;
-
-  /**
-   * AssetId2 of asset that produced track.
-   *
-   * @generated from field: string track_producer = 3;
-   */
-  trackProducer: string;
-
   constructor(data?: PartialMessage<Monitor>);
 
   static readonly runtime: typeof proto3;

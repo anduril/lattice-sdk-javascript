@@ -34,13 +34,6 @@ export declare enum GeoType {
   EMERGENCY = 3,
 
   /**
-   * Fire support coordination measure
-   *
-   * @generated from enum value: GEO_TYPE_FSCM = 4;
-   */
-  FSCM = 4,
-
-  /**
    * Engagement zones allow for engaging an entity if it comes within the zone of another entity.
    *
    * @generated from enum value: GEO_TYPE_ENGAGEMENT_ZONE = 5;
@@ -56,20 +49,6 @@ export declare enum GeoType {
    * @generated from enum value: GEO_TYPE_BULLSEYE = 7;
    */
   BULLSEYE = 7,
-
-  /**
-   * Airspace Coordinating Measure
-   *
-   * @generated from enum value: GEO_TYPE_ACM = 8;
-   */
-  ACM = 8,
-
-  /**
-   * Maneuver Control Measure
-   *
-   * @generated from enum value: GEO_TYPE_MCM = 9;
-   */
-  MCM = 9,
 }
 
 /**

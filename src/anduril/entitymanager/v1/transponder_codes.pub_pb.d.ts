@@ -42,24 +42,21 @@ export declare enum InterrogationResponse {
  */
 export declare class TransponderCodes extends Message<TransponderCodes> {
   /**
-   * The mode 1 code assigned to military assets. Mode 1 is a 5-bit decimal (1-31) value. Note that Mode 1 codes are
-   * NOT unique. A zero mode code indicates No Statement.
+   * The mode 1 code assigned to military assets.
    *
    * @generated from field: uint32 mode1 = 1;
    */
   mode1: number;
 
   /**
-   * The Mode 2 code assigned to military assets. Mode 2 is a 12-bit decimal (1-4095) value. If displaying to a user,
-   * convert to 4 digit octal 0001-7777. Note that Mode 2 codes are NOT unique. A zero mode code indicates No Statement.
+   * The Mode 2 code assigned to military assets.
    *
    * @generated from field: uint32 mode2 = 2;
    */
   mode2: number;
 
   /**
-   * The Mode 3 code assigned by ATC to the asset. Mode 3 is a 12-bit decimal (1-4095) value. If displaying to a user,
-   * convert to 4 digit octal 0001-7777. Note that Mode 3 codes are NOT unique. A zero mode code indicates No Statement.
+   * The Mode 3 code assigned by ATC to the asset.
    *
    * @generated from field: uint32 mode3 = 3;
    */
@@ -115,19 +112,14 @@ export declare class Mode5 extends Message<Mode5> {
   mode5InterrogationResponse: InterrogationResponse;
 
   /**
-   * The Mode 5 code assigned to military assets. Mode 5 is a 12-bit decimal (1-4095) value. If displaying to a user,
-   * convert to 4 digit octal 0001-7777. Note that Mode 5 codes are NOT unique by themselves, but should be used in
-   * conjunction with the Mode 5 platform ID & nationality to provide unique identification.
-   * A zero mode code indicates No Statement.
+   * The Mode 5 code assigned to military assets.
    *
    * @generated from field: uint32 mode5 = 2;
    */
   mode5: number;
 
   /**
-   * The Mode 5 platform identification code. Expected values are between 1 and 16383. Used in conjunction with the
-   * Nationality it provides IFF/SIF capabilities.
-   * A zero platform id indicates No Statement.
+   * The Mode 5 platform identification code.
    *
    * @generated from field: uint32 mode5_platform_id = 3;
    */
