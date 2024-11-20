@@ -277,8 +277,6 @@ const Monitor = proto3.makeMessageType(
   "anduril.tasks.v2.Monitor",
   () => [
     { no: 1, name: "objective", kind: "message", T: Objective },
-    { no: 2, name: "track_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "track_producer", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

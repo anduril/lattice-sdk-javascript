@@ -78,7 +78,6 @@ const AltitudeConstraint = proto3.makeMessageType(
 const Agent = proto3.makeMessageType(
   "anduril.tasks.v2.Agent",
   () => [
-    { no: 1, name: "asset_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );

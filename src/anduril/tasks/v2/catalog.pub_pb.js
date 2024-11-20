@@ -17,7 +17,6 @@ const TaskCatalog = proto3.makeMessageType(
   "anduril.tasks.v2.TaskCatalog",
   () => [
     { no: 1, name: "task_definitions", kind: "message", T: TaskDefinition, repeated: true },
-    { no: 2, name: "is_asset_inhibited", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

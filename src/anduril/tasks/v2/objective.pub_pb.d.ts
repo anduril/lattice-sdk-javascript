@@ -35,13 +35,6 @@ export declare class Objective extends Message<Objective> {
     case: "point";
   } | { case: undefined; value?: undefined };
 
-  /**
-   * the asset (if known) which produced the objective (useful for time-series lookups of historical objectives).
-   *
-   * @generated from field: string produced_by_asset_id = 2;
-   */
-  producedByAssetId: string;
-
   constructor(data?: PartialMessage<Objective>);
 
   static readonly runtime: typeof proto3;

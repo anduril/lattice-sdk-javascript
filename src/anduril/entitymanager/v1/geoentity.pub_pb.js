@@ -21,12 +21,9 @@ const GeoType = proto3.makeEnum(
     {no: 1, name: "GEO_TYPE_GENERAL", localName: "GENERAL"},
     {no: 2, name: "GEO_TYPE_HAZARD", localName: "HAZARD"},
     {no: 3, name: "GEO_TYPE_EMERGENCY", localName: "EMERGENCY"},
-    {no: 4, name: "GEO_TYPE_FSCM", localName: "FSCM"},
     {no: 5, name: "GEO_TYPE_ENGAGEMENT_ZONE", localName: "ENGAGEMENT_ZONE"},
     {no: 6, name: "GEO_TYPE_CONTROL_AREA", localName: "CONTROL_AREA"},
     {no: 7, name: "GEO_TYPE_BULLSEYE", localName: "BULLSEYE"},
-    {no: 8, name: "GEO_TYPE_ACM", localName: "ACM"},
-    {no: 9, name: "GEO_TYPE_MCM", localName: "MCM"},
   ],
 );
 

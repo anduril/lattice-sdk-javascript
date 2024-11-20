@@ -329,8 +329,7 @@ export declare class Task extends Message<Task> {
   initialEntities: TaskEntity[];
 
   /**
-   * The networked owner of this Task. Populated on creation to be the asset on which the Task Manager is running. DO NOT
-   * UNDER ANY CIRCUMSTANCES change or modify this field. It is used to ensure that linear writes occur on the node responsible
+   * The networked owner of this Task. It is used to ensure that linear writes occur on the node responsible
    * for replication of task data to other nodes running Task Manager.
    *
    * @generated from field: anduril.taskmanager.v1.Owner owner = 12;
@@ -497,9 +496,7 @@ export declare class Principal extends Message<Principal> {
   } | { case: undefined; value?: undefined };
 
   /**
-   * The Principal _this_ Principal is acting on behalf of. For example, if there is a Flux node connected to a non-Flux node,
-   * and that Flux node wants to act "on behalf of" that non-Flux node, _this_ Principal would represent the Flux node, and
-   * this "on_behalf_of" Principal would represent the non-Flux node.
+   * The Principal _this_ Principal is acting on behalf of.
    *
    * Likely only populated once in the nesting (i.e. the "on_behalf_of" Principal would not have another "on_behalf_of" in most cases).
    *
@@ -541,13 +538,6 @@ export declare class System extends Message<System> {
    * @generated from field: string entity_id = 2;
    */
   entityId: string;
-
-  /**
-   * The Asset ID of the System.
-   *
-   * @generated from field: string asset_id = 3;
-   */
-  assetId: string;
 
   /**
    * Whether the System Principal (for example, an Asset) can own scheduling.
@@ -732,7 +722,7 @@ export declare class TaskVersion extends Message<TaskVersion> {
 }
 
 /**
- * a Task status update that could come in via RPC or Flux.
+ * a Task status update
  *
  * @generated from message anduril.taskmanager.v1.StatusUpdate
  */
@@ -781,7 +771,7 @@ export declare class StatusUpdate extends Message<StatusUpdate> {
 }
 
 /**
- * Flux message representing a Task create or update.
+ * Message representing a Task create or update.
  *
  * @generated from message anduril.taskmanager.v1.DefinitionUpdate
  */
@@ -813,18 +803,11 @@ export declare class DefinitionUpdate extends Message<DefinitionUpdate> {
 }
 
 /**
- * Owner designates the networked flux node responsible for linear writes of a Task data.
+ * Owner designates the entity responsible for writes of Task data.
  *
  * @generated from message anduril.taskmanager.v1.Owner
  */
 export declare class Owner extends Message<Owner> {
-  /**
-   * Flux Asset ID of the owner.
-   *
-   * @generated from field: string asset_id = 1;
-   */
-  assetId: string;
-
   /**
    * Entity ID of the owner.
    *
@@ -942,13 +925,6 @@ export declare class Team extends Message<Team> {
  * @generated from message anduril.taskmanager.v1.Agent
  */
 export declare class Agent extends Message<Agent> {
-  /**
-   * Asset ID of the agent.
-   *
-   * @generated from field: string asset_id = 1;
-   */
-  assetId: string;
-
   /**
    * Entity ID of the agent.
    *

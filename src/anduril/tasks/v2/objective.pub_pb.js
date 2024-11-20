@@ -19,7 +19,6 @@ const Objective = proto3.makeMessageType(
   () => [
     { no: 1, name: "entity_id", kind: "scalar", T: 9 /* ScalarType.STRING */, oneof: "objective" },
     { no: 5, name: "point", kind: "message", T: Point, oneof: "objective" },
-    { no: 2, name: "produced_by_asset_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

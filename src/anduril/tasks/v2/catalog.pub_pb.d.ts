@@ -17,14 +17,6 @@ export declare class TaskCatalog extends Message<TaskCatalog> {
    */
   taskDefinitions: TaskDefinition[];
 
-  /**
-   * Asset is inhibited by VCE.
-   * Asset can still receive tasks but not be able to act on them until inhibition status is lifted.
-   *
-   * @generated from field: bool is_asset_inhibited = 2;
-   */
-  isAssetInhibited: boolean;
-
   constructor(data?: PartialMessage<TaskCatalog>);
 
   static readonly runtime: typeof proto3;
