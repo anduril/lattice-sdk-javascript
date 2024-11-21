@@ -1,7 +1,8 @@
 {
-  "name": "@anduril/lattice-sdk-javascript",
-  "version": "1.0.13",
+  "name": "@anduril/lattice-sdk",
+  "version": "0.0.0-development",
   "description": "The Lattice SDK vended in Javascript",
+  "license": "SEE LICENSE IN LICENSE.txt",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anduril/lattice-sdk-javascript.git"
@@ -11,9 +12,6 @@
     "url": "https://github.com/anduril/lattice-sdk-javascript/issues"
   },
   "homepage": "https://github.com/anduril/lattice-sdk-javascript#readme",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "dependencies": {
     "@bufbuild/protobuf": "^1.10.0"
   }
