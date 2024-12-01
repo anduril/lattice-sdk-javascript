@@ -1,6 +1,6 @@
 # Lattice SDK Javascript
 
-[![Version](https://img.shields.io/npm/v/@anduril-industries/lattice-sdk.svg)][https://www.npmjs.com/package/@anduril-industries/lattice-sdk]
+[![Version](https://img.shields.io/npm/v/@anduril-industries/lattice-sdk.svg)](https://www.npmjs.com/package/@anduril-industries/lattice-sdk)
 
 The official [Anduril](https://www.anduril.com/) Lattice SDK for Javascript.
 
