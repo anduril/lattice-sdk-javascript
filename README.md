@@ -6,7 +6,7 @@ The official [Anduril](https://www.anduril.com/) Lattice SDK for Javascript.
 
 ## Documentation
 
-See the [Anduril Lattice SDK for Javascript documentation](https://docs.anduril.com/sdks/javascript).
+See the documentation for [Lattice Javascript SDK](https://docs.anduril.com/sdks/javascript).
 
 ## Requirements
 
