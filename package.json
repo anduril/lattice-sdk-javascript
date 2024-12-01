@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/anduril/lattice-sdk-javascript#readme",
   "dependencies": {
-    "@bufbuild/protobuf": "^1.10.0"
+    "@bufbuild/protobuf": "^2.2.2"
   },
   "devDependencies": {
     "semantic-release": "^24.2.0"
