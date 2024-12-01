@@ -10,8 +10,10 @@ See the documentation for [Lattice Javascript SDK](https://docs.anduril.com/sdks
 
 ## Requirements
 
-This repository is tested against the latest [Active LTS Node.js version](https://nodejs.org/en/about/previous-releases).
+To use the SDK please ensure you have the following installed:
 
+* [NodeJS](https://nodejs.org/en/download/package-manager)
+  
 ## Installation
 
 1. Create a new NPM repository `npm init`
