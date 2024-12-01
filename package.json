@@ -2,7 +2,7 @@
   "name": "@anduril-industries/lattice-sdk",
   "version": "0.0.0-development",
   "description": "The Lattice SDK vended in Javascript",
-  "license": "SEE LICENSE IN LICENSE.txt",
+  "license": "SEE LICENSE IN LICENSE.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anduril/lattice-sdk-javascript.git"
