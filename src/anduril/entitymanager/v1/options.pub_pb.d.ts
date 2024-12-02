@@ -15,12 +15,3 @@ export declare const file_anduril_entitymanager_v1_options_pub: GenFile;
  */
 export declare const overridable: GenExtension<FieldOptions, boolean>;
 
-/**
- * When flagged on a field in a repeated component, provides an indication that the
- * the repeated component should be treated as a set. No components sharing
- * identical 'componentIdentifier' field should appear in the set
- *
- * @generated from extension: bool componentIdentifier = 1002;
- */
-export declare const componentIdentifier: GenExtension<FieldOptions, boolean>;
-

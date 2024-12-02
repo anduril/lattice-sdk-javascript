@@ -77,8 +77,6 @@ export declare type CronWindow = Message<"anduril.entitymanager.v1.CronWindow"> 
    *    This schedule begins at 12:00:00pm UTC on March 2nd 2023
    *        0 0 12 2 3 ? 2023
    *
-   * for more guidance see: http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html
-   *
    * @generated from field: string cron_expression = 1;
    */
   cronExpression: string;

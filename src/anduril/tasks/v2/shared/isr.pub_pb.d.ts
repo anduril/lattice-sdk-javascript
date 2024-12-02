@@ -402,15 +402,6 @@ export declare const PriorSchema: GenMessage<Prior>;
  */
 export declare type ISRParameters = Message<"anduril.tasks.v2.ISRParameters"> & {
   /**
-   * Indicates the target speed of the asset. DEPRECATION NOTE: deprecated in favor
-   * of speed_ms since we might have legacy integrations not conforming to the meters per second units.
-   *
-   * @generated from field: google.protobuf.FloatValue speed = 1 [deprecated = true];
-   * @deprecated
-   */
-  speed?: number;
-
-  /**
    * Indicates the target speed of the asset. Units are meters per second.
    *
    * @generated from field: google.protobuf.FloatValue speed_m_s = 2;
@@ -423,15 +414,6 @@ export declare type ISRParameters = Message<"anduril.tasks.v2.ISRParameters"> & 
    * @generated from field: google.protobuf.FloatValue standoff_distance_m = 3;
    */
   standoffDistanceM?: number;
-
-  /**
-   * Indicates the standoff distance from the objective. DEPRECATION NOTE: deprecated in favor of standoff_distance_m
-   *  since we might have legacy integrations not conforming to the meters unit.
-   *
-   * @generated from field: google.protobuf.FloatValue standoff_distance = 4 [deprecated = true];
-   * @deprecated
-   */
-  standoffDistance?: number;
 
   /**
    * Indicates the standoff angle relative to the objective's bearing orientation (defaults to north).

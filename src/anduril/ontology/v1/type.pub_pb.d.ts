@@ -2,111 +2,12 @@
 // @generated from file anduril/ontology/v1/type.pub.proto (package anduril.ontology.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
-import type { Message } from "@bufbuild/protobuf";
+import type { GenEnum, GenFile } from "@bufbuild/protobuf/codegenv1";
 
 /**
  * Describes the file anduril/ontology/v1/type.pub.proto.
  */
 export declare const file_anduril_ontology_v1_type_pub: GenFile;
-
-/**
- * An ObjectType describes the type of object within the ontology and its disposition.
- *
- * @generated from message anduril.ontology.v1.ObjectType
- */
-export declare type ObjectType = Message<"anduril.ontology.v1.ObjectType"> & {
-  /**
-   * @generated from field: anduril.ontology.v1.Class class = 1;
-   */
-  class: Class;
-
-  /**
-   * @generated from field: anduril.ontology.v1.Disposition disposition = 2;
-   */
-  disposition: Disposition;
-
-  /**
-   * @generated from field: anduril.ontology.v1.Environment environment = 3;
-   */
-  environment: Environment;
-};
-
-/**
- * Describes the message anduril.ontology.v1.ObjectType.
- * Use `create(ObjectTypeSchema)` to create a new message.
- */
-export declare const ObjectTypeSchema: GenMessage<ObjectType>;
-
-/**
- * @generated from enum anduril.ontology.v1.Class
- */
-export enum Class {
-  /**
-   * @generated from enum value: CLASS_UNKNOWN = 0;
-   */
-  UNKNOWN = 0,
-
-  /**
-   * @generated from enum value: CLASS_PERSON = 1;
-   */
-  PERSON = 1,
-
-  /**
-   * @generated from enum value: CLASS_CAR = 2;
-   */
-  CAR = 2,
-
-  /**
-   * @generated from enum value: CLASS_ANIMAL = 3;
-   */
-  ANIMAL = 3,
-
-  /**
-   * @generated from enum value: CLASS_AIR_VEHICLE = 4;
-   */
-  AIR_VEHICLE = 4,
-
-  /**
-   * @generated from enum value: CLASS_BICYCLE = 5;
-   */
-  BICYCLE = 5,
-
-  /**
-   * @generated from enum value: CLASS_WATER_VEHICLE = 6;
-   */
-  WATER_VEHICLE = 6,
-
-  /**
-   * @generated from enum value: CLASS_UNKNOWN_VEHICLE = 7;
-   */
-  UNKNOWN_VEHICLE = 7,
-
-  /**
-   * @generated from enum value: CLASS_MISSILE = 8;
-   */
-  MISSILE = 8,
-
-  /**
-   * @generated from enum value: CLASS_UNKNOWN_AIR_VEHICLE = 9;
-   */
-  UNKNOWN_AIR_VEHICLE = 9,
-
-  /**
-   * @generated from enum value: CLASS_BIRD = 10;
-   */
-  BIRD = 10,
-
-  /**
-   * @generated from enum value: CLASS_BACKGROUND = 11;
-   */
-  BACKGROUND = 11,
-}
-
-/**
- * Describes the enum anduril.ontology.v1.Class.
- */
-export declare const ClassSchema: GenEnum<Class>;
 
 /**
  * Refers to the relationship of the tracker to the operational object being represented.
@@ -209,7 +110,7 @@ export enum Environment {
 export declare const EnvironmentSchema: GenEnum<Environment>;
 
 /**
- * Describes Nationality or Alliance information.
+ * Describes Nationality or Alliance information. This is derived from ISO-3166.
  *
  * @generated from enum anduril.ontology.v1.Nationality
  */
@@ -690,9 +591,9 @@ export enum Nationality {
   SYRIAN_ARAB_REPUBLIC = 61,
 
   /**
-   * @generated from enum value: NATIONALITY_TAIWAN_PROVINCE_OF_CHINA = 73;
+   * @generated from enum value: NATIONALITY_TAIWAN = 73;
    */
-  TAIWAN_PROVINCE_OF_CHINA = 73,
+  TAIWAN = 73,
 
   /**
    * @generated from enum value: NATIONALITY_TAJIKISTAN = 45;

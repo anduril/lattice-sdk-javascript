@@ -20,7 +20,7 @@ export declare const file_anduril_taskmanager_v1_task_manager_grpcapi_pub: GenFi
  */
 export declare type CreateTaskRequest = Message<"anduril.taskmanager.v1.CreateTaskRequest"> & {
   /**
-   * Human readable display name for this Task, should be short (<100 chars).
+   * Human-readable display name for this Task, should be short (<100 chars).
    *
    * @generated from field: string display_name = 1;
    */
@@ -51,7 +51,7 @@ export declare type CreateTaskRequest = Message<"anduril.taskmanager.v1.CreateTa
   relations?: Relations;
 
   /**
-   * Longer, free form human readable description of this Task.
+   * Longer, free-form, human-readable description of this Task.
    *
    * @generated from field: string description = 6;
    */
@@ -149,7 +149,7 @@ export declare const GetTaskRequestSchema: GenMessage<GetTaskRequest>;
  */
 export declare type GetTaskResponse = Message<"anduril.taskmanager.v1.GetTaskResponse"> & {
   /**
-   * Task that received.
+   * Task that was returned.
    *
    * @generated from field: anduril.taskmanager.v1.Task task = 1;
    */
@@ -538,7 +538,7 @@ export declare const TaskManagerAPI: GenService<{
   },
   /**
    * Stream Tasks ready for RPC Agent execution that match agent selector (ex: entity_ids).
-   * Intended for use by Taskable Agents that need to receive Tasks ready for execution by RPC
+   * Intended for use by Taskable Agents that need to receive Tasks ready for execution by RPC.
    *
    * @generated from rpc anduril.taskmanager.v1.TaskManagerAPI.ListenAsAgent
    */

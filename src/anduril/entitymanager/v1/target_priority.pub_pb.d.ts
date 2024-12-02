@@ -70,8 +70,6 @@ export declare type HighValueTarget = Message<"anduril.entitymanager.v1.HighValu
 
   /**
    * Indicates whether the target is a 'High Payoff Target'. Targets can be one or both of high value and high payoff.
-   * Semantically a High Value Target characterizes the target's importance to Red, whereas a High Payoff Target
-   * indicates prosecuting the target furthers Blue's specific objectives.
    *
    * @generated from field: bool is_high_payoff_target = 4;
    */

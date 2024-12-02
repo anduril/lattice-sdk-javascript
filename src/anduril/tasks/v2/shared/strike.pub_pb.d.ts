@@ -144,7 +144,7 @@ export declare type StrikeParameters = Message<"anduril.tasks.v2.StrikeParameter
 export declare const StrikeParametersSchema: GenMessage<StrikeParameters>;
 
 /**
- * Individual payload configuration, can represent a munition such as a missile, a gun, or a non-kinetic effect.
+ * Individual payload configuration.
  *
  * @generated from message anduril.tasks.v2.PayloadConfiguration
  */

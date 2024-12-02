@@ -9,21 +9,11 @@ import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
  * Describes the file anduril/entitymanager/v1/options.pub.proto.
  */
 export const file_anduril_entitymanager_v1_options_pub = /*@__PURE__*/
-  fileDesc("CiphbmR1cmlsL2VudGl0eW1hbmFnZXIvdjEvb3B0aW9ucy5wdWIucHJvdG8SGGFuZHVyaWwuZW50aXR5bWFuYWdlci52MTpACgtvdmVycmlkYWJsZRIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMY6QcgASgIUgtvdmVycmlkYWJsZTpQChNjb21wb25lbnRJZGVudGlmaWVyEh0uZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9ucxjqByABKAhSE2NvbXBvbmVudElkZW50aWZpZXJCgAIKHGNvbS5hbmR1cmlsLmVudGl0eW1hbmFnZXIudjFCD09wdGlvbnNQdWJQcm90b1ABWk1naGUuYW5kdXJpbC5kZXYvYW5kdXJpbC9hbmR1cmlsYXBpcy1nby9hbmR1cmlsL2VudGl0eW1hbmFnZXIvdjE7ZW50aXR5bWFuYWdlcqICA0FFWKoCGEFuZHVyaWwuRW50aXR5bWFuYWdlci5WMcoCGEFuZHVyaWxcRW50aXR5bWFuYWdlclxWMeICJEFuZHVyaWxcRW50aXR5bWFuYWdlclxWMVxHUEJNZXRhZGF0YeoCGkFuZHVyaWw6OkVudGl0eW1hbmFnZXI6OlYxYgZwcm90bzM", [file_google_protobuf_descriptor]);
+  fileDesc("CiphbmR1cmlsL2VudGl0eW1hbmFnZXIvdjEvb3B0aW9ucy5wdWIucHJvdG8SGGFuZHVyaWwuZW50aXR5bWFuYWdlci52MTpACgtvdmVycmlkYWJsZRIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMY6QcgASgIUgtvdmVycmlkYWJsZUKAAgocY29tLmFuZHVyaWwuZW50aXR5bWFuYWdlci52MUIPT3B0aW9uc1B1YlByb3RvUAFaTWdoZS5hbmR1cmlsLmRldi9hbmR1cmlsL2FuZHVyaWxhcGlzLWdvL2FuZHVyaWwvZW50aXR5bWFuYWdlci92MTtlbnRpdHltYW5hZ2VyogIDQUVYqgIYQW5kdXJpbC5FbnRpdHltYW5hZ2VyLlYxygIYQW5kdXJpbFxFbnRpdHltYW5hZ2VyXFYx4gIkQW5kdXJpbFxFbnRpdHltYW5hZ2VyXFYxXEdQQk1ldGFkYXRh6gIaQW5kdXJpbDo6RW50aXR5bWFuYWdlcjo6VjFiBnByb3RvMw", [file_google_protobuf_descriptor]);
 
 /**
  * @generated from extension: bool overridable = 1001;
  */
 export const overridable = /*@__PURE__*/
   extDesc(file_anduril_entitymanager_v1_options_pub, 0);
-
-/**
- * When flagged on a field in a repeated component, provides an indication that the
- * the repeated component should be treated as a set. No components sharing
- * identical 'componentIdentifier' field should appear in the set
- *
- * @generated from extension: bool componentIdentifier = 1002;
- */
-export const componentIdentifier = /*@__PURE__*/
-  extDesc(file_anduril_entitymanager_v1_options_pub, 1);
 

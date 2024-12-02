@@ -17,33 +17,12 @@ export declare const file_anduril_entitymanager_v1_power_pub: GenFile;
  */
 export declare type PowerState = Message<"anduril.entitymanager.v1.PowerState"> & {
   /**
+   * This is a map where the key is a unique id of the power source and the value is additional information about the
+   * power source.
+   *
    * @generated from field: map<string, anduril.entitymanager.v1.PowerSource> source_id_to_state = 5;
    */
   sourceIdToState: { [key: string]: PowerSource };
-
-  /**
-   * @generated from field: anduril.entitymanager.v1.PowerStatus power_status = 1 [deprecated = true];
-   * @deprecated
-   */
-  powerStatus: PowerStatus;
-
-  /**
-   * @generated from field: anduril.entitymanager.v1.PowerType power_type = 2 [deprecated = true];
-   * @deprecated
-   */
-  powerType: PowerType;
-
-  /**
-   * @generated from field: anduril.entitymanager.v1.PowerLevel power_level = 3 [deprecated = true];
-   * @deprecated
-   */
-  powerLevel?: PowerLevel;
-
-  /**
-   * @generated from field: repeated string messages = 4 [deprecated = true];
-   * @deprecated
-   */
-  messages: string[];
 };
 
 /**

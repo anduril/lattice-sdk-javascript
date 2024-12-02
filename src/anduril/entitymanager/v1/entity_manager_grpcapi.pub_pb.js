@@ -128,9 +128,9 @@ export const EventType = /*@__PURE__*/
   tsEnum(EventTypeSchema);
 
 /**
- * Entity Manager manages the lifecycle of the entities that comprise the common operational picture.
+ * Entity Manager manages the lifecycle of the entities that comprise the common operational picture (COP).
  *
- * Every object in a battle space is represented as an "Entity". Each Entity is essentially an ID, with a lifecycle
+ * Every object in the COP is represented as an "Entity." Each Entity is essentially an ID, with a lifecycle
  * and a collection of data components. Each data component is a separate protobuf message definition.
  *
  * Entity Manager provides a way to query the currently live set of entities within a set of filter constraints,

@@ -17,12 +17,6 @@ export declare const file_anduril_entitymanager_v1_classification_pub: GenFile;
  */
 export declare type Classification = Message<"anduril.entitymanager.v1.Classification"> & {
   /**
-   * @generated from field: anduril.entitymanager.v1.ClassificationLevels level = 1 [deprecated = true];
-   * @deprecated
-   */
-  level: ClassificationLevels;
-
-  /**
    * The default classification information which should be assumed to apply to everything in
    * the entity unless a specific field level classification is present.
    *

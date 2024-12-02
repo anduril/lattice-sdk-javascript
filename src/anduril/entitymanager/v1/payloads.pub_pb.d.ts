@@ -12,7 +12,7 @@ import type { Environment } from "../../ontology/v1/type.pub_pb.js";
 export declare const file_anduril_entitymanager_v1_payloads_pub: GenFile;
 
 /**
- * List of payloads available for an entity. i.e a weapon.
+ * List of payloads available for an entity.
  *
  * @generated from message anduril.entitymanager.v1.Payloads
  */

@@ -13,7 +13,7 @@ import type { Template } from "./types.pub_pb.js";
 export declare const file_anduril_entitymanager_v1_ontology_pub: GenFile;
 
 /**
- * Available for Entities that have a military view representation.
+ * Provides the disposition, environment, and nationality of an Entity.
  *
  * @generated from message anduril.entitymanager.v1.MilView
  */
@@ -48,7 +48,6 @@ export declare const MilViewSchema: GenMessage<MilView>;
 export declare type Ontology = Message<"anduril.entitymanager.v1.Ontology"> & {
   /**
    * A string that describes the entity's high-level type with natural language.
-   * Examples include "FIGHTER", "TANK", "AIRCRAFT CARRIER", "UAV".
    *
    * @generated from field: string platform_type = 3;
    */
@@ -56,7 +55,6 @@ export declare type Ontology = Message<"anduril.entitymanager.v1.Ontology"> & {
 
   /**
    * A string that describes the entity's exact model or type.
-   * Examples include "F-16", "NASAMS-LCHR", "ARLEIGH BURKE DDG", "GHOST".
    *
    * @generated from field: string specific_type = 4;
    */

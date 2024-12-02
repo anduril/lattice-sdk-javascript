@@ -126,7 +126,6 @@ export declare const GeoLineSchema: GenMessage<GeoLine>;
 export declare type GeoPolygon = Message<"anduril.entitymanager.v1.GeoPolygon"> & {
   /**
    * An array of LinearRings where the first item is the exterior ring and subsequent items are interior rings.
-   * For a good introduction read (https://macwright.com/2015/03/23/geojson-second-bite.html#polygons)
    *
    * @generated from field: repeated anduril.entitymanager.v1.LinearRing rings = 1;
    */
@@ -234,14 +233,6 @@ export declare const GeoEllipsoidSchema: GenMessage<GeoEllipsoid>;
  * @generated from message anduril.entitymanager.v1.LinearRing
  */
 export declare type LinearRing = Message<"anduril.entitymanager.v1.LinearRing"> & {
-  /**
-   * Deprecated: do not use, use positions instead
-   *
-   * @generated from field: repeated anduril.entitymanager.v1.Position points = 1 [deprecated = true];
-   * @deprecated
-   */
-  points: Position[];
-
   /**
    * @generated from field: repeated anduril.entitymanager.v1.GeoPolygonPosition positions = 2;
    */

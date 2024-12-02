@@ -24,7 +24,7 @@ import type { Health } from "./health_status.pub_pb.js";
 import type { GroupDetails } from "./group.pub_pb.js";
 import type { Supplies } from "./supplies.pub_pb.js";
 import type { Orbit } from "./orbit.pub_pb.js";
-import type { AltIdType, OverrideStatus, OverrideType, Source, UInt32Range } from "./types.pub_pb.js";
+import type { AltIdType, OverrideStatus, OverrideType, UInt32Range } from "./types.pub_pb.js";
 import type { Color } from "../../type/color.pub_pb.js";
 
 /**
@@ -40,7 +40,7 @@ export declare const file_anduril_entitymanager_v1_entity_pub: GenFile;
  */
 export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
   /**
-   * A Globally Unique Identifier (GUID) for your entity. If this field is empty, the Entity API
+   * A Globally Unique Identifier (GUID) for your entity. If this field is empty, the Entity Manager API
    * automatically generates an ID when it creates the entity.
    *
    * @generated from field: string entity_id = 1;
@@ -49,14 +49,14 @@ export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
 
   /**
    * A human-readable entity description that's helpful for debugging purposes and human
-   * traceability. If this field is empty, the Entity API generates one for you.
+   * traceability. If this field is empty, the Entity Manager API generates one for you.
    *
    * @generated from field: string description = 2;
    */
   description: string;
 
   /**
-   * Indicates the entity is active and should have lifecycle state of CREATE or UPDATE.
+   * Indicates the entity is active and should have a lifecycle state of CREATE or UPDATE.
    * Set this field to true when publishing an entity.
    *
    * @generated from field: bool is_live = 3;
@@ -64,7 +64,7 @@ export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
   isLive: boolean;
 
   /**
-   * The time when the entity was first known to the entity producer. If this field is empty, the Entity API uses the
+   * The time when the entity was first known to the entity producer. If this field is empty, the Entity Manager API uses the
    * current timestamp of when the entity is first received.
    * For example, when a drone is first powered on, it might report its startup time as the created time.
    * The timestamp doesn't change for the lifetime of an entity.
@@ -143,7 +143,7 @@ export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
   correlation?: Correlation;
 
   /**
-   * Military view of the entity.
+   * View of the entity.
    *
    * @generated from field: anduril.entitymanager.v1.MilView mil_view = 10;
    */
@@ -237,7 +237,7 @@ export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
   taskCatalog?: TaskCatalog;
 
   /**
-   * The relationships between this entity and other entities in the battlespace.
+   * The relationships between this entity and other entities in the common operational picture (COP).
    *
    * @generated from field: anduril.entitymanager.v1.Relationships relationships = 33;
    */
@@ -286,7 +286,7 @@ export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
   groupDetails?: GroupDetails;
 
   /**
-   * Contains relevant supply information for the entity, such as munitions and fuel.
+   * Contains relevant supply information for the entity, such as fuel.
    *
    * @generated from field: anduril.entitymanager.v1.Supplies supplies = 42;
    */
@@ -314,8 +314,7 @@ export declare const EntitySchema: GenMessage<Entity>;
 export declare type Status = Message<"anduril.entitymanager.v1.Status"> & {
   /**
    * A string that describes the activity that the entity is performing.
-   * Examples include "RECONNAISSANCE", "INTERDICTION", "ELECTRONIC WARFARE (EW)", "RETURN TO BASE (RTB)", "PREPARING
-   * FOR LAUNCH".
+   * Examples include "RECONNAISSANCE", "INTERDICTION", "RETURN TO BASE (RTB)", "PREPARING FOR LAUNCH".
    *
    * @generated from field: string platform_activity = 1;
    */
@@ -441,13 +440,6 @@ export declare type Provenance = Message<"anduril.entitymanager.v1.Provenance"> 
    * @generated from field: string data_type = 6;
    */
   dataType: string;
-
-  /**
-   * Enum defining the source TO BE DEPRECATED
-   *
-   * @generated from field: anduril.entitymanager.v1.Source source = 1;
-   */
-  source: Source;
 
   /**
    * An ID that allows an element from a source to be uniquely identified
@@ -701,6 +693,7 @@ export declare const RangeRingsSchema: GenMessage<RangeRings>;
 export declare type Correlation = Message<"anduril.entitymanager.v1.Correlation"> & {
   /**
    * If an entity is correlated, it is either the primary or a secondary.
+   * DEPRECATED - Use membership instead.
    *
    * @generated from oneof anduril.entitymanager.v1.Correlation.correlation
    */
@@ -723,6 +716,13 @@ export declare type Correlation = Message<"anduril.entitymanager.v1.Correlation"
     value: SecondaryCorrelation;
     case: "secondary";
   } | { case: undefined; value?: undefined };
+
+  /**
+   * If present, this entity is a part of a correlation set.
+   *
+   * @generated from field: anduril.entitymanager.v1.CorrelationMembership membership = 4;
+   */
+  membership?: CorrelationMembership;
 
   /**
    * If present, this entity was explicitly decorrelated from one or more entities.
@@ -785,6 +785,80 @@ export declare type SecondaryCorrelation = Message<"anduril.entitymanager.v1.Sec
  * Use `create(SecondaryCorrelationSchema)` to create a new message.
  */
 export declare const SecondaryCorrelationSchema: GenMessage<SecondaryCorrelation>;
+
+/**
+ * @generated from message anduril.entitymanager.v1.CorrelationMembership
+ */
+export declare type CorrelationMembership = Message<"anduril.entitymanager.v1.CorrelationMembership"> & {
+  /**
+   * The ID of the correlation set this entity belongs to.
+   *
+   * @generated from field: string correlation_set_id = 1;
+   */
+  correlationSetId: string;
+
+  /**
+   * If an entity is correlated, it may or may not be the primary.
+   *
+   * @generated from oneof anduril.entitymanager.v1.CorrelationMembership.membership
+   */
+  membership: {
+    /**
+     * This entity is the primary of a correlation set meaning that it serves as the representative
+     * entity of the correlation set.
+     *
+     * @generated from field: anduril.entitymanager.v1.PrimaryMembership primary = 2;
+     */
+    value: PrimaryMembership;
+    case: "primary";
+  } | {
+    /**
+     * This entity is not the primary of the correlation set. Note that there may not
+     * be a primary at all.
+     *
+     * @generated from field: anduril.entitymanager.v1.NonPrimaryMembership non_primary = 3;
+     */
+    value: NonPrimaryMembership;
+    case: "nonPrimary";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * Additional metadata on this correlation.
+   *
+   * @generated from field: anduril.entitymanager.v1.CorrelationMetadata metadata = 4;
+   */
+  metadata?: CorrelationMetadata;
+};
+
+/**
+ * Describes the message anduril.entitymanager.v1.CorrelationMembership.
+ * Use `create(CorrelationMembershipSchema)` to create a new message.
+ */
+export declare const CorrelationMembershipSchema: GenMessage<CorrelationMembership>;
+
+/**
+ * @generated from message anduril.entitymanager.v1.PrimaryMembership
+ */
+export declare type PrimaryMembership = Message<"anduril.entitymanager.v1.PrimaryMembership"> & {
+};
+
+/**
+ * Describes the message anduril.entitymanager.v1.PrimaryMembership.
+ * Use `create(PrimaryMembershipSchema)` to create a new message.
+ */
+export declare const PrimaryMembershipSchema: GenMessage<PrimaryMembership>;
+
+/**
+ * @generated from message anduril.entitymanager.v1.NonPrimaryMembership
+ */
+export declare type NonPrimaryMembership = Message<"anduril.entitymanager.v1.NonPrimaryMembership"> & {
+};
+
+/**
+ * Describes the message anduril.entitymanager.v1.NonPrimaryMembership.
+ * Use `create(NonPrimaryMembershipSchema)` to create a new message.
+ */
+export declare const NonPrimaryMembershipSchema: GenMessage<NonPrimaryMembership>;
 
 /**
  * @generated from message anduril.entitymanager.v1.Decorrelation

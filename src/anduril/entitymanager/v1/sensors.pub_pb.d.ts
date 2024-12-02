@@ -6,7 +6,6 @@ import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1"
 import type { Message } from "@bufbuild/protobuf";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import type { Pose, Position } from "./location.pub_pb.js";
-import type { FloatRange } from "./types.pub_pb.js";
 import type { FrequencyRange } from "./signal.pub_pb.js";
 
 /**
@@ -39,7 +38,7 @@ export declare const SensorsSchema: GenMessage<Sensors>;
  */
 export declare type Sensor = Message<"anduril.entitymanager.v1.Sensor"> & {
   /**
-   * This generally is used to indicate a specific type at a more detailed granularity. E.g. COMInt, LWIR or Echodyne
+   * This generally is used to indicate a specific type at a more detailed granularity. E.g. COMInt or LWIR
    *
    * @generated from field: string sensor_id = 1;
    */
@@ -49,14 +48,6 @@ export declare type Sensor = Message<"anduril.entitymanager.v1.Sensor"> & {
    * @generated from field: anduril.entitymanager.v1.OperationalState operational_state = 3;
    */
   operationalState: OperationalState;
-
-  /**
-   * DEPRECATED -- use `fields_of_view` instead. This field will be marked deprecated and no longer populated by 11/26/2023.
-   *
-   * @generated from field: anduril.entitymanager.v1.FieldOfView field_of_view = 4 [deprecated = true];
-   * @deprecated
-   */
-  fieldOfView?: FieldOfView;
 
   /**
    * The type of sensor
@@ -108,8 +99,8 @@ export declare const SensorSchema: GenMessage<Sensor>;
 export declare type FieldOfView = Message<"anduril.entitymanager.v1.FieldOfView"> & {
   /**
    * The Id for one instance of a FieldOfView, persisted across multiple updates to provide continuity during
-   * smoothing. This is relevant for sensors like an ESM or Radar where the dwell schedule is on the order of
-   * milliseconds, making multiple FOVs a requirement for proper display of search and weapon support beams.
+   * smoothing. This is relevant for sensors where the dwell schedule is on the order of
+   * milliseconds, making multiple FOVs a requirement for proper display of search beams.
    *
    * @generated from field: int32 fov_id = 1;
    */
@@ -230,22 +221,6 @@ export declare const ProjectedFrustumSchema: GenMessage<ProjectedFrustum>;
  * @generated from message anduril.entitymanager.v1.RFConfiguration
  */
 export declare type RFConfiguration = Message<"anduril.entitymanager.v1.RFConfiguration"> & {
-  /**
-   * Frequency ranges that are available for this sensor.
-   *
-   * @generated from field: repeated anduril.entitymanager.v1.FloatRange frequency_range = 1 [deprecated = true];
-   * @deprecated
-   */
-  frequencyRange: FloatRange[];
-
-  /**
-   * Bandwidth ranges that are available for this sensor.
-   *
-   * @generated from field: repeated anduril.entitymanager.v1.FloatRange bandwidth_range = 2 [deprecated = true];
-   * @deprecated
-   */
-  bandwidthRange: FloatRange[];
-
   /**
    * Frequency ranges that are available for this sensor.
    *
@@ -440,11 +415,6 @@ export enum SensorType {
    * @generated from enum value: SENSOR_TYPE_PTU_POS = 6;
    */
   PTU_POS = 6,
-
-  /**
-   * @generated from enum value: SENSOR_TYPE_WISP = 7;
-   */
-  WISP = 7,
 
   /**
    * @generated from enum value: SENSOR_TYPE_PERIMETER = 8;

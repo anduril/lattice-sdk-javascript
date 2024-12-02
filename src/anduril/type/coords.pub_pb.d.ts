@@ -408,8 +408,7 @@ export declare type Pose = Message<"anduril.type.Pose"> & {
    * field would have been att_pose_to_enu.
    *
    * Implementations of this quaternion should left multiply this quaternion to transform a point from the Pose frame
-   * to the enu frame. Following the geometry-cpp rotation convention, the following example would be valid:
-   * (https://ghe.anduril.dev/autonomy/geometry-cpp/blob/master/src/Rotation.h#L90)
+   * to the enu frame.
    *
    * Point<Pose\> posePt{1,0,0};
    * Rotation<Enu, Pose\> attPoseToEnu{};

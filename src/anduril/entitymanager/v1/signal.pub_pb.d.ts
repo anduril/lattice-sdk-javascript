@@ -4,7 +4,6 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
-import type { Position } from "./location.pub_pb.js";
 import type { Pose, TMat2 } from "../../type/coords.pub_pb.js";
 
 /**
@@ -90,13 +89,6 @@ export declare type Signal = Message<"anduril.entitymanager.v1.Signal"> & {
    * @generated from field: anduril.entitymanager.v1.PulseRepetitionInterval pulse_repetition_interval = 9;
    */
   pulseRepetitionInterval?: PulseRepetitionInterval;
-
-  /**
-   * characteristics of the carrier signal to transmit information
-   *
-   * @generated from field: anduril.entitymanager.v1.Modulation modulation = 10;
-   */
-  modulation?: Modulation;
 
   /**
    * describes how a signal is observing the environment
@@ -218,23 +210,6 @@ export declare const FrequencyRangeSchema: GenMessage<FrequencyRange>;
  */
 export declare type LineOfBearing = Message<"anduril.entitymanager.v1.LineOfBearing"> & {
   /**
-   * `origin` and `range_bearing` have been deprecated in favor of `angle_of_arrival`
-   * The location of the asset at the time of measurement.
-   *
-   * @generated from field: anduril.entitymanager.v1.Position origin = 1 [deprecated = true];
-   * @deprecated
-   */
-  origin?: Position;
-
-  /**
-   * Describes the horizontal angle with respect to true north.
-   *
-   * @generated from field: anduril.entitymanager.v1.RangeBearing range_bearing = 2 [deprecated = true];
-   * @deprecated
-   */
-  rangeBearing?: RangeBearing;
-
-  /**
    * The direction pointing from this entity to the detection
    *
    * @generated from field: anduril.entitymanager.v1.AngleOfArrival angle_of_arrival = 3;
@@ -318,34 +293,6 @@ export declare type Fixed = Message<"anduril.entitymanager.v1.Fixed"> & {
 export declare const FixedSchema: GenMessage<Fixed>;
 
 /**
- * Describes range and vertical and horizontal angular measurements of an entity with respect to a target.
- *
- * @generated from message anduril.entitymanager.v1.RangeBearing
- */
-export declare type RangeBearing = Message<"anduril.entitymanager.v1.RangeBearing"> & {
-  /**
-   * The range to a target along the measured angle in meters with its one sigma error value.
-   *
-   * @generated from field: anduril.entitymanager.v1.Measurement range_m = 1;
-   */
-  rangeM?: Measurement;
-
-  /**
-   * Horizontal angle - degrees rotated clockwise from origin_heading: 0-360.
-   * Sigma is the standard deviation of the horizontal angular measurement in decimal degrees: 0-180 degrees.
-   *
-   * @generated from field: anduril.entitymanager.v1.Measurement range_angle_d = 2;
-   */
-  rangeAngleD?: Measurement;
-};
-
-/**
- * Describes the message anduril.entitymanager.v1.RangeBearing.
- * Use `create(RangeBearingSchema)` to create a new message.
- */
-export declare const RangeBearingSchema: GenMessage<RangeBearing>;
-
-/**
  * A component that describe the length in time between two pulses
  *
  * @generated from message anduril.entitymanager.v1.PulseRepetitionInterval
@@ -362,83 +309,6 @@ export declare type PulseRepetitionInterval = Message<"anduril.entitymanager.v1.
  * Use `create(PulseRepetitionIntervalSchema)` to create a new message.
  */
 export declare const PulseRepetitionIntervalSchema: GenMessage<PulseRepetitionInterval>;
-
-/**
- * A component that describe how information is encoded in a transmitted signal through a carrier signal
- *
- * @generated from message anduril.entitymanager.v1.Modulation
- */
-export declare type Modulation = Message<"anduril.entitymanager.v1.Modulation"> & {
-  /**
-   * Modifications to the carrier signal
-   *
-   * @generated from field: anduril.entitymanager.v1.ModulationType modulation_type = 1;
-   */
-  modulationType: ModulationType;
-
-  /**
-   * describes the number of "symbols" that could be communicated with the modulation type
-   * if modulation type is ASK and symbol is 4, signal could have 1 of 4 different amplitudes.
-   *
-   * @generated from field: google.protobuf.Int32Value symbols = 2;
-   */
-  symbols?: number;
-
-  /**
-   * Variations in the time intervals between pulses and the spacing and number of pulses in a series
-   *
-   * @generated from field: string interpulse_modulation = 3;
-   */
-  interpulseModulation: string;
-
-  /**
-   * describes how information is formatted within the signal during transmission
-   *
-   * @generated from field: anduril.entitymanager.v1.Encoding encoding = 4;
-   */
-  encoding?: Encoding;
-};
-
-/**
- * Describes the message anduril.entitymanager.v1.Modulation.
- * Use `create(ModulationSchema)` to create a new message.
- */
-export declare const ModulationSchema: GenMessage<Modulation>;
-
-/**
- * A component that describes the formatting of the information in a signal
- *
- * @generated from message anduril.entitymanager.v1.Encoding
- */
-export declare type Encoding = Message<"anduril.entitymanager.v1.Encoding"> & {
-  /**
-   * rate at which the spreading code is changing
-   * a chip is a pulse of a spread spectrum code. Each data bit is spread across multiple chips (smaller time slots) using a spreading code
-   *
-   * @generated from field: google.protobuf.DoubleValue chip_hop_rate_num_sec = 1;
-   */
-  chipHopRateNumSec?: number;
-
-  /**
-   * time a transmitter remains at a particular frequency before hopping to the next on
-   *
-   * @generated from field: google.protobuf.DoubleValue hop_dwell_time_sec = 2;
-   */
-  hopDwellTimeSec?: number;
-
-  /**
-   * symbols per sec. A symbol is distinct from a bit where one symbol could be composed of multiple bits
-   *
-   * @generated from field: google.protobuf.DoubleValue baud_rate_num_sec = 3;
-   */
-  baudRateNumSec?: number;
-};
-
-/**
- * Describes the message anduril.entitymanager.v1.Encoding.
- * Use `create(EncodingSchema)` to create a new message.
- */
-export declare const EncodingSchema: GenMessage<Encoding>;
 
 /**
  * A component that describes the scanning characteristics of a signal
@@ -462,228 +332,6 @@ export declare type ScanCharacteristics = Message<"anduril.entitymanager.v1.Scan
  * Use `create(ScanCharacteristicsSchema)` to create a new message.
  */
 export declare const ScanCharacteristicsSchema: GenMessage<ScanCharacteristics>;
-
-/**
- * Enumerates the possible modulation types
- *
- * @generated from enum anduril.entitymanager.v1.ModulationType
- */
-export enum ModulationType {
-  /**
-   * @generated from enum value: MODULATION_TYPE_INVALID = 0;
-   */
-  INVALID = 0,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_AMPLITUDE = 1;
-   */
-  AMPLITUDE = 1,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_FREQUENCY = 2;
-   */
-  FREQUENCY = 2,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_PHASE = 3;
-   */
-  PHASE = 3,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_SPACED = 4;
-   */
-  SPACED = 4,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_AMPLITUDE_SHIFT_KEYING = 5;
-   */
-  AMPLITUDE_SHIFT_KEYING = 5,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_FREQUENCY_SHIFT_KEYING = 6;
-   */
-  FREQUENCY_SHIFT_KEYING = 6,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_PHASE_SHIFT_KEYING = 7;
-   */
-  PHASE_SHIFT_KEYING = 7,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_MINIMUM_SHIFT_KEYING = 8;
-   */
-  MINIMUM_SHIFT_KEYING = 8,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_MINIMUM_SHIFT_KEYING_GAUSSIAN = 9;
-   */
-  MINIMUM_SHIFT_KEYING_GAUSSIAN = 9,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_SINGLE_SIDE_BAND_UPPER = 10;
-   */
-  SINGLE_SIDE_BAND_UPPER = 10,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_SINGLE_SIDE_BAND_LOWER = 11;
-   */
-  SINGLE_SIDE_BAND_LOWER = 11,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_SINGLE_SIDE_BAND_FULL_CARRIER = 12;
-   */
-  SINGLE_SIDE_BAND_FULL_CARRIER = 12,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_SINGLE_SIDE_BAND_SUPPRESSED_CARRIER = 13;
-   */
-  SINGLE_SIDE_BAND_SUPPRESSED_CARRIER = 13,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_SINGLE_SIDE_BAND_REDUCED_CARRIER = 14;
-   */
-  SINGLE_SIDE_BAND_REDUCED_CARRIER = 14,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_SINGLE_SIDE_BAND_WITHOUT_CARRIER = 15;
-   */
-  SINGLE_SIDE_BAND_WITHOUT_CARRIER = 15,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DUAL_SIDE_BAND_FULL_CARRIER = 16;
-   */
-  DUAL_SIDE_BAND_FULL_CARRIER = 16,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DUAL_SIDE_BAND_SUPPRESSED_CARRIER = 17;
-   */
-  DUAL_SIDE_BAND_SUPPRESSED_CARRIER = 17,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DUAL_SIDE_BAND_REDUCED_CARRIER = 18;
-   */
-  DUAL_SIDE_BAND_REDUCED_CARRIER = 18,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DUAL_SIDE_BAND_WITHOUT_CARRIER = 19;
-   */
-  DUAL_SIDE_BAND_WITHOUT_CARRIER = 19,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_INDEPENDENT_SIDE_BAND = 20;
-   */
-  INDEPENDENT_SIDE_BAND = 20,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_VESTIGIAL_SIDE_BAND = 21;
-   */
-  VESTIGIAL_SIDE_BAND = 21,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_ON_OFF_KEYING = 22;
-   */
-  ON_OFF_KEYING = 22,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_MULTI_FREQUENCY_SHIFT_KEYING = 23;
-   */
-  MULTI_FREQUENCY_SHIFT_KEYING = 23,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_AUDIO_FREQUENCY_SHIFT_KEYING = 24;
-   */
-  AUDIO_FREQUENCY_SHIFT_KEYING = 24,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_CONTINUOUS_PHASE_FREQUENCY_SHIFT_KEYING = 25;
-   */
-  CONTINUOUS_PHASE_FREQUENCY_SHIFT_KEYING = 25,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_C_PHASE_SHIFT_KEYING = 26;
-   */
-  C_PHASE_SHIFT_KEYING = 26,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DIFFERENTIALLY_ENCODED_BINARY_PHASE_SHIFT_KEYING = 27;
-   */
-  DIFFERENTIALLY_ENCODED_BINARY_PHASE_SHIFT_KEYING = 27,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DIFFERENTIALLY_ENCODED_QUADRATURE_PHASE_SHIFT_KEYING = 28;
-   */
-  DIFFERENTIALLY_ENCODED_QUADRATURE_PHASE_SHIFT_KEYING = 28,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_OFFSET_QUADRATURE_PHASE_SHIFT_KEYING = 29;
-   */
-  OFFSET_QUADRATURE_PHASE_SHIFT_KEYING = 29,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DIFFERENTIAL_PHASE_SHIFT_KEYING = 30;
-   */
-  DIFFERENTIAL_PHASE_SHIFT_KEYING = 30,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_PI_4_QUADRATURE_PHASE_SHIFT_KEYING = 31;
-   */
-  PI_4_QUADRATURE_PHASE_SHIFT_KEYING = 31,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_STACKED_OVERLAPPING_QUADRATURE_PHASE_SHIFT_KEYING = 32;
-   */
-  STACKED_OVERLAPPING_QUADRATURE_PHASE_SHIFT_KEYING = 32,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_F_QUADRATURE_PHASE_SHIFT_KEYING = 33;
-   */
-  F_QUADRATURE_PHASE_SHIFT_KEYING = 33,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_QUADRATURE_AMPLITUDE_ANALOG = 34;
-   */
-  QUADRATURE_AMPLITUDE_ANALOG = 34,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_QUADRATURE_AMPLITUDE_DIGITAL = 35;
-   */
-  QUADRATURE_AMPLITUDE_DIGITAL = 35,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_CONTINUOUS_PHASE = 36;
-   */
-  CONTINUOUS_PHASE = 36,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_PULSE_POSITION = 37;
-   */
-  PULSE_POSITION = 37,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_TRELLIS_CODE = 38;
-   */
-  TRELLIS_CODE = 38,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_ORTHOGONAL_FREQUENCY_DIVISION_MULTIPLEXING = 39;
-   */
-  ORTHOGONAL_FREQUENCY_DIVISION_MULTIPLEXING = 39,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_FREQUENCY_HOPPING_SPREAD_SPECTRUM = 40;
-   */
-  FREQUENCY_HOPPING_SPREAD_SPECTRUM = 40,
-
-  /**
-   * @generated from enum value: MODULATION_TYPE_DIGITAL_SEQUENCE_SPREAD_SPECTRUM = 41;
-   */
-  DIGITAL_SEQUENCE_SPREAD_SPECTRUM = 41,
-}
-
-/**
- * Describes the enum anduril.entitymanager.v1.ModulationType.
- */
-export declare const ModulationTypeSchema: GenEnum<ModulationType>;
 
 /**
  * Enumerates the possible scan types

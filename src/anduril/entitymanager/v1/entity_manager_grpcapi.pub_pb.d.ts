@@ -23,7 +23,7 @@ export declare type PublishEntityRequest = Message<"anduril.entitymanager.v1.Pub
    * Sends an entity object to publish.
    * Required fields:
    *   * expiry_time. This must be in the future, but less than 30 days from now.
-   *   * provenance.data_type. If using the deprecated provenance.source, migrate to data_type.
+   *   * provenance.data_type.
    *   * provenance.source_update_time. This can be earlier than the RPC call if the data entered is older.
    *   * aliases.name
    *   * ontology.template
@@ -61,7 +61,7 @@ export declare type PublishEntitiesRequest = Message<"anduril.entitymanager.v1.P
    * Sends a stream of entity objects to publish.
    * Each entity requires the following fields:
    *   * expiry_time. This must be in the future, but less than 30 days from now.
-   *   * provenance.data_type. If using the deprecated provenance.source, migrate to data_type.
+   *   * provenance.data_type.
    *   * provenance.source_update_time. This can be earlier than the RPC call if the data entered is older.
    *   * aliases.name
    *   * ontology.template
@@ -100,7 +100,7 @@ export declare const PublishEntitiesResponseSchema: GenMessage<PublishEntitiesRe
  */
 export declare type GetEntityRequest = Message<"anduril.entitymanager.v1.GetEntityRequest"> & {
   /**
-   * the GUID of this entity to query
+   * The GUID of this entity to query.
    *
    * @generated from field: string entity_id = 1;
    */
@@ -118,7 +118,7 @@ export declare const GetEntityRequestSchema: GenMessage<GetEntityRequest>;
  */
 export declare type GetEntityResponse = Message<"anduril.entitymanager.v1.GetEntityResponse"> & {
   /**
-   * an Entity object that corresponds with the requested entityId
+   * An Entity object that corresponds with the requested entityId.
    *
    * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
    */
@@ -136,7 +136,7 @@ export declare const GetEntityResponseSchema: GenMessage<GetEntityResponse>;
  */
 export declare type OverrideEntityRequest = Message<"anduril.entitymanager.v1.OverrideEntityRequest"> & {
   /**
-   * The entity containing the overwritten fields. The service will extract the overridable fields from the entity
+   * The entity containing the overridden fields. The service will extract the overridable fields from the entity
    * object and ignore any other fields.
    *
    * @generated from field: anduril.entitymanager.v1.Entity entity = 1;
@@ -152,7 +152,7 @@ export declare type OverrideEntityRequest = Message<"anduril.entitymanager.v1.Ov
   fieldPath: string[];
 
   /**
-   * Additional information about the source of the override
+   * Additional information about the source of the override.
    *
    * @generated from field: anduril.entitymanager.v1.Provenance provenance = 3;
    */
@@ -188,7 +188,7 @@ export declare const OverrideEntityResponseSchema: GenMessage<OverrideEntityResp
  */
 export declare type RemoveEntityOverrideRequest = Message<"anduril.entitymanager.v1.RemoveEntityOverrideRequest"> & {
   /**
-   * The entity ID that the override will be removed from
+   * The entity ID that the override will be removed from.
    *
    * @generated from field: string entity_id = 1;
    */
@@ -227,7 +227,7 @@ export declare const RemoveEntityOverrideResponseSchema: GenMessage<RemoveEntity
  */
 export declare type StreamEntityComponentsRequest = Message<"anduril.entitymanager.v1.StreamEntityComponentsRequest"> & {
   /**
-   * lower_snake_cased component names to include in response events, e.g. location. Only included components will
+   * lower_snake_case component names to include in response events, e.g. location. Only included components will
    * populate.
    *
    * @generated from field: repeated string components_to_include = 1;
@@ -235,7 +235,7 @@ export declare type StreamEntityComponentsRequest = Message<"anduril.entitymanag
   componentsToInclude: string[];
 
   /**
-   * subscribe to all components. This should only be used in cases where you want all components.
+   * Subscribe to all components. This should only be used in cases where you want all components.
    * Setting both components_to_include and include_all_components is invalid and will be rejected.
    *
    * @generated from field: bool include_all_components = 2;
@@ -252,7 +252,7 @@ export declare type StreamEntityComponentsRequest = Message<"anduril.entitymanag
   filter?: Statement;
 
   /**
-   * optional rate-limiting / down-sampling parameters, see RateLimit message for details.
+   * Optional rate-limiting / down-sampling parameters, see RateLimit message for details.
    *
    * @generated from field: anduril.entitymanager.v1.RateLimit rate_limit = 4;
    */
@@ -267,7 +267,7 @@ export declare type StreamEntityComponentsRequest = Message<"anduril.entitymanag
   heartbeatPeriodMillis: number;
 
   /**
-   * subscribe to a finite stream of preexisting events which closes when there are no additional pre-existing events to
+   * Subscribe to a finite stream of preexisting events which closes when there are no additional pre-existing events to
    * process. Respects the filter specified on the StreamEntityComponentsRequest.
    *
    * @generated from field: bool preexisting_only = 6;
@@ -405,9 +405,9 @@ export enum EventType {
 export declare const EventTypeSchema: GenEnum<EventType>;
 
 /**
- * Entity Manager manages the lifecycle of the entities that comprise the common operational picture.
+ * Entity Manager manages the lifecycle of the entities that comprise the common operational picture (COP).
  *
- * Every object in a battle space is represented as an "Entity". Each Entity is essentially an ID, with a lifecycle
+ * Every object in the COP is represented as an "Entity." Each Entity is essentially an ID, with a lifecycle
  * and a collection of data components. Each data component is a separate protobuf message definition.
  *
  * Entity Manager provides a way to query the currently live set of entities within a set of filter constraints,
@@ -417,10 +417,11 @@ export declare const EventTypeSchema: GenEnum<EventType>;
  */
 export declare const EntityManagerAPI: GenService<{
   /**
-   * Publishes an entity for ingestion by Entity Manager. You "own" the entity you create using PublishEntity;
-   * other sources, such as the UI, may not edit or delete these entities.
-   * When called, PublishEntity validates the entity and returns an error if the entity is invalid. We recommend using PublishEntity to publish high- or
-   * low-update rate entities.
+   * Create or update an entity and get a response confirming whether the Entity Manager API succesfully processes
+   * the entity. Ideal for testing environments.
+   * When publishing an entity, only your integration can modify or delete that entity; other sources, such as the
+   * UI or other integrations, can't. If you're pushing entity updates so fast that your publish task can't keep
+   * up with your update rate (a rough estimate of >= 1 Hz), use the PublishEntities request instead.
    *
    * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.PublishEntity
    */
@@ -430,9 +431,13 @@ export declare const EntityManagerAPI: GenService<{
     output: typeof PublishEntityResponseSchema;
   },
   /**
-   * Creates or updates one or more entities. You "own" the entity you create using PublishEntities; other sources may not edit or delete these entities.
-   * Note that PublishEntities doesn't return error messages for invalid entities or provide any other feedback from the server. We recommend using PublishEntity instead.
-   * We only recommend switching to PublishEntities if you publish at an extremely high rate and find that waiting for a response from the server causes your publishing task to fall behind.
+   * Create or update one or more entities rapidly using PublishEntities, which doesn't return error messages
+   * for invalid entities or provide server feedback. When publishing entities, only your integration can
+   * modify or delete those entities; other sources, such as the UI or other integrations, can't.
+   * When you use PublishEntities, you gain higher throughput at the expense of receiving no server responses or
+   * validation. In addition, due to gRPC stream mechanics, you risk losing messages queued on the outgoing gRPC
+   * buffer if the stream connection is lost prior to the messages being sent. If you need validation responses,
+   * are developing in testing environments, or have lower entity update rates, use PublishEntity.
    *
    * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.PublishEntities
    */
@@ -442,7 +447,7 @@ export declare const EntityManagerAPI: GenService<{
     output: typeof PublishEntitiesResponseSchema;
   },
   /**
-   * Get a entity based on an entityId.
+   * Get an entity using its entityId.
    *
    * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.GetEntity
    */
@@ -475,7 +480,7 @@ export declare const EntityManagerAPI: GenService<{
     output: typeof RemoveEntityOverrideResponseSchema;
   },
   /**
-   * Returns a stream of entity with specified components populated.
+   * Returns a stream of entities with specified components populated.
    *
    * @generated from rpc anduril.entitymanager.v1.EntityManagerAPI.StreamEntityComponents
    */

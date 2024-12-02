@@ -2,10 +2,10 @@
 // @generated from file anduril/entitymanager/v1/supplies.pub.proto (package anduril.entitymanager.v1, syntax proto3)
 /* eslint-disable */
 
-import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
+import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv1";
 import type { Message } from "@bufbuild/protobuf";
-import type { Classification } from "./classification.pub_pb.js";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import type { Classification } from "./classification.pub_pb.js";
 
 /**
  * Describes the file anduril/entitymanager/v1/supplies.pub.proto.
@@ -19,11 +19,6 @@ export declare const file_anduril_entitymanager_v1_supplies_pub: GenFile;
  */
 export declare type Supplies = Message<"anduril.entitymanager.v1.Supplies"> & {
   /**
-   * @generated from field: repeated anduril.entitymanager.v1.Munition munitions = 1;
-   */
-  munitions: Munition[];
-
-  /**
    * @generated from field: repeated anduril.entitymanager.v1.Fuel fuel = 2;
    */
   fuel: Fuel[];
@@ -34,72 +29,6 @@ export declare type Supplies = Message<"anduril.entitymanager.v1.Supplies"> & {
  * Use `create(SuppliesSchema)` to create a new message.
  */
 export declare const SuppliesSchema: GenMessage<Supplies>;
-
-/**
- * Munition describes an entity's munitions stores of a similar condition, classification, and quantity
- *
- * @generated from message anduril.entitymanager.v1.Munition
- */
-export declare type Munition = Message<"anduril.entitymanager.v1.Munition"> & {
-  /**
-   * unique munition identifier (for the DoD would be called a munition code). It may be possible munitions with the same identifier
-   * but different condition codes or quantities (e.g., qty 4 in condition A but qty 2 in condition F) to be included in the
-   * repeated munitions field of the supplies message.
-   *
-   * @generated from field: string munition_id = 1;
-   */
-  munitionId: string;
-
-  /**
-   * long form name of the munition
-   *
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  /**
-   * condition of the munitions (maintained as a "oneof" condition to accommodate future non-DoD specific condition identifiers)
-   *
-   * @generated from oneof anduril.entitymanager.v1.Munition.condition
-   */
-  condition: {
-    /**
-     * status of the munition (U.S. DoD Specific)
-     *
-     * @generated from field: anduril.entitymanager.v1.DODConditionCode dod_condition_code = 3;
-     */
-    value: DODConditionCode;
-    case: "dodConditionCode";
-  } | { case: undefined; value?: undefined };
-
-  /**
-   * number of units
-   *
-   * @generated from field: uint32 quantity_units = 4;
-   */
-  quantityUnits: number;
-
-  /**
-   * munitions in a single asset may have different levels of classification
-   * use case: nukes on ballistic missile submarine may be TS/SCI while torpedoes may be SECRET
-   *
-   * @generated from field: anduril.entitymanager.v1.Classification data_classification = 5;
-   */
-  dataClassification?: Classification;
-
-  /**
-   * source of information
-   *
-   * @generated from field: string data_source = 6;
-   */
-  dataSource: string;
-};
-
-/**
- * Describes the message anduril.entitymanager.v1.Munition.
- * Use `create(MunitionSchema)` to create a new message.
- */
-export declare const MunitionSchema: GenMessage<Munition>;
 
 /**
  * Fuel describes an entity's repository of fuels stores including current amount, operational requirements, and maximum authorized capacity
@@ -170,162 +99,4 @@ export declare type Fuel = Message<"anduril.entitymanager.v1.Fuel"> & {
  * Use `create(FuelSchema)` to create a new message.
  */
 export declare const FuelSchema: GenMessage<Fuel>;
-
-/**
- * DOD Condition Codes as documented: DLM 4000.25, Volume 2, April 09, 2022 Change 14. located at https://www.dla.mil/Defense-Data-Standards/Publications/Appendices/
- * Please refer to the DLM reference for more details about each condition code
- *
- * @generated from enum anduril.entitymanager.v1.DODConditionCode
- */
-export enum DODConditionCode {
-  /**
-   * @generated from enum value: DOD_CONDITION_CODE_INVALID = 0;
-   */
-  DOD_CONDITION_CODE_INVALID = 0,
-
-  /**
-   * Serviceable issuable without qualification (i.e., ready for use)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_A = 1;
-   */
-  DOD_CONDITION_CODE_A = 1,
-
-  /**
-   * Serviceable issuable with qualification  (e.g., limited shelf life)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_B = 2;
-   */
-  DOD_CONDITION_CODE_B = 2,
-
-  /**
-   * Serviceable priority issue (i.e., use before A or B)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_C = 3;
-   */
-  DOD_CONDITION_CODE_C = 3,
-
-  /**
-   * Serviceable (requires test or modification)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_D = 4;
-   */
-  DOD_CONDITION_CODE_D = 4,
-
-  /**
-   * Unserviceable but limited restoration required
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_E = 5;
-   */
-  DOD_CONDITION_CODE_E = 5,
-
-  /**
-   * Unserviceable Repairable (i.e., requires repair before ready for use)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_F = 6;
-   */
-  DOD_CONDITION_CODE_F = 6,
-
-  /**
-   * Unserviceable Incomplete (needs add't parts)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_G = 7;
-   */
-  DOD_CONDITION_CODE_G = 7,
-
-  /**
-   * Unserviceable (Condemned; requires classification or analysis)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_H = 8;
-   */
-  DOD_CONDITION_CODE_H = 8,
-
-  /**
-   * Suspended (Product Deficiency)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_Q = 9;
-   */
-  DOD_CONDITION_CODE_Q = 9,
-
-  /**
-   * Scrap. Materiel that has no value except for its basic materiel content
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_S = 10;
-   */
-  DOD_CONDITION_CODE_S = 10,
-
-  /**
-   * Suspended (In Stock; requires classification or analysis)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_J = 11;
-   */
-  DOD_CONDITION_CODE_J = 11,
-
-  /**
-   * Suspended (Returns)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_K = 12;
-   */
-  DOD_CONDITION_CODE_K = 12,
-
-  /**
-   * Suspended (Litigation)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_L = 13;
-   */
-  DOD_CONDITION_CODE_L = 13,
-
-  /**
-   * Suspended (In work; undergoing maintenance)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_M = 14;
-   */
-  DOD_CONDITION_CODE_M = 14,
-
-  /**
-   * Suspended (Ammunition Suitable for Emergency Combat Use Only)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_N = 15;
-   */
-  DOD_CONDITION_CODE_N = 15,
-
-  /**
-   * Unserviceable (Contains parts that could be reclaimed)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_P = 16;
-   */
-  DOD_CONDITION_CODE_P = 16,
-
-  /**
-   * Suspended (Reclaimed items, awaiting condition determination)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_R = 17;
-   */
-  DOD_CONDITION_CODE_R = 17,
-
-  /**
-   * Serviceable (Ammunition Suitable for Training Use Only)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_T = 18;
-   */
-  DOD_CONDITION_CODE_T = 18,
-
-  /**
-   * Unserviceable (waste military munitions)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_V = 19;
-   */
-  DOD_CONDITION_CODE_V = 19,
-
-  /**
-   * Suspended (repair decision delayed)
-   *
-   * @generated from enum value: DOD_CONDITION_CODE_X = 20;
-   */
-  DOD_CONDITION_CODE_X = 20,
-}
-
-/**
- * Describes the enum anduril.entitymanager.v1.DODConditionCode.
- */
-export declare const DODConditionCodeSchema: GenEnum<DODConditionCode>;
 

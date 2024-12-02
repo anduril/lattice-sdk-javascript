@@ -13,7 +13,7 @@ import type { Entity } from "../../entitymanager/v1/entity.pub_pb.js";
 export declare const file_anduril_taskmanager_v1_task_pub: GenFile;
 
 /**
- * A Task is something an agent can be asked to do within a battle space, typically against a given objective.
+ * A Task is something an agent can be asked to do.
  *
  * @generated from message anduril.taskmanager.v1.Task
  */
@@ -592,7 +592,7 @@ export declare type Team = Message<"anduril.taskmanager.v1.Team"> & {
 export declare const TeamSchema: GenMessage<Team>;
 
 /**
- * Represents an Agent on the Battlespace.
+ * Represents an Agent in the COP.
  *
  * @generated from message anduril.taskmanager.v1.Agent
  */
