@@ -1,0 +1,15 @@
+This file was generated with the generate-license-file npm package!
+https://www.npmjs.com/package/generate-license-file
+
+The following npm package may be included in this product:
+
+ - @bufbuild/protobuf@2.2.2
+
+This package contains the following license:
+
+(Apache-2.0 AND BSD-3-Clause)
+
+-----------
+
+This file was generated with the generate-license-file npm package!
+https://www.npmjs.com/package/generate-license-file
