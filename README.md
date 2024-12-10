@@ -27,4 +27,4 @@ yarn add @anduril-industries/lattice-sdk
 
 ## Support
 
-For support with this library please [file an issue](https://github.com/anduril/lattice-sdk-javascript/issues/new) or reach out to your Anduril representative. 
+For support with this library please reach out to your Anduril representative. 
