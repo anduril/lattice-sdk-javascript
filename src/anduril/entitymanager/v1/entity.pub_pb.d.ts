@@ -150,7 +150,7 @@ export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
   milView?: MilView;
 
   /**
-   * A standardized representation of the entity.
+   * Ontology defines an entity's categorization in Lattice, and improves data retrieval and integration. Builds a standardized representation of the entity.
    *
    * @generated from field: anduril.entitymanager.v1.Ontology ontology = 11;
    */

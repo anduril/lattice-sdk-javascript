@@ -35,14 +35,11 @@ export declare const TaskCatalogSchema: GenMessage<TaskCatalog>;
  */
 export declare type TaskDefinition = Message<"anduril.tasks.v2.TaskDefinition"> & {
   /**
+   * Url path must be prefixed with `type.googleapis.com/`.
+   *
    * @generated from field: string task_specification_url = 1;
    */
   taskSpecificationUrl: string;
-
-  /**
-   * @generated from field: string display_name = 2;
-   */
-  displayName: string;
 };
 
 /**
