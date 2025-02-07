@@ -2,13 +2,13 @@
 // @generated from file anduril/entitymanager/v1/group.pub.proto (package anduril.entitymanager.v1, syntax proto3)
 /* eslint-disable */
 
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv1";
+import { enumDesc, fileDesc, messageDesc, tsEnum } from "@bufbuild/protobuf/codegenv1";
 
 /**
  * Describes the file anduril/entitymanager/v1/group.pub.proto.
  */
 export const file_anduril_entitymanager_v1_group_pub = /*@__PURE__*/
-  fileDesc("CihhbmR1cmlsL2VudGl0eW1hbmFnZXIvdjEvZ3JvdXAucHViLnByb3RvEhhhbmR1cmlsLmVudGl0eW1hbmFnZXIudjEiDgoMR3JvdXBEZXRhaWxzQv4BChxjb20uYW5kdXJpbC5lbnRpdHltYW5hZ2VyLnYxQg1Hcm91cFB1YlByb3RvUAFaTWdoZS5hbmR1cmlsLmRldi9hbmR1cmlsL2FuZHVyaWxhcGlzLWdvL2FuZHVyaWwvZW50aXR5bWFuYWdlci92MTtlbnRpdHltYW5hZ2VyogIDQUVYqgIYQW5kdXJpbC5FbnRpdHltYW5hZ2VyLlYxygIYQW5kdXJpbFxFbnRpdHltYW5hZ2VyXFYx4gIkQW5kdXJpbFxFbnRpdHltYW5hZ2VyXFYxXEdQQk1ldGFkYXRh6gIaQW5kdXJpbDo6RW50aXR5bWFuYWdlcjo6VjFiBnByb3RvMw");
+  fileDesc("CihhbmR1cmlsL2VudGl0eW1hbmFnZXIvdjEvZ3JvdXAucHViLnByb3RvEhhhbmR1cmlsLmVudGl0eW1hbmFnZXIudjEiUgoMR3JvdXBEZXRhaWxzEjQKB2VjaGVsb24YAyABKAsyIS5hbmR1cmlsLmVudGl0eW1hbmFnZXIudjEuRWNoZWxvbkgAQgwKCmdyb3VwX3R5cGUiWAoHRWNoZWxvbhI9Cgxhcm15X2VjaGVsb24YASABKA4yJS5hbmR1cmlsLmVudGl0eW1hbmFnZXIudjEuQXJteUVjaGVsb25IAEIOCgxlY2hlbG9uX3R5cGUqqgIKC0FybXlFY2hlbG9uEhgKFEFSTVlfRUNIRUxPTl9JTlZBTElEEAASGgoWQVJNWV9FQ0hFTE9OX0ZJUkVfVEVBTRABEhYKEkFSTVlfRUNIRUxPTl9TUVVBRBACEhgKFEFSTVlfRUNIRUxPTl9QTEFUT09OEAMSGAoUQVJNWV9FQ0hFTE9OX0NPTVBBTlkQBBIaChZBUk1ZX0VDSEVMT05fQkFUVEFMSU9OEAUSGQoVQVJNWV9FQ0hFTE9OX1JFR0lNRU5UEAYSGAoUQVJNWV9FQ0hFTE9OX0JSSUdBREUQBxIZChVBUk1ZX0VDSEVMT05fRElWSVNJT04QCBIWChJBUk1ZX0VDSEVMT05fQ09SUFMQCRIVChFBUk1ZX0VDSEVMT05fQVJNWRAKQv4BChxjb20uYW5kdXJpbC5lbnRpdHltYW5hZ2VyLnYxQg1Hcm91cFB1YlByb3RvUAFaTWdoZS5hbmR1cmlsLmRldi9hbmR1cmlsL2FuZHVyaWxhcGlzLWdvL2FuZHVyaWwvZW50aXR5bWFuYWdlci92MTtlbnRpdHltYW5hZ2VyogIDQUVYqgIYQW5kdXJpbC5FbnRpdHltYW5hZ2VyLlYxygIYQW5kdXJpbFxFbnRpdHltYW5hZ2VyXFYx4gIkQW5kdXJpbFxFbnRpdHltYW5hZ2VyXFYxXEdQQk1ldGFkYXRh6gIaQW5kdXJpbDo6RW50aXR5bWFuYWdlcjo6VjFiBnByb3RvMw");
 
 /**
  * Describes the message anduril.entitymanager.v1.GroupDetails.
@@ -16,4 +16,25 @@ export const file_anduril_entitymanager_v1_group_pub = /*@__PURE__*/
  */
 export const GroupDetailsSchema = /*@__PURE__*/
   messageDesc(file_anduril_entitymanager_v1_group_pub, 0);
+
+/**
+ * Describes the message anduril.entitymanager.v1.Echelon.
+ * Use `create(EchelonSchema)` to create a new message.
+ */
+export const EchelonSchema = /*@__PURE__*/
+  messageDesc(file_anduril_entitymanager_v1_group_pub, 1);
+
+/**
+ * Describes the enum anduril.entitymanager.v1.ArmyEchelon.
+ */
+export const ArmyEchelonSchema = /*@__PURE__*/
+  enumDesc(file_anduril_entitymanager_v1_group_pub, 0);
+
+/**
+ * Military units defined by the Army.
+ *
+ * @generated from enum anduril.entitymanager.v1.ArmyEchelon
+ */
+export const ArmyEchelon = /*@__PURE__*/
+  tsEnum(ArmyEchelonSchema);
 

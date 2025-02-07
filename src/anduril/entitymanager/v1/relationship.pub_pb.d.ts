@@ -97,6 +97,12 @@ export declare type RelationshipType = Message<"anduril.entitymanager.v1.Relatio
      */
     value: MergedFrom;
     case: "mergedFrom";
+  } | {
+    /**
+     * @generated from field: anduril.entitymanager.v1.ActiveTarget active_target = 7;
+     */
+    value: ActiveTarget;
+    case: "activeTarget";
   } | { case: undefined; value?: undefined };
 };
 
@@ -181,4 +187,19 @@ export declare type MergedFrom = Message<"anduril.entitymanager.v1.MergedFrom"> 
  * Use `create(MergedFromSchema)` to create a new message.
  */
 export declare const MergedFromSchema: GenMessage<MergedFrom>;
+
+/**
+ * A target relationship is the inverse of TrackedBy; a one-way relation
+ * from sensor to target, indicating track(s) currently prioritized by a robot.
+ *
+ * @generated from message anduril.entitymanager.v1.ActiveTarget
+ */
+export declare type ActiveTarget = Message<"anduril.entitymanager.v1.ActiveTarget"> & {
+};
+
+/**
+ * Describes the message anduril.entitymanager.v1.ActiveTarget.
+ * Use `create(ActiveTargetSchema)` to create a new message.
+ */
+export declare const ActiveTargetSchema: GenMessage<ActiveTarget>;
 
