@@ -26,9 +26,10 @@ export declare type Task = Message<"anduril.taskmanager.v1.Task"> & {
   version?: TaskVersion;
 
   /**
-   * Human readable display name for this Task, should be short (<100 chars).
+   * DEPRECATED: Human readable display name for this Task, should be short (<100 chars).
    *
-   * @generated from field: string display_name = 2;
+   * @generated from field: string display_name = 2 [deprecated = true];
+   * @deprecated
    */
   displayName: string;
 
