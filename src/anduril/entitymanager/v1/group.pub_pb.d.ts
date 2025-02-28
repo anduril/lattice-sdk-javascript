@@ -21,6 +21,12 @@ export declare type GroupDetails = Message<"anduril.entitymanager.v1.GroupDetail
    */
   groupType: {
     /**
+     * @generated from field: anduril.entitymanager.v1.Team team = 1;
+     */
+    value: Team;
+    case: "team";
+  } | {
+    /**
      * @generated from field: anduril.entitymanager.v1.Echelon echelon = 3;
      */
     value: Echelon;
@@ -33,6 +39,21 @@ export declare type GroupDetails = Message<"anduril.entitymanager.v1.GroupDetail
  * Use `create(GroupDetailsSchema)` to create a new message.
  */
 export declare const GroupDetailsSchema: GenMessage<GroupDetails>;
+
+/**
+ * Describes a Team group type. Comprised of autonomous entities where an entity
+ * in a Team can only be a part of a single Team at a time.
+ *
+ * @generated from message anduril.entitymanager.v1.Team
+ */
+export declare type Team = Message<"anduril.entitymanager.v1.Team"> & {
+};
+
+/**
+ * Describes the message anduril.entitymanager.v1.Team.
+ * Use `create(TeamSchema)` to create a new message.
+ */
+export declare const TeamSchema: GenMessage<Team>;
 
 /**
  * Describes a Echelon group type.  Comprised of entities which are members of the
