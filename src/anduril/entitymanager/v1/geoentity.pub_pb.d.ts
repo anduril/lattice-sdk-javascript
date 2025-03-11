@@ -21,6 +21,23 @@ export declare type GeoDetails = Message<"anduril.entitymanager.v1.GeoDetails"> 
    * @generated from field: anduril.entitymanager.v1.GeoType type = 1;
    */
   type: GeoType;
+
+  /**
+   * @generated from oneof anduril.entitymanager.v1.GeoDetails.type_details
+   */
+  typeDetails: {
+    /**
+     * @generated from field: anduril.entitymanager.v1.ControlAreaDetails control_area = 5;
+     */
+    value: ControlAreaDetails;
+    case: "controlArea";
+  } | {
+    /**
+     * @generated from field: anduril.entitymanager.v1.ACMDetails acm = 6;
+     */
+    value: ACMDetails;
+    case: "acm";
+  } | { case: undefined; value?: undefined };
 };
 
 /**
@@ -28,6 +45,49 @@ export declare type GeoDetails = Message<"anduril.entitymanager.v1.GeoDetails"> 
  * Use `create(GeoDetailsSchema)` to create a new message.
  */
 export declare const GeoDetailsSchema: GenMessage<GeoDetails>;
+
+/**
+ * Determines the type of control area being represented by the geo-entity,
+ * in which an asset can, or cannot, operate.
+ *
+ * @generated from message anduril.entitymanager.v1.ControlAreaDetails
+ */
+export declare type ControlAreaDetails = Message<"anduril.entitymanager.v1.ControlAreaDetails"> & {
+  /**
+   * @generated from field: anduril.entitymanager.v1.ControlAreaType type = 1;
+   */
+  type: ControlAreaType;
+};
+
+/**
+ * Describes the message anduril.entitymanager.v1.ControlAreaDetails.
+ * Use `create(ControlAreaDetailsSchema)` to create a new message.
+ */
+export declare const ControlAreaDetailsSchema: GenMessage<ControlAreaDetails>;
+
+/**
+ * @generated from message anduril.entitymanager.v1.ACMDetails
+ */
+export declare type ACMDetails = Message<"anduril.entitymanager.v1.ACMDetails"> & {
+  /**
+   * @generated from field: anduril.entitymanager.v1.ACMDetailType acm_type = 1;
+   */
+  acmType: ACMDetailType;
+
+  /**
+   * Used for loosely typed associations, such as assignment to a specific fires unit.
+   * Limit to 150 characters.
+   *
+   * @generated from field: string acm_description = 2;
+   */
+  acmDescription: string;
+};
+
+/**
+ * Describes the message anduril.entitymanager.v1.ACMDetails.
+ * Use `create(ACMDetailsSchema)` to create a new message.
+ */
+export declare const ACMDetailsSchema: GenMessage<ACMDetails>;
 
 /**
  * A component that describes the shape of a geo-entity.
@@ -316,10 +376,79 @@ export enum GeoType {
    * @generated from enum value: GEO_TYPE_BULLSEYE = 7;
    */
   BULLSEYE = 7,
+
+  /**
+   * Airspace Coordinating Measure
+   *
+   * @generated from enum value: GEO_TYPE_ACM = 8;
+   */
+  ACM = 8,
 }
 
 /**
  * Describes the enum anduril.entitymanager.v1.GeoType.
  */
 export declare const GeoTypeSchema: GenEnum<GeoType>;
+
+/**
+ * @generated from enum anduril.entitymanager.v1.ControlAreaType
+ */
+export enum ControlAreaType {
+  /**
+   * @generated from enum value: CONTROL_AREA_TYPE_INVALID = 0;
+   */
+  INVALID = 0,
+
+  /**
+   * @generated from enum value: CONTROL_AREA_TYPE_KEEP_IN_ZONE = 1;
+   */
+  KEEP_IN_ZONE = 1,
+
+  /**
+   * @generated from enum value: CONTROL_AREA_TYPE_KEEP_OUT_ZONE = 2;
+   */
+  KEEP_OUT_ZONE = 2,
+
+  /**
+   * The zone for an autonomous asset to nose-dive into
+   * when its assignment has been concluded.
+   *
+   * @generated from enum value: CONTROL_AREA_TYPE_DITCH_ZONE = 3;
+   */
+  DITCH_ZONE = 3,
+
+  /**
+   * The area where an asset is able to loiter.
+   *
+   * @generated from enum value: CONTROL_AREA_TYPE_LOITER_ZONE = 7;
+   */
+  LOITER_ZONE = 7,
+}
+
+/**
+ * Describes the enum anduril.entitymanager.v1.ControlAreaType.
+ */
+export declare const ControlAreaTypeSchema: GenEnum<ControlAreaType>;
+
+/**
+ * @generated from enum anduril.entitymanager.v1.ACMDetailType
+ */
+export enum ACMDetailType {
+  /**
+   * @generated from enum value: ACM_DETAIL_TYPE_INVALID = 0;
+   */
+  ACM_DETAIL_TYPE_INVALID = 0,
+
+  /**
+   * The zone that the autonomous asset is configured to land in.
+   *
+   * @generated from enum value: ACM_DETAIL_TYPE_LANDING_ZONE = 16;
+   */
+  ACM_DETAIL_TYPE_LANDING_ZONE = 16,
+}
+
+/**
+ * Describes the enum anduril.entitymanager.v1.ACMDetailType.
+ */
+export declare const ACMDetailTypeSchema: GenEnum<ACMDetailType>;
 
