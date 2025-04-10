@@ -99,7 +99,7 @@ export enum AltIdType {
   TRACK_REPO_ALERT_ID = 4,
 
   /**
-   * an Anduril AssetId
+   * an Anduril AssetId v2
    *
    * @generated from enum value: ALT_ID_TYPE_ASSET_ID = 5;
    */

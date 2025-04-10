@@ -27,7 +27,7 @@ export declare type CreateTaskRequest = Message<"anduril.taskmanager.v1.CreateTa
   displayName: string;
 
   /**
-   * Full task parameterization, must be a message under anduril/tasks/v*\/.
+   * Full task parameterization.
    *
    * @generated from field: google.protobuf.Any specification = 2;
    */

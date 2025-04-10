@@ -34,7 +34,7 @@ export declare type Task = Message<"anduril.taskmanager.v1.Task"> & {
   displayName: string;
 
   /**
-   * Full Task parameterization, must be a message under anduril/tasks/v*\/
+   * Full Task parameterization.
    *
    * @generated from field: google.protobuf.Any specification = 3;
    */
