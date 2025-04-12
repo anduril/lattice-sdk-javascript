@@ -252,49 +252,40 @@ export enum Template {
   INVALID = 0,
 
   /**
-   * additional track required components:
-   *   * location
-   *   * mil_view
+   * Refers to any detected object.
+   * Requires setting the location, and mil_view components.
    *
    * @generated from enum value: TEMPLATE_TRACK = 1;
    */
   TRACK = 1,
 
   /**
-   * additional SPI required components:
-   *   * location
-   *   * mil_view
-   *   * produced_by
+   * Refers to any sensors detected at a specific location.
+   * Requires setting location, and mil_view.
    *
    * @generated from enum value: TEMPLATE_SENSOR_POINT_OF_INTEREST = 2;
    */
   SENSOR_POINT_OF_INTEREST = 2,
 
   /**
-   * additional asset required components:
-   *   * location
-   *   * mil_view
-   *   * ontology
+   * Refers to a taskable entity under the control of friendly forces.
+   * Requires setting location, and mil_view, and ontology.
    *
    * @generated from enum value: TEMPLATE_ASSET = 3;
    */
   ASSET = 3,
 
   /**
-   * additional geo required components:
-   *   * geo_shape
-   *   * geo_details
+   * Refers to shapes or points of interest drawn on the map.
+   * Requires setting geo_shape and geo_details.
    *
    * @generated from enum value: TEMPLATE_GEO = 4;
    */
   GEO = 4,
 
   /**
-   * additional SOI required components:
-   *   * signal
-   *   * location field should be populated if there is a fix.
-   *   * mil_view
-   *   * ontology
+   * Refers to signal detection with characteristics such as emitter notation, frequency, or lines of bearing.
+   * Requires setting signal, and mil_view, and ontology. Requies setting location, if the signal.fixed component is populated.
    *
    * @generated from enum value: TEMPLATE_SIGNAL_OF_INTEREST = 5;
    */
