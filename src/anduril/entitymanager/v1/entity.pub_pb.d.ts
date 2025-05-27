@@ -16,6 +16,7 @@ import type { LineOfBearing, Signal } from "./signal.pub_pb.js";
 import type { TransponderCodes } from "./transponder_codes.pub_pb.js";
 import type { Classification } from "./classification.pub_pb.js";
 import type { TaskCatalog } from "../../tasks/v2/catalog.pub_pb.js";
+import type { Media } from "./media.pub_pb.js";
 import type { Relationships } from "./relationship.pub_pb.js";
 import type { Dimensions } from "./dimensions.pub_pb.js";
 import type { RouteDetails } from "./route_details.pub_pb.js";
@@ -235,6 +236,13 @@ export declare type Entity = Message<"anduril.entitymanager.v1.Entity"> & {
    * @generated from field: anduril.tasks.v2.TaskCatalog task_catalog = 31;
    */
   taskCatalog?: TaskCatalog;
+
+  /**
+   * Media associated with an entity, such as videos, images, or thumbnails.
+   *
+   * @generated from field: anduril.entitymanager.v1.Media media = 32;
+   */
+  media?: Media;
 
   /**
    * The relationships between this entity and other entities in the common operational picture (COP).

@@ -33,21 +33,12 @@ export declare const MediaSchema: GenMessage<Media>;
  */
 export declare type MediaItem = Message<"anduril.entitymanager.v1.MediaItem"> & {
   /**
-   * To Be Deprecated, use relative_path.
-   * The url where the media related to an entity can be accessed
-   *
-   * @generated from field: string url = 1;
-   */
-  url: string;
-
-  /**
    * @generated from field: anduril.entitymanager.v1.MediaType type = 2;
    */
   type: MediaType;
 
   /**
-   * The relative path where the media related to an entity can be accessed when used to query against a blobs service
-   * node.
+   * The path, relative to the environment base URL, where media related to an entity can be accessed
    *
    * @generated from field: string relative_path = 3;
    */
@@ -70,11 +61,6 @@ export enum MediaType {
   INVALID = 0,
 
   /**
-   * @generated from enum value: MEDIA_TYPE_THUMBNAIL = 1;
-   */
-  THUMBNAIL = 1,
-
-  /**
    * @generated from enum value: MEDIA_TYPE_IMAGE = 2;
    */
   IMAGE = 2,
@@ -83,11 +69,6 @@ export enum MediaType {
    * @generated from enum value: MEDIA_TYPE_VIDEO = 3;
    */
   VIDEO = 3,
-
-  /**
-   * @generated from enum value: MEDIA_TYPE_SLIPPY_TILES = 4;
-   */
-  SLIPPY_TILES = 4,
 }
 
 /**
