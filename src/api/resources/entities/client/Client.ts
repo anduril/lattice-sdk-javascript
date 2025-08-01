@@ -483,19 +483,19 @@ export class Entities {
     }
 
     /**
-     * This SSE API establishes a persistent connection to stream entity events as they occur.
+     * Establishes a persistent connection to stream entity events as they occur.
      */
-    public sseEntityEvents(
+    public streamEntities(
         request: Lattice.EntityStreamRequest = {},
         requestOptions?: Entities.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<Lattice.SseEntityEventsResponse>> {
-        return core.HttpResponsePromise.fromPromise(this.__sseEntityEvents(request, requestOptions));
+    ): core.HttpResponsePromise<core.Stream<Lattice.StreamEntitiesResponse>> {
+        return core.HttpResponsePromise.fromPromise(this.__streamEntities(request, requestOptions));
     }
 
-    private async __sseEntityEvents(
+    private async __streamEntities(
         request: Lattice.EntityStreamRequest = {},
         requestOptions?: Entities.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<Lattice.SseEntityEventsResponse>>> {
+    ): Promise<core.WithRawResponse<core.Stream<Lattice.StreamEntitiesResponse>>> {
         const _response = await core.fetcher<ReadableStream>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??

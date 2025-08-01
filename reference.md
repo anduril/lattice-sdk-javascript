@@ -348,7 +348,7 @@ await client.entities.longPollEntityEvents({
 </dl>
 </details>
 
-<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">sseEntityEvents</a>({ ...params }) -> core.Stream<Lattice.SseEntityEventsResponse></code></summary>
+<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">streamEntities</a>({ ...params }) -> core.Stream<Lattice.StreamEntitiesResponse></code></summary>
 <dl>
 <dd>
 
@@ -360,7 +360,7 @@ await client.entities.longPollEntityEvents({
 <dl>
 <dd>
 
-This SSE API establishes a persistent connection to stream entity events as they occur.
+Establishes a persistent connection to stream entity events as they occur.
 
 </dd>
 </dl>
@@ -376,7 +376,7 @@ This SSE API establishes a persistent connection to stream entity events as they
 <dd>
 
 ```typescript
-const response = await client.entities.sseEntityEvents();
+const response = await client.entities.streamEntities();
 for await (const item of response) {
     console.log(item);
 }

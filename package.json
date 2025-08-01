@@ -1,6 +1,6 @@
 {
     "name": "@anduril-industries/lattice-sdk",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "private": false,
     "repository": "github:anduril/lattice-sdk-javascript",
     "license": "See LICENSE",

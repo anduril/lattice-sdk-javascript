@@ -1,7 +1,9 @@
 export * from "./Timestamp.js";
 export * from "./EntityEventResponse.js";
 export * from "./EntityStreamHeartbeat.js";
+export * from "./HeartbeatObject.js";
 export * from "./EntityStreamEvent.js";
+export * from "./EntityEvent.js";
 export * from "./GoogleProtobufAny.js";
 export * from "./Status.js";
 export * from "./Position.js";
@@ -114,7 +116,6 @@ export * from "./MeanKeplerianElements.js";
 export * from "./TleParameters.js";
 export * from "./OrbitMeanElements.js";
 export * from "./Orbit.js";
-export * from "./EntityEvent.js";
 export * from "./TaskQueryResults.js";
 export * from "./EntityIdsSelector.js";
 export * from "./AgentRequest.js";
