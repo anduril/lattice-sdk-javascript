@@ -1,1 +1,1 @@
-export * from "./SseEntityEventsResponse.js";
+export * from "./StreamEntitiesResponse.js";

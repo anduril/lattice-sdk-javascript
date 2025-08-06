@@ -5,13 +5,11 @@
 import * as Lattice from "../../../index.js";
 
 /**
- * stream event response.
+ * The stream event response.
  */
-export type SseEntityEventsResponse =
-    | Lattice.SseEntityEventsResponse.Heartbeat
-    | Lattice.SseEntityEventsResponse.Entity;
+export type StreamEntitiesResponse = Lattice.StreamEntitiesResponse.Heartbeat | Lattice.StreamEntitiesResponse.Entity;
 
-export namespace SseEntityEventsResponse {
+export namespace StreamEntitiesResponse {
     export interface Heartbeat extends Lattice.EntityStreamHeartbeat {
         event: "heartbeat";
     }
