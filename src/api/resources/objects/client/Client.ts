@@ -228,7 +228,7 @@ export class Objects {
     }
 
     /**
-     * Uploads an object using multiform data. The object must be 1 GiB or smaller.
+     * Uploads an object. The object must be 1 GiB or smaller.
      *
      * @param {core.file.Uploadable} uploadable
      * @param {string} objectPath
