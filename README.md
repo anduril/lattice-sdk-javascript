@@ -1,6 +1,7 @@
 # Lattice SDK TypeScript Library
 
 ![](https://www.anduril.com/lattice-sdk/)
+[![npm shield](https://img.shields.io/npm/v/@anduril-industries/lattice-sdk)](https://www.npmjs.com/package/@anduril-industries/lattice-sdk)
 
 The Lattice SDK TypeScript library provides convenient access to the Lattice API from TypeScript.
 
