@@ -1,8 +1,11 @@
-# Lattice SDK TypeScript Library
+# Anduril TypeScript Library
 
 ![](https://www.anduril.com/lattice-sdk/)
 
-The Lattice SDK TypeScript library provides convenient access to the Lattice API from TypeScript.
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fanduril%2Flattice-sdk-javascript)
+[![npm shield](https://img.shields.io/npm/v/@anduril-industries/lattice-sdk)](https://www.npmjs.com/package/@anduril-industries/lattice-sdk)
+
+The Anduril TypeScript library provides convenient access to the Anduril API from TypeScript.
 
 ## Documentation
 
@@ -534,6 +537,18 @@ while (page.hasNextPage()) {
 
 ## Advanced
 
+### Additional Headers
+
+If you would like to send additional headers as part of the request, use the `headers` request option.
+
+```typescript
+const response = await client.entities.longPollEntityEvents(..., {
+    headers: {
+        'X-Custom-Header': 'custom value'
+    }
+});
+```
+
 ### Retries
 
 The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
@@ -551,6 +566,16 @@ Use the `maxRetries` request option to configure this behavior.
 ```typescript
 const response = await client.entities.longPollEntityEvents(..., {
     maxRetries: 0 // override maxRetries at the request level
+});
+```
+
+### Timeouts
+
+The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
+
+```typescript
+const response = await client.entities.longPollEntityEvents(..., {
+    timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
 
@@ -602,3 +627,13 @@ const client = new LatticeClient({
     fetcher: // provide your implementation here
 });
 ```
+
+## Contributing
+
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!
