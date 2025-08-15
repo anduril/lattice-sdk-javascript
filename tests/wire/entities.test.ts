@@ -17,6 +17,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
@@ -141,6 +142,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: {
                 code: 1,
                 message: "message",
@@ -391,6 +393,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
@@ -514,6 +517,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: {
                 code: 1,
                 message: "message",
@@ -764,6 +768,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
@@ -888,6 +893,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: {
                 code: 1,
                 message: "message",
@@ -1138,6 +1144,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
@@ -1261,6 +1268,7 @@ describe("Entities", () => {
             isLive: true,
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
+            noExpiry: true,
             status: {
                 code: 1,
                 message: "message",
