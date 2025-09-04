@@ -6,6 +6,45 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 import { LatticeClient } from "../../src/Client";
 
 describe("Objects", () => {
+    test("listObjects", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            path_metadatas: [
+                {
+                    content_identifier: { path: "path", checksum: "checksum" },
+                    size_bytes: 1000000,
+                    last_updated_at: "2024-01-15T09:30:00Z",
+                    expiry_time: "2024-01-15T09:30:00Z",
+                },
+            ],
+            next_page_token: "next_page_token",
+        };
+        server.mockEndpoint().get("/api/v1/objects").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const expected = {
+            path_metadatas: [
+                {
+                    content_identifier: {
+                        path: "path",
+                        checksum: "checksum",
+                    },
+                    size_bytes: 1000000,
+                    last_updated_at: "2024-01-15T09:30:00Z",
+                    expiry_time: "2024-01-15T09:30:00Z",
+                },
+            ],
+            next_page_token: "next_page_token",
+        };
+        const page = await client.objects.listObjects();
+        expect(expected.path_metadatas).toEqual(page.data);
+
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.path_metadatas).toEqual(nextPage.data);
+    });
+
     test("deleteObject", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
