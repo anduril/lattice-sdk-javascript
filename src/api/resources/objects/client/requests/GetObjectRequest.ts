@@ -4,9 +4,11 @@
 
 import * as Lattice from "../../../../index.js";
 
+/**
+ * @example
+ *     {}
+ */
 export interface GetObjectRequest {
-    /**
-     * If set, Lattice will compress the response using the specified compression method. If the header is not defined, or the compression method is set to `identity`, no compression will be applied to the response.
-     */
+    /** If set, Lattice will compress the response using the specified compression method. If the header is not defined, or the compression method is set to `identity`, no compression will be applied to the response. */
     "Accept-Encoding"?: Lattice.GetObjectRequestAcceptEncoding;
 }
