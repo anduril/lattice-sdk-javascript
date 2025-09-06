@@ -25,6 +25,8 @@ export declare namespace Tasks {
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
         headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
     }
@@ -64,6 +66,11 @@ export class Tasks {
         request: Lattice.TaskCreation = {},
         requestOptions?: Tasks.RequestOptions,
     ): Promise<core.WithRawResponse<Lattice.Task>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -72,12 +79,9 @@ export class Tasks {
                 "api/v1/tasks",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -139,6 +143,11 @@ export class Tasks {
         taskId: string,
         requestOptions?: Tasks.RequestOptions,
     ): Promise<core.WithRawResponse<Lattice.Task>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -147,11 +156,8 @@ export class Tasks {
                 `api/v1/tasks/${encodeURIComponent(taskId)}`,
             ),
             method: "GET",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -221,6 +227,11 @@ export class Tasks {
         request: Lattice.TaskStatusUpdate = {},
         requestOptions?: Tasks.RequestOptions,
     ): Promise<core.WithRawResponse<Lattice.Task>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -229,12 +240,9 @@ export class Tasks {
                 `api/v1/tasks/${encodeURIComponent(taskId)}/status`,
             ),
             method: "PUT",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -305,6 +313,11 @@ export class Tasks {
         request: Lattice.TaskQuery = {},
         requestOptions?: Tasks.RequestOptions,
     ): Promise<core.WithRawResponse<Lattice.TaskQueryResults>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -313,12 +326,9 @@ export class Tasks {
                 "api/v1/tasks/query",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -388,6 +398,11 @@ export class Tasks {
         request: Lattice.AgentListener = {},
         requestOptions?: Tasks.RequestOptions,
     ): Promise<core.WithRawResponse<Lattice.AgentRequest>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -396,12 +411,9 @@ export class Tasks {
                 "api/v1/agent/listen",
             ),
             method: "POST",
-            headers: mergeHeaders(
-                this._options?.headers,
-                mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-                requestOptions?.headers,
-            ),
+            headers: _headers,
             contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
             requestType: "json",
             body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
