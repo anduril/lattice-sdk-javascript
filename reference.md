@@ -801,6 +801,77 @@ while (page.hasNextPage()) {
 </dl>
 </details>
 
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObject</a>(objectPath, { ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetches an object from your environment using the objectPath path parameter.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.objects.getObject("objectPath");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**objectPath:** `string` — The path of the object to fetch.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Lattice.GetObjectRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Objects.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">deleteObject</a>(objectPath) -> void</code></summary>
 <dl>
 <dd>
