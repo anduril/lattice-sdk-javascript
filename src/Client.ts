@@ -16,7 +16,7 @@ export declare namespace LatticeClient {
         baseUrl?: core.Supplier<string>;
         token?: core.Supplier<core.BearerToken | undefined>;
         /** Additional headers to include in requests. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 
     export interface RequestOptions {
@@ -26,8 +26,10 @@ export declare namespace LatticeClient {
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional query string parameters to include in the request. */
+        queryParams?: Record<string, unknown>;
         /** Additional headers to include in the request. */
-        headers?: Record<string, string | core.Supplier<string | undefined> | undefined>;
+        headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     }
 }
 
@@ -44,8 +46,8 @@ export class LatticeClient {
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@anduril-industries/lattice-sdk",
-                    "X-Fern-SDK-Version": "2.2.0",
-                    "User-Agent": "@anduril-industries/lattice-sdk/2.2.0",
+                    "X-Fern-SDK-Version": "2.3.0",
+                    "User-Agent": "@anduril-industries/lattice-sdk/2.3.0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
