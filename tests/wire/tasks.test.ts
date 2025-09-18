@@ -4,9 +4,10 @@
 
 import { mockServerPool } from "../mock-server/MockServerPool";
 import { LatticeClient } from "../../src/Client";
+import * as Lattice from "../../src/api/index";
 
 describe("Tasks", () => {
-    test("createTask", async () => {
+    test("createTask (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -133,7 +134,89 @@ describe("Tasks", () => {
         });
     });
 
-    test("getTask", async () => {
+    test("createTask (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            taskId: undefined,
+            displayName: undefined,
+            description: undefined,
+            specification: undefined,
+            author: undefined,
+            relations: undefined,
+            isExecutedElsewhere: undefined,
+            initialEntities: undefined,
+        };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.createTask({
+                taskId: undefined,
+                displayName: undefined,
+                description: undefined,
+                specification: undefined,
+                author: undefined,
+                relations: undefined,
+                isExecutedElsewhere: undefined,
+                initialEntities: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("createTask (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            taskId: undefined,
+            displayName: undefined,
+            description: undefined,
+            specification: undefined,
+            author: undefined,
+            relations: undefined,
+            isExecutedElsewhere: undefined,
+            initialEntities: undefined,
+        };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.createTask({
+                taskId: undefined,
+                displayName: undefined,
+                description: undefined,
+                specification: undefined,
+                author: undefined,
+                relations: undefined,
+                isExecutedElsewhere: undefined,
+                initialEntities: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("getTask (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
 
@@ -259,7 +342,73 @@ describe("Tasks", () => {
         });
     });
 
-    test("updateTaskStatus", async () => {
+    test("getTask (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/api/v1/tasks/taskId")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.getTask("taskId");
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("getTask (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/api/v1/tasks/taskId")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.getTask("taskId");
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("getTask (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/api/v1/tasks/taskId")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.getTask("taskId");
+        }).rejects.toThrow(
+            new Lattice.NotFoundError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("updateTaskStatus (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -386,7 +535,88 @@ describe("Tasks", () => {
         });
     });
 
-    test("queryTasks", async () => {
+    test("updateTaskStatus (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { statusVersion: undefined, newStatus: undefined, author: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/tasks/taskId/status")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.updateTaskStatus("taskId", {
+                statusVersion: undefined,
+                newStatus: undefined,
+                author: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("updateTaskStatus (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { statusVersion: undefined, newStatus: undefined, author: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/tasks/taskId/status")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.updateTaskStatus("taskId", {
+                statusVersion: undefined,
+                newStatus: undefined,
+                author: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("updateTaskStatus (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { statusVersion: undefined, newStatus: undefined, author: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/tasks/taskId/status")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.updateTaskStatus("taskId", {
+                statusVersion: undefined,
+                newStatus: undefined,
+                author: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.NotFoundError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("queryTasks (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -430,7 +660,106 @@ describe("Tasks", () => {
         });
     });
 
-    test("listenAsAgent", async () => {
+    test("queryTasks (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            pageToken: undefined,
+            parentTaskId: undefined,
+            statusFilter: undefined,
+            updateTimeRange: undefined,
+        };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.queryTasks({
+                pageToken: undefined,
+                parentTaskId: undefined,
+                statusFilter: undefined,
+                updateTimeRange: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("queryTasks (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            pageToken: undefined,
+            parentTaskId: undefined,
+            statusFilter: undefined,
+            updateTimeRange: undefined,
+        };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.queryTasks({
+                pageToken: undefined,
+                parentTaskId: undefined,
+                statusFilter: undefined,
+                updateTimeRange: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("queryTasks (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            pageToken: undefined,
+            parentTaskId: undefined,
+            statusFilter: undefined,
+            updateTimeRange: undefined,
+        };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.queryTasks({
+                pageToken: undefined,
+                parentTaskId: undefined,
+                statusFilter: undefined,
+                updateTimeRange: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.NotFoundError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("listenAsAgent (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -478,5 +807,55 @@ describe("Tasks", () => {
                 taskId: "taskId",
             },
         });
+    });
+
+    test("listenAsAgent (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { agentSelector: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/agent/listen")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.listenAsAgent({
+                agentSelector: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("listenAsAgent (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { agentSelector: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/agent/listen")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.listenAsAgent({
+                agentSelector: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
     });
 });
