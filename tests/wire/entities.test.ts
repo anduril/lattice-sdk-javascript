@@ -7,7 +7,7 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 
 describe("Entities", () => {
-    test("publishEntity", async () => {
+    test("publishEntity (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -125,6 +125,7 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
+            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -380,10 +381,217 @@ describe("Entities", () => {
             supplies: {
                 fuel: [{}],
             },
+            symbology: {
+                milStd2525C: {
+                    sidc: "sidc",
+                },
+            },
         });
     });
 
-    test("getEntity", async () => {
+    test("publishEntity (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            entityId: undefined,
+            description: undefined,
+            isLive: undefined,
+            createdTime: undefined,
+            expiryTime: undefined,
+            noExpiry: undefined,
+            status: undefined,
+            location: undefined,
+            locationUncertainty: undefined,
+            geoShape: undefined,
+            geoDetails: undefined,
+            aliases: undefined,
+            tracked: undefined,
+            correlation: undefined,
+            milView: undefined,
+            ontology: undefined,
+            sensors: undefined,
+            payloads: undefined,
+            powerState: undefined,
+            provenance: undefined,
+            overrides: undefined,
+            indicators: undefined,
+            targetPriority: undefined,
+            signal: undefined,
+            transponderCodes: undefined,
+            dataClassification: undefined,
+            taskCatalog: undefined,
+            media: undefined,
+            relationships: undefined,
+            visualDetails: undefined,
+            dimensions: undefined,
+            routeDetails: undefined,
+            schedules: undefined,
+            health: undefined,
+            groupDetails: undefined,
+            supplies: undefined,
+            orbit: undefined,
+            symbology: undefined,
+        };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/entities")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.publishEntity({
+                entityId: undefined,
+                description: undefined,
+                isLive: undefined,
+                createdTime: undefined,
+                expiryTime: undefined,
+                noExpiry: undefined,
+                status: undefined,
+                location: undefined,
+                locationUncertainty: undefined,
+                geoShape: undefined,
+                geoDetails: undefined,
+                aliases: undefined,
+                tracked: undefined,
+                correlation: undefined,
+                milView: undefined,
+                ontology: undefined,
+                sensors: undefined,
+                payloads: undefined,
+                powerState: undefined,
+                provenance: undefined,
+                overrides: undefined,
+                indicators: undefined,
+                targetPriority: undefined,
+                signal: undefined,
+                transponderCodes: undefined,
+                dataClassification: undefined,
+                taskCatalog: undefined,
+                media: undefined,
+                relationships: undefined,
+                visualDetails: undefined,
+                dimensions: undefined,
+                routeDetails: undefined,
+                schedules: undefined,
+                health: undefined,
+                groupDetails: undefined,
+                supplies: undefined,
+                orbit: undefined,
+                symbology: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("publishEntity (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            entityId: undefined,
+            description: undefined,
+            isLive: undefined,
+            createdTime: undefined,
+            expiryTime: undefined,
+            noExpiry: undefined,
+            status: undefined,
+            location: undefined,
+            locationUncertainty: undefined,
+            geoShape: undefined,
+            geoDetails: undefined,
+            aliases: undefined,
+            tracked: undefined,
+            correlation: undefined,
+            milView: undefined,
+            ontology: undefined,
+            sensors: undefined,
+            payloads: undefined,
+            powerState: undefined,
+            provenance: undefined,
+            overrides: undefined,
+            indicators: undefined,
+            targetPriority: undefined,
+            signal: undefined,
+            transponderCodes: undefined,
+            dataClassification: undefined,
+            taskCatalog: undefined,
+            media: undefined,
+            relationships: undefined,
+            visualDetails: undefined,
+            dimensions: undefined,
+            routeDetails: undefined,
+            schedules: undefined,
+            health: undefined,
+            groupDetails: undefined,
+            supplies: undefined,
+            orbit: undefined,
+            symbology: undefined,
+        };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/entities")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.publishEntity({
+                entityId: undefined,
+                description: undefined,
+                isLive: undefined,
+                createdTime: undefined,
+                expiryTime: undefined,
+                noExpiry: undefined,
+                status: undefined,
+                location: undefined,
+                locationUncertainty: undefined,
+                geoShape: undefined,
+                geoDetails: undefined,
+                aliases: undefined,
+                tracked: undefined,
+                correlation: undefined,
+                milView: undefined,
+                ontology: undefined,
+                sensors: undefined,
+                payloads: undefined,
+                powerState: undefined,
+                provenance: undefined,
+                overrides: undefined,
+                indicators: undefined,
+                targetPriority: undefined,
+                signal: undefined,
+                transponderCodes: undefined,
+                dataClassification: undefined,
+                taskCatalog: undefined,
+                media: undefined,
+                relationships: undefined,
+                visualDetails: undefined,
+                dimensions: undefined,
+                routeDetails: undefined,
+                schedules: undefined,
+                health: undefined,
+                groupDetails: undefined,
+                supplies: undefined,
+                orbit: undefined,
+                symbology: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("getEntity (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
 
@@ -501,6 +709,7 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
+            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -755,10 +964,81 @@ describe("Entities", () => {
             supplies: {
                 fuel: [{}],
             },
+            symbology: {
+                milStd2525C: {
+                    sidc: "sidc",
+                },
+            },
         });
     });
 
-    test("overrideEntity", async () => {
+    test("getEntity (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/api/v1/entities/entityId")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.getEntity("entityId");
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("getEntity (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/api/v1/entities/entityId")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.getEntity("entityId");
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("getEntity (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .get("/api/v1/entities/entityId")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.getEntity("entityId");
+        }).rejects.toThrow(
+            new Lattice.NotFoundError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("overrideEntity (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -876,6 +1156,7 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
+            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -1131,10 +1412,93 @@ describe("Entities", () => {
             supplies: {
                 fuel: [{}],
             },
+            symbology: {
+                milStd2525C: {
+                    sidc: "sidc",
+                },
+            },
         });
     });
 
-    test("removeEntityOverride", async () => {
+    test("overrideEntity (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { entity: undefined, provenance: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/entities/entityId/override/fieldPath")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.overrideEntity("entityId", "fieldPath", {
+                entity: undefined,
+                provenance: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("overrideEntity (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { entity: undefined, provenance: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/entities/entityId/override/fieldPath")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.overrideEntity("entityId", "fieldPath", {
+                entity: undefined,
+                provenance: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("overrideEntity (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { entity: undefined, provenance: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .put("/api/v1/entities/entityId/override/fieldPath")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.overrideEntity("entityId", "fieldPath", {
+                entity: undefined,
+                provenance: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.NotFoundError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("removeEntityOverride (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
 
@@ -1252,6 +1616,7 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
+            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -1506,10 +1871,81 @@ describe("Entities", () => {
             supplies: {
                 fuel: [{}],
             },
+            symbology: {
+                milStd2525C: {
+                    sidc: "sidc",
+                },
+            },
         });
     });
 
-    test("longPollEntityEvents", async () => {
+    test("removeEntityOverride (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .delete("/api/v1/entities/entityId/override/fieldPath")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("removeEntityOverride (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .delete("/api/v1/entities/entityId/override/fieldPath")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("removeEntityOverride (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .delete("/api/v1/entities/entityId/override/fieldPath")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+        }).rejects.toThrow(
+            new Lattice.NotFoundError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("longPollEntityEvents (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
         const rawRequestBody = { sessionToken: "sessionToken" };
@@ -1538,5 +1974,135 @@ describe("Entities", () => {
                 },
             ],
         });
+    });
+
+    test("longPollEntityEvents (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { sessionToken: "sessionToken", batchSize: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/events")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.longPollEntityEvents({
+                sessionToken: "sessionToken",
+                batchSize: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.BadRequestError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("longPollEntityEvents (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { sessionToken: "sessionToken", batchSize: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/events")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.longPollEntityEvents({
+                sessionToken: "sessionToken",
+                batchSize: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.UnauthorizedError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("longPollEntityEvents (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { sessionToken: "sessionToken", batchSize: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/events")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.longPollEntityEvents({
+                sessionToken: "sessionToken",
+                batchSize: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.NotFoundError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("longPollEntityEvents (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { sessionToken: "sessionToken", batchSize: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/events")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(408)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.longPollEntityEvents({
+                sessionToken: "sessionToken",
+                batchSize: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.RequestTimeoutError({
+                key: "value",
+            }),
+        );
+    });
+
+    test("longPollEntityEvents (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const rawRequestBody = { sessionToken: "sessionToken", batchSize: undefined };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/events")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.entities.longPollEntityEvents({
+                sessionToken: "sessionToken",
+                batchSize: undefined,
+            });
+        }).rejects.toThrow(
+            new Lattice.TooManyRequestsError({
+                key: "value",
+            }),
+        );
     });
 });

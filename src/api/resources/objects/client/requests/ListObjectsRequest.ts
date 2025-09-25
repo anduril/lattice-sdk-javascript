@@ -4,23 +4,20 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         prefix: "prefix",
+ *         sinceTimestamp: "2024-01-15T09:30:00Z",
+ *         pageToken: "pageToken",
+ *         allObjectsInMesh: true
+ *     }
  */
 export interface ListObjectsRequest {
-    /**
-     * Filters the objects based on the specified prefix path. If no path is specified, all objects are returned.
-     */
+    /** Filters the objects based on the specified prefix path. If no path is specified, all objects are returned. */
     prefix?: string;
-    /**
-     * Sets the age for the oldest objects to query across the environment.
-     */
+    /** Sets the age for the oldest objects to query across the environment. */
     sinceTimestamp?: string;
-    /**
-     * Base64 and URL-encoded cursor returned by the service to continue paging.
-     */
+    /** Base64 and URL-encoded cursor returned by the service to continue paging. */
     pageToken?: string;
-    /**
-     * Lists objects across all environment nodes in a Lattice Mesh.
-     */
+    /** Lists objects across all environment nodes in a Lattice Mesh. */
     allObjectsInMesh?: boolean;
 }

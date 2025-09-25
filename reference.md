@@ -757,13 +757,23 @@ Lists objects in your environment. You can define a prefix to list a subset of y
 <dd>
 
 ```typescript
-const response = await client.objects.listObjects();
+const response = await client.objects.listObjects({
+    prefix: "prefix",
+    sinceTimestamp: "2024-01-15T09:30:00Z",
+    pageToken: "pageToken",
+    allObjectsInMesh: true,
+});
 for await (const item of response) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.objects.listObjects();
+let page = await client.objects.listObjects({
+    prefix: "prefix",
+    sinceTimestamp: "2024-01-15T09:30:00Z",
+    pageToken: "pageToken",
+    allObjectsInMesh: true,
+});
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -783,6 +793,77 @@ while (page.hasNextPage()) {
 <dd>
 
 **request:** `Lattice.ListObjectsRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Objects.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObject</a>(objectPath, { ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Fetches an object from your environment using the objectPath path parameter.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.objects.getObject("objectPath");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**objectPath:** `string` — The path of the object to fetch.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Lattice.GetObjectRequest`
 
 </dd>
 </dl>
