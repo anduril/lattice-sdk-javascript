@@ -116,6 +116,8 @@ export * from "./MeanKeplerianElements.js";
 export * from "./TleParameters.js";
 export * from "./OrbitMeanElements.js";
 export * from "./Orbit.js";
+export * from "./MilStd2525C.js";
+export * from "./Symbology.js";
 export * from "./TaskQueryResults.js";
 export * from "./EntityIdsSelector.js";
 export * from "./AgentRequest.js";
