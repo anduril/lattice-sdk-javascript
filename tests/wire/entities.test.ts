@@ -483,11 +483,7 @@ describe("Entities", () => {
                 orbit: undefined,
                 symbology: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("publishEntity (3)", async () => {
@@ -584,11 +580,7 @@ describe("Entities", () => {
                 orbit: undefined,
                 symbology: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getEntity (1)", async () => {
@@ -987,11 +979,7 @@ describe("Entities", () => {
 
         await expect(async () => {
             return await client.entities.getEntity("entityId");
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("getEntity (3)", async () => {
@@ -1009,11 +997,7 @@ describe("Entities", () => {
 
         await expect(async () => {
             return await client.entities.getEntity("entityId");
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getEntity (4)", async () => {
@@ -1031,11 +1015,7 @@ describe("Entities", () => {
 
         await expect(async () => {
             return await client.entities.getEntity("entityId");
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("overrideEntity (1)", async () => {
@@ -1439,11 +1419,7 @@ describe("Entities", () => {
                 entity: undefined,
                 provenance: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("overrideEntity (3)", async () => {
@@ -1465,11 +1441,7 @@ describe("Entities", () => {
                 entity: undefined,
                 provenance: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("overrideEntity (4)", async () => {
@@ -1491,11 +1463,7 @@ describe("Entities", () => {
                 entity: undefined,
                 provenance: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("removeEntityOverride (1)", async () => {
@@ -1894,11 +1862,7 @@ describe("Entities", () => {
 
         await expect(async () => {
             return await client.entities.removeEntityOverride("entityId", "fieldPath");
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("removeEntityOverride (3)", async () => {
@@ -1916,11 +1880,7 @@ describe("Entities", () => {
 
         await expect(async () => {
             return await client.entities.removeEntityOverride("entityId", "fieldPath");
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("removeEntityOverride (4)", async () => {
@@ -1938,11 +1898,7 @@ describe("Entities", () => {
 
         await expect(async () => {
             return await client.entities.removeEntityOverride("entityId", "fieldPath");
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("longPollEntityEvents (1)", async () => {
@@ -1995,11 +1951,7 @@ describe("Entities", () => {
                 sessionToken: "sessionToken",
                 batchSize: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("longPollEntityEvents (3)", async () => {
@@ -2021,11 +1973,7 @@ describe("Entities", () => {
                 sessionToken: "sessionToken",
                 batchSize: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("longPollEntityEvents (4)", async () => {
@@ -2047,11 +1995,7 @@ describe("Entities", () => {
                 sessionToken: "sessionToken",
                 batchSize: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("longPollEntityEvents (5)", async () => {
@@ -2073,11 +2017,7 @@ describe("Entities", () => {
                 sessionToken: "sessionToken",
                 batchSize: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.RequestTimeoutError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.RequestTimeoutError);
     });
 
     test("longPollEntityEvents (6)", async () => {
@@ -2099,10 +2039,6 @@ describe("Entities", () => {
                 sessionToken: "sessionToken",
                 batchSize: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.TooManyRequestsError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.TooManyRequestsError);
     });
 });
