@@ -173,13 +173,12 @@ export class Objects {
         request: Lattice.GetObjectRequest = {},
         requestOptions?: Objects.RequestOptions,
     ): Promise<core.WithRawResponse<core.BinaryResponse>> {
-        const { "Accept-Encoding": acceptEncoding, Priority: priority } = request;
+        const { "Accept-Encoding": acceptEncoding } = request;
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
                 Authorization: await this._getAuthorizationHeader(),
                 "Accept-Encoding": acceptEncoding != null ? acceptEncoding : undefined,
-                Priority: priority != null ? priority : undefined,
             }),
             requestOptions?.headers,
         );

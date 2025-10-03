@@ -168,11 +168,7 @@ describe("Tasks", () => {
                 isExecutedElsewhere: undefined,
                 initialEntities: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("createTask (3)", async () => {
@@ -209,11 +205,7 @@ describe("Tasks", () => {
                 isExecutedElsewhere: undefined,
                 initialEntities: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getTask (1)", async () => {
@@ -357,11 +349,7 @@ describe("Tasks", () => {
 
         await expect(async () => {
             return await client.tasks.getTask("taskId");
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("getTask (3)", async () => {
@@ -379,11 +367,7 @@ describe("Tasks", () => {
 
         await expect(async () => {
             return await client.tasks.getTask("taskId");
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getTask (4)", async () => {
@@ -401,11 +385,7 @@ describe("Tasks", () => {
 
         await expect(async () => {
             return await client.tasks.getTask("taskId");
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("updateTaskStatus (1)", async () => {
@@ -555,11 +535,7 @@ describe("Tasks", () => {
                 newStatus: undefined,
                 author: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("updateTaskStatus (3)", async () => {
@@ -582,11 +558,7 @@ describe("Tasks", () => {
                 newStatus: undefined,
                 author: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("updateTaskStatus (4)", async () => {
@@ -609,11 +581,7 @@ describe("Tasks", () => {
                 newStatus: undefined,
                 author: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("queryTasks (1)", async () => {
@@ -686,11 +654,7 @@ describe("Tasks", () => {
                 statusFilter: undefined,
                 updateTimeRange: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("queryTasks (3)", async () => {
@@ -719,11 +683,7 @@ describe("Tasks", () => {
                 statusFilter: undefined,
                 updateTimeRange: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("queryTasks (4)", async () => {
@@ -752,11 +712,7 @@ describe("Tasks", () => {
                 statusFilter: undefined,
                 updateTimeRange: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("listenAsAgent (1)", async () => {
@@ -827,11 +783,7 @@ describe("Tasks", () => {
             return await client.tasks.listenAsAgent({
                 agentSelector: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("listenAsAgent (3)", async () => {
@@ -852,10 +804,6 @@ describe("Tasks", () => {
             return await client.tasks.listenAsAgent({
                 agentSelector: undefined,
             });
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 });

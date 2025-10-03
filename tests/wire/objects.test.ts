@@ -44,8 +44,8 @@ describe("Objects", () => {
             pageToken: "pageToken",
             allObjectsInMesh: true,
         });
-        expect(expected.path_metadatas).toEqual(page.data);
 
+        expect(expected.path_metadatas).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
         const nextPage = await page.getNextPage();
         expect(expected.path_metadatas).toEqual(nextPage.data);
@@ -60,11 +60,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.listObjects();
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("listObjects (3)", async () => {
@@ -76,11 +72,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.listObjects();
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("listObjects (4)", async () => {
@@ -92,11 +84,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.listObjects();
-        }).rejects.toThrow(
-            new Lattice.InternalServerError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.InternalServerError);
     });
 
     test("deleteObject (1)", async () => {
@@ -124,11 +112,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.deleteObject("objectPath");
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("deleteObject (3)", async () => {
@@ -146,11 +130,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.deleteObject("objectPath");
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("deleteObject (4)", async () => {
@@ -168,11 +148,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.deleteObject("objectPath");
-        }).rejects.toThrow(
-            new Lattice.NotFoundError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("deleteObject (5)", async () => {
@@ -190,11 +166,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.deleteObject("objectPath");
-        }).rejects.toThrow(
-            new Lattice.InternalServerError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.InternalServerError);
     });
 
     test("getObjectMetadata (1)", async () => {
@@ -222,11 +194,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.getObjectMetadata("objectPath");
-        }).rejects.toThrow(
-            new Lattice.BadRequestError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("getObjectMetadata (3)", async () => {
@@ -244,11 +212,7 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.getObjectMetadata("objectPath");
-        }).rejects.toThrow(
-            new Lattice.UnauthorizedError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getObjectMetadata (4)", async () => {
@@ -266,10 +230,6 @@ describe("Objects", () => {
 
         await expect(async () => {
             return await client.objects.getObjectMetadata("objectPath");
-        }).rejects.toThrow(
-            new Lattice.InternalServerError({
-                key: "value",
-            }),
-        );
+        }).rejects.toThrow(Lattice.InternalServerError);
     });
 });
