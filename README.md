@@ -39,7 +39,7 @@ import { LatticeClient } from "@anduril-industries/lattice-sdk";
 
 const client = new LatticeClient({ token: "YOUR_TOKEN" });
 await client.entities.longPollEntityEvents({
-    sessionToken: "sessionToken",
+    sessionToken: "sessionToken"
 });
 ```
 
@@ -91,38 +91,35 @@ await client.objects.uploadObject(new File(['binary data'], 'file.mp3'), ...);
 await client.objects.uploadObject(new ArrayBuffer(8), ...);
 await client.objects.uploadObject(new Uint8Array([0, 1, 2]), ...);
 ```
-
 The client accepts a variety of types for file upload parameters:
-
-- Stream types: `fs.ReadStream`, `stream.Readable`, and `ReadableStream`
-- Buffered types: `Buffer`, `Blob`, `File`, `ArrayBuffer`, `ArrayBufferView`, and `Uint8Array`
+* Stream types: `fs.ReadStream`, `stream.Readable`, and `ReadableStream`
+* Buffered types: `Buffer`, `Blob`, `File`, `ArrayBuffer`, `ArrayBufferView`, and `Uint8Array`
 
 ### Metadata
 
 You can configure metadata when uploading a file:
-
 ```typescript
 const file: Uploadable.WithMetadata = {
     data: createReadStream("path/to/file"),
-    filename: "my-file", // optional
+    filename: "my-file",       // optional
     contentType: "audio/mpeg", // optional
-    contentLength: 1949, // optional
+    contentLength: 1949,       // optional
 };
 ```
 
 Alternatively, you can upload a file directly from a file path:
-
 ```typescript
-const file: Uploadable.FromPath = {
+const file : Uploadable.FromPath = {
     path: "path/to/file",
-    filename: "my-file", // optional
-    contentType: "audio/mpeg", // optional
-    contentLength: 1949, // optional
+    filename: "my-file",        // optional
+    contentType: "audio/mpeg",  // optional
+    contentLength: 1949,        // optional
 };
 ```
 
 The metadata is used to set the `Content-Length`, `Content-Type`, and `Content-Disposition` headers. If not provided, the client will attempt to determine them automatically.
 For example, `fs.ReadStream` has a `path` property which the SDK uses to retrieve the file size from the filesystem without loading it into memory.
+
 
 ## Binary Response
 
@@ -138,7 +135,6 @@ const stream: ReadableStream<Uint8Array> = response.stream();
 // If you want to check if the response body has been used, you can use the following property.
 const bodyUsed = response.bodyUsed;
 ```
-
 <details>
 <summary>Save binary response to a file</summary>
 
@@ -526,7 +522,7 @@ const response = await client.objects.listObjects({
     prefix: "prefix",
     sinceTimestamp: "2024-01-15T09:30:00Z",
     pageToken: "pageToken",
-    allObjectsInMesh: true,
+    allObjectsInMesh: true
 });
 for await (const item of response) {
     console.log(item);
@@ -537,7 +533,7 @@ let page = await client.objects.listObjects({
     prefix: "prefix",
     sinceTimestamp: "2024-01-15T09:30:00Z",
     pageToken: "pageToken",
-    allObjectsInMesh: true,
+    allObjectsInMesh: true
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -626,7 +622,10 @@ console.log(rawResponse.headers['X-My-Header']);
 
 ### Runtime Compatibility
 
+
 The SDK works in the following runtimes:
+
+
 
 - Node.js 18+
 - Vercel
