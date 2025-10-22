@@ -1,7 +1,5 @@
 # Reference
-
 ## Entities
-
 <details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">publishEntity</a>({ ...params }) -> Lattice.Entity</code></summary>
 <dl>
 <dd>
@@ -14,14 +12,13 @@
 <dl>
 <dd>
 
-Publish an entity for ingest into the Entities API. Entities created with this method are "owned" by the originator: other sources,
-such as the UI, may not edit or delete these entities. The server validates entities at API call time and
+Publish an entity for ingest into the Entities API. Entities created with this method are "owned" by the originator: other sources, 
+such as the UI, may not edit or delete these entities. The server validates entities at API call time and 
 returns an error if the entity is invalid.
 
 An entity ID must be provided when calling this endpoint. If the entity referenced by the entity ID does not exist
 then it will be created. Otherwise the entity will be updated. An entity will only be updated if its
 provenance.sourceUpdateTime is greater than the provenance.sourceUpdateTime of the existing entity.
-
 </dd>
 </dl>
 </dd>
@@ -37,8 +34,8 @@ provenance.sourceUpdateTime is greater than the provenance.sourceUpdateTime of t
 
 ```typescript
 await client.entities.publishEntity({});
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -52,20 +49,21 @@ await client.entities.publishEntity({});
 <dl>
 <dd>
 
-**request:** `Lattice.Entity`
-
+**request:** `Lattice.Entity` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions`
+**requestOptions:** `Entities.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -85,8 +83,8 @@ await client.entities.publishEntity({});
 
 ```typescript
 await client.entities.getEntity("entityId");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -101,19 +99,20 @@ await client.entities.getEntity("entityId");
 <dd>
 
 **entityId:** `string` — ID of the entity to return
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions`
+**requestOptions:** `Entities.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -132,13 +131,12 @@ await client.entities.getEntity("entityId");
 <dd>
 
 Only fields marked with overridable can be overridden. Please refer to our documentation to see the comprehensive
-list of fields that can be overridden. The entity in the request body should only have a value set on the field
-specified in the field path parameter. Field paths are rooted in the base entity object and must be represented
+list of fields that can be overridden. The entity in the request body should only have a value set on the field 
+specified in the field path parameter. Field paths are rooted in the base entity object and must be represented 
 using lower_snake_case. Do not include "entity" in the field path.
 
-Note that overrides are applied in an eventually consistent manner. If multiple overrides are created
+Note that overrides are applied in an eventually consistent manner. If multiple overrides are created 
 concurrently for the same field path, the last writer wins.
-
 </dd>
 </dl>
 </dd>
@@ -154,8 +152,8 @@ concurrently for the same field path, the last writer wins.
 
 ```typescript
 await client.entities.overrideEntity("entityId", "mil_view.disposition");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -170,7 +168,7 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 <dd>
 
 **entityId:** `string` — The unique ID of the entity to override
-
+    
 </dd>
 </dl>
 
@@ -178,27 +176,28 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 <dd>
 
 **fieldPath:** `string` — fieldPath to override
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Lattice.EntityOverride`
-
+**request:** `Lattice.EntityOverride` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions`
+**requestOptions:** `Entities.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -217,7 +216,6 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 <dd>
 
 This operation clears the override value from the specified field path on the entity.
-
 </dd>
 </dl>
 </dd>
@@ -233,8 +231,8 @@ This operation clears the override value from the specified field path on the en
 
 ```typescript
 await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -249,7 +247,7 @@ await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
 <dd>
 
 **entityId:** `string` — The unique ID of the entity to undo an override from.
-
+    
 </dd>
 </dl>
 
@@ -257,19 +255,20 @@ await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
 <dd>
 
 **fieldPath:** `string` — The fieldPath to clear overrides from.
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions`
+**requestOptions:** `Entities.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -292,11 +291,10 @@ it becomes available. If you want to start a new polling session then open a req
 'sessionToken' in the request body. The server will return a new session token in the response.
 If you want to retrieve the next batch of results from an existing polling session then send the session
 token you received from the server in the request body. If no new data is available then the server will
-hold the connection open for up to 5 minutes. After the 5 minute timeout period, the server will close the
-connection with no results and you may resume polling with the same session token. If your session falls behind
-more than 3x the total number of entities in the environment, the server will terminate your session.
+hold the connection open for up to 5 minutes. After the 5 minute timeout period, the server will close the 
+connection with no results and you may resume polling with the same session token. If your session falls behind 
+more than 3x the total number of entities in the environment, the server will terminate your session. 
 In this case you must start a new session by sending a request with an empty session token.
-
 </dd>
 </dl>
 </dd>
@@ -312,10 +310,10 @@ In this case you must start a new session by sending a request with an empty ses
 
 ```typescript
 await client.entities.longPollEntityEvents({
-    sessionToken: "sessionToken",
+    sessionToken: "sessionToken"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -329,20 +327,21 @@ await client.entities.longPollEntityEvents({
 <dl>
 <dd>
 
-**request:** `Lattice.EntityEventRequest`
-
+**request:** `Lattice.EntityEventRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions`
+**requestOptions:** `Entities.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -361,7 +360,6 @@ await client.entities.longPollEntityEvents({
 <dd>
 
 Establishes a persistent connection to stream entity events as they occur.
-
 </dd>
 </dl>
 </dd>
@@ -380,8 +378,8 @@ const response = await client.entities.streamEntities();
 for await (const item of response) {
     console.log(item);
 }
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -395,27 +393,27 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `Lattice.EntityStreamRequest`
-
+**request:** `Lattice.EntityStreamRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions`
+**requestOptions:** `Entities.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Tasks
-
 <details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">createTask</a>({ ...params }) -> Lattice.Task</code></summary>
 <dl>
 <dd>
@@ -428,9 +426,8 @@ for await (const item of response) {
 <dl>
 <dd>
 
-Submit a request to create a task and schedule it for delivery. Tasks, once delivered, will
-be asynchronously updated by their destined agent.
-
+Submit a request to create a task and schedule it for delivery. Tasks, once delivered, will 
+be asynchronously updated by their destined agent. 
 </dd>
 </dl>
 </dd>
@@ -446,8 +443,8 @@ be asynchronously updated by their destined agent.
 
 ```typescript
 await client.tasks.createTask();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -461,20 +458,21 @@ await client.tasks.createTask();
 <dl>
 <dd>
 
-**request:** `Lattice.TaskCreation`
-
+**request:** `Lattice.TaskCreation` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions`
+**requestOptions:** `Tasks.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -494,8 +492,8 @@ await client.tasks.createTask();
 
 ```typescript
 await client.tasks.getTask("taskId");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -510,19 +508,20 @@ await client.tasks.getTask("taskId");
 <dd>
 
 **taskId:** `string` — ID of task to return
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions`
+**requestOptions:** `Tasks.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -541,7 +540,6 @@ await client.tasks.getTask("taskId");
 <dd>
 
 Update the status of a task.
-
 </dd>
 </dl>
 </dd>
@@ -557,8 +555,8 @@ Update the status of a task.
 
 ```typescript
 await client.tasks.updateTaskStatus("taskId");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -573,27 +571,28 @@ await client.tasks.updateTaskStatus("taskId");
 <dd>
 
 **taskId:** `string` — ID of task to update status of
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Lattice.TaskStatusUpdate`
-
+**request:** `Lattice.TaskStatusUpdate` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions`
+**requestOptions:** `Tasks.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -612,7 +611,6 @@ await client.tasks.updateTaskStatus("taskId");
 <dd>
 
 Query for tasks by a specified search criteria.
-
 </dd>
 </dl>
 </dd>
@@ -628,8 +626,8 @@ Query for tasks by a specified search criteria.
 
 ```typescript
 await client.tasks.queryTasks();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -643,20 +641,21 @@ await client.tasks.queryTasks();
 <dl>
 <dd>
 
-**request:** `Lattice.TaskQuery`
-
+**request:** `Lattice.TaskQuery` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions`
+**requestOptions:** `Tasks.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -674,10 +673,9 @@ await client.tasks.queryTasks();
 <dl>
 <dd>
 
-This is a long polling API that will block until a new task is ready for delivery. If no new task is
-available then the server will hold on to your request for up to 5 minutes, after that 5 minute timeout
+This is a long polling API that will block until a new task is ready for delivery. If no new task is 
+available then the server will hold on to your request for up to 5 minutes, after that 5 minute timeout 
 period you will be expected to reinitiate a new request.
-
 </dd>
 </dl>
 </dd>
@@ -693,8 +691,8 @@ period you will be expected to reinitiate a new request.
 
 ```typescript
 await client.tasks.listenAsAgent();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -708,27 +706,27 @@ await client.tasks.listenAsAgent();
 <dl>
 <dd>
 
-**request:** `Lattice.AgentListener`
-
+**request:** `Lattice.AgentListener` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions`
+**requestOptions:** `Tasks.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Objects
-
 <details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page<Lattice.PathMetadata></code></summary>
 <dl>
 <dd>
@@ -742,7 +740,6 @@ await client.tasks.listenAsAgent();
 <dd>
 
 Lists objects in your environment. You can define a prefix to list a subset of your objects. If you do not set a prefix, Lattice returns all available objects. By default this endpoint will list local objects only.
-
 </dd>
 </dl>
 </dd>
@@ -761,7 +758,7 @@ const response = await client.objects.listObjects({
     prefix: "prefix",
     sinceTimestamp: "2024-01-15T09:30:00Z",
     pageToken: "pageToken",
-    allObjectsInMesh: true,
+    allObjectsInMesh: true
 });
 for await (const item of response) {
     console.log(item);
@@ -772,13 +769,13 @@ let page = await client.objects.listObjects({
     prefix: "prefix",
     sinceTimestamp: "2024-01-15T09:30:00Z",
     pageToken: "pageToken",
-    allObjectsInMesh: true,
+    allObjectsInMesh: true
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -792,20 +789,21 @@ while (page.hasNextPage()) {
 <dl>
 <dd>
 
-**request:** `Lattice.ListObjectsRequest`
-
+**request:** `Lattice.ListObjectsRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions`
+**requestOptions:** `Objects.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -824,7 +822,6 @@ while (page.hasNextPage()) {
 <dd>
 
 Fetches an object from your environment using the objectPath path parameter.
-
 </dd>
 </dl>
 </dd>
@@ -840,8 +837,8 @@ Fetches an object from your environment using the objectPath path parameter.
 
 ```typescript
 await client.objects.getObject("objectPath");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -856,27 +853,28 @@ await client.objects.getObject("objectPath");
 <dd>
 
 **objectPath:** `string` — The path of the object to fetch.
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Lattice.GetObjectRequest`
-
+**request:** `Lattice.GetObjectRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions`
+**requestOptions:** `Objects.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -895,7 +893,6 @@ await client.objects.getObject("objectPath");
 <dd>
 
 Deletes an object from your environment given the objectPath path parameter.
-
 </dd>
 </dl>
 </dd>
@@ -911,8 +908,8 @@ Deletes an object from your environment given the objectPath path parameter.
 
 ```typescript
 await client.objects.deleteObject("objectPath");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -927,19 +924,20 @@ await client.objects.deleteObject("objectPath");
 <dd>
 
 **objectPath:** `string` — The path of the object to delete.
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions`
+**requestOptions:** `Objects.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -958,7 +956,6 @@ await client.objects.deleteObject("objectPath");
 <dd>
 
 Returns metadata for a specified object path. Use this to fetch metadata such as object size (size_bytes), its expiry time (expiry_time), or its latest update timestamp (last_updated_at).
-
 </dd>
 </dl>
 </dd>
@@ -974,8 +971,8 @@ Returns metadata for a specified object path. Use this to fetch metadata such as
 
 ```typescript
 await client.objects.getObjectMetadata("objectPath");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -990,19 +987,20 @@ await client.objects.getObjectMetadata("objectPath");
 <dd>
 
 **objectPath:** `string` — The path of the object to query.
-
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions`
+**requestOptions:** `Objects.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
