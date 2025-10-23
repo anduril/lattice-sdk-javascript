@@ -1,2 +1,2 @@
-export { type ListObjectsRequest } from "./ListObjectsRequest.js";
-export { type GetObjectRequest } from "./GetObjectRequest.js";
+export type { GetObjectRequest } from "./GetObjectRequest.js";
+export type { ListObjectsRequest } from "./ListObjectsRequest.js";
