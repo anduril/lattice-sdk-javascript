@@ -16,7 +16,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -143,8 +143,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -435,7 +436,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -561,8 +562,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -869,7 +871,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -996,8 +998,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -1307,7 +1310,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -1433,8 +1436,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
