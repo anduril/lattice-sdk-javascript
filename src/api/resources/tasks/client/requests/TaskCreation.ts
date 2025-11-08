@@ -16,7 +16,7 @@ export interface TaskCreation {
     displayName?: string;
     /** Longer, free form human readable description of this Task. */
     description?: string;
-    /** Full set of task parameters. */
+    /** The path for the Protobuf task definition, and the complete task data. */
     specification?: Lattice.GoogleProtobufAny;
     author?: Lattice.Principal;
     /**

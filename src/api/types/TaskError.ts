@@ -3,10 +3,14 @@
 import type * as Lattice from "../index.js";
 
 /**
- * TaskError contains an error code and message typically associated to a Task.
+ * Error information associated with a task.
+ *
+ *  TaskError contains structured error details, including an error code, a human-readable
+ *  message, and optional extended error information. This structure is used when a task
+ *  encounters problems during its lifecycle.
  */
 export interface TaskError {
-    /** Error code for Task error. */
+    /** Error code for task error. */
     code?: TaskError.Code;
     /** Descriptive human-readable string regarding this error. */
     message?: string;
@@ -15,7 +19,7 @@ export interface TaskError {
 }
 
 export namespace TaskError {
-    /** Error code for Task error. */
+    /** Error code for task error. */
     export const Code = {
         ErrorCodeInvalid: "ERROR_CODE_INVALID",
         ErrorCodeCancelled: "ERROR_CODE_CANCELLED",

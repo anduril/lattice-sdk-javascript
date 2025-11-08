@@ -2,6 +2,15 @@
 
 import type * as Lattice from "../index.js";
 
+/**
+ * Response containing tasks that match the query criteria.
+ *
+ * This message returns a list of Task objects that satisfy the filter conditions
+ * specified in the request. When there are more matching tasks than can be returned
+ * in a single response, a page_token is provided to retrieve the next batch in
+ * a subsequent request. An empty tasks list with no page_token indicates that
+ * there are no more matching tasks.
+ */
 export interface TaskQueryResults {
     tasks?: Lattice.Task[];
     /**

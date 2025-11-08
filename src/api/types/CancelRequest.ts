@@ -3,10 +3,11 @@
 import type * as Lattice from "../index.js";
 
 /**
- * Request to Cancel a Task.
+ * The request to cancel a task.
+ *  Contains the task, and the assignee of the request to cancel the task.
  */
 export interface CancelRequest {
-    /** ID of the Task to cancel. */
+    /** The unique task ID of the task to cancel. */
     taskId?: string;
     /**
      * The assignee of the Task. Useful for agent routing where an endpoint owns multiple agents,
