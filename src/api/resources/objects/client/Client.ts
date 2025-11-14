@@ -44,7 +44,7 @@ export class Objects {
     public async listObjects(
         request: Lattice.ListObjectsRequest = {},
         requestOptions?: Objects.RequestOptions,
-    ): Promise<core.Page<Lattice.PathMetadata>> {
+    ): Promise<core.Page<Lattice.PathMetadata, Lattice.ListResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Lattice.ListObjectsRequest): Promise<core.WithRawResponse<Lattice.ListResponse>> => {
                 const { prefix, sinceTimestamp, pageToken, allObjectsInMesh } = request;
@@ -79,6 +79,8 @@ export class Objects {
                     timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
                     maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
                     abortSignal: requestOptions?.abortSignal,
+                    fetchFn: this._options?.fetch,
+                    logging: this._options.logging,
                 });
                 if (_response.ok) {
                     return { data: _response.body as Lattice.ListResponse, rawResponse: _response.rawResponse };
@@ -120,7 +122,7 @@ export class Objects {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Pageable<Lattice.ListResponse, Lattice.PathMetadata>({
+        return new core.Page<Lattice.PathMetadata, Lattice.ListResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -177,6 +179,8 @@ export class Objects {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
         });
         if (_response.ok) {
             return { data: _response.body, rawResponse: _response.rawResponse };
@@ -268,6 +272,8 @@ export class Objects {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.PathMetadata, rawResponse: _response.rawResponse };
@@ -353,6 +359,8 @@ export class Objects {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
         });
         if (_response.ok) {
             return { data: undefined, rawResponse: _response.rawResponse };
@@ -438,6 +446,8 @@ export class Objects {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
         });
         if (_response.ok) {
             return { data: _response.rawResponse.headers, rawResponse: _response.rawResponse };

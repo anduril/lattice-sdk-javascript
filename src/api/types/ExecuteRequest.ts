@@ -3,9 +3,10 @@
 import type * as Lattice from "../index.js";
 
 /**
- * Request to execute a Task.
+ * The request to execute a task.
+ *  Contains the unique ID of the task to execute.
  */
 export interface ExecuteRequest {
-    /** Task to execute. */
+    /** The task to execute. */
     task?: Lattice.Task;
 }
