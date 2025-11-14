@@ -3,10 +3,14 @@
 import type * as Lattice from "../index.js";
 
 /**
- * Wrapper of an entity passed in Tasking, used to hold an additional information, and as a future extension point.
+ * An entity wrapper used in task definitions, with additional metadata.
+ *
+ *  TaskEntity wraps an entity reference with additional contextual information for task execution.
+ *  This structure allows entities to be passed to tasks with supplementary metadata that aids
+ *  in proper task execution, while also serving as an extension point for future capabilities.
  */
 export interface TaskEntity {
-    /** The wrapped entity-manager entity. */
+    /** The wrapped entity. */
     entity?: Lattice.Entity;
     /** Indicates that this entity was generated from a snapshot of a live entity. */
     snapshot?: boolean;
