@@ -115,6 +115,4 @@ export interface Entity {
     supplies?: Lattice.Supplies;
     /** Orbit information for space objects. */
     orbit?: Lattice.Orbit;
-    /** Symbology/iconography for the entity respecting an existing standard. */
-    symbology?: Lattice.Symbology;
 }
