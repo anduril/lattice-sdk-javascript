@@ -4,7 +4,7 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Entities", () => {
+describe("EntitiesClient", () => {
     test("publishEntity (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
@@ -16,7 +16,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -123,7 +123,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -143,8 +142,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -377,11 +377,6 @@ describe("Entities", () => {
             },
             supplies: {
                 fuel: [{}],
-            },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
             },
         });
     });
@@ -435,7 +430,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -542,7 +537,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -561,8 +555,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -795,11 +790,6 @@ describe("Entities", () => {
             },
             supplies: {
                 fuel: [{}],
-            },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
             },
         });
     });
@@ -869,7 +859,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -976,7 +966,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -996,8 +985,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -1230,11 +1220,6 @@ describe("Entities", () => {
             },
             supplies: {
                 fuel: [{}],
-            },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
             },
         });
     });
@@ -1307,7 +1292,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -1414,7 +1399,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -1433,8 +1417,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -1667,11 +1652,6 @@ describe("Entities", () => {
             },
             supplies: {
                 fuel: [{}],
-            },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
             },
         });
     });
