@@ -57,7 +57,7 @@ await client.entities.publishEntity({});
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -69,7 +69,7 @@ await client.entities.publishEntity({});
 </dl>
 </details>
 
-<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">getEntity</a>(entityId) -> Lattice.Entity</code></summary>
+<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">getEntity</a>({ ...params }) -> Lattice.Entity</code></summary>
 <dl>
 <dd>
 
@@ -82,7 +82,9 @@ await client.entities.publishEntity({});
 <dd>
 
 ```typescript
-await client.entities.getEntity("entityId");
+await client.entities.getEntity({
+    entityId: "entityId"
+});
 
 ```
 </dd>
@@ -98,7 +100,7 @@ await client.entities.getEntity("entityId");
 <dl>
 <dd>
 
-**entityId:** `string` — ID of the entity to return
+**request:** `Lattice.GetEntityRequest` 
     
 </dd>
 </dl>
@@ -106,7 +108,7 @@ await client.entities.getEntity("entityId");
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -118,7 +120,7 @@ await client.entities.getEntity("entityId");
 </dl>
 </details>
 
-<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">overrideEntity</a>(entityId, fieldPath, { ...params }) -> Lattice.Entity</code></summary>
+<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">overrideEntity</a>({ ...params }) -> Lattice.Entity</code></summary>
 <dl>
 <dd>
 
@@ -151,7 +153,10 @@ concurrently for the same field path, the last writer wins.
 <dd>
 
 ```typescript
-await client.entities.overrideEntity("entityId", "mil_view.disposition");
+await client.entities.overrideEntity({
+    entityId: "entityId",
+    fieldPath: "mil_view.disposition"
+});
 
 ```
 </dd>
@@ -167,22 +172,6 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**entityId:** `string` — The unique ID of the entity to override
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fieldPath:** `string` — fieldPath to override
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request:** `Lattice.EntityOverride` 
     
 </dd>
@@ -191,7 +180,7 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -203,7 +192,7 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 </dl>
 </details>
 
-<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">removeEntityOverride</a>(entityId, fieldPath) -> Lattice.Entity</code></summary>
+<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">removeEntityOverride</a>({ ...params }) -> Lattice.Entity</code></summary>
 <dl>
 <dd>
 
@@ -230,7 +219,10 @@ This operation clears the override value from the specified field path on the en
 <dd>
 
 ```typescript
-await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
+await client.entities.removeEntityOverride({
+    entityId: "entityId",
+    fieldPath: "mil_view.disposition"
+});
 
 ```
 </dd>
@@ -246,7 +238,7 @@ await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**entityId:** `string` — The unique ID of the entity to undo an override from.
+**request:** `Lattice.RemoveEntityOverrideRequest` 
     
 </dd>
 </dl>
@@ -254,15 +246,7 @@ await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**fieldPath:** `string` — The fieldPath to clear overrides from.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -335,7 +319,7 @@ await client.entities.longPollEntityEvents({
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -401,7 +385,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -466,7 +450,7 @@ await client.tasks.createTask();
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -478,7 +462,7 @@ await client.tasks.createTask();
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getTask</a>(taskId) -> Lattice.Task</code></summary>
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getTask</a>({ ...params }) -> Lattice.Task</code></summary>
 <dl>
 <dd>
 
@@ -491,7 +475,9 @@ await client.tasks.createTask();
 <dd>
 
 ```typescript
-await client.tasks.getTask("taskId");
+await client.tasks.getTask({
+    taskId: "taskId"
+});
 
 ```
 </dd>
@@ -507,7 +493,7 @@ await client.tasks.getTask("taskId");
 <dl>
 <dd>
 
-**taskId:** `string` — ID of task to return
+**request:** `Lattice.GetTaskRequest` 
     
 </dd>
 </dl>
@@ -515,7 +501,7 @@ await client.tasks.getTask("taskId");
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -527,7 +513,7 @@ await client.tasks.getTask("taskId");
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">updateTaskStatus</a>(taskId, { ...params }) -> Lattice.Task</code></summary>
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">updateTaskStatus</a>({ ...params }) -> Lattice.Task</code></summary>
 <dl>
 <dd>
 
@@ -554,7 +540,9 @@ Update the status of a task.
 <dd>
 
 ```typescript
-await client.tasks.updateTaskStatus("taskId");
+await client.tasks.updateTaskStatus({
+    taskId: "taskId"
+});
 
 ```
 </dd>
@@ -570,14 +558,6 @@ await client.tasks.updateTaskStatus("taskId");
 <dl>
 <dd>
 
-**taskId:** `string` — ID of task to update status of
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request:** `Lattice.TaskStatusUpdate` 
     
 </dd>
@@ -586,7 +566,7 @@ await client.tasks.updateTaskStatus("taskId");
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -649,7 +629,7 @@ await client.tasks.queryTasks();
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -714,7 +694,7 @@ await client.tasks.listenAsAgent();
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -727,7 +707,7 @@ await client.tasks.listenAsAgent();
 </details>
 
 ## Objects
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page<Lattice.PathMetadata></code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page<Lattice.PathMetadata, Lattice.ListResponse></code></summary>
 <dl>
 <dd>
 
@@ -754,26 +734,19 @@ Lists objects in your environment. You can define a prefix to list a subset of y
 <dd>
 
 ```typescript
-const response = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
-for await (const item of response) {
+const pageableResponse = await client.objects.listObjects();
+for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
+let page = await client.objects.listObjects();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
+
+// You can also access the underlying response
+const response = page.response;
 
 ```
 </dd>
@@ -797,7 +770,7 @@ while (page.hasNextPage()) {
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -809,7 +782,7 @@ while (page.hasNextPage()) {
 </dl>
 </details>
 
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObject</a>(objectPath, { ...params }) -> core.BinaryResponse</code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObject</a>({ ...params }) -> core.BinaryResponse</code></summary>
 <dl>
 <dd>
 
@@ -836,7 +809,9 @@ Fetches an object from your environment using the objectPath path parameter.
 <dd>
 
 ```typescript
-await client.objects.getObject("objectPath");
+await client.objects.getObject({
+    objectPath: "objectPath"
+});
 
 ```
 </dd>
@@ -852,14 +827,6 @@ await client.objects.getObject("objectPath");
 <dl>
 <dd>
 
-**objectPath:** `string` — The path of the object to fetch.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request:** `Lattice.GetObjectRequest` 
     
 </dd>
@@ -868,7 +835,7 @@ await client.objects.getObject("objectPath");
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -880,7 +847,7 @@ await client.objects.getObject("objectPath");
 </dl>
 </details>
 
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">deleteObject</a>(objectPath) -> void</code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">deleteObject</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -907,7 +874,9 @@ Deletes an object from your environment given the objectPath path parameter.
 <dd>
 
 ```typescript
-await client.objects.deleteObject("objectPath");
+await client.objects.deleteObject({
+    objectPath: "objectPath"
+});
 
 ```
 </dd>
@@ -923,7 +892,7 @@ await client.objects.deleteObject("objectPath");
 <dl>
 <dd>
 
-**objectPath:** `string` — The path of the object to delete.
+**request:** `Lattice.DeleteObjectRequest` 
     
 </dd>
 </dl>
@@ -931,7 +900,7 @@ await client.objects.deleteObject("objectPath");
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -943,7 +912,7 @@ await client.objects.deleteObject("objectPath");
 </dl>
 </details>
 
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObjectMetadata</a>(objectPath) -> Headers</code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObjectMetadata</a>({ ...params }) -> Headers</code></summary>
 <dl>
 <dd>
 
@@ -970,7 +939,9 @@ Returns metadata for a specified object path. Use this to fetch metadata such as
 <dd>
 
 ```typescript
-await client.objects.getObjectMetadata("objectPath");
+await client.objects.getObjectMetadata({
+    objectPath: "objectPath"
+});
 
 ```
 </dd>
@@ -986,7 +957,7 @@ await client.objects.getObjectMetadata("objectPath");
 <dl>
 <dd>
 
-**objectPath:** `string` — The path of the object to query.
+**request:** `Lattice.GetObjectMetadataRequest` 
     
 </dd>
 </dl>
@@ -994,7 +965,7 @@ await client.objects.getObjectMetadata("objectPath");
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>
