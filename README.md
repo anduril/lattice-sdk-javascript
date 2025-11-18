@@ -51,7 +51,7 @@ following namespace:
 ```typescript
 import { Lattice } from "@anduril-industries/lattice-sdk";
 
-const request: Lattice.EntityOverride = {
+const request: Lattice.GetEntityRequest = {
     ...
 };
 ```
@@ -73,6 +73,21 @@ try {
         console.log(err.body);
         console.log(err.rawResponse);
     }
+}
+```
+
+## Streaming Response
+
+Some endpoints return streaming responses instead of returning the full response at once.
+The SDK uses async iterators, so you can consume the responses using a `for await...of` loop.
+
+```typescript
+import { LatticeClient } from "@anduril-industries/lattice-sdk";
+
+const client = new LatticeClient({ token: "YOUR_TOKEN" });
+const response = await client.entities.streamEntities();
+for await (const item of response) {
+    console.log(item);
 }
 ```
 
@@ -518,26 +533,19 @@ List endpoints are paginated. The SDK provides an iterator so that you can simpl
 import { LatticeClient } from "@anduril-industries/lattice-sdk";
 
 const client = new LatticeClient({ token: "YOUR_TOKEN" });
-const response = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
-for await (const item of response) {
+const pageableResponse = await client.objects.listObjects();
+for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
+let page = await client.objects.listObjects();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
+
+// You can also access the underlying response
+const response = page.response;
 ```
 
 ## Advanced
@@ -619,6 +627,69 @@ const { data, rawResponse } = await client.entities.longPollEntityEvents(...).wi
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);
 ```
+
+### Logging
+
+The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
+
+```typescript
+import { LatticeClient, logging } from "@anduril-industries/lattice-sdk";
+
+const client = new LatticeClient({
+    ...
+    logging: {
+        level: logging.LogLevel.Debug, // defaults to logging.LogLevel.Info
+        logger: new logging.ConsoleLogger(), // defaults to ConsoleLogger
+        silent: false, // defaults to true, set to false to enable logging
+    }
+});
+```
+The `logging` object can have the following properties:
+- `level`: The log level to use. Defaults to `logging.LogLevel.Info`.
+- `logger`: The logger to use. Defaults to a `logging.ConsoleLogger`.
+- `silent`: Whether to silence the logger. Defaults to `true`.
+
+The `level` property can be one of the following values:
+- `logging.LogLevel.Debug`
+- `logging.LogLevel.Info`
+- `logging.LogLevel.Warn`
+- `logging.LogLevel.Error`
+
+To provide a custom logger, you can pass in an object that implements the `logging.ILogger` interface.
+
+<details>
+<summary>Custom logger examples</summary>
+
+Here's an example using the popular `winston` logging library.
+```ts
+import winston from 'winston';
+
+const winstonLogger = winston.createLogger({...});
+
+const logger: logging.ILogger = {
+    debug: (msg, ...args) => winstonLogger.debug(msg, ...args),
+    info: (msg, ...args) => winstonLogger.info(msg, ...args),
+    warn: (msg, ...args) => winstonLogger.warn(msg, ...args),
+    error: (msg, ...args) => winstonLogger.error(msg, ...args),
+};
+```
+
+Here's an example using the popular `pino` logging library.
+
+```ts
+import pino from 'pino';
+
+const pinoLogger = pino({...});
+
+const logger: logging.ILogger = {
+  debug: (msg, ...args) => pinoLogger.debug(args, msg),
+  info: (msg, ...args) => pinoLogger.info(args, msg),
+  warn: (msg, ...args) => pinoLogger.warn(args, msg),
+  error: (msg, ...args) => pinoLogger.error(args, msg),
+};
+```
+</details>
+
 
 ### Runtime Compatibility
 

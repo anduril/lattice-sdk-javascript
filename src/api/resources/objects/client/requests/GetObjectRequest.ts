@@ -4,9 +4,13 @@ import type * as Lattice from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         objectPath: "objectPath"
+ *     }
  */
 export interface GetObjectRequest {
+    /** The path of the object to fetch. */
+    objectPath: string;
     /** If set, Lattice will compress the response using the specified compression method. If the header is not defined, or the compression method is set to `identity`, no compression will be applied to the response. */
     "Accept-Encoding"?: Lattice.GetObjectRequestAcceptEncoding;
     /** Indicates a client's preference for the priority of the response. The value is a structured header as defined in RFC 9218. If you do not set the header, Lattice uses the default priority set for the environment. Incremental delivery directives are not supported and will be ignored. */

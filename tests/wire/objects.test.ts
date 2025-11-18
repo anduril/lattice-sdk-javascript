@@ -4,7 +4,7 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Objects", () => {
+describe("ObjectsClient", () => {
     test("listObjects (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
@@ -36,12 +36,7 @@ describe("Objects", () => {
             ],
             next_page_token: "next_page_token",
         };
-        const page = await client.objects.listObjects({
-            prefix: "prefix",
-            sinceTimestamp: "2024-01-15T09:30:00Z",
-            pageToken: "pageToken",
-            allObjectsInMesh: true,
-        });
+        const page = await client.objects.listObjects();
 
         expect(expected.path_metadatas).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -91,7 +86,9 @@ describe("Objects", () => {
 
         server.mockEndpoint().delete("/api/v1/objects/objectPath").respondWith().statusCode(200).build();
 
-        const response = await client.objects.deleteObject("objectPath");
+        const response = await client.objects.deleteObject({
+            objectPath: "objectPath",
+        });
         expect(response).toEqual(undefined);
     });
 
@@ -109,7 +106,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
@@ -127,7 +126,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
@@ -145,7 +146,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
@@ -163,7 +166,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.InternalServerError);
     });
 
@@ -173,7 +178,9 @@ describe("Objects", () => {
 
         server.mockEndpoint().head("/api/v1/objects/objectPath").respondWith().statusCode(200).build();
 
-        const headers = await client.objects.getObjectMetadata("objectPath");
+        const headers = await client.objects.getObjectMetadata({
+            objectPath: "objectPath",
+        });
         expect(headers).toBeInstanceOf(Headers);
     });
 
@@ -191,7 +198,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.getObjectMetadata("objectPath");
+            return await client.objects.getObjectMetadata({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
@@ -209,7 +218,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.getObjectMetadata("objectPath");
+            return await client.objects.getObjectMetadata({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
@@ -227,7 +238,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.getObjectMetadata("objectPath");
+            return await client.objects.getObjectMetadata({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.InternalServerError);
     });
 });

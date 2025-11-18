@@ -4,9 +4,13 @@ import type * as Lattice from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         taskId: "taskId"
+ *     }
  */
 export interface TaskStatusUpdate {
+    /** ID of task to update status of */
+    taskId: string;
     /**
      * The status version of the task to update. This version number increments to indicate the task's
      * current stage in its status lifecycle. Specifically, whenever a task's status updates, the status
