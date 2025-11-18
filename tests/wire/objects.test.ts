@@ -4,7 +4,7 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Objects", () => {
+describe("ObjectsClient", () => {
     test("listObjects (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
