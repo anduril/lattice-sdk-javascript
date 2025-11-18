@@ -4,7 +4,7 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Entities", () => {
+describe("EntitiesClient", () => {
     test("publishEntity (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
@@ -16,7 +16,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -123,7 +123,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -143,8 +142,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -377,11 +377,6 @@ describe("Entities", () => {
             },
             supplies: {
                 fuel: [{}],
-            },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
             },
         });
     });
@@ -435,7 +430,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -542,7 +537,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -552,7 +546,9 @@ describe("Entities", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.entities.getEntity("entityId");
+        const response = await client.entities.getEntity({
+            entityId: "entityId",
+        });
         expect(response).toEqual({
             entityId: "entityId",
             description: "description",
@@ -561,8 +557,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -795,11 +792,6 @@ describe("Entities", () => {
             },
             supplies: {
                 fuel: [{}],
-            },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
             },
         });
     });
@@ -818,7 +810,9 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.getEntity("entityId");
+            return await client.entities.getEntity({
+                entityId: "entityId",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
@@ -836,7 +830,9 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.getEntity("entityId");
+            return await client.entities.getEntity({
+                entityId: "entityId",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
@@ -854,7 +850,9 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.getEntity("entityId");
+            return await client.entities.getEntity({
+                entityId: "entityId",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
@@ -869,7 +867,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -976,7 +974,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -987,7 +984,10 @@ describe("Entities", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.entities.overrideEntity("entityId", "mil_view.disposition");
+        const response = await client.entities.overrideEntity({
+            entityId: "entityId",
+            fieldPath: "mil_view.disposition",
+        });
         expect(response).toEqual({
             entityId: "entityId",
             description: "description",
@@ -996,8 +996,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -1230,11 +1231,6 @@ describe("Entities", () => {
             },
             supplies: {
                 fuel: [{}],
-            },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
             },
         });
     });
@@ -1254,7 +1250,10 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.overrideEntity("entityId", "fieldPath");
+            return await client.entities.overrideEntity({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
@@ -1273,7 +1272,10 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.overrideEntity("entityId", "fieldPath");
+            return await client.entities.overrideEntity({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
@@ -1292,7 +1294,10 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.overrideEntity("entityId", "fieldPath");
+            return await client.entities.overrideEntity({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
@@ -1307,7 +1312,7 @@ describe("Entities", () => {
             createdTime: "2024-01-15T09:30:00Z",
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
+            status: { code: 1, message: "message", details: [{}] },
             location: {
                 position: {
                     latitudeDegrees: 1.1,
@@ -1414,7 +1419,6 @@ describe("Entities", () => {
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
             supplies: { fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
             .mockEndpoint()
@@ -1424,7 +1428,10 @@ describe("Entities", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
+        const response = await client.entities.removeEntityOverride({
+            entityId: "entityId",
+            fieldPath: "mil_view.disposition",
+        });
         expect(response).toEqual({
             entityId: "entityId",
             description: "description",
@@ -1433,8 +1440,9 @@ describe("Entities", () => {
             expiryTime: "2024-01-15T09:30:00Z",
             noExpiry: true,
             status: {
-                platformActivity: "platformActivity",
-                role: "role",
+                code: 1,
+                message: "message",
+                details: [{}],
             },
             location: {
                 position: {
@@ -1668,11 +1676,6 @@ describe("Entities", () => {
             supplies: {
                 fuel: [{}],
             },
-            symbology: {
-                milStd2525C: {
-                    sidc: "sidc",
-                },
-            },
         });
     });
 
@@ -1690,7 +1693,10 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+            return await client.entities.removeEntityOverride({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
@@ -1708,7 +1714,10 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+            return await client.entities.removeEntityOverride({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
@@ -1726,7 +1735,10 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+            return await client.entities.removeEntityOverride({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 

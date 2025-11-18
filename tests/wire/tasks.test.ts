@@ -4,7 +4,7 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Tasks", () => {
+describe("TasksClient", () => {
     test("createTask (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LatticeClient({ token: "test", environment: server.baseUrl });
@@ -215,7 +215,9 @@ describe("Tasks", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tasks.getTask("taskId");
+        const response = await client.tasks.getTask({
+            taskId: "taskId",
+        });
         expect(response).toEqual({
             version: {
                 taskId: "taskId",
@@ -310,7 +312,9 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.getTask("taskId");
+            return await client.tasks.getTask({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
@@ -328,7 +332,9 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.getTask("taskId");
+            return await client.tasks.getTask({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
@@ -346,7 +352,9 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.getTask("taskId");
+            return await client.tasks.getTask({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
@@ -396,7 +404,9 @@ describe("Tasks", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tasks.updateTaskStatus("taskId");
+        const response = await client.tasks.updateTaskStatus({
+            taskId: "taskId",
+        });
         expect(response).toEqual({
             version: {
                 taskId: "taskId",
@@ -492,7 +502,9 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.updateTaskStatus("taskId");
+            return await client.tasks.updateTaskStatus({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
@@ -511,7 +523,9 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.updateTaskStatus("taskId");
+            return await client.tasks.updateTaskStatus({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
@@ -530,7 +544,9 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.updateTaskStatus("taskId");
+            return await client.tasks.updateTaskStatus({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
