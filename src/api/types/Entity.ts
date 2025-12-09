@@ -8,8 +8,8 @@ import type * as Lattice from "../index.js";
  */
 export interface Entity {
     /**
-     * A Globally Unique Identifier (GUID) for your entity. If this field is empty, the Entity Manager API
-     *  automatically generates an ID when it creates the entity.
+     * A Globally Unique Identifier (GUID) for your entity. This is a required
+     *  field.
      */
     entityId?: string;
     /**
