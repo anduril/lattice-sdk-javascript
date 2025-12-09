@@ -4,9 +4,16 @@ import type * as Lattice from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         entityId: "entityId",
+ *         fieldPath: "mil_view.disposition"
+ *     }
  */
 export interface EntityOverride {
+    /** The unique ID of the entity to override */
+    entityId: string;
+    /** fieldPath to override */
+    fieldPath: string;
     /**
      * The entity containing the overridden fields. The service will extract the overridable fields from
      * the object and ignore all other fields.

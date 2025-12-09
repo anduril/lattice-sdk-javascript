@@ -3,28 +3,32 @@
 import type * as Lattice from "../index.js";
 
 /**
- * TaskStatus is contains information regarding the status of a Task at any given time. Can include related information
- *   such as any progress towards Task completion, or any associated results if Task completed.
+ * Comprehensive status information for a task at a given point in time.
+ *
+ *  TaskStatus contains all status-related information for a task, including its current state,
+ *  any error conditions, progress details, results, timing information, and resource allocations.
+ *  This object evolves throughout a task's lifecycle, providing increasing detail as the task
+ *  progresses from creation through execution to completion.
  */
 export interface TaskStatus {
-    /** Status of the Task. */
+    /** Status of the task. */
     status?: TaskStatus.Status;
-    /** Any errors associated with the Task. */
+    /** Any errors associated with the task. */
     taskError?: Lattice.TaskError;
-    /** Any incremental progress on the Task, should be from the tasks/v* /progress folder. */
+    /** Any incremental progress on the task, should be from the tasks/v* /progress folder. */
     progress?: Lattice.GoogleProtobufAny;
-    /** Any final result of the Task, should be from tasks/v* /result folder. */
+    /** Any final result of the task, should be from tasks/v* /result folder. */
     result?: Lattice.GoogleProtobufAny;
-    /** Time the Task began execution, may not be known even for executing Tasks. */
+    /** Time the task began execution, may not be known even for executing Tasks. */
     startTime?: string;
-    /** Any estimate for how the Task will progress, should be from tasks/v* /estimates folder. */
+    /** Any estimate for how the task will progress, should be from tasks/v* /estimates folder. */
     estimate?: Lattice.GoogleProtobufAny;
-    /** Any allocated agents of the Task. */
+    /** Any allocated agents of the task. */
     allocation?: Lattice.Allocation;
 }
 
 export namespace TaskStatus {
-    /** Status of the Task. */
+    /** Status of the task. */
     export const Status = {
         StatusInvalid: "STATUS_INVALID",
         StatusCreated: "STATUS_CREATED",

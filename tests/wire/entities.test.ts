@@ -4,10 +4,10 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Entities", () => {
+describe("EntitiesClient", () => {
     test("publishEntity (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             entityId: "entityId",
@@ -388,7 +388,7 @@ describe("Entities", () => {
 
     test("publishEntity (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -407,7 +407,7 @@ describe("Entities", () => {
 
     test("publishEntity (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -426,7 +426,7 @@ describe("Entities", () => {
 
     test("getEntity (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             entityId: "entityId",
@@ -552,7 +552,9 @@ describe("Entities", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.entities.getEntity("entityId");
+        const response = await client.entities.getEntity({
+            entityId: "entityId",
+        });
         expect(response).toEqual({
             entityId: "entityId",
             description: "description",
@@ -806,7 +808,7 @@ describe("Entities", () => {
 
     test("getEntity (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -818,13 +820,15 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.getEntity("entityId");
+            return await client.entities.getEntity({
+                entityId: "entityId",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("getEntity (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -836,13 +840,15 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.getEntity("entityId");
+            return await client.entities.getEntity({
+                entityId: "entityId",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getEntity (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -854,13 +860,15 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.getEntity("entityId");
+            return await client.entities.getEntity({
+                entityId: "entityId",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("overrideEntity (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             entityId: "entityId",
@@ -987,7 +995,10 @@ describe("Entities", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.entities.overrideEntity("entityId", "mil_view.disposition");
+        const response = await client.entities.overrideEntity({
+            entityId: "entityId",
+            fieldPath: "mil_view.disposition",
+        });
         expect(response).toEqual({
             entityId: "entityId",
             description: "description",
@@ -1241,7 +1252,7 @@ describe("Entities", () => {
 
     test("overrideEntity (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -1254,13 +1265,16 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.overrideEntity("entityId", "fieldPath");
+            return await client.entities.overrideEntity({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("overrideEntity (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -1273,13 +1287,16 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.overrideEntity("entityId", "fieldPath");
+            return await client.entities.overrideEntity({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("overrideEntity (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -1292,13 +1309,16 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.overrideEntity("entityId", "fieldPath");
+            return await client.entities.overrideEntity({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("removeEntityOverride (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             entityId: "entityId",
@@ -1424,7 +1444,10 @@ describe("Entities", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
+        const response = await client.entities.removeEntityOverride({
+            entityId: "entityId",
+            fieldPath: "mil_view.disposition",
+        });
         expect(response).toEqual({
             entityId: "entityId",
             description: "description",
@@ -1678,7 +1701,7 @@ describe("Entities", () => {
 
     test("removeEntityOverride (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -1690,13 +1713,16 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+            return await client.entities.removeEntityOverride({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("removeEntityOverride (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -1708,13 +1734,16 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+            return await client.entities.removeEntityOverride({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("removeEntityOverride (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -1726,13 +1755,16 @@ describe("Entities", () => {
             .build();
 
         await expect(async () => {
-            return await client.entities.removeEntityOverride("entityId", "fieldPath");
+            return await client.entities.removeEntityOverride({
+                entityId: "entityId",
+                fieldPath: "fieldPath",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("longPollEntityEvents (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { sessionToken: "sessionToken" };
         const rawResponseBody = {
             sessionToken: "sessionToken",
@@ -1763,7 +1795,7 @@ describe("Entities", () => {
 
     test("longPollEntityEvents (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { sessionToken: "sessionToken" };
         const rawResponseBody = { key: "value" };
         server
@@ -1784,7 +1816,7 @@ describe("Entities", () => {
 
     test("longPollEntityEvents (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { sessionToken: "sessionToken" };
         const rawResponseBody = { key: "value" };
         server
@@ -1805,7 +1837,7 @@ describe("Entities", () => {
 
     test("longPollEntityEvents (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { sessionToken: "sessionToken" };
         const rawResponseBody = { key: "value" };
         server
@@ -1826,7 +1858,7 @@ describe("Entities", () => {
 
     test("longPollEntityEvents (5)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { sessionToken: "sessionToken" };
         const rawResponseBody = { key: "value" };
         server
@@ -1847,7 +1879,7 @@ describe("Entities", () => {
 
     test("longPollEntityEvents (6)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { sessionToken: "sessionToken" };
         const rawResponseBody = { key: "value" };
         server

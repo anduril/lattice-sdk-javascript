@@ -2,7 +2,6 @@
 
 ![](https://www.anduril.com/lattice-sdk/)
 
-[![npm shield](https://img.shields.io/npm/v/@anduril-industries/lattice-sdk)](https://www.npmjs.com/package/@anduril-industries/lattice-sdk)
 
 The Lattice SDK TypeScript library provides convenient access to the Lattice SDK APIs from TypeScript.
 
@@ -35,7 +34,7 @@ A full reference for this library is available [here](https://github.com/anduril
 Instantiate and use the client with the following:
 
 ```typescript
-import { LatticeClient } from "@anduril-industries/lattice-sdk";
+import { LatticeClient } from "./src/Client";
 
 const client = new LatticeClient({ token: "YOUR_TOKEN" });
 await client.entities.longPollEntityEvents({
@@ -49,9 +48,9 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { Lattice } from "@anduril-industries/lattice-sdk";
+import { Lattice } from "Lattice";
 
-const request: Lattice.EntityOverride = {
+const request: Lattice.GetEntityRequest = {
     ...
 };
 ```
@@ -62,7 +61,7 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { LatticeError } from "@anduril-industries/lattice-sdk";
+import { LatticeError } from "Lattice";
 
 try {
     await client.entities.longPollEntityEvents(...);
@@ -73,6 +72,21 @@ try {
         console.log(err.body);
         console.log(err.rawResponse);
     }
+}
+```
+
+## Streaming Response
+
+Some endpoints return streaming responses instead of returning the full response at once.
+The SDK uses async iterators, so you can consume the responses using a `for await...of` loop.
+
+```typescript
+import { LatticeClient } from "./src/Client";
+
+const client = new LatticeClient({ token: "YOUR_TOKEN" });
+const response = await client.entities.streamEntities();
+for await (const item of response) {
+    console.log(item);
 }
 ```
 
@@ -515,29 +529,22 @@ const text = new TextDecoder().decode(bytes);
 List endpoints are paginated. The SDK provides an iterator so that you can simply loop over the items:
 
 ```typescript
-import { LatticeClient } from "@anduril-industries/lattice-sdk";
+import { LatticeClient } from "./src/Client";
 
 const client = new LatticeClient({ token: "YOUR_TOKEN" });
-const response = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
-for await (const item of response) {
+const pageableResponse = await client.objects.listObjects();
+for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
+let page = await client.objects.listObjects();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
+
+// You can also access the underlying response
+const response = page.response;
 ```
 
 ## Advanced
@@ -620,6 +627,69 @@ console.log(data);
 console.log(rawResponse.headers['X-My-Header']);
 ```
 
+### Logging
+
+The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
+
+```typescript
+import { LatticeClient, logging } from "Lattice";
+
+const client = new LatticeClient({
+    ...
+    logging: {
+        level: logging.LogLevel.Debug, // defaults to logging.LogLevel.Info
+        logger: new logging.ConsoleLogger(), // defaults to ConsoleLogger
+        silent: false, // defaults to true, set to false to enable logging
+    }
+});
+```
+The `logging` object can have the following properties:
+- `level`: The log level to use. Defaults to `logging.LogLevel.Info`.
+- `logger`: The logger to use. Defaults to a `logging.ConsoleLogger`.
+- `silent`: Whether to silence the logger. Defaults to `true`.
+
+The `level` property can be one of the following values:
+- `logging.LogLevel.Debug`
+- `logging.LogLevel.Info`
+- `logging.LogLevel.Warn`
+- `logging.LogLevel.Error`
+
+To provide a custom logger, you can pass in an object that implements the `logging.ILogger` interface.
+
+<details>
+<summary>Custom logger examples</summary>
+
+Here's an example using the popular `winston` logging library.
+```ts
+import winston from 'winston';
+
+const winstonLogger = winston.createLogger({...});
+
+const logger: logging.ILogger = {
+    debug: (msg, ...args) => winstonLogger.debug(msg, ...args),
+    info: (msg, ...args) => winstonLogger.info(msg, ...args),
+    warn: (msg, ...args) => winstonLogger.warn(msg, ...args),
+    error: (msg, ...args) => winstonLogger.error(msg, ...args),
+};
+```
+
+Here's an example using the popular `pino` logging library.
+
+```ts
+import pino from 'pino';
+
+const pinoLogger = pino({...});
+
+const logger: logging.ILogger = {
+  debug: (msg, ...args) => pinoLogger.debug(args, msg),
+  info: (msg, ...args) => pinoLogger.info(args, msg),
+  warn: (msg, ...args) => pinoLogger.warn(args, msg),
+  error: (msg, ...args) => pinoLogger.error(args, msg),
+};
+```
+</details>
+
+
 ### Runtime Compatibility
 
 
@@ -640,7 +710,7 @@ The SDK provides a way for you to customize the underlying HTTP client / Fetch f
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { LatticeClient } from "@anduril-industries/lattice-sdk";
+import { LatticeClient } from "Lattice";
 
 const client = new LatticeClient({
     ...
