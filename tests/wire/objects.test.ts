@@ -4,10 +4,10 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Objects", () => {
+describe("ObjectsClient", () => {
     test("listObjects (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             path_metadatas: [
@@ -20,7 +20,13 @@ describe("Objects", () => {
             ],
             next_page_token: "next_page_token",
         };
-        server.mockEndpoint().get("/api/v1/objects").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint({ once: false })
+            .get("/api/v1/objects")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
         const expected = {
             path_metadatas: [
@@ -36,12 +42,7 @@ describe("Objects", () => {
             ],
             next_page_token: "next_page_token",
         };
-        const page = await client.objects.listObjects({
-            prefix: "prefix",
-            sinceTimestamp: "2024-01-15T09:30:00Z",
-            pageToken: "pageToken",
-            allObjectsInMesh: true,
-        });
+        const page = await client.objects.listObjects();
 
         expect(expected.path_metadatas).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -51,10 +52,16 @@ describe("Objects", () => {
 
     test("listObjects (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
-        server.mockEndpoint().get("/api/v1/objects").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint({ once: false })
+            .get("/api/v1/objects")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
             return await client.objects.listObjects();
@@ -63,10 +70,16 @@ describe("Objects", () => {
 
     test("listObjects (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
-        server.mockEndpoint().get("/api/v1/objects").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint({ once: false })
+            .get("/api/v1/objects")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
             return await client.objects.listObjects();
@@ -75,10 +88,16 @@ describe("Objects", () => {
 
     test("listObjects (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
-        server.mockEndpoint().get("/api/v1/objects").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint({ once: false })
+            .get("/api/v1/objects")
+            .respondWith()
+            .statusCode(500)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
             return await client.objects.listObjects();
@@ -87,17 +106,19 @@ describe("Objects", () => {
 
     test("deleteObject (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         server.mockEndpoint().delete("/api/v1/objects/objectPath").respondWith().statusCode(200).build();
 
-        const response = await client.objects.deleteObject("objectPath");
+        const response = await client.objects.deleteObject({
+            objectPath: "objectPath",
+        });
         expect(response).toEqual(undefined);
     });
 
     test("deleteObject (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -109,13 +130,15 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("deleteObject (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -127,13 +150,15 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("deleteObject (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -145,13 +170,15 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("deleteObject (5)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -163,23 +190,27 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.deleteObject("objectPath");
+            return await client.objects.deleteObject({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.InternalServerError);
     });
 
     test("getObjectMetadata (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         server.mockEndpoint().head("/api/v1/objects/objectPath").respondWith().statusCode(200).build();
 
-        const headers = await client.objects.getObjectMetadata("objectPath");
+        const headers = await client.objects.getObjectMetadata({
+            objectPath: "objectPath",
+        });
         expect(headers).toBeInstanceOf(Headers);
     });
 
     test("getObjectMetadata (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -191,13 +222,15 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.getObjectMetadata("objectPath");
+            return await client.objects.getObjectMetadata({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("getObjectMetadata (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -209,13 +242,15 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.getObjectMetadata("objectPath");
+            return await client.objects.getObjectMetadata({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getObjectMetadata (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -227,7 +262,9 @@ describe("Objects", () => {
             .build();
 
         await expect(async () => {
-            return await client.objects.getObjectMetadata("objectPath");
+            return await client.objects.getObjectMetadata({
+                objectPath: "objectPath",
+            });
         }).rejects.toThrow(Lattice.InternalServerError);
     });
 });
