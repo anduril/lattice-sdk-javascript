@@ -3,11 +3,12 @@
 import type * as Lattice from "../index.js";
 
 /**
- * Relations describes the relationships of this Task, such as assignment, or if the Task has any parents.
+ * Describes the relationships associated with this task: the system assigned to
+ *  execute the task, and the parent task, if one exists.
  */
 export interface Relations {
-    /** Who or what, if anyone, this Task is currently assigned to. */
+    /** The system, user, or team assigned to the task. */
     assignee?: Lattice.Principal;
-    /** If this Task is a "sub-Task", what is its parent, none if empty. */
+    /** Identifies the parent task if the task is a sub-task. */
     parentTaskId?: string;
 }

@@ -4,10 +4,10 @@ import * as Lattice from "../../src/api/index";
 import { LatticeClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("Tasks", () => {
+describe("TasksClient", () => {
     test("createTask (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             version: { taskId: "taskId", definitionVersion: 1, statusVersion: 1 },
@@ -134,7 +134,7 @@ describe("Tasks", () => {
 
     test("createTask (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -153,7 +153,7 @@ describe("Tasks", () => {
 
     test("createTask (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -172,7 +172,7 @@ describe("Tasks", () => {
 
     test("getTask (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
             version: { taskId: "taskId", definitionVersion: 1, statusVersion: 1 },
@@ -215,7 +215,9 @@ describe("Tasks", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tasks.getTask("taskId");
+        const response = await client.tasks.getTask({
+            taskId: "taskId",
+        });
         expect(response).toEqual({
             version: {
                 taskId: "taskId",
@@ -298,7 +300,7 @@ describe("Tasks", () => {
 
     test("getTask (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -310,13 +312,15 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.getTask("taskId");
+            return await client.tasks.getTask({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("getTask (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -328,13 +332,15 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.getTask("taskId");
+            return await client.tasks.getTask({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("getTask (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { key: "value" };
         server
@@ -346,13 +352,15 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.getTask("taskId");
+            return await client.tasks.getTask({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("updateTaskStatus (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             version: { taskId: "taskId", definitionVersion: 1, statusVersion: 1 },
@@ -396,7 +404,9 @@ describe("Tasks", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tasks.updateTaskStatus("taskId");
+        const response = await client.tasks.updateTaskStatus({
+            taskId: "taskId",
+        });
         expect(response).toEqual({
             version: {
                 taskId: "taskId",
@@ -479,7 +489,7 @@ describe("Tasks", () => {
 
     test("updateTaskStatus (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -492,13 +502,15 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.updateTaskStatus("taskId");
+            return await client.tasks.updateTaskStatus({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.BadRequestError);
     });
 
     test("updateTaskStatus (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -511,13 +523,15 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.updateTaskStatus("taskId");
+            return await client.tasks.updateTaskStatus({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
 
     test("updateTaskStatus (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -530,13 +544,15 @@ describe("Tasks", () => {
             .build();
 
         await expect(async () => {
-            return await client.tasks.updateTaskStatus("taskId");
+            return await client.tasks.updateTaskStatus({
+                taskId: "taskId",
+            });
         }).rejects.toThrow(Lattice.NotFoundError);
     });
 
     test("queryTasks (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             tasks: [
@@ -580,7 +596,7 @@ describe("Tasks", () => {
 
     test("queryTasks (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -599,7 +615,7 @@ describe("Tasks", () => {
 
     test("queryTasks (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -618,7 +634,7 @@ describe("Tasks", () => {
 
     test("queryTasks (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -637,7 +653,7 @@ describe("Tasks", () => {
 
     test("listenAsAgent (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
             executeRequest: {
@@ -687,7 +703,7 @@ describe("Tasks", () => {
 
     test("listenAsAgent (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server
@@ -706,7 +722,7 @@ describe("Tasks", () => {
 
     test("listenAsAgent (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new LatticeClient({ token: "test", environment: server.baseUrl });
+        const client = new LatticeClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
         server

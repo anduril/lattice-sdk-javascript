@@ -3,9 +3,9 @@
 import type * as Lattice from "../index.js";
 
 /**
- * Allocation contains a list of agents allocated to a Task.
+ * Allocation contains a list of agents allocated to a task.
  */
 export interface Allocation {
-    /** Agents actively being utilized in a Task. */
+    /** Agents actively being utilized in a task. */
     activeAgents?: Lattice.Agent[];
 }
