@@ -3,7 +3,7 @@
 import type * as Lattice from "../index.js";
 
 /**
- * A Principal is an entity that has authority over this Task.
+ * A Principal is an entity that has authority over this task.
  */
 export interface Principal {
     system?: Lattice.System;

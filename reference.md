@@ -57,7 +57,7 @@ await client.entities.publishEntity({});
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -69,7 +69,7 @@ await client.entities.publishEntity({});
 </dl>
 </details>
 
-<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">getEntity</a>(entityId) -> Lattice.Entity</code></summary>
+<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">getEntity</a>({ ...params }) -> Lattice.Entity</code></summary>
 <dl>
 <dd>
 
@@ -82,7 +82,9 @@ await client.entities.publishEntity({});
 <dd>
 
 ```typescript
-await client.entities.getEntity("entityId");
+await client.entities.getEntity({
+    entityId: "entityId"
+});
 
 ```
 </dd>
@@ -98,7 +100,7 @@ await client.entities.getEntity("entityId");
 <dl>
 <dd>
 
-**entityId:** `string` — ID of the entity to return
+**request:** `Lattice.GetEntityRequest` 
     
 </dd>
 </dl>
@@ -106,7 +108,7 @@ await client.entities.getEntity("entityId");
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -118,7 +120,7 @@ await client.entities.getEntity("entityId");
 </dl>
 </details>
 
-<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">overrideEntity</a>(entityId, fieldPath, { ...params }) -> Lattice.Entity</code></summary>
+<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">overrideEntity</a>({ ...params }) -> Lattice.Entity</code></summary>
 <dl>
 <dd>
 
@@ -151,7 +153,10 @@ concurrently for the same field path, the last writer wins.
 <dd>
 
 ```typescript
-await client.entities.overrideEntity("entityId", "mil_view.disposition");
+await client.entities.overrideEntity({
+    entityId: "entityId",
+    fieldPath: "mil_view.disposition"
+});
 
 ```
 </dd>
@@ -167,22 +172,6 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**entityId:** `string` — The unique ID of the entity to override
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**fieldPath:** `string` — fieldPath to override
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request:** `Lattice.EntityOverride` 
     
 </dd>
@@ -191,7 +180,7 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -203,7 +192,7 @@ await client.entities.overrideEntity("entityId", "mil_view.disposition");
 </dl>
 </details>
 
-<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">removeEntityOverride</a>(entityId, fieldPath) -> Lattice.Entity</code></summary>
+<details><summary><code>client.entities.<a href="/src/api/resources/entities/client/Client.ts">removeEntityOverride</a>({ ...params }) -> Lattice.Entity</code></summary>
 <dl>
 <dd>
 
@@ -230,7 +219,10 @@ This operation clears the override value from the specified field path on the en
 <dd>
 
 ```typescript
-await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
+await client.entities.removeEntityOverride({
+    entityId: "entityId",
+    fieldPath: "mil_view.disposition"
+});
 
 ```
 </dd>
@@ -246,7 +238,7 @@ await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**entityId:** `string` — The unique ID of the entity to undo an override from.
+**request:** `Lattice.RemoveEntityOverrideRequest` 
     
 </dd>
 </dl>
@@ -254,15 +246,7 @@ await client.entities.removeEntityOverride("entityId", "mil_view.disposition");
 <dl>
 <dd>
 
-**fieldPath:** `string` — The fieldPath to clear overrides from.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -335,7 +319,7 @@ await client.entities.longPollEntityEvents({
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -359,7 +343,25 @@ await client.entities.longPollEntityEvents({
 <dl>
 <dd>
 
-Establishes a persistent connection to stream entity events as they occur.
+Establishes a server-sent events (SSE) connection that streams entity data in real-time.
+This is a one-way connection from server to client that follows the SSE protocol with text/event-stream content type.
+
+This endpoint enables clients to maintain a real-time view of the common operational picture (COP)
+by first streaming all pre-existing entities that match filter criteria, then continuously delivering
+updates as entities are created, modified, or deleted.
+
+The server first sends events with type PREEXISTING for all live entities matching the filter that existed before the stream was open,
+then streams CREATE events for newly created entities, UPDATE events when existing entities change, and DELETED events when entities are removed. The stream remains open
+indefinitely unless preExistingOnly is set to true.
+
+Heartbeat messages can be configured to maintain connection health and detect disconnects by setting the heartbeatIntervalMS
+parameter. These heartbeats help keep the connection alive and allow clients to verify the server is still responsive.
+
+Clients can optimize bandwidth usage by specifying which entity components they need populated using the componentsToInclude parameter.
+This allows receiving only relevant data instead of complete entities.
+
+The connection automatically recovers from temporary disconnections, resuming the stream where it left off. Unlike polling approaches,
+this provides real-time updates with minimal latency and reduced server load.
 </dd>
 </dl>
 </dd>
@@ -401,7 +403,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**requestOptions:** `Entities.RequestOptions` 
+**requestOptions:** `EntitiesClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -426,8 +428,14 @@ for await (const item of response) {
 <dl>
 <dd>
 
-Submit a request to create a task and schedule it for delivery. Tasks, once delivered, will 
-be asynchronously updated by their destined agent. 
+Creates a new Task in the system with the specified parameters.
+
+This method initiates a new task with a unique ID (either provided or auto-generated),
+sets the initial task state to STATUS_CREATED, and establishes task ownership. The task
+can be assigned to a specific agent through the Relations field.
+
+Once created, a task enters the lifecycle workflow and can be tracked, updated, and managed
+through other Tasks API endpoints.
 </dd>
 </dl>
 </dd>
@@ -466,7 +474,7 @@ await client.tasks.createTask();
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -478,56 +486,7 @@ await client.tasks.createTask();
 </dl>
 </details>
 
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getTask</a>(taskId) -> Lattice.Task</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.tasks.getTask("taskId");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**taskId:** `string` — ID of task to return
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Tasks.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">updateTaskStatus</a>(taskId, { ...params }) -> Lattice.Task</code></summary>
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">getTask</a>({ ...params }) -> Lattice.Task</code></summary>
 <dl>
 <dd>
 
@@ -539,7 +498,14 @@ await client.tasks.getTask("taskId");
 <dl>
 <dd>
 
-Update the status of a task.
+Retrieves a specific Task by its ID, with options to select a particular task version or view.
+
+This method returns detailed information about a task including its current status,
+specification, relations, and other metadata. The response includes the complete Task object
+with all associated fields.
+
+By default, the method returns the latest definition version of the task from the manager's
+perspective.
 </dd>
 </dl>
 </dd>
@@ -554,7 +520,9 @@ Update the status of a task.
 <dd>
 
 ```typescript
-await client.tasks.updateTaskStatus("taskId");
+await client.tasks.getTask({
+    taskId: "taskId"
+});
 
 ```
 </dd>
@@ -570,10 +538,77 @@ await client.tasks.updateTaskStatus("taskId");
 <dl>
 <dd>
 
-**taskId:** `string` — ID of task to update status of
+**request:** `Lattice.GetTaskRequest` 
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TasksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">updateTaskStatus</a>({ ...params }) -> Lattice.Task</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the status of a Task as it progresses through its lifecycle.
+
+This method allows agents or operators to report the current state of a task,
+which could include changes to task status, and error information.
+
+Each status update increments the task's status_version. When updating status,
+clients must provide the current version to ensure consistency. The system rejects
+updates with mismatched versions to prevent race conditions.
+
+Terminal states (`STATUS_DONE_OK` and `STATUS_DONE_NOT_OK`) are permanent; once a task
+reaches these states, no further updates are allowed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tasks.updateTaskStatus({
+    taskId: "taskId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
 
 <dl>
 <dd>
@@ -586,7 +621,7 @@ await client.tasks.updateTaskStatus("taskId");
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -610,7 +645,21 @@ await client.tasks.updateTaskStatus("taskId");
 <dl>
 <dd>
 
-Query for tasks by a specified search criteria.
+Searches for Tasks that match specified filtering criteria and returns matching tasks in paginated form.
+
+This method allows filtering tasks based on multiple criteria including:
+- Parent task relationships
+- Task status (with inclusive or exclusive filtering)
+- Update time ranges
+- Task view (manager or agent perspective)
+- Task assignee
+- Task type (via exact URL matches or prefix matching)
+
+Results are returned in pages. When more results are available than can be returned in a single
+response, a page_token is provided that can be used in subsequent requests to retrieve the next
+set of results.
+
+By default, this returns the latest task version for each matching task from the manager's perspective.
 </dd>
 </dl>
 </dd>
@@ -649,7 +698,7 @@ await client.tasks.queryTasks();
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -673,8 +722,25 @@ await client.tasks.queryTasks();
 <dl>
 <dd>
 
-This is a long polling API that will block until a new task is ready for delivery. If no new task is 
-available then the server will hold on to your request for up to 5 minutes, after that 5 minute timeout 
+Establishes a server streaming connection that delivers tasks to taskable agents for execution.
+
+This method creates a persistent connection from Tasks API to an agent, allowing the server
+to push tasks to the agent as they become available. The agent receives a stream of tasks that
+match its selector criteria (entity IDs).
+
+The stream delivers three types of requests:
+- ExecuteRequest: Contains a new task for the agent to execute
+- CancelRequest: Indicates a task should be canceled
+- CompleteRequest: Indicates a task should be completed
+
+This is the primary method for taskable agents to receive and process tasks in real-time.
+Agents should maintain this connection and process incoming tasks according to their capabilities.
+
+When an agent receives a task, it should update the task status using the UpdateStatus endpoint
+to provide progress information back to Tasks API.
+
+This is a long polling API that will block until a new task is ready for delivery. If no new task is
+available then the server will hold on to your request for up to 5 minutes, after that 5 minute timeout
 period you will be expected to reinitiate a new request.
 </dd>
 </dl>
@@ -714,7 +780,7 @@ await client.tasks.listenAsAgent();
 <dl>
 <dd>
 
-**requestOptions:** `Tasks.RequestOptions` 
+**requestOptions:** `TasksClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -727,7 +793,7 @@ await client.tasks.listenAsAgent();
 </details>
 
 ## Objects
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page<Lattice.PathMetadata></code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page<Lattice.PathMetadata, Lattice.ListResponse></code></summary>
 <dl>
 <dd>
 
@@ -754,26 +820,19 @@ Lists objects in your environment. You can define a prefix to list a subset of y
 <dd>
 
 ```typescript
-const response = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
-for await (const item of response) {
+const pageableResponse = await client.objects.listObjects();
+for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.objects.listObjects({
-    prefix: "prefix",
-    sinceTimestamp: "2024-01-15T09:30:00Z",
-    pageToken: "pageToken",
-    allObjectsInMesh: true
-});
+let page = await client.objects.listObjects();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
+
+// You can also access the underlying response
+const response = page.response;
 
 ```
 </dd>
@@ -797,7 +856,7 @@ while (page.hasNextPage()) {
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -809,7 +868,7 @@ while (page.hasNextPage()) {
 </dl>
 </details>
 
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObject</a>(objectPath, { ...params }) -> core.BinaryResponse</code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObject</a>({ ...params }) -> core.BinaryResponse</code></summary>
 <dl>
 <dd>
 
@@ -836,7 +895,9 @@ Fetches an object from your environment using the objectPath path parameter.
 <dd>
 
 ```typescript
-await client.objects.getObject("objectPath");
+await client.objects.getObject({
+    objectPath: "objectPath"
+});
 
 ```
 </dd>
@@ -852,14 +913,6 @@ await client.objects.getObject("objectPath");
 <dl>
 <dd>
 
-**objectPath:** `string` — The path of the object to fetch.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request:** `Lattice.GetObjectRequest` 
     
 </dd>
@@ -868,7 +921,7 @@ await client.objects.getObject("objectPath");
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -880,7 +933,7 @@ await client.objects.getObject("objectPath");
 </dl>
 </details>
 
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">deleteObject</a>(objectPath) -> void</code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">deleteObject</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
 
@@ -907,7 +960,9 @@ Deletes an object from your environment given the objectPath path parameter.
 <dd>
 
 ```typescript
-await client.objects.deleteObject("objectPath");
+await client.objects.deleteObject({
+    objectPath: "objectPath"
+});
 
 ```
 </dd>
@@ -923,7 +978,7 @@ await client.objects.deleteObject("objectPath");
 <dl>
 <dd>
 
-**objectPath:** `string` — The path of the object to delete.
+**request:** `Lattice.DeleteObjectRequest` 
     
 </dd>
 </dl>
@@ -931,7 +986,7 @@ await client.objects.deleteObject("objectPath");
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -943,7 +998,7 @@ await client.objects.deleteObject("objectPath");
 </dl>
 </details>
 
-<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObjectMetadata</a>(objectPath) -> Headers</code></summary>
+<details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">getObjectMetadata</a>({ ...params }) -> Headers</code></summary>
 <dl>
 <dd>
 
@@ -970,7 +1025,9 @@ Returns metadata for a specified object path. Use this to fetch metadata such as
 <dd>
 
 ```typescript
-await client.objects.getObjectMetadata("objectPath");
+await client.objects.getObjectMetadata({
+    objectPath: "objectPath"
+});
 
 ```
 </dd>
@@ -986,7 +1043,7 @@ await client.objects.getObjectMetadata("objectPath");
 <dl>
 <dd>
 
-**objectPath:** `string` — The path of the object to query.
+**request:** `Lattice.GetObjectMetadataRequest` 
     
 </dd>
 </dl>
@@ -994,7 +1051,7 @@ await client.objects.getObjectMetadata("objectPath");
 <dl>
 <dd>
 
-**requestOptions:** `Objects.RequestOptions` 
+**requestOptions:** `ObjectsClient.RequestOptions` 
     
 </dd>
 </dl>

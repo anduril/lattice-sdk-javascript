@@ -23,7 +23,7 @@ export interface FieldOfView {
      *  the positive X axis in the sensor frame will be transformed into the ray along the sensor direction in the ENU
      *  frame when transformed by the quaternion contained in this pose.
      */
-    centerRayPose?: Lattice.Pose;
+    centerRayPose?: Lattice.EntityManagerPose;
     /** Horizontal field of view in radians. */
     horizontalFov?: number;
     /** Vertical field of view in radians. */
