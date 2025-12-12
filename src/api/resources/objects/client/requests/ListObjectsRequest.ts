@@ -2,12 +2,7 @@
 
 /**
  * @example
- *     {
- *         prefix: "prefix",
- *         sinceTimestamp: "2024-01-15T09:30:00Z",
- *         pageToken: "pageToken",
- *         allObjectsInMesh: true
- *     }
+ *     {}
  */
 export interface ListObjectsRequest {
     /** Filters the objects based on the specified prefix path. If no path is specified, all objects are returned. */
