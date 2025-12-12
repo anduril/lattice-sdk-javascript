@@ -11,6 +11,11 @@ export class InsufficientStorageError extends errors.LatticeError {
             body: body,
             rawResponse: rawResponse,
         });
-        Object.setPrototypeOf(this, InsufficientStorageError.prototype);
+        Object.setPrototypeOf(this, new.target.prototype);
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, this.constructor);
+        }
+
+        this.name = this.constructor.name;
     }
 }

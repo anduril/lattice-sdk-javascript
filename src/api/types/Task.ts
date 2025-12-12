@@ -3,37 +3,45 @@
 import type * as Lattice from "../index.js";
 
 /**
- * A Task is something an agent can be asked to do.
+ * A task represents a structured unit of work that can be assigned to an agent for execution.
+ *
+ *  Tasks are the fundamental building blocks of work assignment in the Lattice.
+ *  Each task has a unique identifier, a specification defining what needs to be done,
+ *  status information tracking its progress, and various metadata facilitating its lifecycle management.
+ *
+ *  Tasks can be related to each other, through parent-child relationships, assigned to
+ *  specific agents, and tracked through a well-defined state machine from creation to completion.
+ *  They support rich status reporting, including progress updates, error handling, and results.
  */
 export interface Task {
-    /** Version of this Task. */
+    /** Version of this task. */
     version?: Lattice.TaskVersion;
-    /** DEPRECATED: Human readable display name for this Task, should be short (<100 chars). */
+    /** DEPRECATED: Human readable display name for this task, should be short (<100 chars). */
     displayName?: string;
-    /** Full Task parameterization. */
+    /** The path for the Protobuf task definition, and the complete task data. */
     specification?: Lattice.GoogleProtobufAny;
-    /** Records who created this Task. This field will not change after the Task has been created. */
+    /** Records who created this task. This field will not change after the task has been created. */
     createdBy?: Lattice.Principal;
-    /** Records who updated this Task last. */
+    /** Records who updated this task last. */
     lastUpdatedBy?: Lattice.Principal;
     /** Records the time of last update. */
     lastUpdateTime?: string;
-    /** The status of this Task. */
+    /** The status of this task. */
     status?: Lattice.TaskStatus;
-    /** If the Task has been scheduled to execute, what time it should execute at. */
+    /** If the task has been scheduled to execute, what time it should execute at. */
     scheduledTime?: string;
-    /** Any related Tasks associated with this, typically includes an assignee for this Task and/or a parent. */
+    /** Any related Tasks associated with this, typically includes an assignee for this task and/or a parent. */
     relations?: Lattice.Relations;
-    /** Longer, free form human readable description of this Task */
+    /** Longer, free form human readable description of this task */
     description?: string;
     /**
-     * If set, execution of this Task is managed elsewhere, not by Task Manager.
-     *  In other words, Task manager will not attempt to update the assigned agent with execution instructions.
+     * If set, execution of this task is managed elsewhere, not by Task Manager.
+     *  In other words, task manager will not attempt to update the assigned agent with execution instructions.
      */
     isExecutedElsewhere?: boolean;
-    /** Time of Task creation. */
+    /** Time of task creation. */
     createTime?: string;
-    /** If populated, designates this to be a replicated Task. */
+    /** If populated, designates this to be a replicated task. */
     replication?: Lattice.Replication;
     /**
      * If populated, indicates an initial set of entities that can be used to execute an entity aware task
@@ -43,7 +51,7 @@ export interface Task {
      */
     initialEntities?: Lattice.TaskEntity[];
     /**
-     * The networked owner of this Task. It is used to ensure that linear writes occur on the node responsible
+     * The networked owner of this task. It is used to ensure that linear writes occur on the node responsible
      *  for replication of task data to other nodes running Task Manager.
      */
     owner?: Lattice.Owner;

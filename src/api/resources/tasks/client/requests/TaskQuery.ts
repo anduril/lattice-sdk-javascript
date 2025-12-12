@@ -9,7 +9,7 @@ export interface TaskQuery {
     pageToken?: string;
     /**
      * If present matches Tasks with this parent Task ID.
-     * Note: this is mutually exclusive with all other query parameters, i.e., either provide parent Task ID, or
+     * Note: this is mutually exclusive with all other query parameters, for example, either provide parent task ID, or
      * any of the remaining parameters, but not both.
      */
     parentTaskId?: string;
