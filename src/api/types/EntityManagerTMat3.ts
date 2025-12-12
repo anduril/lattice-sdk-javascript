@@ -3,7 +3,7 @@
 /**
  * Symmetric 3d matrix only representing the upper right triangle.
  */
-export interface TMat3 {
+export interface EntityManagerTMat3 {
     mxx?: number;
     mxy?: number;
     mxz?: number;
