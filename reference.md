@@ -792,6 +792,88 @@ await client.tasks.listenAsAgent();
 </dl>
 </details>
 
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">listenAsAgentStream</a>({ ...params }) -> core.Stream<Lattice.ListenAsAgentStreamResponse></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Establishes a server streaming connection that delivers tasks to taskable agents for execution
+using Server-Sent Events (SSE).
+
+This method creates a connection from the Tasks API to an agent that streams relevant tasks to the listener agent. The agent receives a stream of tasks that match the entities specified by the tasks' selector criteria.
+
+The stream delivers three types of requests:
+- `ExecuteRequest`: Contains a new task for the agent to execute
+- `CancelRequest`: Indicates a task should be canceled
+- `CompleteRequest`: Indicates a task should be completed
+
+Additionally, heartbeat messages are sent periodically to maintain the connection.
+
+This is recommended method for taskable agents to receive and process tasks in real-time.
+Agents should maintain connection to this stream and process incoming tasks according to their capabilities. 
+
+When an agent receives a task, it should update the task status using the `UpdateStatus` endpoint
+to provide progress information back to Tasks API.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.tasks.listenAsAgentStream();
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Lattice.AgentStreamRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TasksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Objects
 <details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page<Lattice.PathMetadata, Lattice.ListResponse></code></summary>
 <dl>
