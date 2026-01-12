@@ -710,6 +710,75 @@ await client.tasks.queryTasks();
 </dl>
 </details>
 
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">streamTasks</a>({ ...params }) -> core.Stream<Lattice.StreamTasksResponse></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Establishes a server streaming connection that delivers task updates in real-time using Server-Sent Events (SSE).
+
+The stream delivers all existing non-terminal tasks when first connected, followed by real-time
+updates for task creation and status changes. Additionally, heartbeat messages are sent periodically to maintain the connection.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.tasks.streamTasks();
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Lattice.TaskStreamRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TasksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">listenAsAgent</a>({ ...params }) -> Lattice.AgentRequest</code></summary>
 <dl>
 <dd>
@@ -1123,6 +1192,70 @@ await client.objects.getObjectMetadata({
 <dd>
 
 **requestOptions:** `ObjectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## OAuth2
+<details><summary><code>client.oAuth2.<a href="/src/api/resources/oAuth2/client/Client.ts">getToken</a>({ ...params }) -> Lattice.GetTokenResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Support the client credentials authorization flow
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.oAuth2.getToken({});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Lattice.GetTokenRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OAuth2Client.RequestOptions` 
     
 </dd>
 </dl>
