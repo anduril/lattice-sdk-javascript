@@ -356,6 +356,82 @@ export class TasksClient {
     }
 
     /**
+     * Establishes a server streaming connection that delivers task updates in real-time using Server-Sent Events (SSE).
+     *
+     * The stream delivers all existing non-terminal tasks when first connected, followed by real-time
+     * updates for task creation and status changes. Additionally, heartbeat messages are sent periodically to maintain the connection.
+     */
+    public streamTasks(
+        request: Lattice.TaskStreamRequest = {},
+        requestOptions?: TasksClient.RequestOptions,
+    ): core.HttpResponsePromise<core.Stream<Lattice.StreamTasksResponse>> {
+        return core.HttpResponsePromise.fromPromise(this.__streamTasks(request, requestOptions));
+    }
+
+    private async __streamTasks(
+        request: Lattice.TaskStreamRequest = {},
+        requestOptions?: TasksClient.RequestOptions,
+    ): Promise<core.WithRawResponse<core.Stream<Lattice.StreamTasksResponse>>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher<ReadableStream>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LatticeEnvironment.Default,
+                "api/v1/tasks/stream",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            responseType: "sse",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: new core.Stream({
+                    stream: _response.body,
+                    parse: (data) => data as any,
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "sse",
+                        streamTerminator: "[DONE]",
+                    },
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.LatticeError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/api/v1/tasks/stream");
+    }
+
+    /**
      * Establishes a server streaming connection that delivers tasks to taskable agents for execution.
      *
      * This method creates a persistent connection from Tasks API to an agent, allowing the server
