@@ -1,8 +1,11 @@
 {
     "name": "@anduril-industries/lattice-sdk",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "private": false,
-    "repository": "github:anduril/lattice-sdk-javascript",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/anduril/lattice-sdk-javascript.git"
+    },
     "license": "See LICENSE",
     "type": "commonjs",
     "main": "./dist/cjs/index.js",
