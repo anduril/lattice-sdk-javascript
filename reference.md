@@ -1133,3 +1133,67 @@ await client.objects.getObjectMetadata({
 </dd>
 </dl>
 </details>
+
+## OAuth2
+<details><summary><code>client.oAuth2.<a href="/src/api/resources/oAuth2/client/Client.ts">getToken</a>({ ...params }) -> Lattice.GetTokenResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Support the client credentials authorization flow
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.oAuth2.getToken({});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Lattice.GetTokenRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `OAuth2Client.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
