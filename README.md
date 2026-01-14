@@ -14,6 +14,7 @@ The Lattice SDK TypeScript library provides convenient access to the Lattice SDK
 - [Support](#support)
 - [Reference](#reference)
 - [Usage](#usage)
+- [Authentication](#authentication)
 - [Request and Response Types](#request-and-response-types)
 - [Exception Handling](#exception-handling)
 - [Streaming Response](#streaming-response)
@@ -61,9 +62,40 @@ Instantiate and use the client with the following:
 ```typescript
 import { LatticeClient } from "@anduril-industries/lattice-sdk";
 
-const client = new LatticeClient({ token: "YOUR_TOKEN" });
+const client = new LatticeClient({ clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET" });
 await client.entities.longPollEntityEvents({
     sessionToken: "sessionToken"
+});
+```
+
+## Authentication
+
+The SDK supports OAuth authentication with two options:
+
+**Option 1: OAuth Client Credentials Flow**
+
+Use this when you want the SDK to automatically handle OAuth token retrieval and refreshing:
+
+```typescript
+import { LatticeClient } from "@anduril-industries/lattice-sdk";
+
+const client = new LatticeClient({
+    clientId: "YOUR_CLIENT_ID",
+    clientSecret: "YOUR_CLIENT_SECRET",
+    ...
+});
+```
+
+**Option 2: Token Override**
+
+Use this when you already have a valid bearer token and want to skip the OAuth flow:
+
+```typescript
+import { LatticeClient } from "@anduril-industries/lattice-sdk";
+
+const client = new LatticeClient({
+    token: "my-pre-generated-bearer-token",
+    ...
 });
 ```
 
@@ -108,7 +140,7 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 ```typescript
 import { LatticeClient } from "@anduril-industries/lattice-sdk";
 
-const client = new LatticeClient({ token: "YOUR_TOKEN" });
+const client = new LatticeClient({ clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET" });
 const response = await client.entities.streamEntities();
 for await (const item of response) {
     console.log(item);
@@ -556,7 +588,7 @@ List endpoints are paginated. The SDK provides an iterator so that you can simpl
 ```typescript
 import { LatticeClient } from "@anduril-industries/lattice-sdk";
 
-const client = new LatticeClient({ token: "YOUR_TOKEN" });
+const client = new LatticeClient({ clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET" });
 const pageableResponse = await client.objects.listObjects();
 for await (const item of pageableResponse) {
     console.log(item);
