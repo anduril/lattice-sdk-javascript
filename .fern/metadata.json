@@ -5,5 +5,5 @@
     "generatorConfig": {
         "namespaceExport": "Lattice"
     },
-    "sdkVersion": "5.0.0"
+    "sdkVersion": "4.1.0"
 }
