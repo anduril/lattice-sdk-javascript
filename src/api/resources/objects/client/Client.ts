@@ -45,19 +45,12 @@ export class ObjectsClient {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Lattice.ListObjectsRequest): Promise<core.WithRawResponse<Lattice.ListResponse>> => {
                 const { prefix, sinceTimestamp, pageToken, allObjectsInMesh } = request;
-                const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
-                if (prefix != null) {
-                    _queryParams.prefix = prefix;
-                }
-                if (sinceTimestamp != null) {
-                    _queryParams.sinceTimestamp = sinceTimestamp;
-                }
-                if (pageToken != null) {
-                    _queryParams.pageToken = pageToken;
-                }
-                if (allObjectsInMesh != null) {
-                    _queryParams.allObjectsInMesh = allObjectsInMesh.toString();
-                }
+                const _queryParams: Record<string, unknown> = {
+                    prefix,
+                    sinceTimestamp,
+                    pageToken,
+                    allObjectsInMesh,
+                };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
                     _authRequest.headers,
@@ -142,10 +135,7 @@ export class ObjectsClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Accept-Encoding": acceptEncoding != null ? acceptEncoding : undefined,
-                Priority: priority != null ? priority : undefined,
-            }),
+            mergeOnlyDefinedHeaders({ "Accept-Encoding": acceptEncoding, Priority: priority }),
             requestOptions?.headers,
         );
         const _response = await core.fetcher<core.BinaryResponse>({
