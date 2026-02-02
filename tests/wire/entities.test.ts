@@ -2001,7 +2001,7 @@ describe("EntitiesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { errorCode: "errorCode", message: "message" };
         server
             .mockEndpoint()
             .post("/api/v1/entities/events")
@@ -2029,7 +2029,7 @@ describe("EntitiesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { errorCode: "errorCode", message: "message" };
         server
             .mockEndpoint()
             .post("/api/v1/entities/events")
