@@ -55,4 +55,8 @@ export interface Task {
      *  for replication of task data to other nodes running Task Manager.
      */
     owner?: Lattice.Owner;
+    /** Sets an optional try strategy for tasks. Use this option to control how Lattice attempts to retry delivery of tasks to assets with intermittent access or network connectivity to your environment. */
+    retryStrategy?: Lattice.RetryStrategy;
+    /** The current delivery state of a task. */
+    deliveryState?: Lattice.DeliveryState;
 }

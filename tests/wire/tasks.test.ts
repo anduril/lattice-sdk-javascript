@@ -49,6 +49,12 @@ describe("TasksClient", () => {
             replication: { staleTime: "2024-01-15T09:30:00Z" },
             initialEntities: [{ snapshot: true }],
             owner: { entityId: "entityId" },
+            retryStrategy: { fixedRetryStrategy: { retryInterval: "retryInterval" } },
+            deliveryState: {
+                status: "DELIVERY_STATUS_INVALID",
+                error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
+                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
+            },
         };
         server
             .mockEndpoint()
@@ -136,6 +142,22 @@ describe("TasksClient", () => {
             ],
             owner: {
                 entityId: "entityId",
+            },
+            retryStrategy: {
+                fixedRetryStrategy: {
+                    retryInterval: "retryInterval",
+                },
+            },
+            deliveryState: {
+                status: "DELIVERY_STATUS_INVALID",
+                error: {
+                    code: "DELIVERY_ERROR_CODE_INVALID",
+                    message: "message",
+                },
+                deliveryConstraints: {
+                    deliverAfter: "2024-01-15T09:30:00Z",
+                    deliverBefore: "2024-01-15T09:30:00Z",
+                },
             },
         });
     });
@@ -235,6 +257,12 @@ describe("TasksClient", () => {
             replication: { staleTime: "2024-01-15T09:30:00Z" },
             initialEntities: [{ snapshot: true }],
             owner: { entityId: "entityId" },
+            retryStrategy: { fixedRetryStrategy: { retryInterval: "retryInterval" } },
+            deliveryState: {
+                status: "DELIVERY_STATUS_INVALID",
+                error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
+                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
+            },
         };
         server
             .mockEndpoint()
@@ -323,6 +351,22 @@ describe("TasksClient", () => {
             ],
             owner: {
                 entityId: "entityId",
+            },
+            retryStrategy: {
+                fixedRetryStrategy: {
+                    retryInterval: "retryInterval",
+                },
+            },
+            deliveryState: {
+                status: "DELIVERY_STATUS_INVALID",
+                error: {
+                    code: "DELIVERY_ERROR_CODE_INVALID",
+                    message: "message",
+                },
+                deliveryConstraints: {
+                    deliverAfter: "2024-01-15T09:30:00Z",
+                    deliverBefore: "2024-01-15T09:30:00Z",
+                },
             },
         });
     });
@@ -451,6 +495,12 @@ describe("TasksClient", () => {
             replication: { staleTime: "2024-01-15T09:30:00Z" },
             initialEntities: [{ snapshot: true }],
             owner: { entityId: "entityId" },
+            retryStrategy: { fixedRetryStrategy: { retryInterval: "retryInterval" } },
+            deliveryState: {
+                status: "DELIVERY_STATUS_INVALID",
+                error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
+                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
+            },
         };
         server
             .mockEndpoint()
@@ -540,6 +590,22 @@ describe("TasksClient", () => {
             ],
             owner: {
                 entityId: "entityId",
+            },
+            retryStrategy: {
+                fixedRetryStrategy: {
+                    retryInterval: "retryInterval",
+                },
+            },
+            deliveryState: {
+                status: "DELIVERY_STATUS_INVALID",
+                error: {
+                    code: "DELIVERY_ERROR_CODE_INVALID",
+                    message: "message",
+                },
+                deliveryConstraints: {
+                    deliverAfter: "2024-01-15T09:30:00Z",
+                    deliverBefore: "2024-01-15T09:30:00Z",
+                },
             },
         });
     });
