@@ -2,7 +2,7 @@
 
 export interface RouteDetails {
     /** Free form text giving the name of the entity's destination */
-    destinationName?: string;
+    destinationName?: string | undefined;
     /** Estimated time of arrival at destination */
-    estimatedArrivalTime?: string;
+    estimatedArrivalTime?: string | undefined;
 }

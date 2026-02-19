@@ -7,5 +7,5 @@ import type * as Lattice from "../index.js";
  */
 export interface VisualDetails {
     /** The range rings to display around an entity. */
-    rangeRings?: Lattice.RangeRings;
+    rangeRings?: Lattice.RangeRings | undefined;
 }

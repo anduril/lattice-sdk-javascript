@@ -7,5 +7,5 @@ import type * as Lattice from "../index.js";
  */
 export interface Frequency {
     /** Indicates a frequency of a signal (Hz) with its standard deviation. */
-    frequencyHz?: Lattice.Measurement;
+    frequencyHz?: Lattice.Measurement | undefined;
 }

@@ -5,11 +5,11 @@
  */
 export interface Ontology {
     /** A string that describes the entity's high-level type with natural language. */
-    platformType?: string;
+    platformType?: string | undefined;
     /** A string that describes the entity's exact model or type. */
-    specificType?: string;
+    specificType?: string | undefined;
     /** The template used when creating this entity. Specifies minimum required components. */
-    template?: Ontology.Template;
+    template?: Ontology.Template | undefined;
 }
 
 export namespace Ontology {

@@ -5,5 +5,5 @@
  */
 export interface Threat {
     /** Indicates that the entity has been determined to be a threat. */
-    isThreat?: boolean;
+    isThreat?: boolean | undefined;
 }

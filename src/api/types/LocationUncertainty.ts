@@ -10,12 +10,12 @@ export interface LocationUncertainty {
      * Positional covariance represented by the upper triangle of the covariance matrix. It is valid to populate
      *  only the diagonal of the matrix if the full covariance matrix is unknown.
      */
-    positionEnuCov?: Lattice.EntityManagerTMat3;
+    positionEnuCov?: Lattice.EntityManagerTMat3 | undefined;
     /**
      * Velocity covariance represented by the upper triangle of the covariance matrix. It is valid to populate
      *  only the diagonal of the matrix if the full covariance matrix is unknown.
      */
-    velocityEnuCov?: Lattice.EntityManagerTMat3;
+    velocityEnuCov?: Lattice.EntityManagerTMat3 | undefined;
     /** An ellipse that describes the certainty probability and error boundary for a given geolocation. */
-    positionErrorEllipse?: Lattice.ErrorEllipse;
+    positionErrorEllipse?: Lattice.ErrorEllipse | undefined;
 }

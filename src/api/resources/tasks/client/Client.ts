@@ -406,7 +406,6 @@ export class TasksClient {
                     signal: requestOptions?.abortSignal,
                     eventShape: {
                         type: "sse",
-                        streamTerminator: "[DONE]",
                     },
                 }),
                 rawResponse: _response.rawResponse,
@@ -584,7 +583,6 @@ export class TasksClient {
                     signal: requestOptions?.abortSignal,
                     eventShape: {
                         type: "sse",
-                        streamTerminator: "[DONE]",
                     },
                 }),
                 rawResponse: _response.rawResponse,

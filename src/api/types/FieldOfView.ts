@@ -11,31 +11,31 @@ export interface FieldOfView {
      *  smoothing. This is relevant for sensors where the dwell schedule is on the order of
      *  milliseconds, making multiple FOVs a requirement for proper display of search beams.
      */
-    fovId?: number;
+    fovId?: number | undefined;
     /** The Id of the mount the sensor is on. */
-    mountId?: string;
+    mountId?: string | undefined;
     /** The field of view the sensor projected onto the ground. */
-    projectedFrustum?: Lattice.ProjectedFrustum;
+    projectedFrustum?: Lattice.ProjectedFrustum | undefined;
     /** Center ray of the frustum projected onto the ground. */
-    projectedCenterRay?: Lattice.Position;
+    projectedCenterRay?: Lattice.Position | undefined;
     /**
      * The origin and direction of the center ray for this sensor relative to the ENU frame. A ray which is aligned with
      *  the positive X axis in the sensor frame will be transformed into the ray along the sensor direction in the ENU
      *  frame when transformed by the quaternion contained in this pose.
      */
-    centerRayPose?: Lattice.EntityManagerPose;
+    centerRayPose?: Lattice.EntityManagerPose | undefined;
     /** Horizontal field of view in radians. */
-    horizontalFov?: number;
+    horizontalFov?: number | undefined;
     /** Vertical field of view in radians. */
-    verticalFov?: number;
+    verticalFov?: number | undefined;
     /** Sensor range in meters. */
-    range?: number;
+    range?: number | undefined;
     /**
      * The mode that this sensor is currently in, used to display for context in the UI. Some sensors can emit multiple
      *  sensor field of views with different modes, for example a radar can simultaneously search broadly and perform
      *  tighter bounded tracking.
      */
-    mode?: FieldOfView.Mode;
+    mode?: FieldOfView.Mode | undefined;
 }
 
 export namespace FieldOfView {

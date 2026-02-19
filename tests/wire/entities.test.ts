@@ -130,7 +130,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -384,6 +384,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -570,7 +571,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -825,6 +826,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -1040,7 +1042,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -1297,6 +1299,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -1518,7 +1521,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -1774,6 +1777,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -2001,7 +2005,7 @@ describe("EntitiesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { errorCode: "errorCode", message: "message" };
         server
             .mockEndpoint()
             .post("/api/v1/entities/events")
@@ -2029,7 +2033,7 @@ describe("EntitiesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { errorCode: "errorCode", message: "message" };
         server
             .mockEndpoint()
             .post("/api/v1/entities/events")

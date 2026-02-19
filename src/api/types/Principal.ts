@@ -6,13 +6,13 @@ import type * as Lattice from "../index.js";
  * A Principal is an entity that has authority over this task.
  */
 export interface Principal {
-    system?: Lattice.System;
-    user?: Lattice.User;
-    team?: Lattice.Team;
+    system?: Lattice.System | undefined;
+    user?: Lattice.User | undefined;
+    team?: Lattice.Team | undefined;
     /**
      * The Principal _this_ Principal is acting on behalf of.
      *
      *  Likely only populated once in the nesting (i.e. the "on_behalf_of" Principal would not have another "on_behalf_of" in most cases).
      */
-    onBehalfOf?: Lattice.Principal;
+    onBehalfOf?: Lattice.Principal | undefined;
 }

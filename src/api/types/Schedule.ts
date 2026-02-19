@@ -7,11 +7,11 @@ import type * as Lattice from "../index.js";
  */
 export interface Schedule {
     /** expression that represents this schedule's "ON" state */
-    windows?: Lattice.CronWindow[];
+    windows?: Lattice.CronWindow[] | undefined;
     /** A unique identifier for this schedule. */
-    scheduleId?: string;
+    scheduleId?: string | undefined;
     /** The schedule type */
-    scheduleType?: Schedule.ScheduleType;
+    scheduleType?: Schedule.ScheduleType | undefined;
 }
 
 export namespace Schedule {

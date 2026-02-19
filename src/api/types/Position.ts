@@ -9,28 +9,28 @@
  */
 export interface Position {
     /** WGS84 geodetic latitude in decimal degrees. */
-    latitudeDegrees?: number;
+    latitudeDegrees?: number | undefined;
     /** WGS84 longitude in decimal degrees. */
-    longitudeDegrees?: number;
+    longitudeDegrees?: number | undefined;
     /**
      * altitude as height above ellipsoid (WGS84) in meters. DoubleValue wrapper is used to distinguish optional from
      *  default 0.
      */
-    altitudeHaeMeters?: number;
+    altitudeHaeMeters?: number | undefined;
     /**
      * Altitude as AGL (Above Ground Level) if the upstream data source has this value set. This value represents the
      *  entity's height above the terrain. This is typically measured with a radar altimeter or by using a terrain tile
      *  set lookup. If the value is not set from the upstream, this value is not set.
      */
-    altitudeAglMeters?: number;
+    altitudeAglMeters?: number | undefined;
     /**
      * Altitude as ASF (Above Sea Floor) if the upstream data source has this value set. If the value is not set from the upstream, this value is
      *  not set.
      */
-    altitudeAsfMeters?: number;
+    altitudeAsfMeters?: number | undefined;
     /**
      * The depth of the entity from the surface of the water through sensor measurements based on differential pressure
      *  between the interior and exterior of the vessel. If the value is not set from the upstream, this value is not set.
      */
-    pressureDepthMeters?: number;
+    pressureDepthMeters?: number | undefined;
 }

@@ -2,9 +2,10 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
+import type * as Lattice from "../index.js";
 
 export class ContentTooLargeError extends errors.LatticeError {
-    constructor(body?: unknown, rawResponse?: core.RawResponse) {
+    constructor(body: Lattice.object.Error_, rawResponse?: core.RawResponse) {
         super({
             message: "ContentTooLargeError",
             statusCode: 413,

@@ -6,5 +6,5 @@ export interface PathMetadata {
     content_identifier: Lattice.ContentIdentifier;
     size_bytes: number;
     last_updated_at: string;
-    expiry_time?: string;
+    expiry_time?: string | undefined;
 }

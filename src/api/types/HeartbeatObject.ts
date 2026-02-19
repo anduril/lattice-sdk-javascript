@@ -2,5 +2,5 @@
 
 export interface HeartbeatObject {
     /** The timestamp at which the heartbeat message was sent. */
-    timestamp?: string;
+    timestamp?: string | undefined;
 }
