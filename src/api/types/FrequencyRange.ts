@@ -7,7 +7,7 @@ import type * as Lattice from "../index.js";
  */
 export interface FrequencyRange {
     /** Indicates the lowest measured frequency of a signal (Hz). */
-    minimumFrequencyHz?: Lattice.Frequency;
+    minimumFrequencyHz?: Lattice.Frequency | undefined;
     /** Indicates the maximum measured frequency of a signal (Hz). */
-    maximumFrequencyHz?: Lattice.Frequency;
+    maximumFrequencyHz?: Lattice.Frequency | undefined;
 }

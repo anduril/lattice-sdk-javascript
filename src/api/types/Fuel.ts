@@ -6,23 +6,23 @@ import type * as Lattice from "../index.js";
  * Fuel describes an entity's repository of fuels stores including current amount, operational requirements, and maximum authorized capacity
  */
 export interface Fuel {
-    /** unique fuel identifier */
-    fuelId?: string;
-    /** long form name of the fuel source. */
-    name?: string;
-    /** timestamp the information was reported */
-    reportedDate?: string;
-    /** amount of gallons on hand */
-    amountGallons?: number;
-    /** how much the asset is allowed to have available (in gallons) */
-    maxAuthorizedCapacityGallons?: number;
-    /** minimum required for operations (in gallons) */
-    operationalRequirementGallons?: number;
+    /** Unique fuel identifier */
+    fuelId?: string | undefined;
+    /** Long form name of the fuel source. */
+    name?: string | undefined;
+    /** Timestamp the information was reported */
+    reportedDate?: string | undefined;
+    /** Amount of gallons on hand */
+    amountGallons?: number | undefined;
+    /** How much the asset is allowed to have available (in gallons) */
+    maxAuthorizedCapacityGallons?: number | undefined;
+    /** Minimum required for operations (in gallons) */
+    operationalRequirementGallons?: number | undefined;
     /**
-     * fuel in a single asset may have different levels of classification
-     *  use case: fuel for a SECRET asset while diesel fuel may be UNCLASSIFIED
+     * Fuel in a single asset may have different levels of classification
+     *  Use case: fuel for a SECRET asset while diesel fuel may be UNCLASSIFIED
      */
-    dataClassification?: Lattice.Classification;
-    /** source of information */
-    dataSource?: string;
+    dataClassification?: Lattice.Classification | undefined;
+    /** Source of information */
+    dataSource?: string | undefined;
 }

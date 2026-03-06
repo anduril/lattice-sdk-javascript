@@ -4,5 +4,5 @@ import type * as Lattice from "../index.js";
 
 export interface ListResponse {
     path_metadatas: Lattice.PathMetadata[];
-    next_page_token?: string;
+    next_page_token?: string | undefined;
 }

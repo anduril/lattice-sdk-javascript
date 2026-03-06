@@ -6,7 +6,7 @@ import type * as Lattice from "../index.js";
  * Available for any Entities with alternate ids in other systems.
  */
 export interface Aliases {
-    alternateIds?: Lattice.AlternateId[];
+    alternateIds?: Lattice.AlternateId[] | undefined;
     /** The best available version of the entity's display name. */
-    name?: string;
+    name?: string | undefined;
 }

@@ -130,7 +130,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -384,6 +384,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -570,7 +571,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -825,6 +826,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -1040,7 +1042,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -1297,6 +1299,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -1518,7 +1521,7 @@ describe("EntitiesClient", () => {
                 activeAlerts: [{}],
             },
             groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { fuel: [{}] },
+            supplies: { munitions: [{}], fuel: [{}] },
             symbology: { milStd2525C: { sidc: "sidc" } },
         };
         server
@@ -1774,6 +1777,7 @@ describe("EntitiesClient", () => {
                 },
             },
             supplies: {
+                munitions: [{}],
                 fuel: [{}],
             },
             symbology: {
@@ -2001,7 +2005,7 @@ describe("EntitiesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { errorCode: "errorCode", message: "message" };
         server
             .mockEndpoint()
             .post("/api/v1/entities/events")
@@ -2029,7 +2033,7 @@ describe("EntitiesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { errorCode: "errorCode", message: "message" };
         server
             .mockEndpoint()
             .post("/api/v1/entities/events")
@@ -2044,5 +2048,92 @@ describe("EntitiesClient", () => {
                 sessionToken: "sessionToken",
             });
         }).rejects.toThrow(Lattice.TooManyRequestsError);
+    });
+
+    test("streamEntities (1)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = 'event: \ndata: {"timestamp":"2024-01-15T09:30:00Z","event":"heartbeat"}\n\n';
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/stream")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .sseBody(rawResponseBody)
+            .build();
+
+        const response = await client.entities.streamEntities();
+        const events: unknown[] = [];
+        for await (const event of response) {
+            events.push(event);
+        }
+        expect(events).toEqual([{ event: "heartbeat", timestamp: "2024-01-15T09:30:00Z" }]);
+    });
+
+    test("streamEntities (2)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/stream")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .sseBody(rawResponseBody)
+            .build();
+
+        const response = await client.entities.streamEntities();
+        const events: unknown[] = [];
+        for await (const event of response) {
+            events.push(event);
+        }
+        expect(events.length).toBeGreaterThan(0);
+    });
+
+    test("streamEntities (3)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/api/v1/entities/stream")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .sseBody(rawResponseBody)
+            .build();
+
+        const response = await client.entities.streamEntities();
+        const events: unknown[] = [];
+        for await (const event of response) {
+            events.push(event);
+        }
+        expect(events.length).toBeGreaterThan(0);
     });
 });

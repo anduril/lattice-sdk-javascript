@@ -15,44 +15,48 @@ import type * as Lattice from "../index.js";
  */
 export interface Task {
     /** Version of this task. */
-    version?: Lattice.TaskVersion;
+    version?: Lattice.TaskVersion | undefined;
     /** DEPRECATED: Human readable display name for this task, should be short (<100 chars). */
-    displayName?: string;
+    displayName?: string | undefined;
     /** The path for the Protobuf task definition, and the complete task data. */
-    specification?: Lattice.GoogleProtobufAny;
+    specification?: Lattice.GoogleProtobufAny | undefined;
     /** Records who created this task. This field will not change after the task has been created. */
-    createdBy?: Lattice.Principal;
+    createdBy?: Lattice.Principal | undefined;
     /** Records who updated this task last. */
-    lastUpdatedBy?: Lattice.Principal;
+    lastUpdatedBy?: Lattice.Principal | undefined;
     /** Records the time of last update. */
-    lastUpdateTime?: string;
+    lastUpdateTime?: string | undefined;
     /** The status of this task. */
-    status?: Lattice.TaskStatus;
+    status?: Lattice.TaskStatus | undefined;
     /** If the task has been scheduled to execute, what time it should execute at. */
-    scheduledTime?: string;
+    scheduledTime?: string | undefined;
     /** Any related Tasks associated with this, typically includes an assignee for this task and/or a parent. */
-    relations?: Lattice.Relations;
+    relations?: Lattice.Relations | undefined;
     /** Longer, free form human readable description of this task */
-    description?: string;
+    description?: string | undefined;
     /**
      * If set, execution of this task is managed elsewhere, not by Task Manager.
      *  In other words, task manager will not attempt to update the assigned agent with execution instructions.
      */
-    isExecutedElsewhere?: boolean;
+    isExecutedElsewhere?: boolean | undefined;
     /** Time of task creation. */
-    createTime?: string;
+    createTime?: string | undefined;
     /** If populated, designates this to be a replicated task. */
-    replication?: Lattice.Replication;
+    replication?: Lattice.Replication | undefined;
     /**
      * If populated, indicates an initial set of entities that can be used to execute an entity aware task
      *  For example, an entity Objective, an entity Keep In Zone, etc.
      *  These will not be updated during execution. If a taskable agent needs continuous updates on the entities from the
      *  COP, can call entity-manager, or use an AlternateId escape hatch.
      */
-    initialEntities?: Lattice.TaskEntity[];
+    initialEntities?: Lattice.TaskEntity[] | undefined;
     /**
      * The networked owner of this task. It is used to ensure that linear writes occur on the node responsible
      *  for replication of task data to other nodes running Task Manager.
      */
-    owner?: Lattice.Owner;
+    owner?: Lattice.Owner | undefined;
+    /** Sets an optional try strategy for tasks. Use this option to control how Lattice attempts to retry delivery of tasks to assets with intermittent access or network connectivity to your environment. */
+    retryStrategy?: Lattice.RetryStrategy | undefined;
+    /** The current delivery state of a task. */
+    deliveryState?: Lattice.DeliveryState | undefined;
 }

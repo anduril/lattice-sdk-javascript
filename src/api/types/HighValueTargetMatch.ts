@@ -2,10 +2,10 @@
 
 export interface HighValueTargetMatch {
     /** The ID of the high value target list that matches the target description. */
-    highValueTargetListId?: string;
+    highValueTargetListId?: string | undefined;
     /**
      * The ID of the specific high value target description within a high value target list that was matched against.
      *  The ID is considered to be a globally unique identifier across all high value target IDs.
      */
-    highValueTargetDescriptionId?: string;
+    highValueTargetDescriptionId?: string | undefined;
 }

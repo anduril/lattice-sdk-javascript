@@ -4,5 +4,5 @@
  * Describes the bandwidth of a signal
  */
 export interface Bandwidth {
-    bandwidthHz?: number;
+    bandwidthHz?: number | undefined;
 }

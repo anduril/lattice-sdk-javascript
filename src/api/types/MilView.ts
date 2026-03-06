@@ -4,9 +4,9 @@
  * Provides the disposition, environment, and nationality of an Entity.
  */
 export interface MilView {
-    disposition?: MilView.Disposition;
-    environment?: MilView.Environment;
-    nationality?: MilView.Nationality;
+    disposition?: MilView.Disposition | undefined;
+    environment?: MilView.Environment | undefined;
+    nationality?: MilView.Nationality | undefined;
 }
 
 export namespace MilView {

@@ -7,7 +7,7 @@ import type * as Lattice from "../index.js";
  */
 export interface TaskEventData {
     /** The task event that occurred. */
-    taskEvent?: TaskEventData.TaskEvent;
+    taskEvent?: TaskEventData.TaskEvent | undefined;
 }
 
 export namespace TaskEventData {
@@ -16,9 +16,9 @@ export namespace TaskEventData {
      */
     export interface TaskEvent {
         /** The type of event that occurred for this task. */
-        eventType?: TaskEvent.EventType;
+        eventType?: TaskEvent.EventType | undefined;
         /** The task associated with this event. */
-        task?: Lattice.Task;
+        task?: Lattice.Task | undefined;
     }
 
     export namespace TaskEvent {

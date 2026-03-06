@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * List of sensors available for an entity.
  */
 export interface Sensors {
-    sensors?: Lattice.Sensor[];
+    sensors?: Lattice.Sensor[] | undefined;
 }

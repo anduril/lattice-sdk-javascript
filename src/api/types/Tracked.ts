@@ -7,9 +7,9 @@ import type * as Lattice from "../index.js";
  */
 export interface Tracked {
     /** Quality score, 0-15, nil if none */
-    trackQualityWrapper?: number;
+    trackQualityWrapper?: number | undefined;
     /** Sensor hits aggregation on the tracked entity. */
-    sensorHits?: number;
+    sensorHits?: number | undefined;
     /**
      * Estimated number of objects or units that are represented by this entity. Known as Strength in certain contexts (Link16)
      *  if UpperBound == LowerBound; (strength = LowerBound)
@@ -18,17 +18,17 @@ export interface Tracked {
      *  If LowerBound is defined only (UpperBound unset), LowerBound ≤ Strength
      *  0 indicates unset.
      */
-    numberOfObjects?: Lattice.UInt32Range;
+    numberOfObjects?: Lattice.UInt32Range | undefined;
     /**
      * The radar cross section (RCS) is a measure of how detectable an object is by radar. A large RCS indicates an object is more easily
      *  detected. The unit is “decibels per square meter,” or dBsm
      */
-    radarCrossSection?: number;
+    radarCrossSection?: number | undefined;
     /** Timestamp of the latest tracking measurement for this entity. */
-    lastMeasurementTime?: string;
+    lastMeasurementTime?: string | undefined;
     /**
      * The relative position of a track with respect to the entity that is tracking it. Used for tracks that do not yet have a 3D position.
      *  For this entity (A), being tracked by some entity (B), this LineOfBearing would express a ray from B to A.
      */
-    lineOfBearing?: Lattice.LineOfBearing;
+    lineOfBearing?: Lattice.LineOfBearing | undefined;
 }

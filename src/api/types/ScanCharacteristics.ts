@@ -4,8 +4,8 @@
  * A component that describes the scanning characteristics of a signal
  */
 export interface ScanCharacteristics {
-    scanType?: ScanCharacteristics.ScanType;
-    scanPeriodS?: number;
+    scanType?: ScanCharacteristics.ScanType | undefined;
+    scanPeriodS?: number | undefined;
 }
 
 export namespace ScanCharacteristics {

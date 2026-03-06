@@ -5,5 +5,5 @@
  */
 export interface Owner {
     /** Entity ID of the owner. */
-    entityId?: string;
+    entityId?: string | undefined;
 }

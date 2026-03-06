@@ -2,9 +2,10 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
+import type * as Lattice from "../index.js";
 
 export class RequestTimeoutError extends errors.LatticeError {
-    constructor(body?: unknown, rawResponse?: core.RawResponse) {
+    constructor(body: Lattice.entity.Error_, rawResponse?: core.RawResponse) {
         super({
             message: "RequestTimeoutError",
             statusCode: 408,

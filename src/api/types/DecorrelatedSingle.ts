@@ -4,7 +4,7 @@ import type * as Lattice from "../index.js";
 
 export interface DecorrelatedSingle {
     /** The entity that was decorrelated against. */
-    entityId?: string;
+    entityId?: string | undefined;
     /** Metadata about the decorrelation. */
-    metadata?: Lattice.CorrelationMetadata;
+    metadata?: Lattice.CorrelationMetadata | undefined;
 }
