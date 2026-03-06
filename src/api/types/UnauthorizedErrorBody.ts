@@ -2,5 +2,5 @@
 
 export interface UnauthorizedErrorBody {
     error: string;
-    error_description?: string;
+    error_description?: string | undefined;
 }

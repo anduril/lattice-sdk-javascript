@@ -6,7 +6,7 @@
  *  as a member of a battalion.
  */
 export interface Echelon {
-    armyEchelon?: Echelon.ArmyEchelon;
+    armyEchelon?: Echelon.ArmyEchelon | undefined;
 }
 
 export namespace Echelon {

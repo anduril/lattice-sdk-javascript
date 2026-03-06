@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * A closed ring of points. The first and last point must be the same.
  */
 export interface LinearRing {
-    positions?: Lattice.GeoPolygonPosition[];
+    positions?: Lattice.GeoPolygonPosition[] | undefined;
 }

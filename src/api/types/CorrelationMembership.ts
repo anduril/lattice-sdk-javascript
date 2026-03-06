@@ -4,17 +4,17 @@ import type * as Lattice from "../index.js";
 
 export interface CorrelationMembership {
     /** The ID of the correlation set this entity belongs to. */
-    correlationSetId?: string;
+    correlationSetId?: string | undefined;
     /**
      * This entity is the primary of a correlation set meaning that it serves as the representative
      *  entity of the correlation set.
      */
-    primary?: Lattice.PrimaryMembership;
+    primary?: Lattice.PrimaryMembership | undefined;
     /**
      * This entity is not the primary of the correlation set. Note that there may not
      *  be a primary at all.
      */
-    nonPrimary?: Lattice.NonPrimaryMembership;
+    nonPrimary?: Lattice.NonPrimaryMembership | undefined;
     /** Additional metadata on this correlation. */
-    metadata?: Lattice.CorrelationMetadata;
+    metadata?: Lattice.CorrelationMetadata | undefined;
 }

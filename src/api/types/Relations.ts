@@ -8,7 +8,7 @@ import type * as Lattice from "../index.js";
  */
 export interface Relations {
     /** The system, user, or team assigned to the task. */
-    assignee?: Lattice.Principal;
+    assignee?: Lattice.Principal | undefined;
     /** Identifies the parent task if the task is a sub-task. */
-    parentTaskId?: string;
+    parentTaskId?: string | undefined;
 }

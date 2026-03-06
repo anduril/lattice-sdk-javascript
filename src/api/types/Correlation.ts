@@ -11,14 +11,14 @@ export interface Correlation {
      * This entity is the primary of a correlation meaning that it serves as the representative
      *  entity of the correlation set.
      */
-    primary?: Lattice.PrimaryCorrelation;
+    primary?: Lattice.PrimaryCorrelation | undefined;
     /**
      * This entity is a secondary of a correlation meaning that it will be represented by the
      *  primary of the correlation set.
      */
-    secondary?: Lattice.SecondaryCorrelation;
+    secondary?: Lattice.SecondaryCorrelation | undefined;
     /** If present, this entity is a part of a correlation set. */
-    membership?: Lattice.CorrelationMembership;
+    membership?: Lattice.CorrelationMembership | undefined;
     /**
      * If present, this entity was explicitly decorrelated from one or more entities.
      *  An entity can be both correlated and decorrelated as long as they are disjoint sets.
@@ -27,5 +27,5 @@ export interface Correlation {
      *  decorrelate the two tracks and this decorrelation would be preserved preventing the
      *  correlator from re-correlating them at a later time.
      */
-    decorrelation?: Lattice.Decorrelation;
+    decorrelation?: Lattice.Decorrelation | undefined;
 }

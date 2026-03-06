@@ -7,11 +7,11 @@ import type * as Lattice from "../index.js";
  */
 export interface GeoPolygonPosition {
     /** base position. if no altitude set, its on the ground. */
-    position?: Lattice.Position;
+    position?: Lattice.Position | undefined;
     /**
      * optional height above base position to extrude in meters.
      *  for a given polygon, all points should have a height or none of them.
      *  strictly GeoJSON compatible polygons will not have this set.
      */
-    heightM?: number;
+    heightM?: number | undefined;
 }

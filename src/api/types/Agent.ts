@@ -5,5 +5,5 @@
  */
 export interface Agent {
     /** Entity ID of the agent. */
-    entityId?: string;
+    entityId?: string | undefined;
 }

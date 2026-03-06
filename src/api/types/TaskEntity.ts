@@ -11,7 +11,7 @@ import type * as Lattice from "../index.js";
  */
 export interface TaskEntity {
     /** The wrapped entity. */
-    entity?: Lattice.Entity;
+    entity?: Lattice.Entity | undefined;
     /** Indicates that this entity was generated from a snapshot of a live entity. */
-    snapshot?: boolean;
+    snapshot?: boolean | undefined;
 }

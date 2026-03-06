@@ -7,9 +7,9 @@ import type * as Lattice from "../index.js";
  */
 export interface LineOfBearing {
     /** The direction pointing from this entity to the detection */
-    angleOfArrival?: Lattice.AngleOfArrival;
+    angleOfArrival?: Lattice.AngleOfArrival | undefined;
     /** The estimated distance of the detection */
-    rangeEstimateM?: Lattice.Measurement;
+    rangeEstimateM?: Lattice.Measurement | undefined;
     /** The maximum distance of the detection */
-    maxRangeM?: Lattice.Measurement;
+    maxRangeM?: Lattice.Measurement | undefined;
 }

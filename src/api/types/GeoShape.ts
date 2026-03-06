@@ -6,9 +6,9 @@ import type * as Lattice from "../index.js";
  * A component that describes the shape of a geo-entity.
  */
 export interface GeoShape {
-    point?: Lattice.GeoPoint;
-    line?: Lattice.GeoLine;
-    polygon?: Lattice.GeoPolygon;
-    ellipse?: Lattice.GeoEllipse;
-    ellipsoid?: Lattice.GeoEllipsoid;
+    point?: Lattice.GeoPoint | undefined;
+    line?: Lattice.GeoLine | undefined;
+    polygon?: Lattice.GeoPolygon | undefined;
+    ellipse?: Lattice.GeoEllipse | undefined;
+    ellipsoid?: Lattice.GeoEllipsoid | undefined;
 }

@@ -4,7 +4,7 @@ import type * as Lattice from "../index.js";
 
 export interface EntityManagerPose {
     /** Geospatial location defined by this Pose. */
-    pos?: Lattice.Position;
+    pos?: Lattice.Position | undefined;
     /**
      * The quaternion to transform a point in the Pose frame to the ENU frame. The Pose frame could be Body, Turret,
      *  etc and is determined by the context in which this Pose is used.
@@ -16,5 +16,5 @@ export interface EntityManagerPose {
      *  Implementations of this quaternion should left multiply this quaternion to transform a point from the Pose frame
      *  to the enu frame.
      */
-    orientation?: Lattice.Quaternion;
+    orientation?: Lattice.Quaternion | undefined;
 }

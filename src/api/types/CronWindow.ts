@@ -12,7 +12,7 @@ export interface CronWindow {
      *     This schedule begins at 12:00:00pm UTC on March 2nd 2023
      *         0 0 12 2 3 ? 2023
      */
-    cronExpression?: string;
+    cronExpression?: string | undefined;
     /** describes the duration */
-    durationMillis?: string;
+    durationMillis?: string | undefined;
 }

@@ -11,7 +11,7 @@ export interface TrackedBy {
      * Sensor details of the tracking entity's sensors that were active and tracking the tracked entity. This may be
      *  a subset of the total sensors available on the tracking entity.
      */
-    activelyTrackingSensors?: Lattice.Sensors;
+    activelyTrackingSensors?: Lattice.Sensors | undefined;
     /** Latest time that any sensor in actively_tracking_sensors detected the tracked entity. */
-    lastMeasurementTimestamp?: string;
+    lastMeasurementTimestamp?: string | undefined;
 }

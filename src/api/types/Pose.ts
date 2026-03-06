@@ -4,7 +4,7 @@ import type * as Lattice from "../index.js";
 
 export interface Pose {
     /** Geospatial location defined by this Pose. */
-    pos?: Lattice.Lla;
+    pos?: Lattice.Lla | undefined;
     /**
      * The quaternion to transform a point in the Pose frame to the ENU frame. The Pose frame could be Body, Turret,
      *  etc and is determined by the context in which this Pose is used.
@@ -26,5 +26,5 @@ export interface Pose {
      *  An alternative matrix expression is as follows:
      *  ptEnu = M x ptPose
      */
-    attEnu?: Lattice.Quaternion;
+    attEnu?: Lattice.Quaternion | undefined;
 }

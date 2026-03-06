@@ -7,7 +7,7 @@ import type * as Lattice from "../index.js";
  */
 export interface TargetPriority {
     /** Describes the target priority in relation to high value target lists. */
-    highValueTarget?: Lattice.HighValueTarget;
+    highValueTarget?: Lattice.HighValueTarget | undefined;
     /** Describes whether the entity should be treated as a threat */
-    threat?: Lattice.Threat;
+    threat?: Lattice.Threat | undefined;
 }
