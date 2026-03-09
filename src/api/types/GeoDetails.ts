@@ -6,9 +6,9 @@ import type * as Lattice from "../index.js";
  * A component that describes a geo-entity.
  */
 export interface GeoDetails {
-    type?: GeoDetails.Type;
-    controlArea?: Lattice.ControlAreaDetails;
-    acm?: Lattice.AcmDetails;
+    type?: GeoDetails.Type | undefined;
+    controlArea?: Lattice.ControlAreaDetails | undefined;
+    acm?: Lattice.AcmDetails | undefined;
 }
 
 export namespace GeoDetails {

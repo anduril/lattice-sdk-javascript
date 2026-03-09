@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * Metadata about entity overrides present.
  */
 export interface Overrides {
-    override?: Lattice.Override[];
+    override?: Lattice.Override[] | undefined;
 }

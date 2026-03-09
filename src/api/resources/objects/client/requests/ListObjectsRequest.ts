@@ -13,4 +13,6 @@ export interface ListObjectsRequest {
     pageToken?: string;
     /** Lists objects across all environment nodes in a Lattice Mesh. */
     allObjectsInMesh?: boolean;
+    /** Sets the maximum number of items that should be returned on a single page. */
+    maxPageSize?: number;
 }

@@ -7,7 +7,7 @@ import type * as Lattice from "../index.js";
  */
 export interface HighValueTarget {
     /** Indicates whether the target matches any description from a high value target list. */
-    isHighValueTarget?: boolean;
+    isHighValueTarget?: boolean | undefined;
     /**
      * The priority associated with the target. If the target's description appears on multiple high value target lists,
      *  the priority will be a reflection of the highest priority of all of those list's target description.
@@ -15,9 +15,9 @@ export interface HighValueTarget {
      *  A lower value indicates the target is of a higher priority, with 1 being the highest possible priority. A value of
      *  0 indicates there is no priority associated with this target.
      */
-    targetPriority?: number;
+    targetPriority?: number | undefined;
     /** All of the high value target descriptions that the target matches against. */
-    targetMatches?: Lattice.HighValueTargetMatch[];
+    targetMatches?: Lattice.HighValueTargetMatch[] | undefined;
     /** Indicates whether the target is a 'High Payoff Target'. Targets can be one or both of high value and high payoff. */
-    isHighPayoffTarget?: boolean;
+    isHighPayoffTarget?: boolean | undefined;
 }

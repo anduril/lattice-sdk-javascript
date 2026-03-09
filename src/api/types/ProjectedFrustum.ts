@@ -8,11 +8,11 @@ import type * as Lattice from "../index.js";
  */
 export interface ProjectedFrustum {
     /** Upper left point of the frustum. */
-    upperLeft?: Lattice.Position;
+    upperLeft?: Lattice.Position | undefined;
     /** Upper right point of the frustum. */
-    upperRight?: Lattice.Position;
+    upperRight?: Lattice.Position | undefined;
     /** Bottom right point of the frustum. */
-    bottomRight?: Lattice.Position;
+    bottomRight?: Lattice.Position | undefined;
     /** Bottom left point of the frustum. */
-    bottomLeft?: Lattice.Position;
+    bottomLeft?: Lattice.Position | undefined;
 }

@@ -7,9 +7,9 @@ import type * as Lattice from "../index.js";
  */
 export interface Relationship {
     /** The entity ID to which this entity is related. */
-    relatedEntityId?: string;
+    relatedEntityId?: string | undefined;
     /** A unique identifier for this relationship. Allows removing or updating relationships. */
-    relationshipId?: string;
+    relationshipId?: string | undefined;
     /** The relationship type */
-    relationshipType?: Lattice.RelationshipType;
+    relationshipType?: Lattice.RelationshipType | undefined;
 }

@@ -7,5 +7,5 @@ import type * as Lattice from "../index.js";
  *  See https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.4
  */
 export interface GeoLine {
-    positions?: Lattice.Position[];
+    positions?: Lattice.Position[] | undefined;
 }

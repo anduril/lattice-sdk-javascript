@@ -5,7 +5,7 @@
  */
 export interface GoogleProtobufAny {
     /** The type of the serialized message. */
-    "@type"?: string;
+    "@type"?: string | undefined;
     /** Accepts any additional properties */
     [key: string]: any;
 }

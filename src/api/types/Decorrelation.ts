@@ -4,7 +4,7 @@ import type * as Lattice from "../index.js";
 
 export interface Decorrelation {
     /** This will be specified if this entity was decorrelated against all other entities. */
-    all?: Lattice.DecorrelatedAll;
+    all?: Lattice.DecorrelatedAll | undefined;
     /**
      * A list of decorrelated entities that have been explicitly decorrelated against this entity
      *  which prevents lower precedence correlations from overriding it in the future.
@@ -13,5 +13,5 @@ export interface Decorrelation {
      *  higher precedence than automatic ones. Precedence is determined by both correlation
      *  type and replication mode.
      */
-    decorrelatedEntities?: Lattice.DecorrelatedSingle[];
+    decorrelatedEntities?: Lattice.DecorrelatedSingle[] | undefined;
 }

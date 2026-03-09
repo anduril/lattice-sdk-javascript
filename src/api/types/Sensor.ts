@@ -7,18 +7,18 @@ import type * as Lattice from "../index.js";
  */
 export interface Sensor {
     /** This generally is used to indicate a specific type at a more detailed granularity. E.g. COMInt or LWIR */
-    sensorId?: string;
-    operationalState?: Sensor.OperationalState;
+    sensorId?: string | undefined;
+    operationalState?: Sensor.OperationalState | undefined;
     /** The type of sensor */
-    sensorType?: Sensor.SensorType;
+    sensorType?: Sensor.SensorType | undefined;
     /** A human readable description of the sensor */
-    sensorDescription?: string;
+    sensorDescription?: string | undefined;
     /** RF configuration details of the sensor */
-    rfConfiguraton?: Lattice.RfConfiguration;
+    rfConfiguraton?: Lattice.RfConfiguration | undefined;
     /** Time of the latest detection from the sensor */
-    lastDetectionTimestamp?: string;
+    lastDetectionTimestamp?: string | undefined;
     /** Multiple fields of view for a single sensor component */
-    fieldsOfView?: Lattice.FieldOfView[];
+    fieldsOfView?: Lattice.FieldOfView[] | undefined;
 }
 
 export namespace Sensor {
