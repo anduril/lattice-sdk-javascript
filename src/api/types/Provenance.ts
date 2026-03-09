@@ -5,17 +5,17 @@
  */
 export interface Provenance {
     /** Name of the integration that produced this entity */
-    integrationName?: string;
+    integrationName?: string | undefined;
     /** Source data type of this entity. Examples: ADSB, Link16, etc. */
-    dataType?: string;
+    dataType?: string | undefined;
     /** An ID that allows an element from a source to be uniquely identified */
-    sourceId?: string;
+    sourceId?: string | undefined;
     /**
      * The time, according to the source system, that the data in the entity was last modified. Generally, this should
      *  be the time that the source-reported time of validity of the data in the entity. This field must be
      *  updated with every change to the entity or else Entity Manager will discard the update.
      */
-    sourceUpdateTime?: string;
+    sourceUpdateTime?: string | undefined;
     /** Description of the modification source. In the case of a user this is the email address. */
-    sourceDescription?: string;
+    sourceDescription?: string | undefined;
 }

@@ -8,7 +8,7 @@ export interface Status {
      * A string that describes the activity that the entity is performing.
      *  Examples include "RECONNAISSANCE", "INTERDICTION", "RETURN TO BASE (RTB)", "PREPARING FOR LAUNCH".
      */
-    platformActivity?: string;
+    platformActivity?: string | undefined;
     /** A human-readable string that describes the role the entity is currently performing. E.g. "Team Member", "Commander". */
-    role?: string;
+    role?: string | undefined;
 }

@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * Schedules associated with this entity
  */
 export interface Schedules {
-    schedules?: Lattice.Schedule[];
+    schedules?: Lattice.Schedule[] | undefined;
 }

@@ -7,17 +7,17 @@ import type * as Lattice from "../index.js";
  */
 export interface TransponderCodes {
     /** The mode 1 code assigned to military assets. */
-    mode1?: number;
+    mode1?: number | undefined;
     /** The Mode 2 code assigned to military assets. */
-    mode2?: number;
+    mode2?: number | undefined;
     /** The Mode 3 code assigned by ATC to the asset. */
-    mode3?: number;
+    mode3?: number | undefined;
     /** The validity of the response from the Mode 4 interrogation. */
-    mode4InterrogationResponse?: TransponderCodes.Mode4InterrogationResponse;
+    mode4InterrogationResponse?: TransponderCodes.Mode4InterrogationResponse | undefined;
     /** The Mode 5 transponder codes. */
-    mode5?: Lattice.Mode5;
+    mode5?: Lattice.Mode5 | undefined;
     /** The Mode S transponder codes. */
-    modeS?: Lattice.ModeS;
+    modeS?: Lattice.ModeS | undefined;
 }
 
 export namespace TransponderCodes {

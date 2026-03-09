@@ -5,11 +5,11 @@
  */
 export interface Mode5 {
     /** The validity of the response from the Mode 5 interrogation. */
-    mode5InterrogationResponse?: Mode5.Mode5InterrogationResponse;
+    mode5InterrogationResponse?: Mode5.Mode5InterrogationResponse | undefined;
     /** The Mode 5 code assigned to military assets. */
-    mode5?: number;
+    mode5?: number | undefined;
     /** The Mode 5 platform identification code. */
-    mode5PlatformId?: number;
+    mode5PlatformId?: number | undefined;
 }
 
 export namespace Mode5 {

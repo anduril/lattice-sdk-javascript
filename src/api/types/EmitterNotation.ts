@@ -4,7 +4,7 @@
  * A representation of a single emitter notation.
  */
 export interface EmitterNotation {
-    emitterNotation?: string;
+    emitterNotation?: string | undefined;
     /** confidence as a percentage that the emitter notation in this component is accurate */
-    confidence?: number;
+    confidence?: number | undefined;
 }

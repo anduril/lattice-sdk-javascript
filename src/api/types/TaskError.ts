@@ -11,11 +11,11 @@ import type * as Lattice from "../index.js";
  */
 export interface TaskError {
     /** Error code for task error. */
-    code?: TaskError.Code;
+    code?: TaskError.Code | undefined;
     /** Descriptive human-readable string regarding this error. */
-    message?: string;
+    message?: string | undefined;
     /** Any additional details regarding this error. */
-    errorDetails?: Lattice.GoogleProtobufAny;
+    errorDetails?: Lattice.GoogleProtobufAny | undefined;
 }
 
 export namespace TaskError {

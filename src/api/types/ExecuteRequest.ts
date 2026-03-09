@@ -8,5 +8,5 @@ import type * as Lattice from "../index.js";
  */
 export interface ExecuteRequest {
     /** The task to execute. */
-    task?: Lattice.Task;
+    task?: Lattice.Task | undefined;
 }

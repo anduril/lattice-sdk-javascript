@@ -2,5 +2,5 @@
 
 export interface PrimaryCorrelation {
     /** The secondary entity IDs part of this correlation. */
-    secondaryEntityIds?: string[];
+    secondaryEntityIds?: string[] | undefined;
 }

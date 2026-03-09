@@ -5,5 +5,5 @@
  */
 export interface Replication {
     /** The time by which this task should be assumed to be stale. */
-    staleTime?: string;
+    staleTime?: string | undefined;
 }

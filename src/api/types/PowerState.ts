@@ -10,5 +10,5 @@ export interface PowerState {
      * This is a map where the key is a unique id of the power source and the value is additional information about the
      *  power source.
      */
-    sourceIdToState?: Record<string, Lattice.PowerSource>;
+    sourceIdToState?: Record<string, Lattice.PowerSource> | undefined;
 }

@@ -11,19 +11,19 @@ export interface Alert {
      * Short, machine-readable code that describes this alert. This code is intended to provide systems off-asset
      *  with a lookup key to retrieve more detailed information about the alert.
      */
-    alertCode?: string;
+    alertCode?: string | undefined;
     /**
      * Human-readable description of this alert. The description is intended for display in the UI for human
      *  understanding and should not be used for machine processing. If the description is fixed and the vehicle controller
      *  provides no dynamic substitutions, then prefer lookup based on alert_code.
      */
-    description?: string;
+    description?: string | undefined;
     /** Alert level (Warning, Caution, or Advisory). */
-    level?: Alert.Level;
+    level?: Alert.Level | undefined;
     /** Time at which this alert was activated. */
-    activatedTime?: string;
+    activatedTime?: string | undefined;
     /** Set of conditions which have activated this alert. */
-    activeConditions?: Lattice.AlertCondition[];
+    activeConditions?: Lattice.AlertCondition[] | undefined;
 }
 
 export namespace Alert {

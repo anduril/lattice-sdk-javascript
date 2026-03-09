@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * Individual payload configuration.
  */
 export interface Payload {
-    config?: Lattice.PayloadConfiguration;
+    config?: Lattice.PayloadConfiguration | undefined;
 }

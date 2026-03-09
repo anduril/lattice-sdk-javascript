@@ -9,9 +9,9 @@
  */
 export interface ClassificationInformation {
     /** Classification level to be applied to the information in question. */
-    level?: ClassificationInformation.Level;
+    level?: ClassificationInformation.Level | undefined;
     /** Caveats that may further restrict how the information can be disseminated. */
-    caveats?: string[];
+    caveats?: string[] | undefined;
 }
 
 export namespace ClassificationInformation {

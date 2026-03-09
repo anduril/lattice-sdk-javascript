@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * The relationships between this entity and other entities in the common operational picture.
  */
 export interface Relationships {
-    relationships?: Lattice.Relationship[];
+    relationships?: Lattice.Relationship[] | undefined;
 }

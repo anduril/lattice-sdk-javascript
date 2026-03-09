@@ -7,5 +7,5 @@ import type * as Lattice from "../index.js";
  */
 export interface Allocation {
     /** Agents actively being utilized in a task. */
-    activeAgents?: Lattice.Agent[];
+    activeAgents?: Lattice.Agent[] | undefined;
 }
