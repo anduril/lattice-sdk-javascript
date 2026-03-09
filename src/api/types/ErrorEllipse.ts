@@ -5,11 +5,11 @@
  */
 export interface ErrorEllipse {
     /** Defines the probability in percentage that an entity lies within the given ellipse: 0-1. */
-    probability?: number;
+    probability?: number | undefined;
     /** Defines the distance from the center point of the ellipse to the furthest distance on the perimeter in meters. */
-    semiMajorAxisM?: number;
+    semiMajorAxisM?: number | undefined;
     /** Defines the distance from the center point of the ellipse to the shortest distance on the perimeter in meters. */
-    semiMinorAxisM?: number;
+    semiMinorAxisM?: number | undefined;
     /** The orientation of the semi-major relative to true north in degrees from clockwise: 0-180 due to symmetry across the semi-minor axis. */
-    orientationD?: number;
+    orientationD?: number | undefined;
 }

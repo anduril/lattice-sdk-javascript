@@ -2,5 +2,5 @@
 
 export interface BadRequestErrorBody {
     error: string;
-    error_description?: string;
+    error_description?: string | undefined;
 }

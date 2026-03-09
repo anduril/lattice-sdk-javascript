@@ -4,8 +4,8 @@
  * An alternate id for an Entity.
  */
 export interface AlternateId {
-    id?: string;
-    type?: AlternateId.Type;
+    id?: string | undefined;
+    type?: AlternateId.Type | undefined;
 }
 
 export namespace AlternateId {

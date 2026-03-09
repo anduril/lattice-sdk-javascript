@@ -12,19 +12,19 @@ import type * as Lattice from "../index.js";
  */
 export interface TaskStatus {
     /** Status of the task. */
-    status?: TaskStatus.Status;
+    status?: TaskStatus.Status | undefined;
     /** Any errors associated with the task. */
-    taskError?: Lattice.TaskError;
+    taskError?: Lattice.TaskError | undefined;
     /** Any incremental progress on the task, should be from the tasks/v* /progress folder. */
-    progress?: Lattice.GoogleProtobufAny;
+    progress?: Lattice.GoogleProtobufAny | undefined;
     /** Any final result of the task, should be from tasks/v* /result folder. */
-    result?: Lattice.GoogleProtobufAny;
+    result?: Lattice.GoogleProtobufAny | undefined;
     /** Time the task began execution, may not be known even for executing Tasks. */
-    startTime?: string;
+    startTime?: string | undefined;
     /** Any estimate for how the task will progress, should be from tasks/v* /estimates folder. */
-    estimate?: Lattice.GoogleProtobufAny;
+    estimate?: Lattice.GoogleProtobufAny | undefined;
     /** Any allocated agents of the task. */
-    allocation?: Lattice.Allocation;
+    allocation?: Lattice.Allocation | undefined;
 }
 
 export namespace TaskStatus {

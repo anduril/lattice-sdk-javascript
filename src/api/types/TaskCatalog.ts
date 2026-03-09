@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * Catalog of supported tasks.
  */
 export interface TaskCatalog {
-    taskDefinitions?: Lattice.TaskDefinition[];
+    taskDefinitions?: Lattice.TaskDefinition[] | undefined;
 }

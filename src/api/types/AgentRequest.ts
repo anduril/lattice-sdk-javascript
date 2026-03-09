@@ -15,7 +15,7 @@ import type * as Lattice from "../index.js";
  * for heartbeat messages to ensure the agent is still responsive.
  */
 export interface AgentRequest {
-    executeRequest?: Lattice.ExecuteRequest;
-    cancelRequest?: Lattice.CancelRequest;
-    completeRequest?: Lattice.CompleteRequest;
+    executeRequest?: Lattice.ExecuteRequest | undefined;
+    cancelRequest?: Lattice.CancelRequest | undefined;
+    completeRequest?: Lattice.CompleteRequest | undefined;
 }

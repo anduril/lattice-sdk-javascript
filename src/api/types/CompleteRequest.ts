@@ -6,5 +6,5 @@
  */
 export interface CompleteRequest {
     /** ID of the task to complete. */
-    taskId?: string;
+    taskId?: string | undefined;
 }

@@ -10,10 +10,10 @@ export interface Classification {
      * The default classification information which should be assumed to apply to everything in
      *  the entity unless a specific field level classification is present.
      */
-    default?: Lattice.ClassificationInformation;
+    default?: Lattice.ClassificationInformation | undefined;
     /**
      * The set of individual field classification information which should always precedence
      *  over the default classification information.
      */
-    fields?: Lattice.FieldClassificationInformation[];
+    fields?: Lattice.FieldClassificationInformation[] | undefined;
 }

@@ -7,11 +7,11 @@ import type * as Lattice from "../index.js";
  */
 export interface RangeRings {
     /** The minimum range ring distance, specified in meters. */
-    minDistanceM?: number;
+    minDistanceM?: number | undefined;
     /** The maximum range ring distance, specified in meters. */
-    maxDistanceM?: number;
+    maxDistanceM?: number | undefined;
     /** The count of range rings. */
-    ringCount?: number;
+    ringCount?: number | undefined;
     /** The color of range rings, specified in hex string. */
-    ringLineColor?: Lattice.Color;
+    ringLineColor?: Lattice.Color | undefined;
 }

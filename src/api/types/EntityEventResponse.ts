@@ -4,6 +4,6 @@ import type * as Lattice from "../index.js";
 
 export interface EntityEventResponse {
     /** Long-poll session identifier. Use this token to resume polling on subsequent requests. */
-    sessionToken?: string;
-    entityEvents?: Lattice.EntityEvent[];
+    sessionToken?: string | undefined;
+    entityEvents?: Lattice.EntityEvent[] | undefined;
 }

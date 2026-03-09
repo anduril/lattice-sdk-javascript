@@ -4,7 +4,7 @@ import type * as Lattice from "../index.js";
 
 export interface CorrelationMetadata {
     /** Who or what added this entity to the (de)correlation. */
-    provenance?: Lattice.Provenance;
+    provenance?: Lattice.Provenance | undefined;
     /**
      * Indicates how the correlation will be distributed. Because a correlation is composed of
      *  multiple secondaries, each of which may have been correlated with different replication
@@ -14,9 +14,9 @@ export interface CorrelationMetadata {
      *  with A having been correlated globally and B having been correlated locally, then the
      *  correlation set that is distributed globally than what is known locally in the node.
      */
-    replicationMode?: CorrelationMetadata.ReplicationMode;
+    replicationMode?: CorrelationMetadata.ReplicationMode | undefined;
     /** What type of (de)correlation was this entity added with. */
-    type?: CorrelationMetadata.Type;
+    type?: CorrelationMetadata.Type | undefined;
 }
 
 export namespace CorrelationMetadata {

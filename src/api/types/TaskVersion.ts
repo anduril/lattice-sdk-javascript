@@ -9,15 +9,15 @@
  */
 export interface TaskVersion {
     /** The unique identifier for this task, used to distinguish it from all other tasks in the system. */
-    taskId?: string;
+    taskId?: string | undefined;
     /**
      * Counter that increments on changes to the task definition.
      *  Unset (0) initially, starts at 1 on creation, and increments with each update to task fields.
      */
-    definitionVersion?: number;
+    definitionVersion?: number | undefined;
     /**
      * Counter that increments on changes to TaskStatus.
      *  Unset (0) initially, starts at 1 on creation, and increments with each status update.
      */
-    statusVersion?: number;
+    statusVersion?: number | undefined;
 }

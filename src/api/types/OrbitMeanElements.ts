@@ -6,7 +6,7 @@ import type * as Lattice from "../index.js";
  * Orbit Mean Elements data, analogous to the Orbit Mean Elements Message in CCSDS 502.0-B-3
  */
 export interface OrbitMeanElements {
-    metadata?: Lattice.OrbitMeanElementsMetadata;
-    meanKeplerianElements?: Lattice.MeanKeplerianElements;
-    tleParameters?: Lattice.TleParameters;
+    metadata?: Lattice.OrbitMeanElementsMetadata | undefined;
+    meanKeplerianElements?: Lattice.MeanKeplerianElements | undefined;
+    tleParameters?: Lattice.TleParameters | undefined;
 }
