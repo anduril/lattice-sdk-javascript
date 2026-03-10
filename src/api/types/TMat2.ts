@@ -5,7 +5,7 @@
  *  covariance matrices
  */
 export interface TMat2 {
-    mxx?: number;
-    mxy?: number;
-    myy?: number;
+    mxx?: number | undefined;
+    mxy?: number | undefined;
+    myy?: number | undefined;
 }

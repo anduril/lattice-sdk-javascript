@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * A component that describe the length in time between two pulses
  */
 export interface PulseRepetitionInterval {
-    pulseRepetitionIntervalS?: Lattice.Measurement;
+    pulseRepetitionIntervalS?: Lattice.Measurement | undefined;
 }

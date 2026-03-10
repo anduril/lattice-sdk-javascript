@@ -413,9 +413,15 @@ export class EntitiesClient {
                 case 404:
                     throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 408:
-                    throw new Lattice.RequestTimeoutError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Lattice.RequestTimeoutError(
+                        _response.error.body as Lattice.entity.Error_,
+                        _response.rawResponse,
+                    );
                 case 429:
-                    throw new Lattice.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Lattice.TooManyRequestsError(
+                        _response.error.body as Lattice.entity.Error_,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.LatticeError({
                         statusCode: _response.error.statusCode,
@@ -429,6 +435,8 @@ export class EntitiesClient {
     }
 
     /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Establishes a server-sent events (SSE) connection that streams entity data in real-time.
      * This is a one-way connection from server to client that follows the SSE protocol with text/event-stream content type.
      *
@@ -494,7 +502,6 @@ export class EntitiesClient {
                     signal: requestOptions?.abortSignal,
                     eventShape: {
                         type: "sse",
-                        streamTerminator: "[DONE]",
                     },
                 }),
                 rawResponse: _response.rawResponse,

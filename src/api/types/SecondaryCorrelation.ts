@@ -4,7 +4,7 @@ import type * as Lattice from "../index.js";
 
 export interface SecondaryCorrelation {
     /** The primary of this correlation. */
-    primaryEntityId?: string;
+    primaryEntityId?: string | undefined;
     /** Metadata about the correlation. */
-    metadata?: Lattice.CorrelationMetadata;
+    metadata?: Lattice.CorrelationMetadata | undefined;
 }

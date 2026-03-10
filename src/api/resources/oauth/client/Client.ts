@@ -23,6 +23,8 @@ export class OauthClient {
     }
 
     /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Gets a new short-lived token using the specified client credentials
      *
      * @param {Lattice.GetTokenRequest} request

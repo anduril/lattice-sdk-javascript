@@ -6,9 +6,9 @@ import type * as Lattice from "../index.js";
  * Event representing some type of entity change.
  */
 export interface EntityEvent {
-    eventType?: EntityEvent.EventType;
-    time?: string;
-    entity?: Lattice.Entity;
+    eventType?: EntityEvent.EventType | undefined;
+    time?: string | undefined;
+    entity?: Lattice.Entity | undefined;
 }
 
 export namespace EntityEvent {

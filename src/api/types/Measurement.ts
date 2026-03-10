@@ -5,7 +5,7 @@
  */
 export interface Measurement {
     /** The value of the measurement. */
-    value?: number;
+    value?: number | undefined;
     /** Estimated one standard deviation in same unit as the value. */
-    sigma?: number;
+    sigma?: number | undefined;
 }

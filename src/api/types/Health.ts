@@ -7,16 +7,16 @@ import type * as Lattice from "../index.js";
  */
 export interface Health {
     /** Status indicating whether the entity is able to communicate with Entity Manager. */
-    connectionStatus?: Health.ConnectionStatus;
+    connectionStatus?: Health.ConnectionStatus | undefined;
     /** Top-level health status; typically a roll-up of individual component healths. */
-    healthStatus?: Health.HealthStatus;
+    healthStatus?: Health.HealthStatus | undefined;
     /** Health of individual components running on this Entity. */
-    components?: Lattice.ComponentHealth[];
+    components?: Lattice.ComponentHealth[] | undefined;
     /**
      * The update time for the top-level health information.
      *  If this timestamp is unset, the data is assumed to be most recent
      */
-    updateTime?: string;
+    updateTime?: string | undefined;
     /**
      * Active alerts indicate a critical change in system state sent by the asset
      *  that must be made known to an operator or consumer of the common operating picture.
@@ -25,7 +25,7 @@ export interface Health {
      *  an active alert based on fuel levels running low. Alerts should be removed from this list when their conditions
      *  are cleared. In other words, only active alerts should be reported here.
      */
-    activeAlerts?: Lattice.Alert[];
+    activeAlerts?: Lattice.Alert[] | undefined;
 }
 
 export namespace Health {

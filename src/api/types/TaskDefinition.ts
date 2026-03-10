@@ -5,5 +5,5 @@
  */
 export interface TaskDefinition {
     /** Url path must be prefixed with `type.googleapis.com/`. */
-    taskSpecificationUrl?: string;
+    taskSpecificationUrl?: string | undefined;
 }

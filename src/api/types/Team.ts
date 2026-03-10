@@ -7,6 +7,6 @@ import type * as Lattice from "../index.js";
  */
 export interface Team {
     /** Entity ID of the team */
-    entityId?: string;
-    members?: Lattice.Agent[];
+    entityId?: string | undefined;
+    members?: Lattice.Agent[] | undefined;
 }

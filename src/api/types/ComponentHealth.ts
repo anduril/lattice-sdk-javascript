@@ -7,18 +7,18 @@ import type * as Lattice from "../index.js";
  */
 export interface ComponentHealth {
     /** Consistent internal ID for this component. */
-    id?: string;
+    id?: string | undefined;
     /** Display name for this component. */
-    name?: string;
+    name?: string | undefined;
     /** Health for this component. */
-    health?: ComponentHealth.Health;
+    health?: ComponentHealth.Health | undefined;
     /** Human-readable describing the component state. These messages should be understandable by end users. */
-    messages?: Lattice.ComponentMessage[];
+    messages?: Lattice.ComponentMessage[] | undefined;
     /**
      * The last update time for this specific component.
      *  If this timestamp is unset, the data is assumed to be most recent
      */
-    updateTime?: string;
+    updateTime?: string | undefined;
 }
 
 export namespace ComponentHealth {

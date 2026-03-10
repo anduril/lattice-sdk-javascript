@@ -6,11 +6,11 @@ export interface GetTokenResponse {
     /** The type of token (typically "Bearer") */
     token_type: string;
     /** Lifetime of the access token in seconds */
-    expires_in?: number;
+    expires_in?: number | undefined;
     /** Lifetime of the refresh token */
-    refresh_expires_in?: number;
+    refresh_expires_in?: number | undefined;
     /** Enforce that a token cannot be used before a specific unixtime */
-    "not-before-policy"?: number;
+    "not-before-policy"?: number | undefined;
     /** The scope of the access token */
-    scope?: string;
+    scope?: string | undefined;
 }

@@ -10,7 +10,7 @@ export interface AngleOfArrival {
      * Origin (LLA) and attitude (relative to ENU) of a ray pointing towards the detection. The attitude represents a
      *  forward-left-up (FLU) frame where the x-axis (1, 0, 0) is pointing towards the target.
      */
-    relativePose?: Lattice.Pose;
+    relativePose?: Lattice.Pose | undefined;
     /**
      * Bearing/elevation covariance matrix where bearing is defined in radians CCW+ about the z-axis from the x-axis of FLU frame
      *  and elevation is positive down from the FL/XY plane.
@@ -18,5 +18,5 @@ export interface AngleOfArrival {
      *  mxy = bearing/elevation covariance in rad^2
      *  myy = elevation variance in rad^2
      */
-    bearingElevationCovarianceRad2?: Lattice.TMat2;
+    bearingElevationCovarianceRad2?: Lattice.TMat2 | undefined;
 }

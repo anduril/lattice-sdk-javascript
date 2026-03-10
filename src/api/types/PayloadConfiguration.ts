@@ -5,15 +5,15 @@ export interface PayloadConfiguration {
      * Identifying ID for the capability.
      *  This ID may be used multiple times to represent payloads that are the same capability but have different operational states
      */
-    capabilityId?: string;
+    capabilityId?: string | undefined;
     /** The number of payloads currently available in the configuration. */
-    quantity?: number;
+    quantity?: number | undefined;
     /** The target environments the configuration is effective against. */
-    effectiveEnvironment?: PayloadConfiguration.EffectiveEnvironment.Item[];
+    effectiveEnvironment?: PayloadConfiguration.EffectiveEnvironment.Item[] | undefined;
     /** The operational state of this payload. */
-    payloadOperationalState?: PayloadConfiguration.PayloadOperationalState;
+    payloadOperationalState?: PayloadConfiguration.PayloadOperationalState | undefined;
     /** A human readable description of the payload */
-    payloadDescription?: string;
+    payloadDescription?: string | undefined;
 }
 
 export namespace PayloadConfiguration {

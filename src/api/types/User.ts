@@ -5,5 +5,5 @@
  */
 export interface User {
     /** The User ID associated with this User. */
-    userId?: string;
+    userId?: string | undefined;
 }

@@ -7,5 +7,5 @@ import type * as Lattice from "../index.js";
  *  See https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2
  */
 export interface GeoPoint {
-    position?: Lattice.Position;
+    position?: Lattice.Position | undefined;
 }

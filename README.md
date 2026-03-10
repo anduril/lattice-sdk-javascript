@@ -22,6 +22,7 @@ The Lattice SDK TypeScript library provides convenient access to the Lattice SDK
 - [Binary Response](#binary-response)
 - [Pagination](#pagination)
 - [Advanced](#advanced)
+  - [Subpackage Exports](#subpackage-exports)
   - [Additional Headers](#additional-headers)
   - [Additional Query String Parameters](#additional-query-string-parameters)
   - [Retries](#retries)
@@ -606,6 +607,16 @@ const response = page.response;
 
 ## Advanced
 
+### Subpackage Exports
+
+This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
+
+```typescript
+import { EntitiesClient } from '@anduril-industries/lattice-sdk/entities';
+
+const client = new EntitiesClient({...});
+```
+
 ### Additional Headers
 
 If you would like to send additional headers as part of the request, use the `headers` request option.
@@ -783,3 +794,4 @@ const client = new LatticeClient({
     fetcher: // provide your implementation here
 });
 ```
+
