@@ -7,21 +7,21 @@ import type * as Lattice from "../index.js";
  */
 export interface PowerSource {
     /** Status of the power source. */
-    powerStatus?: PowerSource.PowerStatus;
+    powerStatus?: PowerSource.PowerStatus | undefined;
     /** Used to determine the type of power source. */
-    powerType?: PowerSource.PowerType;
+    powerType?: PowerSource.PowerType | undefined;
     /** Power level of the system. If absent, the power level is assumed to be unknown. */
-    powerLevel?: Lattice.PowerLevel;
+    powerLevel?: Lattice.PowerLevel | undefined;
     /**
      * Set of human-readable messages with status of the power system. Typically this would be used in an error state
      *  to provide additional error information. This can also be used for informational messages.
      */
-    messages?: string[];
+    messages?: string[] | undefined;
     /**
      * Whether the power source is offloadable. If the value is missing (as opposed to false) then the entity does not
      *  report whether the power source is offloadable.
      */
-    offloadable?: boolean;
+    offloadable?: boolean | undefined;
 }
 
 export namespace PowerSource {

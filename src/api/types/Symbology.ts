@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * Symbology associated with an entity.
  */
 export interface Symbology {
-    milStd2525C?: Lattice.MilStd2525C;
+    milStd2525C?: Lattice.MilStd2525C | undefined;
 }

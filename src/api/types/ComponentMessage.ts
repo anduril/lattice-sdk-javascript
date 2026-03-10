@@ -5,9 +5,9 @@
  */
 export interface ComponentMessage {
     /** The status associated with this message. */
-    status?: ComponentMessage.Status;
+    status?: ComponentMessage.Status | undefined;
     /** The human-readable content of the message. */
-    message?: string;
+    message?: string | undefined;
 }
 
 export namespace ComponentMessage {

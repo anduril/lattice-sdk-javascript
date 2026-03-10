@@ -5,7 +5,7 @@
  *  in which an asset can, or cannot, operate.
  */
 export interface ControlAreaDetails {
-    type?: ControlAreaDetails.Type;
+    type?: ControlAreaDetails.Type | undefined;
 }
 
 export namespace ControlAreaDetails {

@@ -4,5 +4,5 @@ import type * as Lattice from "../index.js";
 
 export interface DecorrelatedAll {
     /** Metadata about the decorrelation. */
-    metadata?: Lattice.CorrelationMetadata;
+    metadata?: Lattice.CorrelationMetadata | undefined;
 }

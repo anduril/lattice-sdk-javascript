@@ -7,9 +7,9 @@
  */
 export interface GeoEllipsoid {
     /** Defines the distance from the center point to the surface along the forward axis */
-    forwardAxisM?: number;
+    forwardAxisM?: number | undefined;
     /** Defines the distance from the center point to the surface along the side axis */
-    sideAxisM?: number;
+    sideAxisM?: number | undefined;
     /** Defines the distance from the center point to the surface along the up axis */
-    upAxisM?: number;
+    upAxisM?: number | undefined;
 }

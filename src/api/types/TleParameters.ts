@@ -2,22 +2,22 @@
 
 export interface TleParameters {
     /** Integer specifying TLE ephemeris type */
-    ephemerisType?: number;
+    ephemerisType?: number | undefined;
     /** User-defined free-text message classification/caveats of this TLE */
-    classificationType?: string;
+    classificationType?: string | undefined;
     /** Norad catalog number: integer up to nine digits. */
-    noradCatId?: number;
-    elementSetNo?: number;
+    noradCatId?: number | undefined;
+    elementSetNo?: number | undefined;
     /** Optional: revolution number */
-    revAtEpoch?: number;
+    revAtEpoch?: number | undefined;
     /** Drag parameter for SGP-4 in units 1 / Earth radii */
-    bstar?: number;
+    bstar?: number | undefined;
     /** Drag parameter for SGP4-XP in units m^2 / kg */
-    bterm?: number;
+    bterm?: number | undefined;
     /** First time derivative of mean motion in rev / day^2 */
-    meanMotionDot?: number;
+    meanMotionDot?: number | undefined;
     /** Second time derivative of mean motion in rev / day^3. For use with SGP or PPT3. */
-    meanMotionDdot?: number;
+    meanMotionDdot?: number | undefined;
     /** Solar radiation pressure coefficient A_gamma / m in m^2 / kg. For use with SGP4-XP. */
-    agom?: number;
+    agom?: number | undefined;
 }

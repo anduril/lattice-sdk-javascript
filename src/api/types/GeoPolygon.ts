@@ -8,12 +8,12 @@ import type * as Lattice from "../index.js";
  */
 export interface GeoPolygon {
     /** An array of LinearRings where the first item is the exterior ring and subsequent items are interior rings. */
-    rings?: Lattice.LinearRing[];
+    rings?: Lattice.LinearRing[] | undefined;
     /**
      * An extension hint that this polygon is a rectangle. When true this implies several things:
      *  * exactly 1 linear ring with 5 points (starting corner, 3 other corners and start again)
      *  * each point has the same altitude corresponding with the plane of the rectangle
      *  * each point has the same height (either all present and equal, or all not present)
      */
-    isRectangle?: boolean;
+    isRectangle?: boolean | undefined;
 }

@@ -4,10 +4,10 @@
  * Symmetric 3d matrix only representing the upper right triangle.
  */
 export interface EntityManagerTMat3 {
-    mxx?: number;
-    mxy?: number;
-    mxz?: number;
-    myy?: number;
-    myz?: number;
-    mzz?: number;
+    mxx?: number | undefined;
+    mxy?: number | undefined;
+    mxz?: number | undefined;
+    myy?: number | undefined;
+    myz?: number | undefined;
+    mzz?: number | undefined;
 }

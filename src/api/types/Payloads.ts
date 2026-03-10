@@ -6,5 +6,5 @@ import type * as Lattice from "../index.js";
  * List of payloads available for an entity.
  */
 export interface Payloads {
-    payloadConfigurations?: Lattice.Payload[];
+    payloadConfigurations?: Lattice.Payload[] | undefined;
 }

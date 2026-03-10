@@ -2,5 +2,5 @@
 
 export interface EntityIdsSelector {
     /** Receive tasks as an assignee for one or more of the supplied entity ids. */
-    entityIds?: string[];
+    entityIds?: string[] | undefined;
 }

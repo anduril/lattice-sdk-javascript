@@ -2,16 +2,16 @@
 
 export interface OrbitMeanElementsMetadata {
     /** Creation date/time in UTC */
-    creationDate?: string;
+    creationDate?: string | undefined;
     /** Creating agency or operator */
-    originator?: string;
+    originator?: string | undefined;
     /** ID that uniquely identifies a message from a given originator. */
-    messageId?: string;
+    messageId?: string | undefined;
     /** Reference frame, assumed to be Earth-centered */
-    refFrame?: OrbitMeanElementsMetadata.RefFrame;
+    refFrame?: OrbitMeanElementsMetadata.RefFrame | undefined;
     /** Reference frame epoch in UTC - mandatory only if not intrinsic to frame definition */
-    refFrameEpoch?: string;
-    meanElementTheory?: OrbitMeanElementsMetadata.MeanElementTheory;
+    refFrameEpoch?: string | undefined;
+    meanElementTheory?: OrbitMeanElementsMetadata.MeanElementTheory | undefined;
 }
 
 export namespace OrbitMeanElementsMetadata {

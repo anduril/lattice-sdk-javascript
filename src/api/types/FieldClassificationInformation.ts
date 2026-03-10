@@ -10,7 +10,7 @@ export interface FieldClassificationInformation {
      * Proto field path which is the string representation of a field.
      *  > example: signal.bandwidth_hz would be bandwidth_hz in the signal component
      */
-    fieldPath?: string;
+    fieldPath?: string | undefined;
     /** The information which makes up the field level classification marking. */
-    classificationInformation?: Lattice.ClassificationInformation;
+    classificationInformation?: Lattice.ClassificationInformation | undefined;
 }

@@ -21,7 +21,7 @@ export interface TaskQuery {
 export namespace TaskQuery {
     export interface StatusFilter {
         /** Status of the Task to filter by, inclusive. */
-        status?: StatusFilter.Status;
+        status?: StatusFilter.Status | undefined;
     }
 
     export namespace StatusFilter {
@@ -51,8 +51,8 @@ export namespace TaskQuery {
      */
     export interface UpdateTimeRange {
         /** If provided, returns Tasks only updated after this time. */
-        startTime?: string;
+        startTime?: string | undefined;
         /** If provided, returns Tasks only updated before this time. */
-        endTime?: string;
+        endTime?: string | undefined;
     }
 }

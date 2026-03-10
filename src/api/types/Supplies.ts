@@ -6,5 +6,6 @@ import type * as Lattice from "../index.js";
  * Represents the state of supplies associated with an entity (available but not in condition to use immediately)
  */
 export interface Supplies {
-    fuel?: Lattice.Fuel[];
+    munitions?: Lattice.Munition[] | undefined;
+    fuel?: Lattice.Fuel[] | undefined;
 }

@@ -2,8 +2,8 @@
 
 export interface Quaternion {
     /** x, y, z are vector portion, w is scalar */
-    x?: number;
-    y?: number;
-    z?: number;
-    w?: number;
+    x?: number | undefined;
+    y?: number | undefined;
+    z?: number | undefined;
+    w?: number | undefined;
 }

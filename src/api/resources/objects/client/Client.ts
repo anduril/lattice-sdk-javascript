@@ -26,6 +26,8 @@ export class ObjectsClient {
     }
 
     /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Lists objects in your environment. You can define a prefix to list a subset of your objects. If you do not set a prefix, Lattice returns all available objects. By default this endpoint will list local objects only.
      *
      * @param {Lattice.ListObjectsRequest} request
@@ -44,12 +46,13 @@ export class ObjectsClient {
     ): Promise<core.Page<Lattice.PathMetadata, Lattice.ListResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Lattice.ListObjectsRequest): Promise<core.WithRawResponse<Lattice.ListResponse>> => {
-                const { prefix, sinceTimestamp, pageToken, allObjectsInMesh } = request;
+                const { prefix, sinceTimestamp, pageToken, allObjectsInMesh, maxPageSize } = request;
                 const _queryParams: Record<string, unknown> = {
                     prefix,
-                    sinceTimestamp,
+                    sinceTimestamp: sinceTimestamp != null ? sinceTimestamp : undefined,
                     pageToken,
                     allObjectsInMesh,
+                    maxPageSize,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -113,7 +116,10 @@ export class ObjectsClient {
     }
 
     /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Fetches an object from your environment using the objectPath path parameter.
+     *
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
@@ -182,6 +188,8 @@ export class ObjectsClient {
     }
 
     /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Uploads an object. The object must be 1 GiB or smaller.
      *
      * @param {core.file.Uploadable} uploadable
@@ -250,11 +258,17 @@ export class ObjectsClient {
                 case 401:
                     throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 413:
-                    throw new Lattice.ContentTooLargeError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Lattice.ContentTooLargeError(
+                        _response.error.body as Lattice.object.Error_,
+                        _response.rawResponse,
+                    );
                 case 500:
                     throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 case 507:
-                    throw new Lattice.InsufficientStorageError(_response.error.body as unknown, _response.rawResponse);
+                    throw new Lattice.InsufficientStorageError(
+                        _response.error.body as Lattice.object.Error_,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.LatticeError({
                         statusCode: _response.error.statusCode,
@@ -268,6 +282,8 @@ export class ObjectsClient {
     }
 
     /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Deletes an object from your environment given the objectPath path parameter.
      *
      * @param {Lattice.DeleteObjectRequest} request
@@ -349,6 +365,8 @@ export class ObjectsClient {
     }
 
     /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Returns metadata for a specified object path. Use this to fetch metadata such as object size (size_bytes), its expiry time (expiry_time), or its latest update timestamp (last_updated_at).
      *
      * @param {Lattice.GetObjectMetadataRequest} request

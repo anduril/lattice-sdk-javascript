@@ -5,10 +5,10 @@
  */
 export interface ModeS {
     /** Mode S identifier which comprises of 8 alphanumeric characters. */
-    id?: string;
+    id?: string | undefined;
     /**
      * The Mode S ICAO aircraft address. Expected values are between 1 and 16777214 decimal. The Mode S address is
      *  considered unique.
      */
-    address?: number;
+    address?: number | undefined;
 }

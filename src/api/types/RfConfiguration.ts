@@ -7,7 +7,7 @@ import type * as Lattice from "../index.js";
  */
 export interface RfConfiguration {
     /** Frequency ranges that are available for this sensor. */
-    frequencyRangeHz?: Lattice.FrequencyRange[];
+    frequencyRangeHz?: Lattice.FrequencyRange[] | undefined;
     /** Bandwidth ranges that are available for this sensor. */
-    bandwidthRangeHz?: Lattice.BandwidthRange[];
+    bandwidthRangeHz?: Lattice.BandwidthRange[] | undefined;
 }

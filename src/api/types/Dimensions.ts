@@ -2,5 +2,5 @@
 
 export interface Dimensions {
     /** Length of the entity in meters */
-    lengthM?: number;
+    lengthM?: number | undefined;
 }
