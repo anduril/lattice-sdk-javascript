@@ -6,7 +6,7 @@
         "type": "git",
         "url": "git+https://github.com/anduril/lattice-sdk-javascript.git"
     },
-    "license": "See /fern/config/LICENSE",
+    "license": "See LICENSE",
     "type": "commonjs",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.mjs",
