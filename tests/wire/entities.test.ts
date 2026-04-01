@@ -2098,7 +2098,12 @@ describe("EntitiesClient", () => {
         for await (const event of response) {
             events.push(event);
         }
-        expect(events).toEqual([{ event: "heartbeat", timestamp: "2024-01-15T09:30:00Z" }]);
+        expect(events).toEqual([
+            {
+                event: "heartbeat",
+                timestamp: "2024-01-15T09:30:00Z",
+            },
+        ]);
     });
 
     test("streamEntities (2)", async () => {
