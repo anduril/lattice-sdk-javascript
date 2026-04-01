@@ -14,6 +14,7 @@ The Lattice SDK TypeScript library provides convenient access to the Lattice SDK
 - [Support](#support)
 - [Reference](#reference)
 - [Usage](#usage)
+- [Environments](#environments)
 - [Authentication](#authentication)
 - [Request and Response Types](#request-and-response-types)
 - [Exception Handling](#exception-handling)
@@ -67,6 +68,18 @@ import { LatticeClient } from "@anduril-industries/lattice-sdk";
 const client = new LatticeClient({ clientId: "YOUR_CLIENT_ID", clientSecret: "YOUR_CLIENT_SECRET" });
 await client.entities.longPollEntityEvents({
     sessionToken: "sessionToken"
+});
+```
+
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```typescript
+import { LatticeClient, LatticeEnvironment } from "@anduril-industries/lattice-sdk";
+
+const client = new LatticeClient({
+    environment: LatticeEnvironment.Default,
 });
 ```
 

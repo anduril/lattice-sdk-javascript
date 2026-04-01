@@ -1111,7 +1111,12 @@ describe("TasksClient", () => {
         for await (const event of response) {
             events.push(event);
         }
-        expect(events).toEqual([{ event: "heartbeat", timestamp: "timestamp" }]);
+        expect(events).toEqual([
+            {
+                event: "heartbeat",
+                timestamp: "timestamp",
+            },
+        ]);
     });
 
     test("streamTasks (2)", async () => {
@@ -1307,7 +1312,12 @@ describe("TasksClient", () => {
         for await (const event of response) {
             events.push(event);
         }
-        expect(events).toEqual([{ event: "heartbeat", timestamp: "timestamp" }]);
+        expect(events).toEqual([
+            {
+                event: "heartbeat",
+                timestamp: "timestamp",
+            },
+        ]);
     });
 
     test("streamAsAgent (2)", async () => {
