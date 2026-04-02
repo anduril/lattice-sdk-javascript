@@ -5,4 +5,4 @@ export type { TaskCancellation } from "./TaskCancellation.js";
 export type { TaskCreation } from "./TaskCreation.js";
 export { TaskQuery } from "./TaskQuery.js";
 export type { TaskStatusUpdate } from "./TaskStatusUpdate.js";
-export type { TaskStreamRequest } from "./TaskStreamRequest.js";
+export { TaskStreamRequest } from "./TaskStreamRequest.js";
