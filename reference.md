@@ -1017,6 +1017,86 @@ for await (const item of response) {
 </dl>
 </details>
 
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">streamManualControlFrames</a>({ ...params }) -> core.Stream&lt;Lattice.StreamManualControlFramesResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Establishes a server streaming connection that delivers manual control frames to agents
+using server-sent events (SSE).
+
+This endpoint streams manual control frames, for example, for joystick movements, for a specific task
+to the executing agent. The agent should open this stream before reporting `STATUS_EXECUTING`
+to ensure it is ready to receive control input when the operator begins sending frames.
+
+Each frame includes epoch and sequence metadata for handling concurrent control sessions
+and detecting stale or out-of-order frames. Heartbeat messages are sent periodically to
+maintain the connection.
+
+The stream terminates automatically when the task reaches a terminal state
+(`STATUS_DONE_OK` or `STATUS_DONE_NOT_OK`).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.tasks.streamManualControlFrames({
+    taskId: "taskId"
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Lattice.ManualControlStreamRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TasksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Objects
 <details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page&lt;Lattice.PathMetadata, Lattice.ListResponse&gt;</code></summary>
 <dl>

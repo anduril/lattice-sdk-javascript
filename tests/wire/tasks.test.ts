@@ -1373,4 +1373,99 @@ describe("TasksClient", () => {
             return await client.tasks.streamAsAgent();
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
+
+    test("streamManualControlFrames (1)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = 'event: \ndata: {"timestamp":"timestamp","event":"heartbeat"}\n\n';
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/stream")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .sseBody(rawResponseBody)
+            .build();
+
+        const response = await client.tasks.streamManualControlFrames({
+            taskId: "taskId",
+        });
+        const events: unknown[] = [];
+        for await (const event of response) {
+            events.push(event);
+        }
+        expect(events).toEqual([
+            {
+                event: "heartbeat",
+                timestamp: "timestamp",
+            },
+        ]);
+    });
+
+    test("streamManualControlFrames (2)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/stream")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.streamManualControlFrames({
+                taskId: "taskId",
+            });
+        }).rejects.toThrow(Lattice.BadRequestError);
+    });
+
+    test("streamManualControlFrames (3)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/stream")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.streamManualControlFrames({
+                taskId: "taskId",
+            });
+        }).rejects.toThrow(Lattice.UnauthorizedError);
+    });
 });

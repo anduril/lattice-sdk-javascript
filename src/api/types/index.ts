@@ -76,6 +76,8 @@ export * from "./ListResponse.js";
 export * from "./Lla.js";
 export * from "./Location.js";
 export * from "./LocationUncertainty.js";
+export * from "./ManualControlFrame.js";
+export * from "./ManualControlFrameEvent.js";
 export * from "./MeanKeplerianElements.js";
 export * from "./Measurement.js";
 export * from "./Media.js";

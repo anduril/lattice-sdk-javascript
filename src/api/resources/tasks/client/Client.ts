@@ -697,4 +697,96 @@ export class TasksClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/api/v1/agent/stream");
     }
+
+    /**
+     * @beta This endpoint is in pre-release and may change.
+     *
+     * Establishes a server streaming connection that delivers manual control frames to agents
+     * using server-sent events (SSE).
+     *
+     * This endpoint streams manual control frames, for example, for joystick movements, for a specific task
+     * to the executing agent. The agent should open this stream before reporting `STATUS_EXECUTING`
+     * to ensure it is ready to receive control input when the operator begins sending frames.
+     *
+     * Each frame includes epoch and sequence metadata for handling concurrent control sessions
+     * and detecting stale or out-of-order frames. Heartbeat messages are sent periodically to
+     * maintain the connection.
+     *
+     * The stream terminates automatically when the task reaches a terminal state
+     * (`STATUS_DONE_OK` or `STATUS_DONE_NOT_OK`).
+     */
+    public streamManualControlFrames(
+        request: Lattice.ManualControlStreamRequest,
+        requestOptions?: TasksClient.RequestOptions,
+    ): core.HttpResponsePromise<core.Stream<Lattice.StreamManualControlFramesResponse>> {
+        return core.HttpResponsePromise.fromPromise(this.__streamManualControlFrames(request, requestOptions));
+    }
+
+    private async __streamManualControlFrames(
+        request: Lattice.ManualControlStreamRequest,
+        requestOptions?: TasksClient.RequestOptions,
+    ): Promise<core.WithRawResponse<core.Stream<Lattice.StreamManualControlFramesResponse>>> {
+        const { taskId, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher<ReadableStream>({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LatticeEnvironment.Default,
+                `api/v1/tasks/${core.url.encodePathParam(taskId)}/manual-control/stream`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: _body,
+            responseType: "sse",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: new core.Stream({
+                    stream: _response.body,
+                    parse: (data) => data as any,
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "sse",
+                    },
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.LatticeError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/api/v1/tasks/{taskId}/manual-control/stream",
+        );
+    }
 }
