@@ -37,20 +37,7 @@ describe("ObjectsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const expected = {
-            path_metadatas: [
-                {
-                    content_identifier: {
-                        path: "path",
-                        checksum: "checksum",
-                    },
-                    size_bytes: 1000000,
-                    last_updated_at: "2024-01-15T09:30:00Z",
-                    expiry_time: "2024-01-15T09:30:00Z",
-                },
-            ],
-            next_page_token: "next_page_token",
-        };
+        const expected = rawResponseBody;
         const page = await client.objects.listObjects();
 
         expect(expected.path_metadatas).toEqual(page.data);

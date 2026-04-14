@@ -36,14 +36,7 @@ describe("OauthClient", () => {
             .build();
 
         const response = await client.oauth.getToken({});
-        expect(response).toEqual({
-            access_token: "access_token",
-            token_type: "Bearer",
-            expires_in: 3600,
-            refresh_expires_in: 1,
-            "not-before-policy": 1,
-            scope: "scope",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("getToken (2)", async () => {
