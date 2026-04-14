@@ -67,100 +67,7 @@ describe("TasksClient", () => {
             .build();
 
         const response = await client.tasks.createTask();
-        expect(response).toEqual({
-            version: {
-                taskId: "taskId",
-                definitionVersion: 1,
-                statusVersion: 1,
-            },
-            displayName: "displayName",
-            specification: {
-                "@type": "@type",
-            },
-            createdBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdatedBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: {
-                    code: "ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                progress: {
-                    "@type": "@type",
-                },
-                result: {
-                    "@type": "@type",
-                },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: {
-                    "@type": "@type",
-                },
-                allocation: {
-                    activeAgents: [{}],
-                },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: {
-                parentTaskId: "parentTaskId",
-            },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: {
-                staleTime: "2024-01-15T09:30:00Z",
-            },
-            initialEntities: [
-                {
-                    snapshot: true,
-                },
-            ],
-            owner: {
-                entityId: "entityId",
-            },
-            retryStrategy: {
-                fixedRetryStrategy: {
-                    retryInterval: "retryInterval",
-                },
-            },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: {
-                    code: "DELIVERY_ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                deliveryConstraints: {
-                    deliverAfter: "2024-01-15T09:30:00Z",
-                    deliverBefore: "2024-01-15T09:30:00Z",
-                },
-            },
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("createTask (2)", async () => {
@@ -279,100 +186,7 @@ describe("TasksClient", () => {
         const response = await client.tasks.getTask({
             taskId: "taskId",
         });
-        expect(response).toEqual({
-            version: {
-                taskId: "taskId",
-                definitionVersion: 1,
-                statusVersion: 1,
-            },
-            displayName: "displayName",
-            specification: {
-                "@type": "@type",
-            },
-            createdBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdatedBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: {
-                    code: "ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                progress: {
-                    "@type": "@type",
-                },
-                result: {
-                    "@type": "@type",
-                },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: {
-                    "@type": "@type",
-                },
-                allocation: {
-                    activeAgents: [{}],
-                },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: {
-                parentTaskId: "parentTaskId",
-            },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: {
-                staleTime: "2024-01-15T09:30:00Z",
-            },
-            initialEntities: [
-                {
-                    snapshot: true,
-                },
-            ],
-            owner: {
-                entityId: "entityId",
-            },
-            retryStrategy: {
-                fixedRetryStrategy: {
-                    retryInterval: "retryInterval",
-                },
-            },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: {
-                    code: "DELIVERY_ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                deliveryConstraints: {
-                    deliverAfter: "2024-01-15T09:30:00Z",
-                    deliverBefore: "2024-01-15T09:30:00Z",
-                },
-            },
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("getTask (2)", async () => {
@@ -522,100 +336,7 @@ describe("TasksClient", () => {
         const response = await client.tasks.updateTaskStatus({
             taskId: "taskId",
         });
-        expect(response).toEqual({
-            version: {
-                taskId: "taskId",
-                definitionVersion: 1,
-                statusVersion: 1,
-            },
-            displayName: "displayName",
-            specification: {
-                "@type": "@type",
-            },
-            createdBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdatedBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: {
-                    code: "ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                progress: {
-                    "@type": "@type",
-                },
-                result: {
-                    "@type": "@type",
-                },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: {
-                    "@type": "@type",
-                },
-                allocation: {
-                    activeAgents: [{}],
-                },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: {
-                parentTaskId: "parentTaskId",
-            },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: {
-                staleTime: "2024-01-15T09:30:00Z",
-            },
-            initialEntities: [
-                {
-                    snapshot: true,
-                },
-            ],
-            owner: {
-                entityId: "entityId",
-            },
-            retryStrategy: {
-                fixedRetryStrategy: {
-                    retryInterval: "retryInterval",
-                },
-            },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: {
-                    code: "DELIVERY_ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                deliveryConstraints: {
-                    deliverAfter: "2024-01-15T09:30:00Z",
-                    deliverBefore: "2024-01-15T09:30:00Z",
-                },
-            },
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("updateTaskStatus (2)", async () => {
@@ -768,100 +489,7 @@ describe("TasksClient", () => {
         const response = await client.tasks.cancelTask({
             taskId: "taskId",
         });
-        expect(response).toEqual({
-            version: {
-                taskId: "taskId",
-                definitionVersion: 1,
-                statusVersion: 1,
-            },
-            displayName: "displayName",
-            specification: {
-                "@type": "@type",
-            },
-            createdBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdatedBy: {
-                system: {
-                    serviceName: "serviceName",
-                    entityId: "entityId",
-                    managesOwnScheduling: true,
-                },
-                user: {
-                    userId: "userId",
-                },
-                team: {
-                    entityId: "entityId",
-                    members: [{}],
-                },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: {
-                    code: "ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                progress: {
-                    "@type": "@type",
-                },
-                result: {
-                    "@type": "@type",
-                },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: {
-                    "@type": "@type",
-                },
-                allocation: {
-                    activeAgents: [{}],
-                },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: {
-                parentTaskId: "parentTaskId",
-            },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: {
-                staleTime: "2024-01-15T09:30:00Z",
-            },
-            initialEntities: [
-                {
-                    snapshot: true,
-                },
-            ],
-            owner: {
-                entityId: "entityId",
-            },
-            retryStrategy: {
-                fixedRetryStrategy: {
-                    retryInterval: "retryInterval",
-                },
-            },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: {
-                    code: "DELIVERY_ERROR_CODE_INVALID",
-                    message: "message",
-                },
-                deliveryConstraints: {
-                    deliverAfter: "2024-01-15T09:30:00Z",
-                    deliverBefore: "2024-01-15T09:30:00Z",
-                },
-            },
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("cancelTask (2)", async () => {
@@ -987,20 +615,7 @@ describe("TasksClient", () => {
             .build();
 
         const response = await client.tasks.queryTasks();
-        expect(response).toEqual({
-            tasks: [
-                {
-                    displayName: "displayName",
-                    lastUpdateTime: "2024-01-15T09:30:00Z",
-                    scheduledTime: "2024-01-15T09:30:00Z",
-                    description: "description",
-                    isExecutedElsewhere: true,
-                    createTime: "2024-01-15T09:30:00Z",
-                    initialEntities: [{}],
-                },
-            ],
-            nextPageToken: "nextPageToken",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("queryTasks (2)", async () => {
@@ -1210,25 +825,7 @@ describe("TasksClient", () => {
             .build();
 
         const response = await client.tasks.listenAsAgent();
-        expect(response).toEqual({
-            executeRequest: {
-                task: {
-                    displayName: "displayName",
-                    lastUpdateTime: "2024-01-15T09:30:00Z",
-                    scheduledTime: "2024-01-15T09:30:00Z",
-                    description: "description",
-                    isExecutedElsewhere: true,
-                    createTime: "2024-01-15T09:30:00Z",
-                    initialEntities: [{}],
-                },
-            },
-            cancelRequest: {
-                taskId: "taskId",
-            },
-            completeRequest: {
-                taskId: "taskId",
-            },
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("listenAsAgent (2)", async () => {
