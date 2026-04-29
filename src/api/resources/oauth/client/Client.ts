@@ -58,7 +58,7 @@ export class OauthClient {
             method: "POST",
             headers: _headers,
             contentType: "application/x-www-form-urlencoded",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "form",
             body: { ...request, grant_type: "client_credentials" },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
