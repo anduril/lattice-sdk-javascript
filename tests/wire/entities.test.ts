@@ -110,6 +110,7 @@ describe("EntitiesClient", () => {
                 mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
                 mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
                 modeS: { id: "id", address: 1 },
+                modeCAltitudeFt: 1,
             },
             dataClassification: {
                 default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },
@@ -305,6 +306,7 @@ describe("EntitiesClient", () => {
                 mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
                 mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
                 modeS: { id: "id", address: 1 },
+                modeCAltitudeFt: 1,
             },
             dataClassification: {
                 default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },
@@ -531,6 +533,7 @@ describe("EntitiesClient", () => {
                 mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
                 mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
                 modeS: { id: "id", address: 1 },
+                modeCAltitudeFt: 1,
             },
             dataClassification: {
                 default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },
@@ -765,6 +768,7 @@ describe("EntitiesClient", () => {
                 mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
                 mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
                 modeS: { id: "id", address: 1 },
+                modeCAltitudeFt: 1,
             },
             dataClassification: {
                 default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },

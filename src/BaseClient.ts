@@ -5,6 +5,12 @@ import { mergeHeaders } from "./core/headers.js";
 import * as core from "./core/index.js";
 import type * as environments from "./environments.js";
 
+export type AuthOption =
+    | false
+    | core.AuthProvider["getAuthRequest"]
+    | core.AuthProvider
+    | OAuthAuthProvider.AuthOptions;
+
 export type BaseClientOptions = {
     environment?: core.Supplier<environments.LatticeEnvironment | string>;
     /** Specify a custom URL to connect the client to. */
@@ -19,6 +25,8 @@ export type BaseClientOptions = {
     fetch?: typeof fetch;
     /** Configure logging for the client. */
     logging?: core.logging.LogConfig | core.logging.Logger;
+    /** Override auth. Pass false to disable, a function returning auth headers, an AuthProvider, or auth options. */
+    auth?: AuthOption;
 } & OAuthAuthProvider.AuthOptions;
 
 export interface BaseRequestOptions {
@@ -51,8 +59,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@anduril-industries/lattice-sdk",
-            "X-Fern-SDK-Version": "4.7.1",
-            "User-Agent": "@anduril-industries/lattice-sdk/4.7.1",
+            "X-Fern-SDK-Version": "4.8.0",
+            "User-Agent": "@anduril-industries/lattice-sdk/4.8.0",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },
@@ -70,6 +78,23 @@ export function normalizeClientOptionsWithAuth<T extends BaseClientOptions = Bas
     options: T,
 ): NormalizedClientOptionsWithAuth<T> {
     const normalized = normalizeClientOptions(options) as NormalizedClientOptionsWithAuth<T>;
+
+    if (options.auth === false) {
+        normalized.authProvider = new core.NoOpAuthProvider();
+        return normalized;
+    }
+    if (options.auth != null) {
+        if (typeof options.auth === "function") {
+            normalized.authProvider = { getAuthRequest: options.auth };
+            return normalized;
+        }
+        if (core.isAuthProvider(options.auth)) {
+            normalized.authProvider = options.auth;
+            return normalized;
+        }
+        Object.assign(normalized, options.auth);
+    }
+
     const normalizedWithNoOpAuthProvider = withNoOpAuthProvider(normalized);
     normalized.authProvider ??= OAuthAuthProvider.createInstance(normalizedWithNoOpAuthProvider);
     return normalized;

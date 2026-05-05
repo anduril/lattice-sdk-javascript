@@ -3,7 +3,7 @@
 import type * as Lattice from "../index.js";
 
 /**
- * A message describing any transponder codes associated with Mode 1, 2, 3, 4, 5, S interrogations.
+ * A message describing any transponder codes associated with Mode 1, 2, 3, 4, 5, S, C interrogations.
  */
 export interface TransponderCodes {
     /** The mode 1 code assigned to military assets. */
@@ -18,6 +18,11 @@ export interface TransponderCodes {
     mode5?: Lattice.Mode5 | undefined;
     /** The Mode S transponder codes. */
     modeS?: Lattice.ModeS | undefined;
+    /**
+     * The Mode C altitude reported by the transponder in feet. Mode C provides pressure altitude
+     *  in 100-foot increments up to 10,000 feet MSL. A zero value indicates No Statement.
+     */
+    modeCAltitudeFt?: number | undefined;
 }
 
 export namespace TransponderCodes {
