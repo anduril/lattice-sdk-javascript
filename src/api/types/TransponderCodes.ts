@@ -19,8 +19,8 @@ export interface TransponderCodes {
     /** The Mode S transponder codes. */
     modeS?: Lattice.ModeS | undefined;
     /**
-     * The Mode C altitude reported by the transponder in feet. Mode C provides pressure altitude
-     *  in 100-foot increments up to 10,000 feet MSL. A zero value indicates No Statement.
+     * The Mode C altitude reported by the transponder in feet. Mode C provides pressure altitude in 100-foot increments up
+     *  to 10,000 feet MSL. Valid altitudes include 0 ft (sea level). An unset field indicates no Mode C response was received.
      */
     modeCAltitudeFt?: number | undefined;
 }
