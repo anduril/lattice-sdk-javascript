@@ -122,6 +122,111 @@ export class ObjectsClient {
     /**
      * @beta This endpoint is in pre-release and may change.
      *
+     * Returns paginated records of force-distributed objects deleted on the
+     * local node. Useful for operators diagnosing why an object visible on
+     * one node is missing on another. Each record identifies the exact
+     * `(path, checksum)` pair suppressed from re-sync by the distribution
+     * manager. Node-scoped: each node returns only its own records.
+     *
+     * @param {Lattice.ListDeletedObjectsRequest} request
+     * @param {ObjectsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Lattice.BadRequestError}
+     * @throws {@link Lattice.UnauthorizedError}
+     * @throws {@link Lattice.InternalServerError}
+     *
+     * @example
+     *     await client.objects.listDeletedObjects()
+     */
+    public async listDeletedObjects(
+        request: Lattice.ListDeletedObjectsRequest = {},
+        requestOptions?: ObjectsClient.RequestOptions,
+    ): Promise<core.Page<Lattice.DeletedObjectEntry, Lattice.ListDeletedObjectsResponse>> {
+        const list = core.HttpResponsePromise.interceptFunction(
+            async (
+                request: Lattice.ListDeletedObjectsRequest,
+            ): Promise<core.WithRawResponse<Lattice.ListDeletedObjectsResponse>> => {
+                const { pageToken, maxPageSize } = request;
+                const _queryParams: Record<string, unknown> = {
+                    pageToken,
+                    maxPageSize,
+                };
+                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+                    _authRequest.headers,
+                    this._options?.headers,
+                    requestOptions?.headers,
+                );
+                const _response = await core.fetcher({
+                    url: core.url.join(
+                        (await core.Supplier.get(this._options.baseUrl)) ??
+                            (await core.Supplier.get(this._options.environment)) ??
+                            environments.LatticeEnvironment.Default,
+                        "api/v1/debug/deleted-objects",
+                    ),
+                    method: "GET",
+                    headers: _headers,
+                    queryString: core.url
+                        .queryBuilder()
+                        .addMany(_queryParams)
+                        .mergeAdditional(requestOptions?.queryParams)
+                        .build(),
+                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+                    abortSignal: requestOptions?.abortSignal,
+                    fetchFn: this._options?.fetch,
+                    logging: this._options.logging,
+                });
+                if (_response.ok) {
+                    return {
+                        data: _response.body as Lattice.ListDeletedObjectsResponse,
+                        rawResponse: _response.rawResponse,
+                    };
+                }
+                if (_response.error.reason === "status-code") {
+                    switch (_response.error.statusCode) {
+                        case 400:
+                            throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                        case 401:
+                            throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                        case 500:
+                            throw new Lattice.InternalServerError(
+                                _response.error.body as unknown,
+                                _response.rawResponse,
+                            );
+                        default:
+                            throw new errors.LatticeError({
+                                statusCode: _response.error.statusCode,
+                                body: _response.error.body,
+                                rawResponse: _response.rawResponse,
+                            });
+                    }
+                }
+                return handleNonStatusCodeError(
+                    _response.error,
+                    _response.rawResponse,
+                    "GET",
+                    "/api/v1/debug/deleted-objects",
+                );
+            },
+        );
+        const dataWithRawResponse = await list(request).withRawResponse();
+        return new core.Page<Lattice.DeletedObjectEntry, Lattice.ListDeletedObjectsResponse>({
+            response: dataWithRawResponse.data,
+            rawResponse: dataWithRawResponse.rawResponse,
+            hasNextPage: (response) =>
+                response?.next_page_token != null &&
+                !(typeof response?.next_page_token === "string" && response?.next_page_token === ""),
+            getItems: (response) => response?.deleted_objects ?? [],
+            loadPage: (response) => {
+                return list(core.setObjectProperty(request, "pageToken", response?.next_page_token));
+            },
+        });
+    }
+
+    /**
+     * @beta This endpoint is in pre-release and may change.
+     *
      * Fetches an object from your environment using the objectPath path parameter.
      *
      * @throws {@link Lattice.BadRequestError}
