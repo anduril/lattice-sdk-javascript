@@ -5,7 +5,7 @@
     "generatorConfig": {
         "namespaceExport": "Lattice"
     },
-    "originGitCommit": "5d986a44d6048be9f2b4a92667f30029447d20c9",
+    "originGitCommit": "3701de7160b40bbf98bfa071c191177e2ac6be0b",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "4.11.0",
