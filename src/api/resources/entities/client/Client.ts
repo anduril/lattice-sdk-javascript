@@ -435,8 +435,6 @@ export class EntitiesClient {
     }
 
     /**
-     * @beta This endpoint is in pre-release and may change.
-     *
      * Establishes a server-sent events (SSE) connection that streams entity data in real-time.
      * This is a one-way connection from server to client that follows the SSE protocol with text/event-stream content type.
      *

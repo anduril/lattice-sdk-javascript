@@ -269,8 +269,6 @@ export class TasksClient {
     }
 
     /**
-     * @beta This endpoint is in pre-release and may change.
-     *
      * Cancels a task by marking it for cancellation in the system.
      *
      * This method initiates task cancellation based on the task's current state:
@@ -443,8 +441,6 @@ export class TasksClient {
     }
 
     /**
-     * @beta This endpoint is in pre-release and may change.
-     *
      * Establishes a server streaming connection that delivers task updates in real-time using Server-Sent Events (SSE).
      *
      * The stream delivers all existing non-terminal tasks when first connected, followed by real-time
@@ -609,8 +605,6 @@ export class TasksClient {
     }
 
     /**
-     * @beta This endpoint is in pre-release and may change.
-     *
      * Establishes a server streaming connection that delivers tasks to taskable agents for execution
      * using Server-Sent Events (SSE).
      *
@@ -699,8 +693,6 @@ export class TasksClient {
     }
 
     /**
-     * @beta This endpoint is in pre-release and may change.
-     *
      * Establishes a server streaming connection that delivers manual control frames to agents
      * using server-sent events (SSE).
      *
