@@ -1,11 +1,11 @@
 //  This file was auto-generated from our API Definition.
 
 export interface Color {
-    /** The amount of red in the color as a value in the interval [0, 1]. */
+    /** The amount of red in the color as a value in the interval [0, 255]. */
     red?: number | undefined;
-    /** The amount of green in the color as a value in the interval [0, 1]. */
+    /** The amount of green in the color as a value in the interval [0, 255]. */
     green?: number | undefined;
-    /** The amount of blue in the color as a value in the interval [0, 1]. */
+    /** The amount of blue in the color as a value in the interval [0, 255]. */
     blue?: number | undefined;
     /**
      * The fraction of this color that should be applied to the pixel. That is,

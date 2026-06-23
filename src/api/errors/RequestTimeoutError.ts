@@ -17,6 +17,6 @@ export class RequestTimeoutError extends errors.LatticeError {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = this.constructor.name;
+        this.name = "RequestTimeoutError";
     }
 }

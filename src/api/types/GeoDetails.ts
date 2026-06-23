@@ -9,6 +9,7 @@ export interface GeoDetails {
     type?: GeoDetails.Type | undefined;
     controlArea?: Lattice.ControlAreaDetails | undefined;
     acm?: Lattice.AcmDetails | undefined;
+    visualDetails?: Lattice.GeoVisualDetails | undefined;
 }
 
 export namespace GeoDetails {

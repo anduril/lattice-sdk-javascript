@@ -61,6 +61,7 @@ export * from "./GeoPoint.js";
 export * from "./GeoPolygon.js";
 export * from "./GeoPolygonPosition.js";
 export * from "./GeoShape.js";
+export * from "./GeoVisualDetails.js";
 export * from "./GoogleProtobufAny.js";
 export * from "./GroupChild.js";
 export * from "./GroupDetails.js";
