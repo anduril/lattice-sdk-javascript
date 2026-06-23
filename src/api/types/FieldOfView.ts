@@ -49,7 +49,7 @@ export namespace FieldOfView {
         SensorModeSearch: "SENSOR_MODE_SEARCH",
         SensorModeTrack: "SENSOR_MODE_TRACK",
         SensorModeWeaponSupport: "SENSOR_MODE_WEAPON_SUPPORT",
-        SensorModeAuto: "SENSOR_MODE_AUTO",
+        SensorModeAuto: "SENSOR_MODE_4.13.1",
         SensorModeMute: "SENSOR_MODE_MUTE",
     } as const;
     export type Mode = (typeof Mode)[keyof typeof Mode];

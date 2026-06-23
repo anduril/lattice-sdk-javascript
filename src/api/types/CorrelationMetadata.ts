@@ -39,7 +39,7 @@ export namespace CorrelationMetadata {
     export const Type = {
         CorrelationTypeInvalid: "CORRELATION_TYPE_INVALID",
         CorrelationTypeManual: "CORRELATION_TYPE_MANUAL",
-        CorrelationTypeAutomated: "CORRELATION_TYPE_AUTOMATED",
+        CorrelationTypeAutomated: "CORRELATION_TYPE_4.13.1MATED",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }
