@@ -19,7 +19,7 @@ importers:
         version: 2.11.2(@types/node@20.19.43)(typescript@5.9.3)
       ts-loader:
         specifier: ^9.5.4
-        version: 9.6.2(typescript@5.9.3)(webpack@5.108.0)
+        version: 9.6.2(typescript@5.9.3)(webpack@5.108.1)
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -28,7 +28,7 @@ importers:
         version: 4.1.9(@types/node@20.19.43)(msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3))(vite@8.1.0(@types/node@20.19.43)(terser@5.48.0))
       webpack:
         specifier: ^5.105.4
-        version: 5.108.0
+        version: 5.108.1
 
 packages:
 
@@ -985,8 +985,8 @@ packages:
     resolution: {integrity: sha512-HPuy+uuoTCaaoEoI1LQ3JN9+vrPBvEesnnX1jADHy728cHSMlq4wUc4afYqahq2B1mhQVZxCXOkNTnXltr+2vQ==}
     engines: {node: '>=10.13.0'}
 
-  webpack@5.108.0:
-    resolution: {integrity: sha512-Ln1JuYGPRTXcHECapSFSvACtHmWEN5sQqFJeLLGQ0057S7qzT2eXUz0MZUedtmIrNy3nJgnITSubIYKGED9jSQ==}
+  webpack@5.108.1:
+    resolution: {integrity: sha512-UUCihHQK3O7483Woa0SulNLDeAiOhHI2PN2PAPU4fVWJqbzhv04EJ8FaWtB9WWh3i8fRt28543U7VfuJTOrpgQ==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     peerDependencies:
@@ -1559,13 +1559,13 @@ snapshots:
 
   mime-db@1.54.0: {}
 
-  minimizer-webpack-plugin@5.6.1(webpack@5.108.0):
+  minimizer-webpack-plugin@5.6.1(webpack@5.108.1):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
       terser: 5.48.0
-      webpack: 5.108.0
+      webpack: 5.108.1
 
   msw@2.11.2(@types/node@20.19.43)(typescript@5.9.3):
     dependencies:
@@ -1724,13 +1724,13 @@ snapshots:
     dependencies:
       tldts: 7.4.4
 
-  ts-loader@9.6.2(typescript@5.9.3)(webpack@5.108.0):
+  ts-loader@9.6.2(typescript@5.9.3)(webpack@5.108.1):
     dependencies:
       chalk: 4.1.2
       picomatch: 4.0.4
       source-map: 0.7.6
       typescript: 5.9.3
-      webpack: 5.108.0
+      webpack: 5.108.1
 
   tslib@2.8.1:
     optional: true
@@ -1792,7 +1792,7 @@ snapshots:
 
   webpack-sources@3.5.0: {}
 
-  webpack@5.108.0:
+  webpack@5.108.1:
     dependencies:
       '@types/estree': 1.0.9
       '@types/json-schema': 7.0.15
@@ -1810,7 +1810,7 @@ snapshots:
       graceful-fs: 4.2.11
       loader-runner: 4.3.2
       mime-db: 1.54.0
-      minimizer-webpack-plugin: 5.6.1(webpack@5.108.0)
+      minimizer-webpack-plugin: 5.6.1(webpack@5.108.1)
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.3
