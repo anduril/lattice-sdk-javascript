@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Comprehensive status information for a task at a given point in time.
@@ -30,21 +30,21 @@ export interface TaskStatus {
 export namespace TaskStatus {
     /** Status of the task. */
     export const Status = {
-        StatusInvalid: "STATUS_INVALID",
-        StatusCreated: "STATUS_CREATED",
-        StatusScheduledInManager: "STATUS_SCHEDULED_IN_MANAGER",
-        StatusSent: "STATUS_SENT",
-        StatusMachineReceipt: "STATUS_MACHINE_RECEIPT",
-        StatusAck: "STATUS_ACK",
-        StatusWilco: "STATUS_WILCO",
-        StatusExecuting: "STATUS_EXECUTING",
-        StatusWaitingForUpdate: "STATUS_WAITING_FOR_UPDATE",
-        StatusDoneOk: "STATUS_DONE_OK",
-        StatusDoneNotOk: "STATUS_DONE_NOT_OK",
-        StatusReplaced: "STATUS_REPLACED",
-        StatusCancelRequested: "STATUS_CANCEL_REQUESTED",
-        StatusCompleteRequested: "STATUS_COMPLETE_REQUESTED",
-        StatusVersionRejected: "STATUS_VERSION_REJECTED",
-    } as const;
-    export type Status = (typeof Status)[keyof typeof Status];
+            StatusInvalid: "STATUS_INVALID",
+            StatusCreated: "STATUS_CREATED",
+            StatusScheduledInManager: "STATUS_SCHEDULED_IN_MANAGER",
+            StatusSent: "STATUS_SENT",
+            StatusMachineReceipt: "STATUS_MACHINE_RECEIPT",
+            StatusAck: "STATUS_ACK",
+            StatusWilco: "STATUS_WILCO",
+            StatusExecuting: "STATUS_EXECUTING",
+            StatusWaitingForUpdate: "STATUS_WAITING_FOR_UPDATE",
+            StatusDoneOk: "STATUS_DONE_OK",
+            StatusDoneNotOk: "STATUS_DONE_NOT_OK",
+            StatusReplaced: "STATUS_REPLACED",
+            StatusCancelRequested: "STATUS_CANCEL_REQUESTED",
+            StatusCompleteRequested: "STATUS_COMPLETE_REQUESTED",
+            StatusVersionRejected: "STATUS_VERSION_REJECTED"
+        } as const;
+    export type Status = typeof Status[keyof typeof Status];
 }

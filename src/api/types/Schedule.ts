@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * A Schedule associated with this entity
@@ -17,9 +17,9 @@ export interface Schedule {
 export namespace Schedule {
     /** The schedule type */
     export const ScheduleType = {
-        ScheduleTypeInvalid: "SCHEDULE_TYPE_INVALID",
-        ScheduleTypeZoneEnabled: "SCHEDULE_TYPE_ZONE_ENABLED",
-        ScheduleTypeZoneTempEnabled: "SCHEDULE_TYPE_ZONE_TEMP_ENABLED",
-    } as const;
-    export type ScheduleType = (typeof ScheduleType)[keyof typeof ScheduleType];
+            ScheduleTypeInvalid: "SCHEDULE_TYPE_INVALID",
+            ScheduleTypeZoneEnabled: "SCHEDULE_TYPE_ZONE_ENABLED",
+            ScheduleTypeZoneTempEnabled: "SCHEDULE_TYPE_ZONE_TEMP_ENABLED"
+        } as const;
+    export type ScheduleType = typeof ScheduleType[keyof typeof ScheduleType];
 }

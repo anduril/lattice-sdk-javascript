@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as core from "../../core/index.js";
+import * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
 
 export class UnauthorizedError extends errors.LatticeError {
@@ -9,7 +9,7 @@ export class UnauthorizedError extends errors.LatticeError {
             message: "UnauthorizedError",
             statusCode: 401,
             body: body,
-            rawResponse: rawResponse,
+            rawResponse: rawResponse
         });
         Object.setPrototypeOf(this, new.target.prototype);
         if (Error.captureStackTrace) {

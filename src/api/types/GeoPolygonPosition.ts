@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * A position in a GeoPolygon with an optional extruded height.

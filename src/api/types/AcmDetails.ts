@@ -11,8 +11,8 @@ export interface AcmDetails {
 
 export namespace AcmDetails {
     export const AcmType = {
-        AcmDetailTypeInvalid: "ACM_DETAIL_TYPE_INVALID",
-        AcmDetailTypeLandingZone: "ACM_DETAIL_TYPE_LANDING_ZONE",
-    } as const;
-    export type AcmType = (typeof AcmType)[keyof typeof AcmType];
+            AcmDetailTypeInvalid: "ACM_DETAIL_TYPE_INVALID",
+            AcmDetailTypeLandingZone: "ACM_DETAIL_TYPE_LANDING_ZONE"
+        } as const;
+    export type AcmType = typeof AcmType[keyof typeof AcmType];
 }

@@ -3,4 +3,5 @@
 /**
  * A fix of a signal. No extra fields but it is expected that location should be populated when using this report.
  */
-export type Fixed = {};
+export interface Fixed {
+}

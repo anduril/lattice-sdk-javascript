@@ -1,18 +1,18 @@
 //  This file was auto-generated from our API Definition.
 
-export class LatticeTimeoutError extends Error {
-    public readonly cause?: unknown;
+import * as errors from "./index.js";
 
+export class LatticeTimeoutError extends errors.LatticeError {
     constructor(message: string, opts?: { cause?: unknown }) {
-        super(message);
+        super({
+            message: message,
+            cause: opts?.cause
+        });
         Object.setPrototypeOf(this, new.target.prototype);
         if (Error.captureStackTrace) {
             Error.captureStackTrace(this, this.constructor);
         }
 
         this.name = "LatticeTimeoutError";
-        if (opts?.cause != null) {
-            this.cause = opts.cause;
-        }
     }
 }

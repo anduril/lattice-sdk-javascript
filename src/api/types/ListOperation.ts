@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * The ListOperation represents an operation against a proto list. If the list is of primitive proto
@@ -40,8 +40,8 @@ export namespace ListOperation {
      *  for each member of the specified list.
      */
     export const ListComparator = {
-        ListComparatorInvalid: "LIST_COMPARATOR_INVALID",
-        ListComparatorAnyOf: "LIST_COMPARATOR_ANY_OF",
-    } as const;
-    export type ListComparator = (typeof ListComparator)[keyof typeof ListComparator];
+            ListComparatorInvalid: "LIST_COMPARATOR_INVALID",
+            ListComparatorAnyOf: "LIST_COMPARATOR_ANY_OF"
+        } as const;
+    export type ListComparator = typeof ListComparator[keyof typeof ListComparator];
 }

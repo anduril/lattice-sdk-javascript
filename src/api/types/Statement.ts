@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * A Statement is the building block of the entity filter. The outermost statement is conceptually

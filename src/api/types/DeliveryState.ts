@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Defines the current state of a task's delivery.
@@ -17,11 +17,11 @@ export interface DeliveryState {
 export namespace DeliveryState {
     /** The current status of the delivery. */
     export const Status = {
-        DeliveryStatusInvalid: "DELIVERY_STATUS_INVALID",
-        DeliveryStatusDelivered: "DELIVERY_STATUS_DELIVERED",
-        DeliveryStatusPendingExecute: "DELIVERY_STATUS_PENDING_EXECUTE",
-        DeliveryStatusPendingCancel: "DELIVERY_STATUS_PENDING_CANCEL",
-        DeliveryStatusPendingComplete: "DELIVERY_STATUS_PENDING_COMPLETE",
-    } as const;
-    export type Status = (typeof Status)[keyof typeof Status];
+            DeliveryStatusInvalid: "DELIVERY_STATUS_INVALID",
+            DeliveryStatusDelivered: "DELIVERY_STATUS_DELIVERED",
+            DeliveryStatusPendingExecute: "DELIVERY_STATUS_PENDING_EXECUTE",
+            DeliveryStatusPendingCancel: "DELIVERY_STATUS_PENDING_CANCEL",
+            DeliveryStatusPendingComplete: "DELIVERY_STATUS_PENDING_COMPLETE"
+        } as const;
+    export type Status = typeof Status[keyof typeof Status];
 }

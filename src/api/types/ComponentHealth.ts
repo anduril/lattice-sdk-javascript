@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Health of an individual component.
@@ -24,12 +24,12 @@ export interface ComponentHealth {
 export namespace ComponentHealth {
     /** Health for this component. */
     export const Health = {
-        HealthStatusInvalid: "HEALTH_STATUS_INVALID",
-        HealthStatusHealthy: "HEALTH_STATUS_HEALTHY",
-        HealthStatusWarn: "HEALTH_STATUS_WARN",
-        HealthStatusFail: "HEALTH_STATUS_FAIL",
-        HealthStatusOffline: "HEALTH_STATUS_OFFLINE",
-        HealthStatusNotReady: "HEALTH_STATUS_NOT_READY",
-    } as const;
-    export type Health = (typeof Health)[keyof typeof Health];
+            HealthStatusInvalid: "HEALTH_STATUS_INVALID",
+            HealthStatusHealthy: "HEALTH_STATUS_HEALTHY",
+            HealthStatusWarn: "HEALTH_STATUS_WARN",
+            HealthStatusFail: "HEALTH_STATUS_FAIL",
+            HealthStatusOffline: "HEALTH_STATUS_OFFLINE",
+            HealthStatusNotReady: "HEALTH_STATUS_NOT_READY"
+        } as const;
+    export type Health = typeof Health[keyof typeof Health];
 }

@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * An alert informs operators of critical events related to system performance and mission
@@ -29,10 +29,10 @@ export interface Alert {
 export namespace Alert {
     /** Alert level (Warning, Caution, or Advisory). */
     export const Level = {
-        AlertLevelInvalid: "ALERT_LEVEL_INVALID",
-        AlertLevelAdvisory: "ALERT_LEVEL_ADVISORY",
-        AlertLevelCaution: "ALERT_LEVEL_CAUTION",
-        AlertLevelWarning: "ALERT_LEVEL_WARNING",
-    } as const;
-    export type Level = (typeof Level)[keyof typeof Level];
+            AlertLevelInvalid: "ALERT_LEVEL_INVALID",
+            AlertLevelAdvisory: "ALERT_LEVEL_ADVISORY",
+            AlertLevelCaution: "ALERT_LEVEL_CAUTION",
+            AlertLevelWarning: "ALERT_LEVEL_WARNING"
+        } as const;
+    export type Level = typeof Level[keyof typeof Level];
 }

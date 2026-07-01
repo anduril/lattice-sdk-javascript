@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * The Predicate fully encodes the information required to make an evaluation of an entity field
@@ -37,19 +37,19 @@ export namespace Predicate {
      *  be used for a boolean value comparison.
      */
     export const Comparator = {
-        ComparatorInvalid: "COMPARATOR_INVALID",
-        ComparatorMatchAll: "COMPARATOR_MATCH_ALL",
-        ComparatorEquality: "COMPARATOR_EQUALITY",
-        ComparatorIn: "COMPARATOR_IN",
-        ComparatorLessThan: "COMPARATOR_LESS_THAN",
-        ComparatorGreaterThan: "COMPARATOR_GREATER_THAN",
-        ComparatorLessThanEqualTo: "COMPARATOR_LESS_THAN_EQUAL_TO",
-        ComparatorGreaterThanEqualTo: "COMPARATOR_GREATER_THAN_EQUAL_TO",
-        ComparatorWithin: "COMPARATOR_WITHIN",
-        ComparatorExists: "COMPARATOR_EXISTS",
-        ComparatorCaseInsensitiveEquality: "COMPARATOR_CASE_INSENSITIVE_EQUALITY",
-        ComparatorCaseInsensitiveEqualityIn: "COMPARATOR_CASE_INSENSITIVE_EQUALITY_IN",
-        ComparatorRangeClosed: "COMPARATOR_RANGE_CLOSED",
-    } as const;
-    export type Comparator = (typeof Comparator)[keyof typeof Comparator];
+            ComparatorInvalid: "COMPARATOR_INVALID",
+            ComparatorMatchAll: "COMPARATOR_MATCH_ALL",
+            ComparatorEquality: "COMPARATOR_EQUALITY",
+            ComparatorIn: "COMPARATOR_IN",
+            ComparatorLessThan: "COMPARATOR_LESS_THAN",
+            ComparatorGreaterThan: "COMPARATOR_GREATER_THAN",
+            ComparatorLessThanEqualTo: "COMPARATOR_LESS_THAN_EQUAL_TO",
+            ComparatorGreaterThanEqualTo: "COMPARATOR_GREATER_THAN_EQUAL_TO",
+            ComparatorWithin: "COMPARATOR_WITHIN",
+            ComparatorExists: "COMPARATOR_EXISTS",
+            ComparatorCaseInsensitiveEquality: "COMPARATOR_CASE_INSENSITIVE_EQUALITY",
+            ComparatorCaseInsensitiveEqualityIn: "COMPARATOR_CASE_INSENSITIVE_EQUALITY_IN",
+            ComparatorRangeClosed: "COMPARATOR_RANGE_CLOSED"
+        } as const;
+    export type Comparator = typeof Comparator[keyof typeof Comparator];
 }

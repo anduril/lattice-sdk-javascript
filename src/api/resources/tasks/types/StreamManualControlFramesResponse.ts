@@ -1,11 +1,11 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../index.js";
+import * as Lattice from "../../../index.js";
 
 /**
  * The stream event response.
  */
-export type StreamManualControlFramesResponse =
+export type StreamManualControlFramesResponse = 
     | Lattice.StreamManualControlFramesResponse.Heartbeat
     | Lattice.StreamManualControlFramesResponse.ManualControlFrame;
 

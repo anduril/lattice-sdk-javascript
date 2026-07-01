@@ -1,9 +1,9 @@
 //  This file was auto-generated from our API Definition.
 
 import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClient.js";
-import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
+import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../BaseClient.js";
 import * as core from "../../../../core/index.js";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
@@ -12,7 +12,8 @@ import * as Lattice from "../../../index.js";
 export declare namespace ObjectsClient {
     export type Options = BaseClientOptions;
 
-    export interface RequestOptions extends BaseRequestOptions {}
+    export interface RequestOptions extends BaseRequestOptions {
+    }
 }
 
 /**
@@ -22,7 +23,10 @@ export class ObjectsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ObjectsClient.Options>;
 
     constructor(options: ObjectsClient.Options) {
-        this._options = normalizeClientOptionsWithAuth(options);
+
+
+                        this._options = normalizeClientOptionsWithAuth(options);
+                    
     }
 
     /**
@@ -38,82 +42,44 @@ export class ObjectsClient {
      * @example
      *     await client.objects.listObjects()
      */
-    public async listObjects(
-        request: Lattice.ListObjectsRequest = {},
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): Promise<core.Page<Lattice.PathMetadata, Lattice.ListResponse>> {
-        const list = core.HttpResponsePromise.interceptFunction(
-            async (request: Lattice.ListObjectsRequest): Promise<core.WithRawResponse<Lattice.ListResponse>> => {
-                const { prefix, sinceTimestamp, pageToken, allObjectsInMesh, maxPageSize } = request;
-                const _queryParams: Record<string, unknown> = {
-                    prefix,
-                    sinceTimestamp: sinceTimestamp != null ? sinceTimestamp : undefined,
-                    pageToken,
-                    allObjectsInMesh,
-                    maxPageSize,
-                };
-                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-                    _authRequest.headers,
-                    this._options?.headers,
-                    requestOptions?.headers,
-                );
-                const _response = await core.fetcher({
-                    url: core.url.join(
-                        (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.LatticeEnvironment.Default,
-                        "api/v1/objects",
-                    ),
-                    method: "GET",
-                    headers: _headers,
-                    queryString: core.url
-                        .queryBuilder()
-                        .addMany(_queryParams)
-                        .mergeAdditional(requestOptions?.queryParams)
-                        .build(),
-                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
-                    fetchFn: this._options?.fetch,
-                    logging: this._options.logging,
+    public async listObjects(request: Lattice.ListObjectsRequest = {}, requestOptions?: ObjectsClient.RequestOptions): Promise<core.Page<Lattice.PathMetadata, Lattice.ListResponse>> {
+        const list = core.HttpResponsePromise.interceptFunction(async (request: Lattice.ListObjectsRequest): Promise<core.WithRawResponse<Lattice.ListResponse>> => { const { prefix, sinceTimestamp, pageToken, allObjectsInMesh, maxPageSize } = request; const _queryParams: Record<string, unknown> = {
+            prefix,
+            sinceTimestamp: sinceTimestamp != null ? sinceTimestamp : undefined,
+            pageToken,
+            allObjectsInMesh,
+            maxPageSize
+        }; const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest(); let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers); const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/objects"),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().addMany(_queryParams).mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        }); if (_response.ok) {
+            return { data: _response.body as Lattice.ListResponse, rawResponse: _response.rawResponse };
+        } if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 500: throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
                 });
-                if (_response.ok) {
-                    return { data: _response.body as Lattice.ListResponse, rawResponse: _response.rawResponse };
-                }
-                if (_response.error.reason === "status-code") {
-                    switch (_response.error.statusCode) {
-                        case 400:
-                            throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                        case 401:
-                            throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Lattice.InternalServerError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        default:
-                            throw new errors.LatticeError({
-                                statusCode: _response.error.statusCode,
-                                body: _response.error.body,
-                                rawResponse: _response.rawResponse,
-                            });
-                    }
-                }
-                return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/api/v1/objects");
-            },
-        );
+            }
+        } return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/api/v1/objects"); });
         const dataWithRawResponse = await list(request).withRawResponse();
         return new core.Page<Lattice.PathMetadata, Lattice.ListResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
-            hasNextPage: (response) =>
-                response?.next_page_token != null &&
-                !(typeof response?.next_page_token === "string" && response?.next_page_token === ""),
-            getItems: (response) => response?.path_metadatas ?? [],
-            loadPage: (response) => {
-                return list(core.setObjectProperty(request, "pageToken", response?.next_page_token));
-            },
+            hasNextPage: response => response?.next_page_token != null && !(typeof response?.next_page_token === "string" && response?.next_page_token === ""),
+            getItems: response => response?.path_metadatas ?? [],
+            loadPage: response => { return list(core.setObjectProperty(request, "pageToken", response?.next_page_token)); }
         });
     }
 
@@ -125,32 +91,16 @@ export class ObjectsClient {
      * @throws {@link Lattice.NotFoundError}
      * @throws {@link Lattice.InternalServerError}
      */
-    public getObject(
-        request: Lattice.GetObjectRequest,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<core.BinaryResponse> {
+    public getObject(request: Lattice.GetObjectRequest, requestOptions?: ObjectsClient.RequestOptions): core.HttpResponsePromise<core.BinaryResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getObject(request, requestOptions));
     }
 
-    private async __getObject(
-        request: Lattice.GetObjectRequest,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.BinaryResponse>> {
-        const { objectPath, "Accept-Encoding": acceptEncoding, Priority: priority } = request;
+    private async __getObject(request: Lattice.GetObjectRequest, requestOptions?: ObjectsClient.RequestOptions): Promise<core.WithRawResponse<core.BinaryResponse>> {
+        const { objectPath, "Accept-Encoding": acceptEncoding, "Priority": priority } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({ "Accept-Encoding": acceptEncoding, Priority: priority }),
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, mergeOnlyDefinedHeaders({ "Accept-Encoding": acceptEncoding, "Priority": priority }), requestOptions?.headers);
         const _response = await core.fetcher<core.BinaryResponse>({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/objects/${core.url.encodePathParam(objectPath)}`),
             method: "GET",
             headers: _headers,
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
@@ -159,7 +109,7 @@ export class ObjectsClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body, rawResponse: _response.rawResponse };
@@ -167,20 +117,15 @@ export class ObjectsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 500: throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -204,34 +149,16 @@ export class ObjectsClient {
      *     import { createReadStream } from "fs";
      *     await client.objects.uploadObject(createReadStream("path/to/file"), undefined)
      */
-    public uploadObject(
-        uploadable: core.file.Uploadable,
-        objectPath: string,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.PathMetadata> {
+    public uploadObject(uploadable: core.file.Uploadable, objectPath: string, requestOptions?: ObjectsClient.RequestOptions): core.HttpResponsePromise<Lattice.PathMetadata> {
         return core.HttpResponsePromise.fromPromise(this.__uploadObject(uploadable, objectPath, requestOptions));
     }
 
-    private async __uploadObject(
-        uploadable: core.file.Uploadable,
-        objectPath: string,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.PathMetadata>> {
+    private async __uploadObject(uploadable: core.file.Uploadable, objectPath: string, requestOptions?: ObjectsClient.RequestOptions): Promise<core.WithRawResponse<Lattice.PathMetadata>> {
         const _binaryUploadRequest = await core.file.toBinaryUploadRequest(uploadable);
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            _binaryUploadRequest.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, _binaryUploadRequest.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/objects/${core.url.encodePathParam(objectPath)}`),
             method: "POST",
             headers: _headers,
             contentType: "application/octet-stream",
@@ -243,7 +170,7 @@ export class ObjectsClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.PathMetadata, rawResponse: _response.rawResponse };
@@ -251,28 +178,16 @@ export class ObjectsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 413:
-                    throw new Lattice.ContentTooLargeError(
-                        _response.error.body as Lattice.object.Error_,
-                        _response.rawResponse,
-                    );
-                case 500:
-                    throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                case 507:
-                    throw new Lattice.InsufficientStorageError(
-                        _response.error.body as Lattice.object.Error_,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 413: throw new Lattice.ContentTooLargeError(_response.error.body as Lattice.object.Error_, _response.rawResponse);
+                case 500: throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 507: throw new Lattice.InsufficientStorageError(_response.error.body as Lattice.object.Error_, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -295,31 +210,16 @@ export class ObjectsClient {
      *         objectPath: "objectPath"
      *     })
      */
-    public deleteObject(
-        request: Lattice.DeleteObjectRequest,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<void> {
+    public deleteObject(request: Lattice.DeleteObjectRequest, requestOptions?: ObjectsClient.RequestOptions): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__deleteObject(request, requestOptions));
     }
 
-    private async __deleteObject(
-        request: Lattice.DeleteObjectRequest,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<void>> {
+    private async __deleteObject(request: Lattice.DeleteObjectRequest, requestOptions?: ObjectsClient.RequestOptions): Promise<core.WithRawResponse<void>> {
         const { objectPath } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/objects/${core.url.encodePathParam(objectPath)}`),
             method: "DELETE",
             headers: _headers,
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
@@ -327,7 +227,7 @@ export class ObjectsClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: undefined, rawResponse: _response.rawResponse };
@@ -335,29 +235,19 @@ export class ObjectsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 500: throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "DELETE",
-            "/api/v1/objects/{objectPath}",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/api/v1/objects/{objectPath}");
     }
 
     /**
@@ -375,31 +265,16 @@ export class ObjectsClient {
      *         objectPath: "objectPath"
      *     })
      */
-    public getObjectMetadata(
-        request: Lattice.GetObjectMetadataRequest,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): core.HttpResponsePromise<Headers> {
+    public getObjectMetadata(request: Lattice.GetObjectMetadataRequest, requestOptions?: ObjectsClient.RequestOptions): core.HttpResponsePromise<Headers> {
         return core.HttpResponsePromise.fromPromise(this.__getObjectMetadata(request, requestOptions));
     }
 
-    private async __getObjectMetadata(
-        request: Lattice.GetObjectMetadataRequest,
-        requestOptions?: ObjectsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Headers>> {
+    private async __getObjectMetadata(request: Lattice.GetObjectMetadataRequest, requestOptions?: ObjectsClient.RequestOptions): Promise<core.WithRawResponse<Headers>> {
         const { objectPath } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/objects/${core.url.encodePathParam(objectPath)}`),
             method: "HEAD",
             headers: _headers,
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
@@ -407,7 +282,7 @@ export class ObjectsClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.rawResponse.headers, rawResponse: _response.rawResponse };
@@ -415,18 +290,14 @@ export class ObjectsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 500: throw new Lattice.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 

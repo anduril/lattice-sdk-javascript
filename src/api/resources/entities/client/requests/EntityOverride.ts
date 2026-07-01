@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../../index.js";
+import * as Lattice from "../../../../index.js";
 
 /**
  * @example
@@ -15,7 +15,7 @@ export interface EntityOverride {
     /** fieldPath to override */
     fieldPath: string;
     /**
-     * The entity containing the overridden fields. The service will extract the overridable fields from
+     * The entity containing the overridden fields. The service will extract the overridable fields from 
      * the object and ignore all other fields.
      */
     entity?: Lattice.Entity;

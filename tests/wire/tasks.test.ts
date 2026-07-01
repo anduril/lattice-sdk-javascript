@@ -6,1063 +6,681 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 import { mockOAuth } from "./mockAuth";
 
 describe("TasksClient", () => {
+    
     test("createTask (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            version: { taskId: "taskId", definitionVersion: 1, statusVersion: 1 },
-            displayName: "displayName",
-            specification: { "@type": "@type" },
-            createdBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdatedBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: { code: "ERROR_CODE_INVALID", message: "message" },
-                progress: { "@type": "@type" },
-                result: { "@type": "@type" },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: { "@type": "@type" },
-                allocation: { activeAgents: [{}] },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: { parentTaskId: "parentTaskId" },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: { staleTime: "2024-01-15T09:30:00Z" },
-            initialEntities: [{ snapshot: true }],
-            owner: { entityId: "entityId" },
-            retryStrategy: { fixedRetryStrategy: { retryInterval: "retryInterval" } },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
-            },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "version" : { "taskId" : "taskId" , "definitionVersion" : 1 , "statusVersion" : 1 } , "displayName" : "displayName" , "specification" : { "@type" : "@type" } , "createdBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdatedBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdateTime" : "2024-01-15T09:30:00Z" , "status" : { "status" : "STATUS_INVALID" , "taskError" : { "code" : "ERROR_CODE_INVALID" , "message" : "message" } , "progress" : { "@type" : "@type" } , "result" : { "@type" : "@type" } , "startTime" : "2024-01-15T09:30:00Z" , "estimate" : { "@type" : "@type" } , "allocation" : { "activeAgents" : [ { } ] } } , "scheduledTime" : "2024-01-15T09:30:00Z" , "relations" : { "parentTaskId" : "parentTaskId" } , "description" : "description" , "isExecutedElsewhere" : true , "createTime" : "2024-01-15T09:30:00Z" , "replication" : { "staleTime" : "2024-01-15T09:30:00Z" } , "initialEntities" : [ { "snapshot" : true } ] , "owner" : { "entityId" : "entityId" } , "retryStrategy" : { "fixedRetryStrategy" : { "retryInterval" : "retryInterval" } } , "deliveryState" : { "status" : "DELIVERY_STATUS_INVALID" , "error" : { "code" : "DELIVERY_ERROR_CODE_INVALID" , "message" : "message" } , "deliveryConstraints" : { "deliverAfter" : "2024-01-15T09:30:00Z" , "deliverBefore" : "2024-01-15T09:30:00Z" } } };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.createTask();
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.tasks.createTask();
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("createTask (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.createTask();
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.createTask()
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("createTask (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.createTask();
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.createTask()
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("getTask (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = {
-            version: { taskId: "taskId", definitionVersion: 1, statusVersion: 1 },
-            displayName: "displayName",
-            specification: { "@type": "@type" },
-            createdBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdatedBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: { code: "ERROR_CODE_INVALID", message: "message" },
-                progress: { "@type": "@type" },
-                result: { "@type": "@type" },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: { "@type": "@type" },
-                allocation: { activeAgents: [{}] },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: { parentTaskId: "parentTaskId" },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: { staleTime: "2024-01-15T09:30:00Z" },
-            initialEntities: [{ snapshot: true }],
-            owner: { entityId: "entityId" },
-            retryStrategy: { fixedRetryStrategy: { retryInterval: "retryInterval" } },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
-            },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "version" : { "taskId" : "taskId" , "definitionVersion" : 1 , "statusVersion" : 1 } , "displayName" : "displayName" , "specification" : { "@type" : "@type" } , "createdBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdatedBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdateTime" : "2024-01-15T09:30:00Z" , "status" : { "status" : "STATUS_INVALID" , "taskError" : { "code" : "ERROR_CODE_INVALID" , "message" : "message" } , "progress" : { "@type" : "@type" } , "result" : { "@type" : "@type" } , "startTime" : "2024-01-15T09:30:00Z" , "estimate" : { "@type" : "@type" } , "allocation" : { "activeAgents" : [ { } ] } } , "scheduledTime" : "2024-01-15T09:30:00Z" , "relations" : { "parentTaskId" : "parentTaskId" } , "description" : "description" , "isExecutedElsewhere" : true , "createTime" : "2024-01-15T09:30:00Z" , "replication" : { "staleTime" : "2024-01-15T09:30:00Z" } , "initialEntities" : [ { "snapshot" : true } ] , "owner" : { "entityId" : "entityId" } , "retryStrategy" : { "fixedRetryStrategy" : { "retryInterval" : "retryInterval" } } , "deliveryState" : { "status" : "DELIVERY_STATUS_INVALID" , "error" : { "code" : "DELIVERY_ERROR_CODE_INVALID" , "message" : "message" } , "deliveryConstraints" : { "deliverAfter" : "2024-01-15T09:30:00Z" , "deliverBefore" : "2024-01-15T09:30:00Z" } } };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/tasks/taskId")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/tasks/taskId").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.getTask({
-            taskId: "taskId",
-        });
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.tasks.getTask({
+    taskId: "taskId"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("getTask (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/tasks/taskId")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/tasks/taskId").respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.getTask({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.getTask({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("getTask (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/tasks/taskId")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/tasks/taskId").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.getTask({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.getTask({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("getTask (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/tasks/taskId")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/tasks/taskId").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.getTask({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.tasks.getTask({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("updateTaskStatus (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            version: { taskId: "taskId", definitionVersion: 1, statusVersion: 1 },
-            displayName: "displayName",
-            specification: { "@type": "@type" },
-            createdBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdatedBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: { code: "ERROR_CODE_INVALID", message: "message" },
-                progress: { "@type": "@type" },
-                result: { "@type": "@type" },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: { "@type": "@type" },
-                allocation: { activeAgents: [{}] },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: { parentTaskId: "parentTaskId" },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: { staleTime: "2024-01-15T09:30:00Z" },
-            initialEntities: [{ snapshot: true }],
-            owner: { entityId: "entityId" },
-            retryStrategy: { fixedRetryStrategy: { retryInterval: "retryInterval" } },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
-            },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "version" : { "taskId" : "taskId" , "definitionVersion" : 1 , "statusVersion" : 1 } , "displayName" : "displayName" , "specification" : { "@type" : "@type" } , "createdBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdatedBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdateTime" : "2024-01-15T09:30:00Z" , "status" : { "status" : "STATUS_INVALID" , "taskError" : { "code" : "ERROR_CODE_INVALID" , "message" : "message" } , "progress" : { "@type" : "@type" } , "result" : { "@type" : "@type" } , "startTime" : "2024-01-15T09:30:00Z" , "estimate" : { "@type" : "@type" } , "allocation" : { "activeAgents" : [ { } ] } } , "scheduledTime" : "2024-01-15T09:30:00Z" , "relations" : { "parentTaskId" : "parentTaskId" } , "description" : "description" , "isExecutedElsewhere" : true , "createTime" : "2024-01-15T09:30:00Z" , "replication" : { "staleTime" : "2024-01-15T09:30:00Z" } , "initialEntities" : [ { "snapshot" : true } ] , "owner" : { "entityId" : "entityId" } , "retryStrategy" : { "fixedRetryStrategy" : { "retryInterval" : "retryInterval" } } , "deliveryState" : { "status" : "DELIVERY_STATUS_INVALID" , "error" : { "code" : "DELIVERY_ERROR_CODE_INVALID" , "message" : "message" } , "deliveryConstraints" : { "deliverAfter" : "2024-01-15T09:30:00Z" , "deliverBefore" : "2024-01-15T09:30:00Z" } } };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/status")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/status").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.updateTaskStatus({
-            taskId: "taskId",
-        });
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.tasks.updateTaskStatus({
+    taskId: "taskId"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("updateTaskStatus (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/status")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/status").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.updateTaskStatus({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.updateTaskStatus({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("updateTaskStatus (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/status")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/status").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.updateTaskStatus({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.updateTaskStatus({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("updateTaskStatus (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/status")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/status").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.updateTaskStatus({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.tasks.updateTaskStatus({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("cancelTask (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            version: { taskId: "taskId", definitionVersion: 1, statusVersion: 1 },
-            displayName: "displayName",
-            specification: { "@type": "@type" },
-            createdBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdatedBy: {
-                system: { serviceName: "serviceName", entityId: "entityId", managesOwnScheduling: true },
-                user: { userId: "userId" },
-                team: { entityId: "entityId", members: [{}] },
-            },
-            lastUpdateTime: "2024-01-15T09:30:00Z",
-            status: {
-                status: "STATUS_INVALID",
-                taskError: { code: "ERROR_CODE_INVALID", message: "message" },
-                progress: { "@type": "@type" },
-                result: { "@type": "@type" },
-                startTime: "2024-01-15T09:30:00Z",
-                estimate: { "@type": "@type" },
-                allocation: { activeAgents: [{}] },
-            },
-            scheduledTime: "2024-01-15T09:30:00Z",
-            relations: { parentTaskId: "parentTaskId" },
-            description: "description",
-            isExecutedElsewhere: true,
-            createTime: "2024-01-15T09:30:00Z",
-            replication: { staleTime: "2024-01-15T09:30:00Z" },
-            initialEntities: [{ snapshot: true }],
-            owner: { entityId: "entityId" },
-            retryStrategy: { fixedRetryStrategy: { retryInterval: "retryInterval" } },
-            deliveryState: {
-                status: "DELIVERY_STATUS_INVALID",
-                error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
-            },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "version" : { "taskId" : "taskId" , "definitionVersion" : 1 , "statusVersion" : 1 } , "displayName" : "displayName" , "specification" : { "@type" : "@type" } , "createdBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdatedBy" : { "system" : { "serviceName" : "serviceName" , "entityId" : "entityId" , "managesOwnScheduling" : true } , "user" : { "userId" : "userId" } , "team" : { "entityId" : "entityId" , "members" : [ { } ] } } , "lastUpdateTime" : "2024-01-15T09:30:00Z" , "status" : { "status" : "STATUS_INVALID" , "taskError" : { "code" : "ERROR_CODE_INVALID" , "message" : "message" } , "progress" : { "@type" : "@type" } , "result" : { "@type" : "@type" } , "startTime" : "2024-01-15T09:30:00Z" , "estimate" : { "@type" : "@type" } , "allocation" : { "activeAgents" : [ { } ] } } , "scheduledTime" : "2024-01-15T09:30:00Z" , "relations" : { "parentTaskId" : "parentTaskId" } , "description" : "description" , "isExecutedElsewhere" : true , "createTime" : "2024-01-15T09:30:00Z" , "replication" : { "staleTime" : "2024-01-15T09:30:00Z" } , "initialEntities" : [ { "snapshot" : true } ] , "owner" : { "entityId" : "entityId" } , "retryStrategy" : { "fixedRetryStrategy" : { "retryInterval" : "retryInterval" } } , "deliveryState" : { "status" : "DELIVERY_STATUS_INVALID" , "error" : { "code" : "DELIVERY_ERROR_CODE_INVALID" , "message" : "message" } , "deliveryConstraints" : { "deliverAfter" : "2024-01-15T09:30:00Z" , "deliverBefore" : "2024-01-15T09:30:00Z" } } };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.cancelTask({
-            taskId: "taskId",
-        });
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.tasks.cancelTask({
+    taskId: "taskId"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("cancelTask (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.cancelTask({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.cancelTask({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("cancelTask (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.cancelTask({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.cancelTask({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("cancelTask (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/tasks/taskId/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/tasks/taskId/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.cancelTask({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.tasks.cancelTask({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("queryTasks (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            tasks: [
-                {
-                    displayName: "displayName",
-                    lastUpdateTime: "2024-01-15T09:30:00Z",
-                    scheduledTime: "2024-01-15T09:30:00Z",
-                    description: "description",
-                    isExecutedElsewhere: true,
-                    createTime: "2024-01-15T09:30:00Z",
-                    initialEntities: [{}],
-                },
-            ],
-            nextPageToken: "nextPageToken",
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "tasks" : [ { "displayName" : "displayName" , "lastUpdateTime" : "2024-01-15T09:30:00Z" , "scheduledTime" : "2024-01-15T09:30:00Z" , "description" : "description" , "isExecutedElsewhere" : true , "createTime" : "2024-01-15T09:30:00Z" , "initialEntities" : [ { } ] } ] , "nextPageToken" : "nextPageToken" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/query")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/query").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.queryTasks();
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.tasks.queryTasks();
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("queryTasks (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/query")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/query").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.queryTasks();
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.queryTasks()
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("queryTasks (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/query")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/query").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.queryTasks();
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.queryTasks()
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("queryTasks (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/query")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/query").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.queryTasks();
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.tasks.queryTasks()
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("streamTasks (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = 'event: \ndata: {"timestamp":"timestamp","event":"heartbeat"}\n\n';
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = "event: \ndata: {\"timestamp\":\"timestamp\",\"event\":\"heartbeat\"}\n\n";
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .sseBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).sseBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.streamTasks();
-        const events: unknown[] = [];
-        for await (const event of response) {
-            events.push(event);
-        }
-        expect(events).toEqual([
-            {
-                event: "heartbeat",
-                timestamp: "timestamp",
-            },
-        ]);
+        
+            const response = await client.tasks.streamTasks();
+            const events: unknown[] = [];
+            for await (const event of response) {
+                events.push(event);
+            }
+            expect(events).toEqual([ {
+    event: "heartbeat",
+    timestamp: "timestamp"
+} ]);
     });
-
+          
     test("streamTasks (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.streamTasks();
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.streamTasks()
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("streamTasks (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.streamTasks();
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.streamTasks()
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("listenAsAgent (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            executeRequest: {
-                task: {
-                    displayName: "displayName",
-                    lastUpdateTime: "2024-01-15T09:30:00Z",
-                    scheduledTime: "2024-01-15T09:30:00Z",
-                    description: "description",
-                    isExecutedElsewhere: true,
-                    createTime: "2024-01-15T09:30:00Z",
-                    initialEntities: [{}],
-                },
-            },
-            cancelRequest: { taskId: "taskId" },
-            completeRequest: { taskId: "taskId" },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "executeRequest" : { "task" : { "displayName" : "displayName" , "lastUpdateTime" : "2024-01-15T09:30:00Z" , "scheduledTime" : "2024-01-15T09:30:00Z" , "description" : "description" , "isExecutedElsewhere" : true , "createTime" : "2024-01-15T09:30:00Z" , "initialEntities" : [ { } ] } } , "cancelRequest" : { "taskId" : "taskId" } , "completeRequest" : { "taskId" : "taskId" } };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/agent/listen")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/agent/listen").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.listenAsAgent();
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.tasks.listenAsAgent();
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("listenAsAgent (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/agent/listen")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/agent/listen").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.listenAsAgent();
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.listenAsAgent()
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("listenAsAgent (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/agent/listen")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/agent/listen").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.listenAsAgent();
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.listenAsAgent()
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("streamAsAgent (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = 'event: \ndata: {"timestamp":"timestamp","event":"heartbeat"}\n\n';
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = "event: \ndata: {\"timestamp\":\"timestamp\",\"event\":\"heartbeat\"}\n\n";
+        
         server
             .mockEndpoint()
-            .post("/api/v1/agent/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .sseBody(rawResponseBody)
-            .build();
+            .post("/api/v1/agent/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).sseBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.streamAsAgent();
-        const events: unknown[] = [];
-        for await (const event of response) {
-            events.push(event);
-        }
-        expect(events).toEqual([
-            {
-                event: "heartbeat",
-                timestamp: "timestamp",
-            },
-        ]);
+        
+            const response = await client.tasks.streamAsAgent();
+            const events: unknown[] = [];
+            for await (const event of response) {
+                events.push(event);
+            }
+            expect(events).toEqual([ {
+    event: "heartbeat",
+    timestamp: "timestamp"
+} ]);
     });
-
+          
     test("streamAsAgent (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/agent/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/agent/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.streamAsAgent();
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.streamAsAgent()
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("streamAsAgent (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/agent/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/agent/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.streamAsAgent();
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.streamAsAgent()
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("streamManualControlFrames (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = 'event: \ndata: {"timestamp":"timestamp","event":"heartbeat"}\n\n';
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = "event: \ndata: {\"timestamp\":\"timestamp\",\"event\":\"heartbeat\"}\n\n";
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/taskId/manual-control/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .sseBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/taskId/manual-control/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).sseBody(rawResponseBody)
+                .build();
 
-        const response = await client.tasks.streamManualControlFrames({
-            taskId: "taskId",
-        });
-        const events: unknown[] = [];
-        for await (const event of response) {
-            events.push(event);
-        }
-        expect(events).toEqual([
-            {
-                event: "heartbeat",
-                timestamp: "timestamp",
-            },
-        ]);
+        
+            const response = await client.tasks.streamManualControlFrames({
+    taskId: "taskId"
+});
+            const events: unknown[] = [];
+            for await (const event of response) {
+                events.push(event);
+            }
+            expect(events).toEqual([ {
+    event: "heartbeat",
+    timestamp: "timestamp"
+} ]);
     });
-
+          
     test("streamManualControlFrames (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/taskId/manual-control/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/taskId/manual-control/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.streamManualControlFrames({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.tasks.streamManualControlFrames({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("streamManualControlFrames (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/tasks/taskId/manual-control/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/tasks/taskId/manual-control/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.tasks.streamManualControlFrames({
-                taskId: "taskId",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.tasks.streamManualControlFrames({
+    taskId: "taskId"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
+          
 });

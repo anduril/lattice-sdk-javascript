@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 export interface CorrelationMetadata {
     /** Who or what added this entity to the (de)correlation. */
@@ -30,16 +30,16 @@ export namespace CorrelationMetadata {
      *  correlation set that is distributed globally than what is known locally in the node.
      */
     export const ReplicationMode = {
-        CorrelationReplicationModeInvalid: "CORRELATION_REPLICATION_MODE_INVALID",
-        CorrelationReplicationModeLocal: "CORRELATION_REPLICATION_MODE_LOCAL",
-        CorrelationReplicationModeGlobal: "CORRELATION_REPLICATION_MODE_GLOBAL",
-    } as const;
-    export type ReplicationMode = (typeof ReplicationMode)[keyof typeof ReplicationMode];
+            CorrelationReplicationModeInvalid: "CORRELATION_REPLICATION_MODE_INVALID",
+            CorrelationReplicationModeLocal: "CORRELATION_REPLICATION_MODE_LOCAL",
+            CorrelationReplicationModeGlobal: "CORRELATION_REPLICATION_MODE_GLOBAL"
+        } as const;
+    export type ReplicationMode = typeof ReplicationMode[keyof typeof ReplicationMode];
     /** What type of (de)correlation was this entity added with. */
     export const Type = {
-        CorrelationTypeInvalid: "CORRELATION_TYPE_INVALID",
-        CorrelationTypeManual: "CORRELATION_TYPE_MANUAL",
-        CorrelationTypeAutomated: "CORRELATION_TYPE_AUTOMATED",
-    } as const;
-    export type Type = (typeof Type)[keyof typeof Type];
+            CorrelationTypeInvalid: "CORRELATION_TYPE_INVALID",
+            CorrelationTypeManual: "CORRELATION_TYPE_MANUAL",
+            CorrelationTypeAutomated: "CORRELATION_TYPE_AUTOMATED"
+        } as const;
+    export type Type = typeof Type[keyof typeof Type];
 }

@@ -17,13 +17,13 @@ export interface OrbitMeanElementsMetadata {
 export namespace OrbitMeanElementsMetadata {
     /** Reference frame, assumed to be Earth-centered */
     export const RefFrame = {
-        EciReferenceFrameInvalid: "ECI_REFERENCE_FRAME_INVALID",
-        EciReferenceFrameTeme: "ECI_REFERENCE_FRAME_TEME",
-    } as const;
-    export type RefFrame = (typeof RefFrame)[keyof typeof RefFrame];
+            EciReferenceFrameInvalid: "ECI_REFERENCE_FRAME_INVALID",
+            EciReferenceFrameTeme: "ECI_REFERENCE_FRAME_TEME"
+        } as const;
+    export type RefFrame = typeof RefFrame[keyof typeof RefFrame];
     export const MeanElementTheory = {
-        MeanElementTheoryInvalid: "MEAN_ELEMENT_THEORY_INVALID",
-        MeanElementTheorySgp4: "MEAN_ELEMENT_THEORY_SGP4",
-    } as const;
-    export type MeanElementTheory = (typeof MeanElementTheory)[keyof typeof MeanElementTheory];
+            MeanElementTheoryInvalid: "MEAN_ELEMENT_THEORY_INVALID",
+            MeanElementTheorySgp4: "MEAN_ELEMENT_THEORY_SGP4"
+        } as const;
+    export type MeanElementTheory = typeof MeanElementTheory[keyof typeof MeanElementTheory];
 }

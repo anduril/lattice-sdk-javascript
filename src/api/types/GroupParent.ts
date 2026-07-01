@@ -5,4 +5,5 @@
  *  the Entity Group represented by the related entity. The presence of this relationship alone determines that
  *  the type of group that this entity is a member of is an Entity Group.
  */
-export type GroupParent = {};
+export interface GroupParent {
+}

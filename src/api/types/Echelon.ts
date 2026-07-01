@@ -11,17 +11,17 @@ export interface Echelon {
 
 export namespace Echelon {
     export const ArmyEchelon = {
-        ArmyEchelonInvalid: "ARMY_ECHELON_INVALID",
-        ArmyEchelonFireTeam: "ARMY_ECHELON_FIRE_TEAM",
-        ArmyEchelonSquad: "ARMY_ECHELON_SQUAD",
-        ArmyEchelonPlatoon: "ARMY_ECHELON_PLATOON",
-        ArmyEchelonCompany: "ARMY_ECHELON_COMPANY",
-        ArmyEchelonBattalion: "ARMY_ECHELON_BATTALION",
-        ArmyEchelonRegiment: "ARMY_ECHELON_REGIMENT",
-        ArmyEchelonBrigade: "ARMY_ECHELON_BRIGADE",
-        ArmyEchelonDivision: "ARMY_ECHELON_DIVISION",
-        ArmyEchelonCorps: "ARMY_ECHELON_CORPS",
-        ArmyEchelonArmy: "ARMY_ECHELON_ARMY",
-    } as const;
-    export type ArmyEchelon = (typeof ArmyEchelon)[keyof typeof ArmyEchelon];
+            ArmyEchelonInvalid: "ARMY_ECHELON_INVALID",
+            ArmyEchelonFireTeam: "ARMY_ECHELON_FIRE_TEAM",
+            ArmyEchelonSquad: "ARMY_ECHELON_SQUAD",
+            ArmyEchelonPlatoon: "ARMY_ECHELON_PLATOON",
+            ArmyEchelonCompany: "ARMY_ECHELON_COMPANY",
+            ArmyEchelonBattalion: "ARMY_ECHELON_BATTALION",
+            ArmyEchelonRegiment: "ARMY_ECHELON_REGIMENT",
+            ArmyEchelonBrigade: "ARMY_ECHELON_BRIGADE",
+            ArmyEchelonDivision: "ARMY_ECHELON_DIVISION",
+            ArmyEchelonCorps: "ARMY_ECHELON_CORPS",
+            ArmyEchelonArmy: "ARMY_ECHELON_ARMY"
+        } as const;
+    export type ArmyEchelon = typeof ArmyEchelon[keyof typeof ArmyEchelon];
 }

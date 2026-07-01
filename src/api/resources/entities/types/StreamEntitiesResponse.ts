@@ -1,11 +1,13 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../index.js";
+import * as Lattice from "../../../index.js";
 
 /**
  * The stream event response.
  */
-export type StreamEntitiesResponse = Lattice.StreamEntitiesResponse.Heartbeat | Lattice.StreamEntitiesResponse.Entity;
+export type StreamEntitiesResponse = 
+    | Lattice.StreamEntitiesResponse.Heartbeat
+    | Lattice.StreamEntitiesResponse.Entity;
 
 export namespace StreamEntitiesResponse {
     export interface Heartbeat extends Lattice.EntityStreamHeartbeat {

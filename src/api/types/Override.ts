@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Details about an override. Last write wins.
@@ -33,22 +33,22 @@ export interface Override {
 export namespace Override {
     /** status of the override */
     export const Status = {
-        OverrideStatusInvalid: "OVERRIDE_STATUS_INVALID",
-        OverrideStatusApplied: "OVERRIDE_STATUS_APPLIED",
-        OverrideStatusPending: "OVERRIDE_STATUS_PENDING",
-        OverrideStatusTimeout: "OVERRIDE_STATUS_TIMEOUT",
-        OverrideStatusRejected: "OVERRIDE_STATUS_REJECTED",
-        OverrideStatusDeletionPending: "OVERRIDE_STATUS_DELETION_PENDING",
-    } as const;
-    export type Status = (typeof Status)[keyof typeof Status];
+            OverrideStatusInvalid: "OVERRIDE_STATUS_INVALID",
+            OverrideStatusApplied: "OVERRIDE_STATUS_APPLIED",
+            OverrideStatusPending: "OVERRIDE_STATUS_PENDING",
+            OverrideStatusTimeout: "OVERRIDE_STATUS_TIMEOUT",
+            OverrideStatusRejected: "OVERRIDE_STATUS_REJECTED",
+            OverrideStatusDeletionPending: "OVERRIDE_STATUS_DELETION_PENDING"
+        } as const;
+    export type Status = typeof Status[keyof typeof Status];
     /**
      * The type of the override, defined by the stage of the entity lifecycle that the entity was in when the override
      *  was requested.
      */
     export const Type = {
-        OverrideTypeInvalid: "OVERRIDE_TYPE_INVALID",
-        OverrideTypeLive: "OVERRIDE_TYPE_LIVE",
-        OverrideTypePostExpiry: "OVERRIDE_TYPE_POST_EXPIRY",
-    } as const;
-    export type Type = (typeof Type)[keyof typeof Type];
+            OverrideTypeInvalid: "OVERRIDE_TYPE_INVALID",
+            OverrideTypeLive: "OVERRIDE_TYPE_LIVE",
+            OverrideTypePostExpiry: "OVERRIDE_TYPE_POST_EXPIRY"
+        } as const;
+    export type Type = typeof Type[keyof typeof Type];
 }

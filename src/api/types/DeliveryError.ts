@@ -13,10 +13,10 @@ export interface DeliveryError {
 export namespace DeliveryError {
     /** Error code for Delivery error. */
     export const Code = {
-        DeliveryErrorCodeInvalid: "DELIVERY_ERROR_CODE_INVALID",
-        DeliveryErrorCodeUnavailable: "DELIVERY_ERROR_CODE_UNAVAILABLE",
-        DeliveryErrorCodeTimeout: "DELIVERY_ERROR_CODE_TIMEOUT",
-        DeliveryErrorCodeRejected: "DELIVERY_ERROR_CODE_REJECTED",
-    } as const;
-    export type Code = (typeof Code)[keyof typeof Code];
+            DeliveryErrorCodeInvalid: "DELIVERY_ERROR_CODE_INVALID",
+            DeliveryErrorCodeUnavailable: "DELIVERY_ERROR_CODE_UNAVAILABLE",
+            DeliveryErrorCodeTimeout: "DELIVERY_ERROR_CODE_TIMEOUT",
+            DeliveryErrorCodeRejected: "DELIVERY_ERROR_CODE_REJECTED"
+        } as const;
+    export type Code = typeof Code[keyof typeof Code];
 }

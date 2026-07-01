@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 export interface Decorrelation {
     /** This will be specified if this entity was decorrelated against all other entities. */

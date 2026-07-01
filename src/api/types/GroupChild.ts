@@ -5,4 +5,5 @@
  *  represents an Entity Group and (2) the related entity is a child member of this group. The presence of this
  *  relationship alone determines that the type of group is an Entity Group.
  */
-export type GroupChild = {};
+export interface GroupChild {
+}

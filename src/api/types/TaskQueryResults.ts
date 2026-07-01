@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Response containing tasks that match the query criteria.
@@ -14,9 +14,9 @@ import type * as Lattice from "../index.js";
 export interface TaskQueryResults {
     tasks?: Lattice.Task[] | undefined;
     /**
-     * Incomplete results can be detected by a non-empty nextPageToken field in the query results. In order to retrieve
-     * the next page, perform the exact same request as previously and append a pageToken field with the value of
-     * nextPageToken from the previous page. A new nextPageToken is provided on the following pages until all the
+     * Incomplete results can be detected by a non-empty nextPageToken field in the query results. In order to retrieve 
+     * the next page, perform the exact same request as previously and append a pageToken field with the value of 
+     * nextPageToken from the previous page. A new nextPageToken is provided on the following pages until all the 
      * results are retrieved.
      */
     nextPageToken?: string | undefined;

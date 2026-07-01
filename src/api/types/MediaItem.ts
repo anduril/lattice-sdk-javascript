@@ -12,9 +12,9 @@ export interface MediaItem {
 export namespace MediaItem {
     /** The type of media for this item. */
     export const Type = {
-        MediaTypeInvalid: "MEDIA_TYPE_INVALID",
-        MediaTypeImage: "MEDIA_TYPE_IMAGE",
-        MediaTypeVideo: "MEDIA_TYPE_VIDEO",
-    } as const;
-    export type Type = (typeof Type)[keyof typeof Type];
+            MediaTypeInvalid: "MEDIA_TYPE_INVALID",
+            MediaTypeImage: "MEDIA_TYPE_IMAGE",
+            MediaTypeVideo: "MEDIA_TYPE_VIDEO"
+        } as const;
+    export type Type = typeof Type[keyof typeof Type];
 }

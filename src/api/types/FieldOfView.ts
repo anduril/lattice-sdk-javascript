@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Sensor Field Of View closely resembling fov.proto SensorFieldOfView.
@@ -45,12 +45,12 @@ export namespace FieldOfView {
      *  tighter bounded tracking.
      */
     export const Mode = {
-        SensorModeInvalid: "SENSOR_MODE_INVALID",
-        SensorModeSearch: "SENSOR_MODE_SEARCH",
-        SensorModeTrack: "SENSOR_MODE_TRACK",
-        SensorModeWeaponSupport: "SENSOR_MODE_WEAPON_SUPPORT",
-        SensorModeAuto: "SENSOR_MODE_AUTO",
-        SensorModeMute: "SENSOR_MODE_MUTE",
-    } as const;
-    export type Mode = (typeof Mode)[keyof typeof Mode];
+            SensorModeInvalid: "SENSOR_MODE_INVALID",
+            SensorModeSearch: "SENSOR_MODE_SEARCH",
+            SensorModeTrack: "SENSOR_MODE_TRACK",
+            SensorModeWeaponSupport: "SENSOR_MODE_WEAPON_SUPPORT",
+            SensorModeAuto: "SENSOR_MODE_AUTO",
+            SensorModeMute: "SENSOR_MODE_MUTE"
+        } as const;
+    export type Mode = typeof Mode[keyof typeof Mode];
 }
