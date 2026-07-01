@@ -6,1157 +6,537 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 import { mockOAuth } from "./mockAuth";
 
 describe("EntitiesClient", () => {
+    
     test("publishEntity (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            entityId: "entityId",
-            description: "description",
-            isLive: true,
-            createdTime: "2024-01-15T09:30:00Z",
-            expiryTime: "2024-01-15T09:30:00Z",
-            noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
-            location: {
-                position: {
-                    latitudeDegrees: 1.1,
-                    longitudeDegrees: 1.1,
-                    altitudeHaeMeters: 1.1,
-                    altitudeAglMeters: 1.1,
-                    altitudeAsfMeters: 1.1,
-                    pressureDepthMeters: 1.1,
-                },
-                velocityEnu: { e: 1.1, n: 1.1, u: 1.1 },
-                speedMps: 1.1,
-                acceleration: { e: 1.1, n: 1.1, u: 1.1 },
-                attitudeEnu: { x: 1.1, y: 1.1, z: 1.1, w: 1.1 },
-            },
-            locationUncertainty: {
-                positionEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
-            },
-            geoShape: {
-                line: { positions: [{}] },
-                polygon: { rings: [{}], isRectangle: true },
-                ellipse: { semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1, heightM: 1.1 },
-                ellipsoid: { forwardAxisM: 1.1, sideAxisM: 1.1, upAxisM: 1.1 },
-            },
-            geoDetails: {
-                type: "GEO_TYPE_INVALID",
-                controlArea: { type: "CONTROL_AREA_TYPE_INVALID" },
-                acm: { acmType: "ACM_DETAIL_TYPE_INVALID", acmDescription: "acmDescription" },
-            },
-            aliases: { alternateIds: [{}], name: "name" },
-            tracked: {
-                trackQualityWrapper: 1,
-                sensorHits: 1,
-                numberOfObjects: { lowerBound: 1, upperBound: 1 },
-                radarCrossSection: 1.1,
-                lastMeasurementTime: "2024-01-15T09:30:00Z",
-            },
-            correlation: {
-                primary: { secondaryEntityIds: ["secondaryEntityIds"] },
-                secondary: { primaryEntityId: "primaryEntityId" },
-                membership: { correlationSetId: "correlationSetId" },
-                decorrelation: { decorrelatedEntities: [{}] },
-            },
-            milView: {
-                disposition: "DISPOSITION_UNKNOWN",
-                environment: "ENVIRONMENT_UNKNOWN",
-                nationality: "NATIONALITY_INVALID",
-            },
-            ontology: { platformType: "platformType", specificType: "specificType", template: "TEMPLATE_INVALID" },
-            sensors: { sensors: [{}] },
-            payloads: { payloadConfigurations: [{}] },
-            powerState: { sourceIdToState: { key: {} } },
-            provenance: {
-                integrationName: "integrationName",
-                dataType: "dataType",
-                sourceId: "sourceId",
-                sourceUpdateTime: "2024-01-15T09:30:00Z",
-                sourceDescription: "sourceDescription",
-            },
-            overrides: { override: [{}] },
-            indicators: { simulated: true, exercise: true, emergency: true, c2: true, egressable: true, starred: true },
-            targetPriority: {
-                highValueTarget: {
-                    isHighValueTarget: true,
-                    targetPriority: 1,
-                    targetMatches: [{}],
-                    isHighPayoffTarget: true,
-                },
-                threat: { isThreat: true },
-            },
-            signal: {
-                bandwidthHz: 1.1,
-                signalToNoiseRatio: 1.1,
-                emitterNotations: [{}],
-                pulseWidthS: 1.1,
-                scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
-            },
-            transponderCodes: {
-                mode1: 1,
-                mode2: 1,
-                mode3: 1,
-                mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
-                mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
-                modeS: { id: "id", address: 1 },
-                modeCAltitudeFt: 1,
-            },
-            dataClassification: {
-                default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },
-                fields: [{}],
-            },
-            taskCatalog: { taskDefinitions: [{}] },
-            media: { media: [{}] },
-            relationships: { relationships: [{}] },
-            visualDetails: { rangeRings: { minDistanceM: 1.1, maxDistanceM: 1.1, ringCount: 1 } },
-            dimensions: { lengthM: 1.1 },
-            routeDetails: { destinationName: "destinationName", estimatedArrivalTime: "2024-01-15T09:30:00Z" },
-            schedules: { schedules: [{}] },
-            health: {
-                connectionStatus: "CONNECTION_STATUS_INVALID",
-                healthStatus: "HEALTH_STATUS_INVALID",
-                components: [{}],
-                updateTime: "2024-01-15T09:30:00Z",
-                activeAlerts: [{}],
-            },
-            groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { munitions: [{}], fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "entityId" : "entityId" , "description" : "description" , "isLive" : true , "createdTime" : "2024-01-15T09:30:00Z" , "expiryTime" : "2024-01-15T09:30:00Z" , "noExpiry" : true , "status" : { "platformActivity" : "platformActivity" , "role" : "role" } , "location" : { "position" : { "latitudeDegrees" : 1.1 , "longitudeDegrees" : 1.1 , "altitudeHaeMeters" : 1.1 , "altitudeAglMeters" : 1.1 , "altitudeAsfMeters" : 1.1 , "pressureDepthMeters" : 1.1 } , "velocityEnu" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "speedMps" : 1.1 , "acceleration" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "attitudeEnu" : { "x" : 1.1 , "y" : 1.1 , "z" : 1.1 , "w" : 1.1 } } , "locationUncertainty" : { "positionEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "velocityEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "positionErrorEllipse" : { "probability" : 1.1 , "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 } } , "geoShape" : { "line" : { "positions" : [ { } ] } , "polygon" : { "rings" : [ { } ] , "isRectangle" : true } , "ellipse" : { "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 , "heightM" : 1.1 } , "ellipsoid" : { "forwardAxisM" : 1.1 , "sideAxisM" : 1.1 , "upAxisM" : 1.1 } } , "geoDetails" : { "type" : "GEO_TYPE_INVALID" , "controlArea" : { "type" : "CONTROL_AREA_TYPE_INVALID" } , "acm" : { "acmType" : "ACM_DETAIL_TYPE_INVALID" , "acmDescription" : "acmDescription" } } , "aliases" : { "alternateIds" : [ { } ] , "name" : "name" } , "tracked" : { "trackQualityWrapper" : 1 , "sensorHits" : 1 , "numberOfObjects" : { "lowerBound" : 1 , "upperBound" : 1 } , "radarCrossSection" : 1.1 , "lastMeasurementTime" : "2024-01-15T09:30:00Z" } , "correlation" : { "primary" : { "secondaryEntityIds" : [ "secondaryEntityIds" ] } , "secondary" : { "primaryEntityId" : "primaryEntityId" } , "membership" : { "correlationSetId" : "correlationSetId" } , "decorrelation" : { "decorrelatedEntities" : [ { } ] } } , "milView" : { "disposition" : "DISPOSITION_UNKNOWN" , "environment" : "ENVIRONMENT_UNKNOWN" , "nationality" : "NATIONALITY_INVALID" } , "ontology" : { "platformType" : "platformType" , "specificType" : "specificType" , "template" : "TEMPLATE_INVALID" } , "sensors" : { "sensors" : [ { } ] } , "payloads" : { "payloadConfigurations" : [ { } ] } , "powerState" : { "sourceIdToState" : { "key" : { } } } , "provenance" : { "integrationName" : "integrationName" , "dataType" : "dataType" , "sourceId" : "sourceId" , "sourceUpdateTime" : "2024-01-15T09:30:00Z" , "sourceDescription" : "sourceDescription" } , "overrides" : { "override" : [ { } ] } , "indicators" : { "simulated" : true , "exercise" : true , "emergency" : true , "c2" : true , "egressable" : true , "starred" : true } , "targetPriority" : { "highValueTarget" : { "isHighValueTarget" : true , "targetPriority" : 1 , "targetMatches" : [ { } ] , "isHighPayoffTarget" : true } , "threat" : { "isThreat" : true } } , "signal" : { "bandwidthHz" : 1.1 , "signalToNoiseRatio" : 1.1 , "emitterNotations" : [ { } ] , "pulseWidthS" : 1.1 , "scanCharacteristics" : { "scanType" : "SCAN_TYPE_INVALID" , "scanPeriodS" : 1.1 } } , "transponderCodes" : { "mode1" : 1 , "mode2" : 1 , "mode3" : 1 , "mode4InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : { "mode5InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : 1 , "mode5PlatformId" : 1 } , "modeS" : { "id" : "id" , "address" : 1 } , "modeCAltitudeFt" : 1 } , "dataClassification" : { "default" : { "level" : "CLASSIFICATION_LEVELS_INVALID" , "caveats" : [ "caveats" ] } , "fields" : [ { } ] } , "taskCatalog" : { "taskDefinitions" : [ { } ] } , "media" : { "media" : [ { } ] } , "relationships" : { "relationships" : [ { } ] } , "visualDetails" : { "rangeRings" : { "minDistanceM" : 1.1 , "maxDistanceM" : 1.1 , "ringCount" : 1 } } , "dimensions" : { "lengthM" : 1.1 } , "routeDetails" : { "destinationName" : "destinationName" , "estimatedArrivalTime" : "2024-01-15T09:30:00Z" } , "schedules" : { "schedules" : [ { } ] } , "health" : { "connectionStatus" : "CONNECTION_STATUS_INVALID" , "healthStatus" : "HEALTH_STATUS_INVALID" , "components" : [ { } ] , "updateTime" : "2024-01-15T09:30:00Z" , "activeAlerts" : [ { } ] } , "groupDetails" : { "echelon" : { "armyEchelon" : "ARMY_ECHELON_INVALID" } } , "supplies" : { "munitions" : [ { } ] , "fuel" : [ { } ] } , "symbology" : { "milStd2525C" : { "sidc" : "sidc" } } };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/entities")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/entities").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.entities.publishEntity({});
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.entities.publishEntity({});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("publishEntity (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/entities")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/entities").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.publishEntity({});
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.entities.publishEntity({})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("publishEntity (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/entities")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/entities").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.publishEntity({});
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.entities.publishEntity({})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("getEntity (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = {
-            entityId: "entityId",
-            description: "description",
-            isLive: true,
-            createdTime: "2024-01-15T09:30:00Z",
-            expiryTime: "2024-01-15T09:30:00Z",
-            noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
-            location: {
-                position: {
-                    latitudeDegrees: 1.1,
-                    longitudeDegrees: 1.1,
-                    altitudeHaeMeters: 1.1,
-                    altitudeAglMeters: 1.1,
-                    altitudeAsfMeters: 1.1,
-                    pressureDepthMeters: 1.1,
-                },
-                velocityEnu: { e: 1.1, n: 1.1, u: 1.1 },
-                speedMps: 1.1,
-                acceleration: { e: 1.1, n: 1.1, u: 1.1 },
-                attitudeEnu: { x: 1.1, y: 1.1, z: 1.1, w: 1.1 },
-            },
-            locationUncertainty: {
-                positionEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
-            },
-            geoShape: {
-                line: { positions: [{}] },
-                polygon: { rings: [{}], isRectangle: true },
-                ellipse: { semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1, heightM: 1.1 },
-                ellipsoid: { forwardAxisM: 1.1, sideAxisM: 1.1, upAxisM: 1.1 },
-            },
-            geoDetails: {
-                type: "GEO_TYPE_INVALID",
-                controlArea: { type: "CONTROL_AREA_TYPE_INVALID" },
-                acm: { acmType: "ACM_DETAIL_TYPE_INVALID", acmDescription: "acmDescription" },
-            },
-            aliases: { alternateIds: [{}], name: "name" },
-            tracked: {
-                trackQualityWrapper: 1,
-                sensorHits: 1,
-                numberOfObjects: { lowerBound: 1, upperBound: 1 },
-                radarCrossSection: 1.1,
-                lastMeasurementTime: "2024-01-15T09:30:00Z",
-            },
-            correlation: {
-                primary: { secondaryEntityIds: ["secondaryEntityIds"] },
-                secondary: { primaryEntityId: "primaryEntityId" },
-                membership: { correlationSetId: "correlationSetId" },
-                decorrelation: { decorrelatedEntities: [{}] },
-            },
-            milView: {
-                disposition: "DISPOSITION_UNKNOWN",
-                environment: "ENVIRONMENT_UNKNOWN",
-                nationality: "NATIONALITY_INVALID",
-            },
-            ontology: { platformType: "platformType", specificType: "specificType", template: "TEMPLATE_INVALID" },
-            sensors: { sensors: [{}] },
-            payloads: { payloadConfigurations: [{}] },
-            powerState: { sourceIdToState: { key: {} } },
-            provenance: {
-                integrationName: "integrationName",
-                dataType: "dataType",
-                sourceId: "sourceId",
-                sourceUpdateTime: "2024-01-15T09:30:00Z",
-                sourceDescription: "sourceDescription",
-            },
-            overrides: { override: [{}] },
-            indicators: { simulated: true, exercise: true, emergency: true, c2: true, egressable: true, starred: true },
-            targetPriority: {
-                highValueTarget: {
-                    isHighValueTarget: true,
-                    targetPriority: 1,
-                    targetMatches: [{}],
-                    isHighPayoffTarget: true,
-                },
-                threat: { isThreat: true },
-            },
-            signal: {
-                bandwidthHz: 1.1,
-                signalToNoiseRatio: 1.1,
-                emitterNotations: [{}],
-                pulseWidthS: 1.1,
-                scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
-            },
-            transponderCodes: {
-                mode1: 1,
-                mode2: 1,
-                mode3: 1,
-                mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
-                mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
-                modeS: { id: "id", address: 1 },
-                modeCAltitudeFt: 1,
-            },
-            dataClassification: {
-                default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },
-                fields: [{}],
-            },
-            taskCatalog: { taskDefinitions: [{}] },
-            media: { media: [{}] },
-            relationships: { relationships: [{}] },
-            visualDetails: { rangeRings: { minDistanceM: 1.1, maxDistanceM: 1.1, ringCount: 1 } },
-            dimensions: { lengthM: 1.1 },
-            routeDetails: { destinationName: "destinationName", estimatedArrivalTime: "2024-01-15T09:30:00Z" },
-            schedules: { schedules: [{}] },
-            health: {
-                connectionStatus: "CONNECTION_STATUS_INVALID",
-                healthStatus: "HEALTH_STATUS_INVALID",
-                components: [{}],
-                updateTime: "2024-01-15T09:30:00Z",
-                activeAlerts: [{}],
-            },
-            groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { munitions: [{}], fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "entityId" : "entityId" , "description" : "description" , "isLive" : true , "createdTime" : "2024-01-15T09:30:00Z" , "expiryTime" : "2024-01-15T09:30:00Z" , "noExpiry" : true , "status" : { "platformActivity" : "platformActivity" , "role" : "role" } , "location" : { "position" : { "latitudeDegrees" : 1.1 , "longitudeDegrees" : 1.1 , "altitudeHaeMeters" : 1.1 , "altitudeAglMeters" : 1.1 , "altitudeAsfMeters" : 1.1 , "pressureDepthMeters" : 1.1 } , "velocityEnu" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "speedMps" : 1.1 , "acceleration" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "attitudeEnu" : { "x" : 1.1 , "y" : 1.1 , "z" : 1.1 , "w" : 1.1 } } , "locationUncertainty" : { "positionEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "velocityEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "positionErrorEllipse" : { "probability" : 1.1 , "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 } } , "geoShape" : { "line" : { "positions" : [ { } ] } , "polygon" : { "rings" : [ { } ] , "isRectangle" : true } , "ellipse" : { "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 , "heightM" : 1.1 } , "ellipsoid" : { "forwardAxisM" : 1.1 , "sideAxisM" : 1.1 , "upAxisM" : 1.1 } } , "geoDetails" : { "type" : "GEO_TYPE_INVALID" , "controlArea" : { "type" : "CONTROL_AREA_TYPE_INVALID" } , "acm" : { "acmType" : "ACM_DETAIL_TYPE_INVALID" , "acmDescription" : "acmDescription" } } , "aliases" : { "alternateIds" : [ { } ] , "name" : "name" } , "tracked" : { "trackQualityWrapper" : 1 , "sensorHits" : 1 , "numberOfObjects" : { "lowerBound" : 1 , "upperBound" : 1 } , "radarCrossSection" : 1.1 , "lastMeasurementTime" : "2024-01-15T09:30:00Z" } , "correlation" : { "primary" : { "secondaryEntityIds" : [ "secondaryEntityIds" ] } , "secondary" : { "primaryEntityId" : "primaryEntityId" } , "membership" : { "correlationSetId" : "correlationSetId" } , "decorrelation" : { "decorrelatedEntities" : [ { } ] } } , "milView" : { "disposition" : "DISPOSITION_UNKNOWN" , "environment" : "ENVIRONMENT_UNKNOWN" , "nationality" : "NATIONALITY_INVALID" } , "ontology" : { "platformType" : "platformType" , "specificType" : "specificType" , "template" : "TEMPLATE_INVALID" } , "sensors" : { "sensors" : [ { } ] } , "payloads" : { "payloadConfigurations" : [ { } ] } , "powerState" : { "sourceIdToState" : { "key" : { } } } , "provenance" : { "integrationName" : "integrationName" , "dataType" : "dataType" , "sourceId" : "sourceId" , "sourceUpdateTime" : "2024-01-15T09:30:00Z" , "sourceDescription" : "sourceDescription" } , "overrides" : { "override" : [ { } ] } , "indicators" : { "simulated" : true , "exercise" : true , "emergency" : true , "c2" : true , "egressable" : true , "starred" : true } , "targetPriority" : { "highValueTarget" : { "isHighValueTarget" : true , "targetPriority" : 1 , "targetMatches" : [ { } ] , "isHighPayoffTarget" : true } , "threat" : { "isThreat" : true } } , "signal" : { "bandwidthHz" : 1.1 , "signalToNoiseRatio" : 1.1 , "emitterNotations" : [ { } ] , "pulseWidthS" : 1.1 , "scanCharacteristics" : { "scanType" : "SCAN_TYPE_INVALID" , "scanPeriodS" : 1.1 } } , "transponderCodes" : { "mode1" : 1 , "mode2" : 1 , "mode3" : 1 , "mode4InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : { "mode5InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : 1 , "mode5PlatformId" : 1 } , "modeS" : { "id" : "id" , "address" : 1 } , "modeCAltitudeFt" : 1 } , "dataClassification" : { "default" : { "level" : "CLASSIFICATION_LEVELS_INVALID" , "caveats" : [ "caveats" ] } , "fields" : [ { } ] } , "taskCatalog" : { "taskDefinitions" : [ { } ] } , "media" : { "media" : [ { } ] } , "relationships" : { "relationships" : [ { } ] } , "visualDetails" : { "rangeRings" : { "minDistanceM" : 1.1 , "maxDistanceM" : 1.1 , "ringCount" : 1 } } , "dimensions" : { "lengthM" : 1.1 } , "routeDetails" : { "destinationName" : "destinationName" , "estimatedArrivalTime" : "2024-01-15T09:30:00Z" } , "schedules" : { "schedules" : [ { } ] } , "health" : { "connectionStatus" : "CONNECTION_STATUS_INVALID" , "healthStatus" : "HEALTH_STATUS_INVALID" , "components" : [ { } ] , "updateTime" : "2024-01-15T09:30:00Z" , "activeAlerts" : [ { } ] } , "groupDetails" : { "echelon" : { "armyEchelon" : "ARMY_ECHELON_INVALID" } } , "supplies" : { "munitions" : [ { } ] , "fuel" : [ { } ] } , "symbology" : { "milStd2525C" : { "sidc" : "sidc" } } };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/entities/entityId")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/entities/entityId").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.entities.getEntity({
-            entityId: "entityId",
-        });
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.entities.getEntity({
+    entityId: "entityId"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("getEntity (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/entities/entityId")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/entities/entityId").respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.getEntity({
-                entityId: "entityId",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.entities.getEntity({
+    entityId: "entityId"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("getEntity (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/entities/entityId")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/entities/entityId").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.getEntity({
-                entityId: "entityId",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.entities.getEntity({
+    entityId: "entityId"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("getEntity (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .get("/api/v1/entities/entityId")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .get("/api/v1/entities/entityId").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.getEntity({
-                entityId: "entityId",
-            });
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.entities.getEntity({
+    entityId: "entityId"
+})
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("overrideEntity (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            entityId: "entityId",
-            description: "description",
-            isLive: true,
-            createdTime: "2024-01-15T09:30:00Z",
-            expiryTime: "2024-01-15T09:30:00Z",
-            noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
-            location: {
-                position: {
-                    latitudeDegrees: 1.1,
-                    longitudeDegrees: 1.1,
-                    altitudeHaeMeters: 1.1,
-                    altitudeAglMeters: 1.1,
-                    altitudeAsfMeters: 1.1,
-                    pressureDepthMeters: 1.1,
-                },
-                velocityEnu: { e: 1.1, n: 1.1, u: 1.1 },
-                speedMps: 1.1,
-                acceleration: { e: 1.1, n: 1.1, u: 1.1 },
-                attitudeEnu: { x: 1.1, y: 1.1, z: 1.1, w: 1.1 },
-            },
-            locationUncertainty: {
-                positionEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
-            },
-            geoShape: {
-                line: { positions: [{}] },
-                polygon: { rings: [{}], isRectangle: true },
-                ellipse: { semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1, heightM: 1.1 },
-                ellipsoid: { forwardAxisM: 1.1, sideAxisM: 1.1, upAxisM: 1.1 },
-            },
-            geoDetails: {
-                type: "GEO_TYPE_INVALID",
-                controlArea: { type: "CONTROL_AREA_TYPE_INVALID" },
-                acm: { acmType: "ACM_DETAIL_TYPE_INVALID", acmDescription: "acmDescription" },
-            },
-            aliases: { alternateIds: [{}], name: "name" },
-            tracked: {
-                trackQualityWrapper: 1,
-                sensorHits: 1,
-                numberOfObjects: { lowerBound: 1, upperBound: 1 },
-                radarCrossSection: 1.1,
-                lastMeasurementTime: "2024-01-15T09:30:00Z",
-            },
-            correlation: {
-                primary: { secondaryEntityIds: ["secondaryEntityIds"] },
-                secondary: { primaryEntityId: "primaryEntityId" },
-                membership: { correlationSetId: "correlationSetId" },
-                decorrelation: { decorrelatedEntities: [{}] },
-            },
-            milView: {
-                disposition: "DISPOSITION_UNKNOWN",
-                environment: "ENVIRONMENT_UNKNOWN",
-                nationality: "NATIONALITY_INVALID",
-            },
-            ontology: { platformType: "platformType", specificType: "specificType", template: "TEMPLATE_INVALID" },
-            sensors: { sensors: [{}] },
-            payloads: { payloadConfigurations: [{}] },
-            powerState: { sourceIdToState: { key: {} } },
-            provenance: {
-                integrationName: "integrationName",
-                dataType: "dataType",
-                sourceId: "sourceId",
-                sourceUpdateTime: "2024-01-15T09:30:00Z",
-                sourceDescription: "sourceDescription",
-            },
-            overrides: { override: [{}] },
-            indicators: { simulated: true, exercise: true, emergency: true, c2: true, egressable: true, starred: true },
-            targetPriority: {
-                highValueTarget: {
-                    isHighValueTarget: true,
-                    targetPriority: 1,
-                    targetMatches: [{}],
-                    isHighPayoffTarget: true,
-                },
-                threat: { isThreat: true },
-            },
-            signal: {
-                bandwidthHz: 1.1,
-                signalToNoiseRatio: 1.1,
-                emitterNotations: [{}],
-                pulseWidthS: 1.1,
-                scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
-            },
-            transponderCodes: {
-                mode1: 1,
-                mode2: 1,
-                mode3: 1,
-                mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
-                mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
-                modeS: { id: "id", address: 1 },
-                modeCAltitudeFt: 1,
-            },
-            dataClassification: {
-                default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },
-                fields: [{}],
-            },
-            taskCatalog: { taskDefinitions: [{}] },
-            media: { media: [{}] },
-            relationships: { relationships: [{}] },
-            visualDetails: { rangeRings: { minDistanceM: 1.1, maxDistanceM: 1.1, ringCount: 1 } },
-            dimensions: { lengthM: 1.1 },
-            routeDetails: { destinationName: "destinationName", estimatedArrivalTime: "2024-01-15T09:30:00Z" },
-            schedules: { schedules: [{}] },
-            health: {
-                connectionStatus: "CONNECTION_STATUS_INVALID",
-                healthStatus: "HEALTH_STATUS_INVALID",
-                components: [{}],
-                updateTime: "2024-01-15T09:30:00Z",
-                activeAlerts: [{}],
-            },
-            groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { munitions: [{}], fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "entityId" : "entityId" , "description" : "description" , "isLive" : true , "createdTime" : "2024-01-15T09:30:00Z" , "expiryTime" : "2024-01-15T09:30:00Z" , "noExpiry" : true , "status" : { "platformActivity" : "platformActivity" , "role" : "role" } , "location" : { "position" : { "latitudeDegrees" : 1.1 , "longitudeDegrees" : 1.1 , "altitudeHaeMeters" : 1.1 , "altitudeAglMeters" : 1.1 , "altitudeAsfMeters" : 1.1 , "pressureDepthMeters" : 1.1 } , "velocityEnu" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "speedMps" : 1.1 , "acceleration" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "attitudeEnu" : { "x" : 1.1 , "y" : 1.1 , "z" : 1.1 , "w" : 1.1 } } , "locationUncertainty" : { "positionEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "velocityEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "positionErrorEllipse" : { "probability" : 1.1 , "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 } } , "geoShape" : { "line" : { "positions" : [ { } ] } , "polygon" : { "rings" : [ { } ] , "isRectangle" : true } , "ellipse" : { "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 , "heightM" : 1.1 } , "ellipsoid" : { "forwardAxisM" : 1.1 , "sideAxisM" : 1.1 , "upAxisM" : 1.1 } } , "geoDetails" : { "type" : "GEO_TYPE_INVALID" , "controlArea" : { "type" : "CONTROL_AREA_TYPE_INVALID" } , "acm" : { "acmType" : "ACM_DETAIL_TYPE_INVALID" , "acmDescription" : "acmDescription" } } , "aliases" : { "alternateIds" : [ { } ] , "name" : "name" } , "tracked" : { "trackQualityWrapper" : 1 , "sensorHits" : 1 , "numberOfObjects" : { "lowerBound" : 1 , "upperBound" : 1 } , "radarCrossSection" : 1.1 , "lastMeasurementTime" : "2024-01-15T09:30:00Z" } , "correlation" : { "primary" : { "secondaryEntityIds" : [ "secondaryEntityIds" ] } , "secondary" : { "primaryEntityId" : "primaryEntityId" } , "membership" : { "correlationSetId" : "correlationSetId" } , "decorrelation" : { "decorrelatedEntities" : [ { } ] } } , "milView" : { "disposition" : "DISPOSITION_UNKNOWN" , "environment" : "ENVIRONMENT_UNKNOWN" , "nationality" : "NATIONALITY_INVALID" } , "ontology" : { "platformType" : "platformType" , "specificType" : "specificType" , "template" : "TEMPLATE_INVALID" } , "sensors" : { "sensors" : [ { } ] } , "payloads" : { "payloadConfigurations" : [ { } ] } , "powerState" : { "sourceIdToState" : { "key" : { } } } , "provenance" : { "integrationName" : "integrationName" , "dataType" : "dataType" , "sourceId" : "sourceId" , "sourceUpdateTime" : "2024-01-15T09:30:00Z" , "sourceDescription" : "sourceDescription" } , "overrides" : { "override" : [ { } ] } , "indicators" : { "simulated" : true , "exercise" : true , "emergency" : true , "c2" : true , "egressable" : true , "starred" : true } , "targetPriority" : { "highValueTarget" : { "isHighValueTarget" : true , "targetPriority" : 1 , "targetMatches" : [ { } ] , "isHighPayoffTarget" : true } , "threat" : { "isThreat" : true } } , "signal" : { "bandwidthHz" : 1.1 , "signalToNoiseRatio" : 1.1 , "emitterNotations" : [ { } ] , "pulseWidthS" : 1.1 , "scanCharacteristics" : { "scanType" : "SCAN_TYPE_INVALID" , "scanPeriodS" : 1.1 } } , "transponderCodes" : { "mode1" : 1 , "mode2" : 1 , "mode3" : 1 , "mode4InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : { "mode5InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : 1 , "mode5PlatformId" : 1 } , "modeS" : { "id" : "id" , "address" : 1 } , "modeCAltitudeFt" : 1 } , "dataClassification" : { "default" : { "level" : "CLASSIFICATION_LEVELS_INVALID" , "caveats" : [ "caveats" ] } , "fields" : [ { } ] } , "taskCatalog" : { "taskDefinitions" : [ { } ] } , "media" : { "media" : [ { } ] } , "relationships" : { "relationships" : [ { } ] } , "visualDetails" : { "rangeRings" : { "minDistanceM" : 1.1 , "maxDistanceM" : 1.1 , "ringCount" : 1 } } , "dimensions" : { "lengthM" : 1.1 } , "routeDetails" : { "destinationName" : "destinationName" , "estimatedArrivalTime" : "2024-01-15T09:30:00Z" } , "schedules" : { "schedules" : [ { } ] } , "health" : { "connectionStatus" : "CONNECTION_STATUS_INVALID" , "healthStatus" : "HEALTH_STATUS_INVALID" , "components" : [ { } ] , "updateTime" : "2024-01-15T09:30:00Z" , "activeAlerts" : [ { } ] } , "groupDetails" : { "echelon" : { "armyEchelon" : "ARMY_ECHELON_INVALID" } } , "supplies" : { "munitions" : [ { } ] , "fuel" : [ { } ] } , "symbology" : { "milStd2525C" : { "sidc" : "sidc" } } };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/entities/entityId/override/mil_view.disposition")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/entities/entityId/override/mil_view.disposition").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.entities.overrideEntity({
-            entityId: "entityId",
-            fieldPath: "mil_view.disposition",
-        });
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.entities.overrideEntity({
+    entityId: "entityId",
+    fieldPath: "mil_view.disposition"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("overrideEntity (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/entities/entityId/override/fieldPath")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/entities/entityId/override/fieldPath").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.overrideEntity({
-                entityId: "entityId",
-                fieldPath: "fieldPath",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.entities.overrideEntity({
+    entityId: "entityId",
+    fieldPath: "fieldPath"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("overrideEntity (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/entities/entityId/override/fieldPath")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/entities/entityId/override/fieldPath").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.overrideEntity({
-                entityId: "entityId",
-                fieldPath: "fieldPath",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.entities.overrideEntity({
+    entityId: "entityId",
+    fieldPath: "fieldPath"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("overrideEntity (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .put("/api/v1/entities/entityId/override/fieldPath")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .put("/api/v1/entities/entityId/override/fieldPath").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.overrideEntity({
-                entityId: "entityId",
-                fieldPath: "fieldPath",
-            });
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.entities.overrideEntity({
+    entityId: "entityId",
+    fieldPath: "fieldPath"
+})
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("removeEntityOverride (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = {
-            entityId: "entityId",
-            description: "description",
-            isLive: true,
-            createdTime: "2024-01-15T09:30:00Z",
-            expiryTime: "2024-01-15T09:30:00Z",
-            noExpiry: true,
-            status: { platformActivity: "platformActivity", role: "role" },
-            location: {
-                position: {
-                    latitudeDegrees: 1.1,
-                    longitudeDegrees: 1.1,
-                    altitudeHaeMeters: 1.1,
-                    altitudeAglMeters: 1.1,
-                    altitudeAsfMeters: 1.1,
-                    pressureDepthMeters: 1.1,
-                },
-                velocityEnu: { e: 1.1, n: 1.1, u: 1.1 },
-                speedMps: 1.1,
-                acceleration: { e: 1.1, n: 1.1, u: 1.1 },
-                attitudeEnu: { x: 1.1, y: 1.1, z: 1.1, w: 1.1 },
-            },
-            locationUncertainty: {
-                positionEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
-                positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
-            },
-            geoShape: {
-                line: { positions: [{}] },
-                polygon: { rings: [{}], isRectangle: true },
-                ellipse: { semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1, heightM: 1.1 },
-                ellipsoid: { forwardAxisM: 1.1, sideAxisM: 1.1, upAxisM: 1.1 },
-            },
-            geoDetails: {
-                type: "GEO_TYPE_INVALID",
-                controlArea: { type: "CONTROL_AREA_TYPE_INVALID" },
-                acm: { acmType: "ACM_DETAIL_TYPE_INVALID", acmDescription: "acmDescription" },
-            },
-            aliases: { alternateIds: [{}], name: "name" },
-            tracked: {
-                trackQualityWrapper: 1,
-                sensorHits: 1,
-                numberOfObjects: { lowerBound: 1, upperBound: 1 },
-                radarCrossSection: 1.1,
-                lastMeasurementTime: "2024-01-15T09:30:00Z",
-            },
-            correlation: {
-                primary: { secondaryEntityIds: ["secondaryEntityIds"] },
-                secondary: { primaryEntityId: "primaryEntityId" },
-                membership: { correlationSetId: "correlationSetId" },
-                decorrelation: { decorrelatedEntities: [{}] },
-            },
-            milView: {
-                disposition: "DISPOSITION_UNKNOWN",
-                environment: "ENVIRONMENT_UNKNOWN",
-                nationality: "NATIONALITY_INVALID",
-            },
-            ontology: { platformType: "platformType", specificType: "specificType", template: "TEMPLATE_INVALID" },
-            sensors: { sensors: [{}] },
-            payloads: { payloadConfigurations: [{}] },
-            powerState: { sourceIdToState: { key: {} } },
-            provenance: {
-                integrationName: "integrationName",
-                dataType: "dataType",
-                sourceId: "sourceId",
-                sourceUpdateTime: "2024-01-15T09:30:00Z",
-                sourceDescription: "sourceDescription",
-            },
-            overrides: { override: [{}] },
-            indicators: { simulated: true, exercise: true, emergency: true, c2: true, egressable: true, starred: true },
-            targetPriority: {
-                highValueTarget: {
-                    isHighValueTarget: true,
-                    targetPriority: 1,
-                    targetMatches: [{}],
-                    isHighPayoffTarget: true,
-                },
-                threat: { isThreat: true },
-            },
-            signal: {
-                bandwidthHz: 1.1,
-                signalToNoiseRatio: 1.1,
-                emitterNotations: [{}],
-                pulseWidthS: 1.1,
-                scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
-            },
-            transponderCodes: {
-                mode1: 1,
-                mode2: 1,
-                mode3: 1,
-                mode4InterrogationResponse: "INTERROGATION_RESPONSE_INVALID",
-                mode5: { mode5InterrogationResponse: "INTERROGATION_RESPONSE_INVALID", mode5: 1, mode5PlatformId: 1 },
-                modeS: { id: "id", address: 1 },
-                modeCAltitudeFt: 1,
-            },
-            dataClassification: {
-                default: { level: "CLASSIFICATION_LEVELS_INVALID", caveats: ["caveats"] },
-                fields: [{}],
-            },
-            taskCatalog: { taskDefinitions: [{}] },
-            media: { media: [{}] },
-            relationships: { relationships: [{}] },
-            visualDetails: { rangeRings: { minDistanceM: 1.1, maxDistanceM: 1.1, ringCount: 1 } },
-            dimensions: { lengthM: 1.1 },
-            routeDetails: { destinationName: "destinationName", estimatedArrivalTime: "2024-01-15T09:30:00Z" },
-            schedules: { schedules: [{}] },
-            health: {
-                connectionStatus: "CONNECTION_STATUS_INVALID",
-                healthStatus: "HEALTH_STATUS_INVALID",
-                components: [{}],
-                updateTime: "2024-01-15T09:30:00Z",
-                activeAlerts: [{}],
-            },
-            groupDetails: { echelon: { armyEchelon: "ARMY_ECHELON_INVALID" } },
-            supplies: { munitions: [{}], fuel: [{}] },
-            symbology: { milStd2525C: { sidc: "sidc" } },
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "entityId" : "entityId" , "description" : "description" , "isLive" : true , "createdTime" : "2024-01-15T09:30:00Z" , "expiryTime" : "2024-01-15T09:30:00Z" , "noExpiry" : true , "status" : { "platformActivity" : "platformActivity" , "role" : "role" } , "location" : { "position" : { "latitudeDegrees" : 1.1 , "longitudeDegrees" : 1.1 , "altitudeHaeMeters" : 1.1 , "altitudeAglMeters" : 1.1 , "altitudeAsfMeters" : 1.1 , "pressureDepthMeters" : 1.1 } , "velocityEnu" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "speedMps" : 1.1 , "acceleration" : { "e" : 1.1 , "n" : 1.1 , "u" : 1.1 } , "attitudeEnu" : { "x" : 1.1 , "y" : 1.1 , "z" : 1.1 , "w" : 1.1 } } , "locationUncertainty" : { "positionEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "velocityEnuCov" : { "mxx" : 1.1 , "mxy" : 1.1 , "mxz" : 1.1 , "myy" : 1.1 , "myz" : 1.1 , "mzz" : 1.1 } , "positionErrorEllipse" : { "probability" : 1.1 , "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 } } , "geoShape" : { "line" : { "positions" : [ { } ] } , "polygon" : { "rings" : [ { } ] , "isRectangle" : true } , "ellipse" : { "semiMajorAxisM" : 1.1 , "semiMinorAxisM" : 1.1 , "orientationD" : 1.1 , "heightM" : 1.1 } , "ellipsoid" : { "forwardAxisM" : 1.1 , "sideAxisM" : 1.1 , "upAxisM" : 1.1 } } , "geoDetails" : { "type" : "GEO_TYPE_INVALID" , "controlArea" : { "type" : "CONTROL_AREA_TYPE_INVALID" } , "acm" : { "acmType" : "ACM_DETAIL_TYPE_INVALID" , "acmDescription" : "acmDescription" } } , "aliases" : { "alternateIds" : [ { } ] , "name" : "name" } , "tracked" : { "trackQualityWrapper" : 1 , "sensorHits" : 1 , "numberOfObjects" : { "lowerBound" : 1 , "upperBound" : 1 } , "radarCrossSection" : 1.1 , "lastMeasurementTime" : "2024-01-15T09:30:00Z" } , "correlation" : { "primary" : { "secondaryEntityIds" : [ "secondaryEntityIds" ] } , "secondary" : { "primaryEntityId" : "primaryEntityId" } , "membership" : { "correlationSetId" : "correlationSetId" } , "decorrelation" : { "decorrelatedEntities" : [ { } ] } } , "milView" : { "disposition" : "DISPOSITION_UNKNOWN" , "environment" : "ENVIRONMENT_UNKNOWN" , "nationality" : "NATIONALITY_INVALID" } , "ontology" : { "platformType" : "platformType" , "specificType" : "specificType" , "template" : "TEMPLATE_INVALID" } , "sensors" : { "sensors" : [ { } ] } , "payloads" : { "payloadConfigurations" : [ { } ] } , "powerState" : { "sourceIdToState" : { "key" : { } } } , "provenance" : { "integrationName" : "integrationName" , "dataType" : "dataType" , "sourceId" : "sourceId" , "sourceUpdateTime" : "2024-01-15T09:30:00Z" , "sourceDescription" : "sourceDescription" } , "overrides" : { "override" : [ { } ] } , "indicators" : { "simulated" : true , "exercise" : true , "emergency" : true , "c2" : true , "egressable" : true , "starred" : true } , "targetPriority" : { "highValueTarget" : { "isHighValueTarget" : true , "targetPriority" : 1 , "targetMatches" : [ { } ] , "isHighPayoffTarget" : true } , "threat" : { "isThreat" : true } } , "signal" : { "bandwidthHz" : 1.1 , "signalToNoiseRatio" : 1.1 , "emitterNotations" : [ { } ] , "pulseWidthS" : 1.1 , "scanCharacteristics" : { "scanType" : "SCAN_TYPE_INVALID" , "scanPeriodS" : 1.1 } } , "transponderCodes" : { "mode1" : 1 , "mode2" : 1 , "mode3" : 1 , "mode4InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : { "mode5InterrogationResponse" : "INTERROGATION_RESPONSE_INVALID" , "mode5" : 1 , "mode5PlatformId" : 1 } , "modeS" : { "id" : "id" , "address" : 1 } , "modeCAltitudeFt" : 1 } , "dataClassification" : { "default" : { "level" : "CLASSIFICATION_LEVELS_INVALID" , "caveats" : [ "caveats" ] } , "fields" : [ { } ] } , "taskCatalog" : { "taskDefinitions" : [ { } ] } , "media" : { "media" : [ { } ] } , "relationships" : { "relationships" : [ { } ] } , "visualDetails" : { "rangeRings" : { "minDistanceM" : 1.1 , "maxDistanceM" : 1.1 , "ringCount" : 1 } } , "dimensions" : { "lengthM" : 1.1 } , "routeDetails" : { "destinationName" : "destinationName" , "estimatedArrivalTime" : "2024-01-15T09:30:00Z" } , "schedules" : { "schedules" : [ { } ] } , "health" : { "connectionStatus" : "CONNECTION_STATUS_INVALID" , "healthStatus" : "HEALTH_STATUS_INVALID" , "components" : [ { } ] , "updateTime" : "2024-01-15T09:30:00Z" , "activeAlerts" : [ { } ] } , "groupDetails" : { "echelon" : { "armyEchelon" : "ARMY_ECHELON_INVALID" } } , "supplies" : { "munitions" : [ { } ] , "fuel" : [ { } ] } , "symbology" : { "milStd2525C" : { "sidc" : "sidc" } } };
+        
         server
             .mockEndpoint()
-            .delete("/api/v1/entities/entityId/override/mil_view.disposition")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .delete("/api/v1/entities/entityId/override/mil_view.disposition").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.entities.removeEntityOverride({
-            entityId: "entityId",
-            fieldPath: "mil_view.disposition",
-        });
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.entities.removeEntityOverride({
+    entityId: "entityId",
+    fieldPath: "mil_view.disposition"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("removeEntityOverride (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .delete("/api/v1/entities/entityId/override/fieldPath")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .delete("/api/v1/entities/entityId/override/fieldPath").respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.removeEntityOverride({
-                entityId: "entityId",
-                fieldPath: "fieldPath",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.entities.removeEntityOverride({
+    entityId: "entityId",
+    fieldPath: "fieldPath"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("removeEntityOverride (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .delete("/api/v1/entities/entityId/override/fieldPath")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .delete("/api/v1/entities/entityId/override/fieldPath").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.removeEntityOverride({
-                entityId: "entityId",
-                fieldPath: "fieldPath",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.entities.removeEntityOverride({
+    entityId: "entityId",
+    fieldPath: "fieldPath"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("removeEntityOverride (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .delete("/api/v1/entities/entityId/override/fieldPath")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .delete("/api/v1/entities/entityId/override/fieldPath").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.removeEntityOverride({
-                entityId: "entityId",
-                fieldPath: "fieldPath",
-            });
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.entities.removeEntityOverride({
+    entityId: "entityId",
+    fieldPath: "fieldPath"
+})
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("longPollEntityEvents (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = {
-            sessionToken: "sessionToken",
-            entityEvents: [{ eventType: "EVENT_TYPE_INVALID", time: "2024-01-15T09:30:00Z" }],
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "sessionToken" : "sessionToken" };
+        const rawResponseBody = { "sessionToken" : "sessionToken" , "entityEvents" : [ { "eventType" : "EVENT_TYPE_INVALID" , "time" : "2024-01-15T09:30:00Z" } ] };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/events")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/events").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.entities.longPollEntityEvents({
-            sessionToken: "sessionToken",
-        });
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.entities.longPollEntityEvents({
+    sessionToken: "sessionToken"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("longPollEntityEvents (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "sessionToken" : "sessionToken" };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/events")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/events").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.longPollEntityEvents({
-                sessionToken: "sessionToken",
-            });
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.entities.longPollEntityEvents({
+    sessionToken: "sessionToken"
+})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("longPollEntityEvents (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "sessionToken" : "sessionToken" };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/events")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/events").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.longPollEntityEvents({
-                sessionToken: "sessionToken",
-            });
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.entities.longPollEntityEvents({
+    sessionToken: "sessionToken"
+})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
-
+          
     test("longPollEntityEvents (4)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "sessionToken" : "sessionToken" };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/events")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/events").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.longPollEntityEvents({
-                sessionToken: "sessionToken",
-            });
-        }).rejects.toThrow(Lattice.NotFoundError);
+        
+            await expect(async () => {
+                return await client.entities.longPollEntityEvents({
+    sessionToken: "sessionToken"
+})
+            }).rejects.toThrow(Lattice.NotFoundError);
     });
-
+          
     test("longPollEntityEvents (5)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { errorCode: "errorCode", message: "message" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "sessionToken" : "sessionToken" };
+        const rawResponseBody = { "errorCode" : "errorCode" , "message" : "message" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/events")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(408)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/events").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(408).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.longPollEntityEvents({
-                sessionToken: "sessionToken",
-            });
-        }).rejects.toThrow(Lattice.RequestTimeoutError);
+        
+            await expect(async () => {
+                return await client.entities.longPollEntityEvents({
+    sessionToken: "sessionToken"
+})
+            }).rejects.toThrow(Lattice.RequestTimeoutError);
     });
-
+          
     test("longPollEntityEvents (6)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { sessionToken: "sessionToken" };
-        const rawResponseBody = { errorCode: "errorCode", message: "message" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "sessionToken" : "sessionToken" };
+        const rawResponseBody = { "errorCode" : "errorCode" , "message" : "message" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/events")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/events").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(429).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.longPollEntityEvents({
-                sessionToken: "sessionToken",
-            });
-        }).rejects.toThrow(Lattice.TooManyRequestsError);
+        
+            await expect(async () => {
+                return await client.entities.longPollEntityEvents({
+    sessionToken: "sessionToken"
+})
+            }).rejects.toThrow(Lattice.TooManyRequestsError);
     });
-
+          
     test("streamEntities (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = 'event: \ndata: {"timestamp":"2024-01-15T09:30:00Z","event":"heartbeat"}\n\n';
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = "event: \ndata: {\"timestamp\":\"2024-01-15T09:30:00Z\",\"event\":\"heartbeat\"}\n\n";
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .sseBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).sseBody(rawResponseBody)
+                .build();
 
-        const response = await client.entities.streamEntities();
-        const events: unknown[] = [];
-        for await (const event of response) {
-            events.push(event);
-        }
-        expect(events).toEqual([
-            {
-                event: "heartbeat",
-                timestamp: "2024-01-15T09:30:00Z",
-            },
-        ]);
+        
+            const response = await client.entities.streamEntities();
+            const events: unknown[] = [];
+            for await (const event of response) {
+                events.push(event);
+            }
+            expect(events).toEqual([ {
+    event: "heartbeat",
+    timestamp: "2024-01-15T09:30:00Z"
+} ]);
     });
-
+          
     test("streamEntities (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.streamEntities();
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.entities.streamEntities()
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("streamEntities (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/entities/stream")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/entities/stream").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.entities.streamEntities();
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.entities.streamEntities()
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
+          
 });

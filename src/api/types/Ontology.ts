@@ -15,12 +15,12 @@ export interface Ontology {
 export namespace Ontology {
     /** The template used when creating this entity. Specifies minimum required components. */
     export const Template = {
-        TemplateInvalid: "TEMPLATE_INVALID",
-        TemplateTrack: "TEMPLATE_TRACK",
-        TemplateSensorPointOfInterest: "TEMPLATE_SENSOR_POINT_OF_INTEREST",
-        TemplateAsset: "TEMPLATE_ASSET",
-        TemplateGeo: "TEMPLATE_GEO",
-        TemplateSignalOfInterest: "TEMPLATE_SIGNAL_OF_INTEREST",
-    } as const;
-    export type Template = (typeof Template)[keyof typeof Template];
+            TemplateInvalid: "TEMPLATE_INVALID",
+            TemplateTrack: "TEMPLATE_TRACK",
+            TemplateSensorPointOfInterest: "TEMPLATE_SENSOR_POINT_OF_INTEREST",
+            TemplateAsset: "TEMPLATE_ASSET",
+            TemplateGeo: "TEMPLATE_GEO",
+            TemplateSignalOfInterest: "TEMPLATE_SIGNAL_OF_INTEREST"
+        } as const;
+    export type Template = typeof Template[keyof typeof Template];
 }

@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Event representing some type of entity change.
@@ -13,12 +13,12 @@ export interface EntityEvent {
 
 export namespace EntityEvent {
     export const EventType = {
-        EventTypeInvalid: "EVENT_TYPE_INVALID",
-        EventTypeCreated: "EVENT_TYPE_CREATED",
-        EventTypeUpdate: "EVENT_TYPE_UPDATE",
-        EventTypeDeleted: "EVENT_TYPE_DELETED",
-        EventTypePreexisting: "EVENT_TYPE_PREEXISTING",
-        EventTypePostExpiryOverride: "EVENT_TYPE_POST_EXPIRY_OVERRIDE",
-    } as const;
-    export type EventType = (typeof EventType)[keyof typeof EventType];
+            EventTypeInvalid: "EVENT_TYPE_INVALID",
+            EventTypeCreated: "EVENT_TYPE_CREATED",
+            EventTypeUpdate: "EVENT_TYPE_UPDATE",
+            EventTypeDeleted: "EVENT_TYPE_DELETED",
+            EventTypePreexisting: "EVENT_TYPE_PREEXISTING",
+            EventTypePostExpiryOverride: "EVENT_TYPE_POST_EXPIRY_OVERRIDE"
+        } as const;
+    export type EventType = typeof EventType[keyof typeof EventType];
 }

@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * General health of the entity as reported by the entity.
@@ -31,19 +31,19 @@ export interface Health {
 export namespace Health {
     /** Status indicating whether the entity is able to communicate with Entity Manager. */
     export const ConnectionStatus = {
-        ConnectionStatusInvalid: "CONNECTION_STATUS_INVALID",
-        ConnectionStatusOnline: "CONNECTION_STATUS_ONLINE",
-        ConnectionStatusOffline: "CONNECTION_STATUS_OFFLINE",
-    } as const;
-    export type ConnectionStatus = (typeof ConnectionStatus)[keyof typeof ConnectionStatus];
+            ConnectionStatusInvalid: "CONNECTION_STATUS_INVALID",
+            ConnectionStatusOnline: "CONNECTION_STATUS_ONLINE",
+            ConnectionStatusOffline: "CONNECTION_STATUS_OFFLINE"
+        } as const;
+    export type ConnectionStatus = typeof ConnectionStatus[keyof typeof ConnectionStatus];
     /** Top-level health status; typically a roll-up of individual component healths. */
     export const HealthStatus = {
-        HealthStatusInvalid: "HEALTH_STATUS_INVALID",
-        HealthStatusHealthy: "HEALTH_STATUS_HEALTHY",
-        HealthStatusWarn: "HEALTH_STATUS_WARN",
-        HealthStatusFail: "HEALTH_STATUS_FAIL",
-        HealthStatusOffline: "HEALTH_STATUS_OFFLINE",
-        HealthStatusNotReady: "HEALTH_STATUS_NOT_READY",
-    } as const;
-    export type HealthStatus = (typeof HealthStatus)[keyof typeof HealthStatus];
+            HealthStatusInvalid: "HEALTH_STATUS_INVALID",
+            HealthStatusHealthy: "HEALTH_STATUS_HEALTHY",
+            HealthStatusWarn: "HEALTH_STATUS_WARN",
+            HealthStatusFail: "HEALTH_STATUS_FAIL",
+            HealthStatusOffline: "HEALTH_STATUS_OFFLINE",
+            HealthStatusNotReady: "HEALTH_STATUS_NOT_READY"
+        } as const;
+    export type HealthStatus = typeof HealthStatus[keyof typeof HealthStatus];
 }

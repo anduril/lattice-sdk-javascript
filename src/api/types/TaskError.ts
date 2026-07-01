@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Error information associated with a task.
@@ -21,11 +21,11 @@ export interface TaskError {
 export namespace TaskError {
     /** Error code for task error. */
     export const Code = {
-        ErrorCodeInvalid: "ERROR_CODE_INVALID",
-        ErrorCodeCancelled: "ERROR_CODE_CANCELLED",
-        ErrorCodeRejected: "ERROR_CODE_REJECTED",
-        ErrorCodeTimeout: "ERROR_CODE_TIMEOUT",
-        ErrorCodeFailed: "ERROR_CODE_FAILED",
-    } as const;
-    export type Code = (typeof Code)[keyof typeof Code];
+            ErrorCodeInvalid: "ERROR_CODE_INVALID",
+            ErrorCodeCancelled: "ERROR_CODE_CANCELLED",
+            ErrorCodeRejected: "ERROR_CODE_REJECTED",
+            ErrorCodeTimeout: "ERROR_CODE_TIMEOUT",
+            ErrorCodeFailed: "ERROR_CODE_FAILED"
+        } as const;
+    export type Code = typeof Code[keyof typeof Code];
 }

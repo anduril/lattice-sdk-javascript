@@ -1,5 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
-export interface EntityStreamHeartbeat extends Lattice.HeartbeatObject {}
+export interface EntityStreamHeartbeat extends Lattice.HeartbeatObject {
+}

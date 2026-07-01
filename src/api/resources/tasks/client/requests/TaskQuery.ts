@@ -27,23 +27,23 @@ export namespace TaskQuery {
     export namespace StatusFilter {
         /** Status of the Task to filter by, inclusive. */
         export const Status = {
-            StatusInvalid: "STATUS_INVALID",
-            StatusCreated: "STATUS_CREATED",
-            StatusScheduledInManager: "STATUS_SCHEDULED_IN_MANAGER",
-            StatusSent: "STATUS_SENT",
-            StatusMachineReceipt: "STATUS_MACHINE_RECEIPT",
-            StatusAck: "STATUS_ACK",
-            StatusWilco: "STATUS_WILCO",
-            StatusExecuting: "STATUS_EXECUTING",
-            StatusWaitingForUpdate: "STATUS_WAITING_FOR_UPDATE",
-            StatusDoneOk: "STATUS_DONE_OK",
-            StatusDoneNotOk: "STATUS_DONE_NOT_OK",
-            StatusReplaced: "STATUS_REPLACED",
-            StatusCancelRequested: "STATUS_CANCEL_REQUESTED",
-            StatusCompleteRequested: "STATUS_COMPLETE_REQUESTED",
-            StatusVersionRejected: "STATUS_VERSION_REJECTED",
-        } as const;
-        export type Status = (typeof Status)[keyof typeof Status];
+                StatusInvalid: "STATUS_INVALID",
+                StatusCreated: "STATUS_CREATED",
+                StatusScheduledInManager: "STATUS_SCHEDULED_IN_MANAGER",
+                StatusSent: "STATUS_SENT",
+                StatusMachineReceipt: "STATUS_MACHINE_RECEIPT",
+                StatusAck: "STATUS_ACK",
+                StatusWilco: "STATUS_WILCO",
+                StatusExecuting: "STATUS_EXECUTING",
+                StatusWaitingForUpdate: "STATUS_WAITING_FOR_UPDATE",
+                StatusDoneOk: "STATUS_DONE_OK",
+                StatusDoneNotOk: "STATUS_DONE_NOT_OK",
+                StatusReplaced: "STATUS_REPLACED",
+                StatusCancelRequested: "STATUS_CANCEL_REQUESTED",
+                StatusCompleteRequested: "STATUS_COMPLETE_REQUESTED",
+                StatusVersionRejected: "STATUS_VERSION_REJECTED"
+            } as const;
+        export type Status = typeof Status[keyof typeof Status];
     }
 
     /**

@@ -15,11 +15,10 @@ export interface Mode5 {
 export namespace Mode5 {
     /** The validity of the response from the Mode 5 interrogation. */
     export const Mode5InterrogationResponse = {
-        InterrogationResponseInvalid: "INTERROGATION_RESPONSE_INVALID",
-        InterrogationResponseCorrect: "INTERROGATION_RESPONSE_CORRECT",
-        InterrogationResponseIncorrect: "INTERROGATION_RESPONSE_INCORRECT",
-        InterrogationResponseNoResponse: "INTERROGATION_RESPONSE_NO_RESPONSE",
-    } as const;
-    export type Mode5InterrogationResponse =
-        (typeof Mode5InterrogationResponse)[keyof typeof Mode5InterrogationResponse];
+            InterrogationResponseInvalid: "INTERROGATION_RESPONSE_INVALID",
+            InterrogationResponseCorrect: "INTERROGATION_RESPONSE_CORRECT",
+            InterrogationResponseIncorrect: "INTERROGATION_RESPONSE_INCORRECT",
+            InterrogationResponseNoResponse: "INTERROGATION_RESPONSE_NO_RESPONSE"
+        } as const;
+    export type Mode5InterrogationResponse = typeof Mode5InterrogationResponse[keyof typeof Mode5InterrogationResponse];
 }

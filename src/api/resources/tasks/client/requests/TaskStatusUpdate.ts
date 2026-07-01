@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../../index.js";
+import * as Lattice from "../../../../index.js";
 
 /**
  * @example
@@ -12,9 +12,9 @@ export interface TaskStatusUpdate {
     /** ID of task to update status of */
     taskId: string;
     /**
-     * The status version of the task to update. This version number increments to indicate the task's
-     * current stage in its status lifecycle. Specifically, whenever a task's status updates, the status
-     * version increments by one. Any status updates received with a lower status version number than what
+     * The status version of the task to update. This version number increments to indicate the task's 
+     * current stage in its status lifecycle. Specifically, whenever a task's status updates, the status 
+     * version increments by one. Any status updates received with a lower status version number than what 
      * is known are considered stale and ignored.
      */
     statusVersion?: number;

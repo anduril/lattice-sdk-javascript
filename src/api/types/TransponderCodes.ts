@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * A message describing any transponder codes associated with Mode 1, 2, 3, 4, 5, S, C interrogations.
@@ -28,11 +28,10 @@ export interface TransponderCodes {
 export namespace TransponderCodes {
     /** The validity of the response from the Mode 4 interrogation. */
     export const Mode4InterrogationResponse = {
-        InterrogationResponseInvalid: "INTERROGATION_RESPONSE_INVALID",
-        InterrogationResponseCorrect: "INTERROGATION_RESPONSE_CORRECT",
-        InterrogationResponseIncorrect: "INTERROGATION_RESPONSE_INCORRECT",
-        InterrogationResponseNoResponse: "INTERROGATION_RESPONSE_NO_RESPONSE",
-    } as const;
-    export type Mode4InterrogationResponse =
-        (typeof Mode4InterrogationResponse)[keyof typeof Mode4InterrogationResponse];
+            InterrogationResponseInvalid: "INTERROGATION_RESPONSE_INVALID",
+            InterrogationResponseCorrect: "INTERROGATION_RESPONSE_CORRECT",
+            InterrogationResponseIncorrect: "INTERROGATION_RESPONSE_INCORRECT",
+            InterrogationResponseNoResponse: "INTERROGATION_RESPONSE_NO_RESPONSE"
+        } as const;
+    export type Mode4InterrogationResponse = typeof Mode4InterrogationResponse[keyof typeof Mode4InterrogationResponse];
 }

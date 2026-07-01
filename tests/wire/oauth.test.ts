@@ -6,90 +6,67 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 import { mockOAuth } from "./mockAuth";
 
 describe("OauthClient", () => {
+    
     test("getToken (1)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { grant_type: "client_credentials" };
-        const rawResponseBody = {
-            access_token: "access_token",
-            token_type: "Bearer",
-            expires_in: 3600,
-            refresh_expires_in: 1,
-            "not-before-policy": 1,
-            scope: "scope",
-        };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "grant_type" : "client_credentials" };
+        const rawResponseBody = { "access_token" : "access_token" , "token_type" : "Bearer" , "expires_in" : 3600 , "refresh_expires_in" : 1 , "not-before-policy" : 1 , "scope" : "scope" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/oauth/token")
-            .formUrlEncodedBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/oauth/token").formUrlEncodedBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
 
-        const response = await client.oauth.getToken({});
-        expect(response).toEqual(rawResponseBody);
+        
+                        
+                                const response = await client.oauth.getToken({});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
     });
-
+          
     test("getToken (2)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { grant_type: "client_credentials" };
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "grant_type" : "client_credentials" };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/oauth/token")
-            .formUrlEncodedBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/oauth/token").formUrlEncodedBody(rawRequestBody)
+                .respondWith()
+            .statusCode(400).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.oauth.getToken({});
-        }).rejects.toThrow(Lattice.BadRequestError);
+        
+            await expect(async () => {
+                return await client.oauth.getToken({})
+            }).rejects.toThrow(Lattice.BadRequestError);
     });
-
+          
     test("getToken (3)", async () => {
-        const server = mockServerPool.createServer();
-        mockOAuth(server);
+        const server = mockServerPool.createServer();mockOAuth(server);
 
-        const client = new LatticeClient({
-            maxRetries: 0,
-            clientId: "test_client_id",
-            clientSecret: "test_client_secret",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { grant_type: "client_credentials" };
-        const rawResponseBody = { key: "value" };
-
+        const client = new LatticeClient({ "maxRetries" : 0 , "clientId" : "test_client_id" , "clientSecret" : "test_client_secret" , "environment" : server.baseUrl });
+        const rawRequestBody = { "grant_type" : "client_credentials" };
+        const rawResponseBody = { "key" : "value" };
+        
         server
             .mockEndpoint()
-            .post("/api/v1/oauth/token")
-            .formUrlEncodedBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+            .post("/api/v1/oauth/token").formUrlEncodedBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
 
-        await expect(async () => {
-            return await client.oauth.getToken({});
-        }).rejects.toThrow(Lattice.UnauthorizedError);
+        
+            await expect(async () => {
+                return await client.oauth.getToken({})
+            }).rejects.toThrow(Lattice.UnauthorizedError);
     });
+          
 });

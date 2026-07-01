@@ -17,12 +17,12 @@ export interface ClassificationInformation {
 export namespace ClassificationInformation {
     /** Classification level to be applied to the information in question. */
     export const Level = {
-        ClassificationLevelsInvalid: "CLASSIFICATION_LEVELS_INVALID",
-        ClassificationLevelsUnclassified: "CLASSIFICATION_LEVELS_UNCLASSIFIED",
-        ClassificationLevelsControlledUnclassified: "CLASSIFICATION_LEVELS_CONTROLLED_UNCLASSIFIED",
-        ClassificationLevelsConfidential: "CLASSIFICATION_LEVELS_CONFIDENTIAL",
-        ClassificationLevelsSecret: "CLASSIFICATION_LEVELS_SECRET",
-        ClassificationLevelsTopSecret: "CLASSIFICATION_LEVELS_TOP_SECRET",
-    } as const;
-    export type Level = (typeof Level)[keyof typeof Level];
+            ClassificationLevelsInvalid: "CLASSIFICATION_LEVELS_INVALID",
+            ClassificationLevelsUnclassified: "CLASSIFICATION_LEVELS_UNCLASSIFIED",
+            ClassificationLevelsControlledUnclassified: "CLASSIFICATION_LEVELS_CONTROLLED_UNCLASSIFIED",
+            ClassificationLevelsConfidential: "CLASSIFICATION_LEVELS_CONFIDENTIAL",
+            ClassificationLevelsSecret: "CLASSIFICATION_LEVELS_SECRET",
+            ClassificationLevelsTopSecret: "CLASSIFICATION_LEVELS_TOP_SECRET"
+        } as const;
+    export type Level = typeof Level[keyof typeof Level];
 }

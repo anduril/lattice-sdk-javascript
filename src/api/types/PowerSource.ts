@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Represents the state of a single power source that is connected to this entity.
@@ -27,20 +27,20 @@ export interface PowerSource {
 export namespace PowerSource {
     /** Status of the power source. */
     export const PowerStatus = {
-        PowerStatusInvalid: "POWER_STATUS_INVALID",
-        PowerStatusUnknown: "POWER_STATUS_UNKNOWN",
-        PowerStatusNotPresent: "POWER_STATUS_NOT_PRESENT",
-        PowerStatusOperating: "POWER_STATUS_OPERATING",
-        PowerStatusDisabled: "POWER_STATUS_DISABLED",
-        PowerStatusError: "POWER_STATUS_ERROR",
-    } as const;
-    export type PowerStatus = (typeof PowerStatus)[keyof typeof PowerStatus];
+            PowerStatusInvalid: "POWER_STATUS_INVALID",
+            PowerStatusUnknown: "POWER_STATUS_UNKNOWN",
+            PowerStatusNotPresent: "POWER_STATUS_NOT_PRESENT",
+            PowerStatusOperating: "POWER_STATUS_OPERATING",
+            PowerStatusDisabled: "POWER_STATUS_DISABLED",
+            PowerStatusError: "POWER_STATUS_ERROR"
+        } as const;
+    export type PowerStatus = typeof PowerStatus[keyof typeof PowerStatus];
     /** Used to determine the type of power source. */
     export const PowerType = {
-        PowerTypeInvalid: "POWER_TYPE_INVALID",
-        PowerTypeUnknown: "POWER_TYPE_UNKNOWN",
-        PowerTypeGas: "POWER_TYPE_GAS",
-        PowerTypeBattery: "POWER_TYPE_BATTERY",
-    } as const;
-    export type PowerType = (typeof PowerType)[keyof typeof PowerType];
+            PowerTypeInvalid: "POWER_TYPE_INVALID",
+            PowerTypeUnknown: "POWER_TYPE_UNKNOWN",
+            PowerTypeGas: "POWER_TYPE_GAS",
+            PowerTypeBattery: "POWER_TYPE_BATTERY"
+        } as const;
+    export type PowerType = typeof PowerType[keyof typeof PowerType];
 }

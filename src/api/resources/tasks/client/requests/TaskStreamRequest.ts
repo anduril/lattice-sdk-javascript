@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../../index.js";
+import * as Lattice from "../../../../index.js";
 
 /**
  * @example
@@ -39,13 +39,13 @@ export namespace TaskStreamRequest {
     /**
      * Optional filter that only returns tasks with specific types. If not provided, all task types will be streamed.
      */
-    export type TaskType =
+    export type TaskType = 
         | {
-              taskTypeUrls: string[];
-          }
+            taskTypeUrls: string[];
+        }
         | {
-              taskTypePrefix: string;
-          };
+            taskTypePrefix: string;
+        };
 
     /**
      * A filter for task statuses (inclusive or exclusive).
@@ -62,31 +62,31 @@ export namespace TaskStreamRequest {
 
         export namespace Statuses {
             export const Item = {
-                StatusInvalid: "STATUS_INVALID",
-                StatusCreated: "STATUS_CREATED",
-                StatusScheduledInManager: "STATUS_SCHEDULED_IN_MANAGER",
-                StatusSent: "STATUS_SENT",
-                StatusMachineReceipt: "STATUS_MACHINE_RECEIPT",
-                StatusAck: "STATUS_ACK",
-                StatusWilco: "STATUS_WILCO",
-                StatusExecuting: "STATUS_EXECUTING",
-                StatusWaitingForUpdate: "STATUS_WAITING_FOR_UPDATE",
-                StatusDoneOk: "STATUS_DONE_OK",
-                StatusDoneNotOk: "STATUS_DONE_NOT_OK",
-                StatusReplaced: "STATUS_REPLACED",
-                StatusCancelRequested: "STATUS_CANCEL_REQUESTED",
-                StatusCompleteRequested: "STATUS_COMPLETE_REQUESTED",
-                StatusVersionRejected: "STATUS_VERSION_REJECTED",
-            } as const;
-            export type Item = (typeof Item)[keyof typeof Item];
+                    StatusInvalid: "STATUS_INVALID",
+                    StatusCreated: "STATUS_CREATED",
+                    StatusScheduledInManager: "STATUS_SCHEDULED_IN_MANAGER",
+                    StatusSent: "STATUS_SENT",
+                    StatusMachineReceipt: "STATUS_MACHINE_RECEIPT",
+                    StatusAck: "STATUS_ACK",
+                    StatusWilco: "STATUS_WILCO",
+                    StatusExecuting: "STATUS_EXECUTING",
+                    StatusWaitingForUpdate: "STATUS_WAITING_FOR_UPDATE",
+                    StatusDoneOk: "STATUS_DONE_OK",
+                    StatusDoneNotOk: "STATUS_DONE_NOT_OK",
+                    StatusReplaced: "STATUS_REPLACED",
+                    StatusCancelRequested: "STATUS_CANCEL_REQUESTED",
+                    StatusCompleteRequested: "STATUS_COMPLETE_REQUESTED",
+                    StatusVersionRejected: "STATUS_VERSION_REJECTED"
+                } as const;
+            export type Item = typeof Item[keyof typeof Item];
         }
 
         /** The type of filter to apply. */
         export const FilterType = {
-            FilterTypeInvalid: "FILTER_TYPE_INVALID",
-            FilterTypeInclusive: "FILTER_TYPE_INCLUSIVE",
-            FilterTypeExclusive: "FILTER_TYPE_EXCLUSIVE",
-        } as const;
-        export type FilterType = (typeof FilterType)[keyof typeof FilterType];
+                FilterTypeInvalid: "FILTER_TYPE_INVALID",
+                FilterTypeInclusive: "FILTER_TYPE_INCLUSIVE",
+                FilterTypeExclusive: "FILTER_TYPE_EXCLUSIVE"
+            } as const;
+        export type FilterType = typeof FilterType[keyof typeof FilterType];
     }
 }

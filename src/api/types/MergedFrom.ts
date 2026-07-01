@@ -4,4 +4,5 @@
  * A MergedFrom relationship is a uni-directional relationship indicating that this entity is a merged entity whose
  *  data has at least partially been merged from the related entity.
  */
-export type MergedFrom = {};
+export interface MergedFrom {
+}

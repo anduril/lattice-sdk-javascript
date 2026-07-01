@@ -1,9 +1,9 @@
 //  This file was auto-generated from our API Definition.
 
 import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClient.js";
-import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
-import { mergeHeaders } from "../../../../core/headers.js";
+import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../BaseClient.js";
 import * as core from "../../../../core/index.js";
+import { mergeHeaders } from "../../../../core/headers.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
@@ -12,7 +12,8 @@ import * as Lattice from "../../../index.js";
 export declare namespace TasksClient {
     export type Options = BaseClientOptions;
 
-    export interface RequestOptions extends BaseRequestOptions {}
+    export interface RequestOptions extends BaseRequestOptions {
+    }
 }
 
 /**
@@ -22,7 +23,10 @@ export class TasksClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<TasksClient.Options>;
 
     constructor(options: TasksClient.Options) {
-        this._options = normalizeClientOptionsWithAuth(options);
+
+
+                        this._options = normalizeClientOptionsWithAuth(options);
+                    
     }
 
     /**
@@ -44,30 +48,15 @@ export class TasksClient {
      * @example
      *     await client.tasks.createTask()
      */
-    public createTask(
-        request: Lattice.TaskCreation = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Task> {
+    public createTask(request: Lattice.TaskCreation = {}, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<Lattice.Task> {
         return core.HttpResponsePromise.fromPromise(this.__createTask(request, requestOptions));
     }
 
-    private async __createTask(
-        request: Lattice.TaskCreation = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Task>> {
+    private async __createTask(request: Lattice.TaskCreation = {}, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Task>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/tasks",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/tasks"),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -78,7 +67,7 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Task, rawResponse: _response.rawResponse };
@@ -86,16 +75,13 @@ export class TasksClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -124,31 +110,16 @@ export class TasksClient {
      *         taskId: "taskId"
      *     })
      */
-    public getTask(
-        request: Lattice.GetTaskRequest,
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Task> {
+    public getTask(request: Lattice.GetTaskRequest, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<Lattice.Task> {
         return core.HttpResponsePromise.fromPromise(this.__getTask(request, requestOptions));
     }
 
-    private async __getTask(
-        request: Lattice.GetTaskRequest,
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Task>> {
+    private async __getTask(request: Lattice.GetTaskRequest, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Task>> {
         const { taskId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/tasks/${core.url.encodePathParam(taskId)}`),
             method: "GET",
             headers: _headers,
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
@@ -156,7 +127,7 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Task, rawResponse: _response.rawResponse };
@@ -164,18 +135,14 @@ export class TasksClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -207,31 +174,16 @@ export class TasksClient {
      *         taskId: "taskId"
      *     })
      */
-    public updateTaskStatus(
-        request: Lattice.TaskStatusUpdate,
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Task> {
+    public updateTaskStatus(request: Lattice.TaskStatusUpdate, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<Lattice.Task> {
         return core.HttpResponsePromise.fromPromise(this.__updateTaskStatus(request, requestOptions));
     }
 
-    private async __updateTaskStatus(
-        request: Lattice.TaskStatusUpdate,
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Task>> {
+    private async __updateTaskStatus(request: Lattice.TaskStatusUpdate, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Task>> {
         const { taskId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}/status`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/tasks/${core.url.encodePathParam(taskId)}/status`),
             method: "PUT",
             headers: _headers,
             contentType: "application/json",
@@ -242,7 +194,7 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Task, rawResponse: _response.rawResponse };
@@ -250,18 +202,14 @@ export class TasksClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -292,31 +240,16 @@ export class TasksClient {
      *         taskId: "taskId"
      *     })
      */
-    public cancelTask(
-        request: Lattice.TaskCancellation,
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Task> {
+    public cancelTask(request: Lattice.TaskCancellation, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<Lattice.Task> {
         return core.HttpResponsePromise.fromPromise(this.__cancelTask(request, requestOptions));
     }
 
-    private async __cancelTask(
-        request: Lattice.TaskCancellation,
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Task>> {
+    private async __cancelTask(request: Lattice.TaskCancellation, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Task>> {
         const { taskId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}/cancel`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/tasks/${core.url.encodePathParam(taskId)}/cancel`),
             method: "PUT",
             headers: _headers,
             contentType: "application/json",
@@ -327,7 +260,7 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Task, rawResponse: _response.rawResponse };
@@ -335,18 +268,14 @@ export class TasksClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -380,30 +309,15 @@ export class TasksClient {
      * @example
      *     await client.tasks.queryTasks()
      */
-    public queryTasks(
-        request: Lattice.TaskQuery = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.TaskQueryResults> {
+    public queryTasks(request: Lattice.TaskQuery = {}, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<Lattice.TaskQueryResults> {
         return core.HttpResponsePromise.fromPromise(this.__queryTasks(request, requestOptions));
     }
 
-    private async __queryTasks(
-        request: Lattice.TaskQuery = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.TaskQueryResults>> {
+    private async __queryTasks(request: Lattice.TaskQuery = {}, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<Lattice.TaskQueryResults>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/tasks/query",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/tasks/query"),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -414,7 +328,7 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.TaskQueryResults, rawResponse: _response.rawResponse };
@@ -422,18 +336,14 @@ export class TasksClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -446,30 +356,15 @@ export class TasksClient {
      * The stream delivers all existing non-terminal tasks when first connected, followed by real-time
      * updates for task creation and status changes. Additionally, heartbeat messages are sent periodically to maintain the connection.
      */
-    public streamTasks(
-        request: Lattice.TaskStreamRequest = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<Lattice.StreamTasksResponse>> {
+    public streamTasks(request: Lattice.TaskStreamRequest = {}, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<core.Stream<Lattice.StreamTasksResponse>> {
         return core.HttpResponsePromise.fromPromise(this.__streamTasks(request, requestOptions));
     }
 
-    private async __streamTasks(
-        request: Lattice.TaskStreamRequest = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<Lattice.StreamTasksResponse>>> {
+    private async __streamTasks(request: Lattice.TaskStreamRequest = {}, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<core.Stream<Lattice.StreamTasksResponse>>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher<ReadableStream>({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/tasks/stream",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/tasks/stream"),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -481,34 +376,30 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
-            return {
-                data: new core.Stream({
+            return { data: new core.Stream({
                     stream: _response.body,
-                    parse: (data) => data as any,
+                    parse: data => data as any,
                     signal: requestOptions?.abortSignal,
                     eventShape: {
-                        type: "sse",
+                        type: "sse"
                     },
-                }),
-                rawResponse: _response.rawResponse,
-            };
+                    reconnectionEnabled: requestOptions?.stream?.reconnectionEnabled ?? this._options?.stream?.reconnectionEnabled,
+                    maxReconnectionAttempts: requestOptions?.stream?.maxReconnectionAttempts ?? this._options?.stream?.maxReconnectionAttempts
+                }), rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -546,30 +437,15 @@ export class TasksClient {
      * @example
      *     await client.tasks.listenAsAgent()
      */
-    public listenAsAgent(
-        request: Lattice.AgentListener = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.AgentRequest> {
+    public listenAsAgent(request: Lattice.AgentListener = {}, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<Lattice.AgentRequest> {
         return core.HttpResponsePromise.fromPromise(this.__listenAsAgent(request, requestOptions));
     }
 
-    private async __listenAsAgent(
-        request: Lattice.AgentListener = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.AgentRequest>> {
+    private async __listenAsAgent(request: Lattice.AgentListener = {}, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<Lattice.AgentRequest>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/agent/listen",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/agent/listen"),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -580,7 +456,7 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.AgentRequest, rawResponse: _response.rawResponse };
@@ -588,16 +464,13 @@ export class TasksClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -618,35 +491,20 @@ export class TasksClient {
      * Additionally, heartbeat messages are sent periodically to maintain the connection.
      *
      * This is recommended method for taskable agents to receive and process tasks in real-time.
-     * Agents should maintain connection to this stream and process incoming tasks according to their capabilities.
+     * Agents should maintain connection to this stream and process incoming tasks according to their capabilities. 
      *
      * When an agent receives a task, it should update the task status using the `UpdateStatus` endpoint
      * to provide progress information back to Tasks API.
      */
-    public streamAsAgent(
-        request: Lattice.AgentStreamRequest = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<Lattice.StreamAsAgentResponse>> {
+    public streamAsAgent(request: Lattice.AgentStreamRequest = {}, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<core.Stream<Lattice.StreamAsAgentResponse>> {
         return core.HttpResponsePromise.fromPromise(this.__streamAsAgent(request, requestOptions));
     }
 
-    private async __streamAsAgent(
-        request: Lattice.AgentStreamRequest = {},
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<Lattice.StreamAsAgentResponse>>> {
+    private async __streamAsAgent(request: Lattice.AgentStreamRequest = {}, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<core.Stream<Lattice.StreamAsAgentResponse>>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher<ReadableStream>({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/agent/stream",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/agent/stream"),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -658,34 +516,30 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
-            return {
-                data: new core.Stream({
+            return { data: new core.Stream({
                     stream: _response.body,
-                    parse: (data) => data as any,
+                    parse: data => data as any,
                     signal: requestOptions?.abortSignal,
                     eventShape: {
-                        type: "sse",
+                        type: "sse"
                     },
-                }),
-                rawResponse: _response.rawResponse,
-            };
+                    reconnectionEnabled: requestOptions?.stream?.reconnectionEnabled ?? this._options?.stream?.reconnectionEnabled,
+                    maxReconnectionAttempts: requestOptions?.stream?.maxReconnectionAttempts ?? this._options?.stream?.maxReconnectionAttempts
+                }), rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -707,31 +561,16 @@ export class TasksClient {
      * The stream terminates automatically when the task reaches a terminal state
      * (`STATUS_DONE_OK` or `STATUS_DONE_NOT_OK`).
      */
-    public streamManualControlFrames(
-        request: Lattice.ManualControlStreamRequest,
-        requestOptions?: TasksClient.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<Lattice.StreamManualControlFramesResponse>> {
+    public streamManualControlFrames(request: Lattice.ManualControlStreamRequest, requestOptions?: TasksClient.RequestOptions): core.HttpResponsePromise<core.Stream<Lattice.StreamManualControlFramesResponse>> {
         return core.HttpResponsePromise.fromPromise(this.__streamManualControlFrames(request, requestOptions));
     }
 
-    private async __streamManualControlFrames(
-        request: Lattice.ManualControlStreamRequest,
-        requestOptions?: TasksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<Lattice.StreamManualControlFramesResponse>>> {
+    private async __streamManualControlFrames(request: Lattice.ManualControlStreamRequest, requestOptions?: TasksClient.RequestOptions): Promise<core.WithRawResponse<core.Stream<Lattice.StreamManualControlFramesResponse>>> {
         const { taskId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher<ReadableStream>({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}/manual-control/stream`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/tasks/${core.url.encodePathParam(taskId)}/manual-control/stream`),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -743,42 +582,33 @@ export class TasksClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
-            return {
-                data: new core.Stream({
+            return { data: new core.Stream({
                     stream: _response.body,
-                    parse: (data) => data as any,
+                    parse: data => data as any,
                     signal: requestOptions?.abortSignal,
                     eventShape: {
-                        type: "sse",
+                        type: "sse"
                     },
-                }),
-                rawResponse: _response.rawResponse,
-            };
+                    reconnectionEnabled: requestOptions?.stream?.reconnectionEnabled ?? this._options?.stream?.reconnectionEnabled,
+                    maxReconnectionAttempts: requestOptions?.stream?.maxReconnectionAttempts ?? this._options?.stream?.maxReconnectionAttempts
+                }), rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/api/v1/tasks/{taskId}/manual-control/stream",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/api/v1/tasks/{taskId}/manual-control/stream");
     }
 }

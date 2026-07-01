@@ -13,12 +13,12 @@ export interface ComponentMessage {
 export namespace ComponentMessage {
     /** The status associated with this message. */
     export const Status = {
-        HealthStatusInvalid: "HEALTH_STATUS_INVALID",
-        HealthStatusHealthy: "HEALTH_STATUS_HEALTHY",
-        HealthStatusWarn: "HEALTH_STATUS_WARN",
-        HealthStatusFail: "HEALTH_STATUS_FAIL",
-        HealthStatusOffline: "HEALTH_STATUS_OFFLINE",
-        HealthStatusNotReady: "HEALTH_STATUS_NOT_READY",
-    } as const;
-    export type Status = (typeof Status)[keyof typeof Status];
+            HealthStatusInvalid: "HEALTH_STATUS_INVALID",
+            HealthStatusHealthy: "HEALTH_STATUS_HEALTHY",
+            HealthStatusWarn: "HEALTH_STATUS_WARN",
+            HealthStatusFail: "HEALTH_STATUS_FAIL",
+            HealthStatusOffline: "HEALTH_STATUS_OFFLINE",
+            HealthStatusNotReady: "HEALTH_STATUS_NOT_READY"
+        } as const;
+    export type Status = typeof Status[keyof typeof Status];
 }

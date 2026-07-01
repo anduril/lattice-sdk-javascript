@@ -21,25 +21,25 @@ export namespace PayloadConfiguration {
 
     export namespace EffectiveEnvironment {
         export const Item = {
-            EnvironmentUnknown: "ENVIRONMENT_UNKNOWN",
-            EnvironmentAir: "ENVIRONMENT_AIR",
-            EnvironmentSurface: "ENVIRONMENT_SURFACE",
-            EnvironmentSubSurface: "ENVIRONMENT_SUB_SURFACE",
-            EnvironmentLand: "ENVIRONMENT_LAND",
-            EnvironmentSpace: "ENVIRONMENT_SPACE",
-        } as const;
-        export type Item = (typeof Item)[keyof typeof Item];
+                EnvironmentUnknown: "ENVIRONMENT_UNKNOWN",
+                EnvironmentAir: "ENVIRONMENT_AIR",
+                EnvironmentSurface: "ENVIRONMENT_SURFACE",
+                EnvironmentSubSurface: "ENVIRONMENT_SUB_SURFACE",
+                EnvironmentLand: "ENVIRONMENT_LAND",
+                EnvironmentSpace: "ENVIRONMENT_SPACE"
+            } as const;
+        export type Item = typeof Item[keyof typeof Item];
     }
 
     /** The operational state of this payload. */
     export const PayloadOperationalState = {
-        PayloadOperationalStateInvalid: "PAYLOAD_OPERATIONAL_STATE_INVALID",
-        PayloadOperationalStateOff: "PAYLOAD_OPERATIONAL_STATE_OFF",
-        PayloadOperationalStateNonOperational: "PAYLOAD_OPERATIONAL_STATE_NON_OPERATIONAL",
-        PayloadOperationalStateDegraded: "PAYLOAD_OPERATIONAL_STATE_DEGRADED",
-        PayloadOperationalStateOperational: "PAYLOAD_OPERATIONAL_STATE_OPERATIONAL",
-        PayloadOperationalStateOutOfService: "PAYLOAD_OPERATIONAL_STATE_OUT_OF_SERVICE",
-        PayloadOperationalStateUnknown: "PAYLOAD_OPERATIONAL_STATE_UNKNOWN",
-    } as const;
-    export type PayloadOperationalState = (typeof PayloadOperationalState)[keyof typeof PayloadOperationalState];
+            PayloadOperationalStateInvalid: "PAYLOAD_OPERATIONAL_STATE_INVALID",
+            PayloadOperationalStateOff: "PAYLOAD_OPERATIONAL_STATE_OFF",
+            PayloadOperationalStateNonOperational: "PAYLOAD_OPERATIONAL_STATE_NON_OPERATIONAL",
+            PayloadOperationalStateDegraded: "PAYLOAD_OPERATIONAL_STATE_DEGRADED",
+            PayloadOperationalStateOperational: "PAYLOAD_OPERATIONAL_STATE_OPERATIONAL",
+            PayloadOperationalStateOutOfService: "PAYLOAD_OPERATIONAL_STATE_OUT_OF_SERVICE",
+            PayloadOperationalStateUnknown: "PAYLOAD_OPERATIONAL_STATE_UNKNOWN"
+        } as const;
+    export type PayloadOperationalState = typeof PayloadOperationalState[keyof typeof PayloadOperationalState];
 }

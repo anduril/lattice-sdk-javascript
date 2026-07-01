@@ -10,11 +10,11 @@ export interface ControlAreaDetails {
 
 export namespace ControlAreaDetails {
     export const Type = {
-        ControlAreaTypeInvalid: "CONTROL_AREA_TYPE_INVALID",
-        ControlAreaTypeKeepInZone: "CONTROL_AREA_TYPE_KEEP_IN_ZONE",
-        ControlAreaTypeKeepOutZone: "CONTROL_AREA_TYPE_KEEP_OUT_ZONE",
-        ControlAreaTypeDitchZone: "CONTROL_AREA_TYPE_DITCH_ZONE",
-        ControlAreaTypeLoiterZone: "CONTROL_AREA_TYPE_LOITER_ZONE",
-    } as const;
-    export type Type = (typeof Type)[keyof typeof Type];
+            ControlAreaTypeInvalid: "CONTROL_AREA_TYPE_INVALID",
+            ControlAreaTypeKeepInZone: "CONTROL_AREA_TYPE_KEEP_IN_ZONE",
+            ControlAreaTypeKeepOutZone: "CONTROL_AREA_TYPE_KEEP_OUT_ZONE",
+            ControlAreaTypeDitchZone: "CONTROL_AREA_TYPE_DITCH_ZONE",
+            ControlAreaTypeLoiterZone: "CONTROL_AREA_TYPE_LOITER_ZONE"
+        } as const;
+    export type Type = typeof Type[keyof typeof Type];
 }

@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../index.js";
+import * as Lattice from "../index.js";
 
 /**
  * Fuel describes an entity's repository of fuels stores including current amount, operational requirements, and maximum authorized capacity

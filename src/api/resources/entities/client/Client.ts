@@ -1,9 +1,9 @@
 //  This file was auto-generated from our API Definition.
 
 import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClient.js";
-import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
-import { mergeHeaders } from "../../../../core/headers.js";
+import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../BaseClient.js";
 import * as core from "../../../../core/index.js";
+import { mergeHeaders } from "../../../../core/headers.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
@@ -12,7 +12,8 @@ import * as Lattice from "../../../index.js";
 export declare namespace EntitiesClient {
     export type Options = BaseClientOptions;
 
-    export interface RequestOptions extends BaseRequestOptions {}
+    export interface RequestOptions extends BaseRequestOptions {
+    }
 }
 
 /**
@@ -22,12 +23,15 @@ export class EntitiesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<EntitiesClient.Options>;
 
     constructor(options: EntitiesClient.Options) {
-        this._options = normalizeClientOptionsWithAuth(options);
+
+
+                        this._options = normalizeClientOptionsWithAuth(options);
+                    
     }
 
     /**
-     * Publish an entity for ingest into the Entities API. Entities created with this method are "owned" by the originator: other sources,
-     * such as the UI, may not edit or delete these entities. The server validates entities at API call time and
+     * Publish an entity for ingest into the Entities API. Entities created with this method are "owned" by the originator: other sources, 
+     * such as the UI, may not edit or delete these entities. The server validates entities at API call time and 
      * returns an error if the entity is invalid.
      *
      * An entity ID must be provided when calling this endpoint. If the entity referenced by the entity ID does not exist
@@ -43,30 +47,15 @@ export class EntitiesClient {
      * @example
      *     await client.entities.publishEntity({})
      */
-    public publishEntity(
-        request: Lattice.Entity,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Entity> {
+    public publishEntity(request: Lattice.Entity, requestOptions?: EntitiesClient.RequestOptions): core.HttpResponsePromise<Lattice.Entity> {
         return core.HttpResponsePromise.fromPromise(this.__publishEntity(request, requestOptions));
     }
 
-    private async __publishEntity(
-        request: Lattice.Entity,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Entity>> {
+    private async __publishEntity(request: Lattice.Entity, requestOptions?: EntitiesClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Entity>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/entities",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/entities"),
             method: "PUT",
             headers: _headers,
             contentType: "application/json",
@@ -77,7 +66,7 @@ export class EntitiesClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Entity, rawResponse: _response.rawResponse };
@@ -85,16 +74,13 @@ export class EntitiesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -114,31 +100,16 @@ export class EntitiesClient {
      *         entityId: "entityId"
      *     })
      */
-    public getEntity(
-        request: Lattice.GetEntityRequest,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Entity> {
+    public getEntity(request: Lattice.GetEntityRequest, requestOptions?: EntitiesClient.RequestOptions): core.HttpResponsePromise<Lattice.Entity> {
         return core.HttpResponsePromise.fromPromise(this.__getEntity(request, requestOptions));
     }
 
-    private async __getEntity(
-        request: Lattice.GetEntityRequest,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Entity>> {
+    private async __getEntity(request: Lattice.GetEntityRequest, requestOptions?: EntitiesClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Entity>> {
         const { entityId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/entities/${core.url.encodePathParam(entityId)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/entities/${core.url.encodePathParam(entityId)}`),
             method: "GET",
             headers: _headers,
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
@@ -146,7 +117,7 @@ export class EntitiesClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Entity, rawResponse: _response.rawResponse };
@@ -154,18 +125,14 @@ export class EntitiesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -174,11 +141,11 @@ export class EntitiesClient {
 
     /**
      * Only fields marked with overridable can be overridden. Please refer to our documentation to see the comprehensive
-     * list of fields that can be overridden. The entity in the request body should only have a value set on the field
-     * specified in the field path parameter. Field paths are rooted in the base entity object and must be represented
+     * list of fields that can be overridden. The entity in the request body should only have a value set on the field 
+     * specified in the field path parameter. Field paths are rooted in the base entity object and must be represented 
      * using lower_snake_case. Do not include "entity" in the field path.
      *
-     * Note that overrides are applied in an eventually consistent manner. If multiple overrides are created
+     * Note that overrides are applied in an eventually consistent manner. If multiple overrides are created 
      * concurrently for the same field path, the last writer wins.
      *
      * @param {Lattice.EntityOverride} request
@@ -194,31 +161,16 @@ export class EntitiesClient {
      *         fieldPath: "mil_view.disposition"
      *     })
      */
-    public overrideEntity(
-        request: Lattice.EntityOverride,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Entity> {
+    public overrideEntity(request: Lattice.EntityOverride, requestOptions?: EntitiesClient.RequestOptions): core.HttpResponsePromise<Lattice.Entity> {
         return core.HttpResponsePromise.fromPromise(this.__overrideEntity(request, requestOptions));
     }
 
-    private async __overrideEntity(
-        request: Lattice.EntityOverride,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Entity>> {
+    private async __overrideEntity(request: Lattice.EntityOverride, requestOptions?: EntitiesClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Entity>> {
         const { entityId, fieldPath, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/entities/${core.url.encodePathParam(entityId)}/override/${core.url.encodePathParam(fieldPath)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/entities/${core.url.encodePathParam(entityId)}/override/${core.url.encodePathParam(fieldPath)}`),
             method: "PUT",
             headers: _headers,
             contentType: "application/json",
@@ -229,7 +181,7 @@ export class EntitiesClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Entity, rawResponse: _response.rawResponse };
@@ -237,27 +189,18 @@ export class EntitiesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "PUT",
-            "/api/v1/entities/{entityId}/override/{fieldPath}",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PUT", "/api/v1/entities/{entityId}/override/{fieldPath}");
     }
 
     /**
@@ -276,31 +219,16 @@ export class EntitiesClient {
      *         fieldPath: "mil_view.disposition"
      *     })
      */
-    public removeEntityOverride(
-        request: Lattice.RemoveEntityOverrideRequest,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.Entity> {
+    public removeEntityOverride(request: Lattice.RemoveEntityOverrideRequest, requestOptions?: EntitiesClient.RequestOptions): core.HttpResponsePromise<Lattice.Entity> {
         return core.HttpResponsePromise.fromPromise(this.__removeEntityOverride(request, requestOptions));
     }
 
-    private async __removeEntityOverride(
-        request: Lattice.RemoveEntityOverrideRequest,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.Entity>> {
+    private async __removeEntityOverride(request: Lattice.RemoveEntityOverrideRequest, requestOptions?: EntitiesClient.RequestOptions): Promise<core.WithRawResponse<Lattice.Entity>> {
         const { entityId, fieldPath } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                `api/v1/entities/${core.url.encodePathParam(entityId)}/override/${core.url.encodePathParam(fieldPath)}`,
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), `api/v1/entities/${core.url.encodePathParam(entityId)}/override/${core.url.encodePathParam(fieldPath)}`),
             method: "DELETE",
             headers: _headers,
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
@@ -308,7 +236,7 @@ export class EntitiesClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.Entity, rawResponse: _response.rawResponse };
@@ -316,27 +244,18 @@ export class EntitiesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "DELETE",
-            "/api/v1/entities/{entityId}/override/{fieldPath}",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/api/v1/entities/{entityId}/override/{fieldPath}");
     }
 
     /**
@@ -345,9 +264,9 @@ export class EntitiesClient {
      * 'sessionToken' in the request body. The server will return a new session token in the response.
      * If you want to retrieve the next batch of results from an existing polling session then send the session
      * token you received from the server in the request body. If no new data is available then the server will
-     * hold the connection open for up to 5 minutes. After the 5 minute timeout period, the server will close the
-     * connection with no results and you may resume polling with the same session token. If your session falls behind
-     * more than 3x the total number of entities in the environment, the server will terminate your session.
+     * hold the connection open for up to 5 minutes. After the 5 minute timeout period, the server will close the 
+     * connection with no results and you may resume polling with the same session token. If your session falls behind 
+     * more than 3x the total number of entities in the environment, the server will terminate your session. 
      * In this case you must start a new session by sending a request with an empty session token.
      *
      * @param {Lattice.EntityEventRequest} request
@@ -364,30 +283,15 @@ export class EntitiesClient {
      *         sessionToken: "sessionToken"
      *     })
      */
-    public longPollEntityEvents(
-        request: Lattice.EntityEventRequest,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): core.HttpResponsePromise<Lattice.EntityEventResponse> {
+    public longPollEntityEvents(request: Lattice.EntityEventRequest, requestOptions?: EntitiesClient.RequestOptions): core.HttpResponsePromise<Lattice.EntityEventResponse> {
         return core.HttpResponsePromise.fromPromise(this.__longPollEntityEvents(request, requestOptions));
     }
 
-    private async __longPollEntityEvents(
-        request: Lattice.EntityEventRequest,
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Lattice.EntityEventResponse>> {
+    private async __longPollEntityEvents(request: Lattice.EntityEventRequest, requestOptions?: EntitiesClient.RequestOptions): Promise<core.WithRawResponse<Lattice.EntityEventResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/entities/events",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/entities/events"),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -398,7 +302,7 @@ export class EntitiesClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
             return { data: _response.body as Lattice.EntityEventResponse, rawResponse: _response.rawResponse };
@@ -406,28 +310,16 @@ export class EntitiesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 408:
-                    throw new Lattice.RequestTimeoutError(
-                        _response.error.body as Lattice.entity.Error_,
-                        _response.rawResponse,
-                    );
-                case 429:
-                    throw new Lattice.TooManyRequestsError(
-                        _response.error.body as Lattice.entity.Error_,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404: throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 408: throw new Lattice.RequestTimeoutError(_response.error.body as Lattice.entity.Error_, _response.rawResponse);
+                case 429: throw new Lattice.TooManyRequestsError(_response.error.body as Lattice.entity.Error_, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
@@ -455,30 +347,15 @@ export class EntitiesClient {
      * The connection automatically recovers from temporary disconnections, resuming the stream where it left off. Unlike polling approaches,
      * this provides real-time updates with minimal latency and reduced server load.
      */
-    public streamEntities(
-        request: Lattice.EntityStreamRequest = {},
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<Lattice.StreamEntitiesResponse>> {
+    public streamEntities(request: Lattice.EntityStreamRequest = {}, requestOptions?: EntitiesClient.RequestOptions): core.HttpResponsePromise<core.Stream<Lattice.StreamEntitiesResponse>> {
         return core.HttpResponsePromise.fromPromise(this.__streamEntities(request, requestOptions));
     }
 
-    private async __streamEntities(
-        request: Lattice.EntityStreamRequest = {},
-        requestOptions?: EntitiesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<Lattice.StreamEntitiesResponse>>> {
+    private async __streamEntities(request: Lattice.EntityStreamRequest = {}, requestOptions?: EntitiesClient.RequestOptions): Promise<core.WithRawResponse<core.Stream<Lattice.StreamEntitiesResponse>>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher<ReadableStream>({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.LatticeEnvironment.Default,
-                "api/v1/entities/stream",
-            ),
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.LatticeEnvironment.Default), "api/v1/entities/stream"),
             method: "POST",
             headers: _headers,
             contentType: "application/json",
@@ -490,34 +367,30 @@ export class EntitiesClient {
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
             fetchFn: this._options?.fetch,
-            logging: this._options.logging,
+            logging: this._options.logging
         });
         if (_response.ok) {
-            return {
-                data: new core.Stream({
+            return { data: new core.Stream({
                     stream: _response.body,
-                    parse: (data) => data as any,
+                    parse: data => data as any,
                     signal: requestOptions?.abortSignal,
                     eventShape: {
-                        type: "sse",
+                        type: "sse"
                     },
-                }),
-                rawResponse: _response.rawResponse,
-            };
+                    reconnectionEnabled: requestOptions?.stream?.reconnectionEnabled ?? this._options?.stream?.reconnectionEnabled,
+                    maxReconnectionAttempts: requestOptions?.stream?.maxReconnectionAttempts ?? this._options?.stream?.maxReconnectionAttempts
+                }), rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.LatticeError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                case 400: throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401: throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                default: throw new errors.LatticeError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
             }
         }
 
