@@ -5,9 +5,10 @@
     "generatorConfig": {
         "namespaceExport": "Lattice"
     },
-    "originGitCommit": "4016840bac18b730e4b9377b546d092cec2cde67",
+    "originGitCommit": "1069e3b3ce136f7476fcbda6e403f5937b667aa6",
     "originGitCommitIsDirty": false,
-    "invokedBy": "manual",
+    "invokedBy": "ci",
     "requestedVersion": "4.17.0",
+    "ciProvider": "circleci",
     "sdkVersion": "4.17.0"
 }
