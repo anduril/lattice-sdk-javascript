@@ -356,19 +356,16 @@ export class TasksClient {
     /**
      * Searches for Tasks that match specified filtering criteria and returns matching tasks in paginated form.
      *
-     * This method allows filtering tasks based on multiple criteria including:
-     * - Parent task relationships
-     * - Task status (with inclusive or exclusive filtering)
-     * - Update time ranges
-     * - Task view (manager or agent perspective)
-     * - Task assignee
-     * - Task type (via exact URL matches or prefix matching)
+     * This method allows filtering tasks based on the following criteria:
+     * - Parent-task relationships.
+     * - Task status with inclusive or exclusive filtering.
+     * - Update time ranges.
      *
-     * Results are returned in pages. When more results are available than can be returned in a single
-     * response, a page_token is provided that can be used in subsequent requests to retrieve the next
+     * Lattice returns the results in pages. When more results are available than can be returned in a single
+     * response, a `page_token` is provided. Use the `page_token` in subsequent requests to retrieve the next
      * set of results.
      *
-     * By default, this returns the latest task version for each matching task from the manager's perspective.
+     * By default, this returns the latest task version for each matching task.
      *
      * @param {Lattice.TaskQuery} request
      * @param {TasksClient.RequestOptions} requestOptions - Request-specific configuration.
