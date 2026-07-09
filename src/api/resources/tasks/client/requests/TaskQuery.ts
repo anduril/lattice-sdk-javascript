@@ -8,24 +8,24 @@ export interface TaskQuery {
     /** If set, returns results starting from the given pageToken. */
     pageToken?: string;
     /**
-     * If present matches Tasks with this parent Task ID.
-     * Note: this is mutually exclusive with all other query parameters, for example, either provide parent task ID, or
+     * If present matches tasks with this parent task ID.
+     * This is mutually exclusive with all other query parameters, for example, either provide parent task ID, or
      * any of the remaining parameters, but not both.
      */
     parentTaskId?: string;
     statusFilter?: TaskQuery.StatusFilter;
-    /** If provided, only provides Tasks updated within the time range. */
+    /** If provided, only provides tasks updated within the time range. */
     updateTimeRange?: TaskQuery.UpdateTimeRange;
 }
 
 export namespace TaskQuery {
     export interface StatusFilter {
-        /** Status of the Task to filter by, inclusive. */
+        /** Status of the task to filter by, inclusive. */
         status?: StatusFilter.Status | undefined;
     }
 
     export namespace StatusFilter {
-        /** Status of the Task to filter by, inclusive. */
+        /** Status of the task to filter by, inclusive. */
         export const Status = {
             StatusInvalid: "STATUS_INVALID",
             StatusCreated: "STATUS_CREATED",
@@ -47,12 +47,12 @@ export namespace TaskQuery {
     }
 
     /**
-     * If provided, only provides Tasks updated within the time range.
+     * If provided, only provides tasks updated within the time range.
      */
     export interface UpdateTimeRange {
-        /** If provided, returns Tasks only updated after this time. */
+        /** If provided, returns tasks only updated after this time. */
         startTime?: string | undefined;
-        /** If provided, returns Tasks only updated before this time. */
+        /** If provided, returns tasks only updated before this time. */
         endTime?: string | undefined;
     }
 }
