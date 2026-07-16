@@ -15,6 +15,8 @@ export type BaseClientOptions = {
     environment?: core.Supplier<environments.LatticeEnvironment | string>;
     /** Specify a custom URL to connect the client to. */
     baseUrl?: core.Supplier<string>;
+    /** Defaults to "example.developer.anduril.com". */
+    server?: string;
     /** Additional headers to include in requests. */
     headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
     /** The default maximum time to wait for a response in seconds. */
@@ -65,16 +67,23 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@anduril-industries/lattice-sdk",
-            "X-Fern-SDK-Version": "4.20.0",
-            "User-Agent": "@anduril-industries/lattice-sdk/4.20.0",
+            "X-Fern-SDK-Version": "4.21.0",
+            "User-Agent": "@anduril-industries/lattice-sdk/4.21.0",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },
         options?.headers,
     );
 
+    let baseUrl = options?.baseUrl;
+    if (options?.server != null) {
+        const _server = options?.server ?? "example.developer.anduril.com";
+        baseUrl = `https://${_server}`;
+    }
+
     return {
         ...options,
+        baseUrl,
         logging: core.logging.createLogger(options?.logging),
         headers,
     } as NormalizedClientOptions<T>;
