@@ -40,6 +40,8 @@ export class EntitiesClient {
      *
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.entities.publishEntity({})
@@ -109,6 +111,8 @@ export class EntitiesClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.entities.getEntity({
@@ -188,6 +192,8 @@ export class EntitiesClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.entities.overrideEntity({
@@ -270,6 +276,8 @@ export class EntitiesClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.entities.removeEntityOverride({
@@ -359,6 +367,8 @@ export class EntitiesClient {
      * @throws {@link Lattice.NotFoundError}
      * @throws {@link Lattice.RequestTimeoutError}
      * @throws {@link Lattice.TooManyRequestsError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.entities.longPollEntityEvents({

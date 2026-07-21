@@ -34,6 +34,8 @@ export class ObjectsClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.InternalServerError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.objects.listObjects()
@@ -124,6 +126,8 @@ export class ObjectsClient {
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
      * @throws {@link Lattice.InternalServerError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      */
     public getObject(
         request: Lattice.GetObjectRequest,
@@ -199,6 +203,8 @@ export class ObjectsClient {
      * @throws {@link Lattice.ContentTooLargeError}
      * @throws {@link Lattice.InternalServerError}
      * @throws {@link Lattice.InsufficientStorageError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     import { createReadStream } from "fs";
@@ -289,6 +295,8 @@ export class ObjectsClient {
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
      * @throws {@link Lattice.InternalServerError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.objects.deleteObject({
@@ -369,6 +377,8 @@ export class ObjectsClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.InternalServerError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.objects.getObjectMetadata({
