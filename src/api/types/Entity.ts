@@ -48,10 +48,20 @@ export interface Entity {
     noExpiry?: boolean | undefined;
     /** Human-readable descriptions of what the entity is currently doing. */
     status?: Lattice.Status | undefined;
-    /** Geospatial data related to the entity, including its position, kinematics, and orientation. */
+    /**
+     * Geospatial data related to the entity, including its position, kinematics, and orientation. Populate either
+     *  this field (and `location_uncertainty`) or `kinematics`, not both. Populating both can lead to conflicting or
+     *  inconsistent kinematics data for the entity.
+     */
     location?: Lattice.Location | undefined;
     /** Indicates uncertainty of the entity's position and kinematics. */
     locationUncertainty?: Lattice.LocationUncertainty | undefined;
+    /**
+     * Kinematics data related to the entity to a higher degree of granularity than Location. This is preferred for Track Entities.
+     *  Populate either `location`/`location_uncertainty` or this field, not both.
+     *  Populating both can lead to conflicting or inconsistent kinematics data for the entity.
+     */
+    kinematics?: Lattice.Kinematics | undefined;
     /** Geospatial representation of the entity, including entities that cover an area rather than a fixed point. */
     geoShape?: Lattice.GeoShape | undefined;
     /** Additional details on what the geospatial area or point represents, along with visual display details. */

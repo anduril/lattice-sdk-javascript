@@ -31,6 +31,8 @@ export class OauthClient {
      *
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.oauth.getToken({})

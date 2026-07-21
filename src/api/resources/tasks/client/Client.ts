@@ -41,6 +41,8 @@ export class TasksClient {
      *
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.tasks.createTask()
@@ -119,6 +121,8 @@ export class TasksClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.tasks.getTask({
@@ -202,6 +206,8 @@ export class TasksClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.tasks.updateTaskStatus({
@@ -287,6 +293,8 @@ export class TasksClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.tasks.cancelTask({
@@ -374,6 +382,8 @@ export class TasksClient {
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
      * @throws {@link Lattice.NotFoundError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.tasks.queryTasks()
@@ -540,6 +550,8 @@ export class TasksClient {
      *
      * @throws {@link Lattice.BadRequestError}
      * @throws {@link Lattice.UnauthorizedError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
      *
      * @example
      *     await client.tasks.listenAsAgent()

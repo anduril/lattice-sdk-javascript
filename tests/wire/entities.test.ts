@@ -44,6 +44,10 @@ describe("EntitiesClient", () => {
                 velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
                 positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
             },
+            kinematics: {
+                kinematicsGeodetic: { measurementTime: "2024-01-15T09:30:00Z" },
+                kinematicsGeocentric: { measurementTime: "2024-01-15T09:30:00Z" },
+            },
             geoShape: {
                 line: { positions: [{}] },
                 polygon: { rings: [{}], isRectangle: true },
@@ -239,6 +243,10 @@ describe("EntitiesClient", () => {
                 positionEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
                 velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
                 positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
+            },
+            kinematics: {
+                kinematicsGeodetic: { measurementTime: "2024-01-15T09:30:00Z" },
+                kinematicsGeocentric: { measurementTime: "2024-01-15T09:30:00Z" },
             },
             geoShape: {
                 line: { positions: [{}] },
@@ -466,6 +474,10 @@ describe("EntitiesClient", () => {
                 positionEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
                 velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
                 positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
+            },
+            kinematics: {
+                kinematicsGeodetic: { measurementTime: "2024-01-15T09:30:00Z" },
+                kinematicsGeocentric: { measurementTime: "2024-01-15T09:30:00Z" },
             },
             geoShape: {
                 line: { positions: [{}] },
@@ -701,6 +713,10 @@ describe("EntitiesClient", () => {
                 positionEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
                 velocityEnuCov: { mxx: 1.1, mxy: 1.1, mxz: 1.1, myy: 1.1, myz: 1.1, mzz: 1.1 },
                 positionErrorEllipse: { probability: 1.1, semiMajorAxisM: 1.1, semiMinorAxisM: 1.1, orientationD: 1.1 },
+            },
+            kinematics: {
+                kinematicsGeodetic: { measurementTime: "2024-01-15T09:30:00Z" },
+                kinematicsGeocentric: { measurementTime: "2024-01-15T09:30:00Z" },
             },
             geoShape: {
                 line: { positions: [{}] },
