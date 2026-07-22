@@ -3,7 +3,7 @@
 import { OAuthAuthProvider } from "./auth/OAuthAuthProvider.js";
 import { mergeHeaders } from "./core/headers.js";
 import * as core from "./core/index.js";
-import type * as environments from "./environments.js";
+import * as environments from "./environments.js";
 
 export type AuthOption =
     | false
@@ -67,8 +67,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@anduril-industries/lattice-sdk",
-            "X-Fern-SDK-Version": "4.22.0",
-            "User-Agent": "@anduril-industries/lattice-sdk/4.22.0",
+            "X-Fern-SDK-Version": "4.23.0",
+            "User-Agent": "@anduril-industries/lattice-sdk/4.23.0",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },
@@ -78,7 +78,12 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
     let baseUrl = options?.baseUrl;
     if (options?.server != null) {
         const _server = options?.server ?? "example.developer.anduril.com";
-        baseUrl = `https://${_server}`;
+        if (baseUrl == null) {
+            const _environmentUrls = new Map<unknown, string>([
+                [environments.LatticeEnvironment.Default, `https://${_server}`],
+            ]);
+            baseUrl = _environmentUrls.get(options?.environment) ?? `https://${_server}`;
+        }
     }
 
     return {
