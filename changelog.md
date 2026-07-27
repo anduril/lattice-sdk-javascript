@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.24.0] - 2026-07-27
+### Changed
+- **Passthrough requests** — auth headers are now only sent when the resolved URL targets the configured base URL origin, preventing SDK credentials from leaking to cross-origin hosts.
+- **Passthrough debug logging** — request URLs are now redacted to hide embedded credentials and sensitive query parameters.
+
 ## [4.23.0] - 2026-07-22
 
 ## [4.22.0] - 2026-07-21
