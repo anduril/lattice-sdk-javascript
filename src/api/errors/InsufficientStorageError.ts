@@ -5,6 +5,8 @@ import * as errors from "../../errors/index.js";
 import type * as Lattice from "../index.js";
 
 export class InsufficientStorageError extends errors.LatticeError {
+    public declare readonly body: Lattice.object.Error_;
+
     constructor(body: Lattice.object.Error_, rawResponse?: core.RawResponse) {
         super({
             message: "InsufficientStorageError",
