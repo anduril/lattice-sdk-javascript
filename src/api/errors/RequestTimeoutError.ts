@@ -5,6 +5,8 @@ import * as errors from "../../errors/index.js";
 import type * as Lattice from "../index.js";
 
 export class RequestTimeoutError extends errors.LatticeError {
+    public declare readonly body: Lattice.entity.Error_;
+
     constructor(body: Lattice.entity.Error_, rawResponse?: core.RawResponse) {
         super({
             message: "RequestTimeoutError",
