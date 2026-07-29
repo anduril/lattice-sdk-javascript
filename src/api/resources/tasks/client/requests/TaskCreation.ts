@@ -35,4 +35,8 @@ export interface TaskCreation {
      * task. For example, an entity Objective, an entity Keep In Zone, etc.
      */
     initialEntities?: Lattice.TaskEntity[];
+    /** Any retry strategy for task execution or update. */
+    retryStrategy?: Lattice.RetryStrategy;
+    /** Any scheduling constraints for Lattice delivery of the task. */
+    deliveryConstraints?: Lattice.DeliveryConstraints;
 }
