@@ -22,4 +22,6 @@ export interface Signal {
     pulseRepetitionInterval?: Lattice.PulseRepetitionInterval | undefined;
     /** describes how a signal is observing the environment */
     scanCharacteristics?: Lattice.ScanCharacteristics | undefined;
+    /** Indicates the received signal strength (RSSI) of this signal in decibels relative to one milliwatt (dBm). */
+    receivedSignalStrengthDbm?: Lattice.Measurement | undefined;
 }

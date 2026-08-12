@@ -106,6 +106,7 @@ describe("EntitiesClient", () => {
                 emitterNotations: [{}],
                 pulseWidthS: 1.1,
                 scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
+                receivedSignalStrengthDbm: { value: 1.1, sigma: 1.1 },
             },
             transponderCodes: {
                 mode1: 1,
@@ -306,6 +307,7 @@ describe("EntitiesClient", () => {
                 emitterNotations: [{}],
                 pulseWidthS: 1.1,
                 scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
+                receivedSignalStrengthDbm: { value: 1.1, sigma: 1.1 },
             },
             transponderCodes: {
                 mode1: 1,
@@ -537,6 +539,7 @@ describe("EntitiesClient", () => {
                 emitterNotations: [{}],
                 pulseWidthS: 1.1,
                 scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
+                receivedSignalStrengthDbm: { value: 1.1, sigma: 1.1 },
             },
             transponderCodes: {
                 mode1: 1,
@@ -776,6 +779,7 @@ describe("EntitiesClient", () => {
                 emitterNotations: [{}],
                 pulseWidthS: 1.1,
                 scanCharacteristics: { scanType: "SCAN_TYPE_INVALID", scanPeriodS: 1.1 },
+                receivedSignalStrengthDbm: { value: 1.1, sigma: 1.1 },
             },
             transponderCodes: {
                 mode1: 1,
