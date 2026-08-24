@@ -208,7 +208,7 @@ export class ObjectsClient {
      *
      * @example
      *     import { createReadStream } from "fs";
-     *     await client.objects.uploadObject(createReadStream("path/to/file"), undefined)
+     *     await client.objects.uploadObject(createReadStream("path/to/file"), "objectPath")
      */
     public uploadObject(
         uploadable: core.file.Uploadable,
@@ -369,7 +369,7 @@ export class ObjectsClient {
     }
 
     /**
-     * Returns metadata for a specified object path. Use this to fetch metadata such as object size (size_bytes), its expiry time (expiry_time), or its latest update timestamp (last_updated_at).
+     * Returns metadata for a specified object path. Use this to fetch metadata such as object size (size_bytes), its expiry time (expiry_time), or when it arrived on the node holding it (last_updated_at).
      *
      * @param {Lattice.GetObjectMetadataRequest} request
      * @param {ObjectsClient.RequestOptions} requestOptions - Request-specific configuration.
