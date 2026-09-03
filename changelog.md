@@ -2,6 +2,14 @@
 
 ## [4.28.0] - 2026-09-03
 
+**Added**
+
+- VideoClient — new client (client.video.video) for managing live video streams with create, get, list, and delete operations for both ingress and egress streams.
+- Ingress and egress stream types — added request/response and resource types such as CreateIngressStreamRequest, CreateEgressStreamResponse, IngressStream, and EgressStream.
+- Transport support types — added settings types for RTSP, SRT, and MPEG-TS transports (RtspSettings, SrtSettings, MpegTsSettings) with ingress/egress variants.
+- IngressStream.Status — new enum exposing stream lifecycle states such as StreamStatusLive, StreamStatusInactive, and StreamStatusArchived.
+- Video error types — added BadRequestError, ConflictError, ForbiddenError, NotFoundError, UnauthorizedError, TooManyRequestsError, InternalServerError, and ServiceUnavailableError, most exposing a GoogleRpcStatus body, plus a new ./video subpath export.
+
 ## [4.27.0] - 2026-08-24
 
 ## [4.26.0] - 2026-08-12
