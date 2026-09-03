@@ -2,6 +2,20 @@
 
 ## [5.0.0] - 2026-09-03
 
+### Breaking Changes
+- **`client.video.video.*`** — the nested `.video` accessor was removed; call egress and ingress methods directly, e.g. replace `client.video.video.listEgressStreams()` with `client.video.listEgressStreams()`.
+- **`video` namespace re-exports** — the nested `video.*` re-exports and their request types are no longer exported from the video resource module; import them from their new location.
+
+### Added
+- **Egress stream methods** — `listEgressStreams`, `createEgressStream`, `getEgressStream`, and `deleteEgressStream` are now available directly on `VideoClient`.
+- **Ingress stream methods** — `listIngressStreams`, `createIngressStream`, `getIngressStream`, and `deleteIngressStream` are now available directly on `VideoClient`.
+- **`DeliveryConstraints.requireAcknowledgement`** — optional field requiring agent acknowledgement before a task is considered delivered.
+- **`DELIVERY_ERROR_CODE_NOT_ACKNOWLEDGED`** — new value in the `DeliveryError.Code` enum.
+- **`PlatformSubcomponents`** — new type and optional field on `GroupDetails`.
+
+### Changed
+- **`MpegTsSettings`, `MpegTsIngress`, `CreateIngressStreamResponse`** — documentation clarified that MPEG-TS ingress is edge-only and may be disabled in cloud deployments.
+
 ## [4.28.0] - 2026-09-03
 
 **Added**
