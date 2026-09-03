@@ -1501,7 +1501,7 @@ await client.oauth.getToken({});
 </details>
 
 ## Video
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">listEgressStreams</a>({ ...params }) -> Lattice.ListEgressStreamsResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">listEgressStreams</a>({ ...params }) -> Lattice.ListEgressStreamsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1530,7 +1530,7 @@ Returns a list of active egress stream objects.
 <dd>
 
 ```typescript
-await client.video.video.listEgressStreams();
+await client.video.listEgressStreams();
 
 ```
 </dd>
@@ -1566,7 +1566,7 @@ await client.video.video.listEgressStreams();
 </dl>
 </details>
 
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">createEgressStream</a>({ ...params }) -> Lattice.CreateEgressStreamResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">createEgressStream</a>({ ...params }) -> Lattice.CreateEgressStreamResponse</code></summary>
 <dl>
 <dd>
 
@@ -1594,7 +1594,7 @@ Creates an egress stream that publishes a live stream to a downstream consumer.
 <dd>
 
 ```typescript
-await client.video.video.createEgressStream();
+await client.video.createEgressStream();
 
 ```
 </dd>
@@ -1630,7 +1630,7 @@ await client.video.video.createEgressStream();
 </dl>
 </details>
 
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">getEgressStream</a>({ ...params }) -> Lattice.GetEgressStreamResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">getEgressStream</a>({ ...params }) -> Lattice.GetEgressStreamResponse</code></summary>
 <dl>
 <dd>
 
@@ -1657,7 +1657,7 @@ Retrieves an egress stream object and its associated metadata.
 <dd>
 
 ```typescript
-await client.video.video.getEgressStream({
+await client.video.getEgressStream({
     egressId: "egressId"
 });
 
@@ -1695,7 +1695,7 @@ await client.video.video.getEgressStream({
 </dl>
 </details>
 
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">deleteEgressStream</a>({ ...params }) -> Lattice.DeleteEgressStreamResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">deleteEgressStream</a>({ ...params }) -> Lattice.DeleteEgressStreamResponse</code></summary>
 <dl>
 <dd>
 
@@ -1723,7 +1723,7 @@ Deletes the egress stream for a live stream. Returns `NOT_FOUND` if no matching 
 <dd>
 
 ```typescript
-await client.video.video.deleteEgressStream({
+await client.video.deleteEgressStream({
     egressId: "egressId"
 });
 
@@ -1761,7 +1761,7 @@ await client.video.video.deleteEgressStream({
 </dl>
 </details>
 
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">listIngressStreams</a>({ ...params }) -> Lattice.ListIngressStreamsResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">listIngressStreams</a>({ ...params }) -> Lattice.ListIngressStreamsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1790,7 +1790,7 @@ Returns a list of top level ingress stream objects, including ingress streams an
 <dd>
 
 ```typescript
-await client.video.video.listIngressStreams();
+await client.video.listIngressStreams();
 
 ```
 </dd>
@@ -1826,7 +1826,7 @@ await client.video.video.listIngressStreams();
 </dl>
 </details>
 
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">createIngressStream</a>({ ...params }) -> Lattice.CreateIngressStreamResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">createIngressStream</a>({ ...params }) -> Lattice.CreateIngressStreamResponse</code></summary>
 <dl>
 <dd>
 
@@ -1854,7 +1854,7 @@ Creates a video ingress stream, returning metadata that you can use to stream li
 <dd>
 
 ```typescript
-await client.video.video.createIngressStream();
+await client.video.createIngressStream();
 
 ```
 </dd>
@@ -1890,7 +1890,7 @@ await client.video.video.createIngressStream();
 </dl>
 </details>
 
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">getIngressStream</a>({ ...params }) -> Lattice.GetIngressStreamResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">getIngressStream</a>({ ...params }) -> Lattice.GetIngressStreamResponse</code></summary>
 <dl>
 <dd>
 
@@ -1918,7 +1918,7 @@ Retrieves a top level ingress stream object and its associated metadata. This in
 <dd>
 
 ```typescript
-await client.video.video.getIngressStream({
+await client.video.getIngressStream({
     ingressId: "ingressId"
 });
 
@@ -1956,7 +1956,7 @@ await client.video.video.getIngressStream({
 </dl>
 </details>
 
-<details><summary><code>client.video.video.<a href="/src/api/resources/video/resources/video/client/Client.ts">deleteIngressStream</a>({ ...params }) -> Lattice.DeleteIngressStreamResponse</code></summary>
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">deleteIngressStream</a>({ ...params }) -> Lattice.DeleteIngressStreamResponse</code></summary>
 <dl>
 <dd>
 
@@ -1984,7 +1984,7 @@ Deletes a video ingress stream and transitions the stream to `STREAM_STATUS_ARCH
 <dd>
 
 ```typescript
-await client.video.video.deleteIngressStream({
+await client.video.deleteIngressStream({
     ingressId: "ingressId"
 });
 
