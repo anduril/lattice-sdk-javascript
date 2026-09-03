@@ -4,6 +4,7 @@ import { EntitiesClient } from "./api/resources/entities/client/Client.js";
 import { OauthClient } from "./api/resources/oauth/client/Client.js";
 import { ObjectsClient } from "./api/resources/objects/client/Client.js";
 import { TasksClient } from "./api/resources/tasks/client/Client.js";
+import { VideoClient } from "./api/resources/video/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
 import * as core from "./core/index.js";
@@ -20,6 +21,7 @@ export class LatticeClient {
     protected _tasks: TasksClient | undefined;
     protected _objects: ObjectsClient | undefined;
     protected _oauth: OauthClient | undefined;
+    protected _video: VideoClient | undefined;
 
     constructor(options: LatticeClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -39,6 +41,10 @@ export class LatticeClient {
 
     public get oauth(): OauthClient {
         return (this._oauth ??= new OauthClient(this._options));
+    }
+
+    public get video(): VideoClient {
+        return (this._video ??= new VideoClient(this._options));
     }
 
     /**

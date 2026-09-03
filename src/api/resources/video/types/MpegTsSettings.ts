@@ -1,0 +1,10 @@
+//  This file was auto-generated from our API Definition.
+
+/**
+ * Settings for MPEG-TS ingress. Empty by default, the service allocates a UDP port
+ *  from a service-wide pool and returns the push URL in CreateIngressStreamResponse.
+ *
+ *  MPEG-TS ingress may be disabled per deployment. When it is disabled, a
+ *  CreateIngressStream request that selects mpeg_ts is rejected with a gRPC error.
+ */
+export type MpegTsSettings = Record<string, unknown>;

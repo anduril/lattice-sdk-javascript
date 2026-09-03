@@ -1,0 +1,24 @@
+//  This file was auto-generated from our API Definition.
+
+import type * as core from "../../../../core/index.js";
+import * as errors from "../../../../errors/index.js";
+import type * as Lattice from "../../../index.js";
+
+export class InternalServerError extends errors.LatticeError {
+    public declare readonly body: Lattice.video.GoogleRpcStatus;
+
+    constructor(body: Lattice.video.GoogleRpcStatus, rawResponse?: core.RawResponse) {
+        super({
+            message: "InternalServerError",
+            statusCode: 500,
+            body: body,
+            rawResponse: rawResponse,
+        });
+        Object.setPrototypeOf(this, new.target.prototype);
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, this.constructor);
+        }
+
+        this.name = "InternalServerError";
+    }
+}
