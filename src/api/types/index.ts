@@ -125,6 +125,7 @@ export * from "./PathMetadata.js";
 export * from "./Payload.js";
 export * from "./PayloadConfiguration.js";
 export * from "./Payloads.js";
+export * from "./PlatformSubcomponents.js";
 export * from "./Pose.js";
 export * from "./Position.js";
 export * from "./PositionType.js";

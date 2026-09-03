@@ -9,8 +9,11 @@ export interface CreateIngressStreamResponse {
      */
     ingressId?: string | undefined;
     /**
-     * Connection details for an MPEG-TS push. Only returned when MPEG-TS ingress is
-     *  enabled for the deployment and the request selected mpeg_ts.
+     * Connection details for an MPEG-TS push. Only returned when the request selected
+     *  mpeg_ts and MPEG-TS ingress is enabled for the deployment. MPEG-TS ingress is
+     *  supported only at the edge, in closed networks; in a cloud environment reached over
+     *  the public internet it may be disabled per deployment, in which case the create
+     *  request is rejected and this field is never populated.
      */
     mpegTs?: Lattice.video.MpegTsIngress | undefined;
     srt?: Lattice.video.SrtIngress | undefined;
