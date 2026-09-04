@@ -53,7 +53,11 @@ describe("TasksClient", () => {
             deliveryState: {
                 status: "DELIVERY_STATUS_INVALID",
                 error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
+                deliveryConstraints: {
+                    deliverAfter: "2024-01-15T09:30:00Z",
+                    deliverBefore: "2024-01-15T09:30:00Z",
+                    requireAcknowledgement: true,
+                },
             },
         };
 
@@ -171,7 +175,11 @@ describe("TasksClient", () => {
             deliveryState: {
                 status: "DELIVERY_STATUS_INVALID",
                 error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
+                deliveryConstraints: {
+                    deliverAfter: "2024-01-15T09:30:00Z",
+                    deliverBefore: "2024-01-15T09:30:00Z",
+                    requireAcknowledgement: true,
+                },
             },
         };
 
@@ -320,7 +328,11 @@ describe("TasksClient", () => {
             deliveryState: {
                 status: "DELIVERY_STATUS_INVALID",
                 error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
+                deliveryConstraints: {
+                    deliverAfter: "2024-01-15T09:30:00Z",
+                    deliverBefore: "2024-01-15T09:30:00Z",
+                    requireAcknowledgement: true,
+                },
             },
         };
 
@@ -473,7 +485,11 @@ describe("TasksClient", () => {
             deliveryState: {
                 status: "DELIVERY_STATUS_INVALID",
                 error: { code: "DELIVERY_ERROR_CODE_INVALID", message: "message" },
-                deliveryConstraints: { deliverAfter: "2024-01-15T09:30:00Z", deliverBefore: "2024-01-15T09:30:00Z" },
+                deliveryConstraints: {
+                    deliverAfter: "2024-01-15T09:30:00Z",
+                    deliverBefore: "2024-01-15T09:30:00Z",
+                    requireAcknowledgement: true,
+                },
             },
         };
 
