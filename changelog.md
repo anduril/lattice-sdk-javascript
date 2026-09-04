@@ -2,6 +2,22 @@
 
 ## [5.0.0] - 2026-09-04
 
+### Breaking Changes
+- **`video` namespace** — video request types are no longer exported under `video`; access functionality through the top-level client and reference types directly (e.g. `Lattice.GoogleRpcStatus` instead of `Lattice.video.GoogleRpcStatus`).
+- **`client.video.video.*`** — the nested `.video` sub-client is removed; drop the extra segment and call methods directly, e.g. replace `client.video.video.listEgressStreams()` with `client.video.listEgressStreams()`.
+- **`VideoClient.video`** — the nested getter is removed; call egress and ingress stream methods directly on the client instead.
+
+### Added
+- **Egress stream methods** — `listEgressStreams`, `createEgressStream`, `getEgressStream`, and `deleteEgressStream` for managing video egress streams.
+- **Ingress stream methods** — `listIngressStreams`, `createIngressStream`, `getIngressStream`, and `deleteIngressStream`, with new `MpegTsIngress`, `MpegTsSettings`, and MPEG-TS support types.
+- **Stream types** — `EgressStream`, `IngressStream`, and their list/get/create/delete response types are now available.
+- **Typed video errors** — status-specific error classes (e.g. `BadRequestError`, `NotFoundError`, `ServiceUnavailableError`) are thrown for their respective HTTP status codes.
+- **`requireAcknowledgement`** — new optional field on `DeliveryConstraints` requiring agent acknowledgement, plus a new `PlatformSubcomponents` group type on `GroupDetails`.
+
+### Changed
+- **`DeliveryError.Code`** — added new enum value `DELIVERY_ERROR_CODE_NOT_ACKNOWLEDGED`.
+- **`CreateIngressStreamRequest.mpegTs`** — documentation clarified that MPEG-TS ingress is supported only at the edge in closed networks.
+
 ## [4.28.0] - 2026-09-03
 
 **Added**
