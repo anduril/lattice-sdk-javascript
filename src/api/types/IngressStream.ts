@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../index.js";
+import type * as Lattice from "../index.js";
 
 /**
  * An ingress stream represents a single source feeding frames into Lattice.
@@ -13,9 +13,9 @@ export interface IngressStream {
     title?: string | undefined;
     /** Current lifecycle status of the stream. See StreamStatus for the full state machine. */
     status?: IngressStream.Status | undefined;
-    mpegTs?: Lattice.video.MpegTsIngress | undefined;
-    rtsp?: Lattice.video.RtspIngress | undefined;
-    srt?: Lattice.video.SrtIngress | undefined;
+    mpegTs?: Lattice.MpegTsIngress | undefined;
+    rtsp?: Lattice.RtspIngress | undefined;
+    srt?: Lattice.SrtIngress | undefined;
     /** Wall-clock time the stream was created. */
     createdAt?: string | undefined;
     /**
