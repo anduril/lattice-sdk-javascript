@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../index.js";
+import type * as Lattice from "../index.js";
 
 export interface CreateEgressStreamResponse {
     /**
@@ -8,6 +8,6 @@ export interface CreateEgressStreamResponse {
      *  `GetEgressStream` and `DeleteEgressStream` calls.
      */
     egressId?: string | undefined;
-    rtsp?: Lattice.video.RtspEgress | undefined;
-    srt?: Lattice.video.SrtEgress | undefined;
+    rtsp?: Lattice.RtspEgress | undefined;
+    srt?: Lattice.SrtEgress | undefined;
 }

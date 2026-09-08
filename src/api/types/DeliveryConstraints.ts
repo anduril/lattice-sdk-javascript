@@ -13,4 +13,14 @@ export interface DeliveryConstraints {
      *  This field is only required for tasks with retry strategies.
      */
     deliverBefore?: string | undefined;
+    /**
+     * Requires the agent to acknowledge the request before Lattice considers it delivered.
+     *  Without this, a request sent over a streaming agent connection is marked delivered as soon
+     *  as the send returns, which only proves it reached a local buffer and not that the agent
+     *  received it. With this set, the task is not marked delivered until the agent reports a
+     *  status confirming receipt; Lattice re-sends until it does, and eventually fails delivery
+     *  with DELIVERY_ERROR_CODE_NOT_ACKNOWLEDGED. Requires deliver_before, which bounds that
+     *  retrying.
+     */
+    requireAcknowledgement?: boolean | undefined;
 }

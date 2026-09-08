@@ -7,5 +7,6 @@ import type * as Lattice from "../index.js";
  */
 export interface GroupDetails {
     team?: Lattice.Team | undefined;
+    platformSubcomponents?: Lattice.PlatformSubcomponents | undefined;
     echelon?: Lattice.Echelon | undefined;
 }

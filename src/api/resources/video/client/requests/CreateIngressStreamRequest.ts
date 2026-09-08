@@ -1,6 +1,6 @@
 //  This file was auto-generated from our API Definition.
 
-import type * as Lattice from "../../../../../../index.js";
+import type * as Lattice from "../../../../index.js";
 
 /**
  * @example
@@ -31,16 +31,19 @@ export interface CreateIngressStreamRequest {
      * Receive an MPEG-TS push from the producer. The service allocates a UDP port and
      *  returns the URL the producer must push to in CreateIngressStreamResponse.
      *
-     *  MPEG-TS ingress may be disabled per deployment. When it is disabled, a request
-     *  that selects mpeg_ts is rejected with a gRPC error rather than accepted, so
-     *  callers should be prepared to fall back to another protocol.
+     *  MPEG-TS ingress is supported only at the edge, in closed networks. When Lattice
+     *  runs in a cloud environment reached over the public internet, MPEG-TS ingress may
+     *  be disabled per deployment. When it is disabled, a request that selects mpeg_ts is
+     *  rejected with a gRPC error rather than accepted, so callers should be prepared to
+     *  fall back to RTSP or SRT. An MPEG-TS stream created at the edge can still be listed
+     *  and inspected on the IngressStream read model even when cloud ingress is disabled.
      */
-    mpegTs?: Lattice.video.MpegTsSettings;
+    mpegTs?: Lattice.MpegTsSettings;
     /** Pull from a caller-supplied RTSP URL. */
-    rtsp?: Lattice.video.RtspSettings;
+    rtsp?: Lattice.RtspSettings;
     /**
      * Receive an SRT push from the producer. The service returns a URL and session_id
      *  in CreateIngressStreamResponse.
      */
-    srt?: Lattice.video.SrtSettings;
+    srt?: Lattice.SrtSettings;
 }

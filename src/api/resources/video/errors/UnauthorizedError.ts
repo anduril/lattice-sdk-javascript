@@ -5,9 +5,9 @@ import * as errors from "../../../../errors/index.js";
 import type * as Lattice from "../../../index.js";
 
 export class UnauthorizedError extends errors.LatticeError {
-    public declare readonly body: Lattice.video.GoogleRpcStatus;
+    public declare readonly body: Lattice.GoogleRpcStatus;
 
-    constructor(body: Lattice.video.GoogleRpcStatus, rawResponse?: core.RawResponse) {
+    constructor(body: Lattice.GoogleRpcStatus, rawResponse?: core.RawResponse) {
         super({
             message: "UnauthorizedError",
             statusCode: 401,

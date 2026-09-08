@@ -17,6 +17,7 @@ export namespace DeliveryError {
         DeliveryErrorCodeUnavailable: "DELIVERY_ERROR_CODE_UNAVAILABLE",
         DeliveryErrorCodeTimeout: "DELIVERY_ERROR_CODE_TIMEOUT",
         DeliveryErrorCodeRejected: "DELIVERY_ERROR_CODE_REJECTED",
+        DeliveryErrorCodeNotAcknowledged: "DELIVERY_ERROR_CODE_NOT_ACKNOWLEDGED",
     } as const;
     export type Code = (typeof Code)[keyof typeof Code];
 }

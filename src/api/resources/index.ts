@@ -13,4 +13,5 @@ export * as task from "./task/index.js";
 export * from "./tasks/client/requests/index.js";
 export * as tasks from "./tasks/index.js";
 export * from "./tasks/types/index.js";
+export * from "./video/client/requests/index.js";
 export * as video from "./video/index.js";

@@ -1,9 +1,9 @@
 //  This file was auto-generated from our API Definition.
 
-import * as Lattice from "../../../src/api/index";
-import { LatticeClient } from "../../../src/Client";
-import { mockServerPool } from "../../mock-server/MockServerPool";
-import { mockOAuth } from "../mockAuth";
+import * as Lattice from "../../src/api/index";
+import { LatticeClient } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+import { mockOAuth } from "./mockAuth";
 
 describe("VideoClient", () => {
     test("listEgressStreams (1)", async () => {
@@ -30,7 +30,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.listEgressStreams();
+        const response = await client.video.listEgressStreams();
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -56,7 +56,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listEgressStreams();
+            return await client.video.listEgressStreams();
         }).rejects.toThrow(Lattice.video.BadRequestError);
     });
 
@@ -82,7 +82,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listEgressStreams();
+            return await client.video.listEgressStreams();
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
     });
 
@@ -108,7 +108,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listEgressStreams();
+            return await client.video.listEgressStreams();
         }).rejects.toThrow(Lattice.video.ForbiddenError);
     });
 
@@ -134,7 +134,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listEgressStreams();
+            return await client.video.listEgressStreams();
         }).rejects.toThrow(Lattice.video.NotFoundError);
     });
 
@@ -160,7 +160,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listEgressStreams();
+            return await client.video.listEgressStreams();
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
     });
 
@@ -190,7 +190,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.createEgressStream();
+        const response = await client.video.createEgressStream();
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -217,7 +217,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createEgressStream();
+            return await client.video.createEgressStream();
         }).rejects.toThrow(Lattice.video.BadRequestError);
     });
 
@@ -244,7 +244,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createEgressStream();
+            return await client.video.createEgressStream();
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
     });
 
@@ -271,7 +271,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createEgressStream();
+            return await client.video.createEgressStream();
         }).rejects.toThrow(Lattice.video.ForbiddenError);
     });
 
@@ -298,7 +298,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createEgressStream();
+            return await client.video.createEgressStream();
         }).rejects.toThrow(Lattice.video.NotFoundError);
     });
 
@@ -325,7 +325,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createEgressStream();
+            return await client.video.createEgressStream();
         }).rejects.toThrow(Lattice.video.ConflictError);
     });
 
@@ -352,7 +352,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createEgressStream();
+            return await client.video.createEgressStream();
         }).rejects.toThrow(Lattice.video.TooManyRequestsError);
     });
 
@@ -379,7 +379,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createEgressStream();
+            return await client.video.createEgressStream();
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
     });
 
@@ -411,7 +411,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.getEgressStream({
+        const response = await client.video.getEgressStream({
             egressId: "egressId",
         });
         expect(response).toEqual(rawResponseBody);
@@ -439,7 +439,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getEgressStream({
+            return await client.video.getEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.BadRequestError);
@@ -467,7 +467,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getEgressStream({
+            return await client.video.getEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
@@ -495,7 +495,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getEgressStream({
+            return await client.video.getEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.ForbiddenError);
@@ -523,7 +523,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getEgressStream({
+            return await client.video.getEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.NotFoundError);
@@ -551,7 +551,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getEgressStream({
+            return await client.video.getEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
@@ -578,7 +578,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.deleteEgressStream({
+        const response = await client.video.deleteEgressStream({
             egressId: "egressId",
         });
         expect(response).toEqual(rawResponseBody);
@@ -606,7 +606,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteEgressStream({
+            return await client.video.deleteEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.BadRequestError);
@@ -634,7 +634,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteEgressStream({
+            return await client.video.deleteEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
@@ -662,7 +662,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteEgressStream({
+            return await client.video.deleteEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.ForbiddenError);
@@ -690,7 +690,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteEgressStream({
+            return await client.video.deleteEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.NotFoundError);
@@ -718,7 +718,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteEgressStream({
+            return await client.video.deleteEgressStream({
                 egressId: "egressId",
             });
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
@@ -757,7 +757,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.listIngressStreams();
+        const response = await client.video.listIngressStreams();
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -783,7 +783,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listIngressStreams();
+            return await client.video.listIngressStreams();
         }).rejects.toThrow(Lattice.video.BadRequestError);
     });
 
@@ -809,7 +809,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listIngressStreams();
+            return await client.video.listIngressStreams();
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
     });
 
@@ -835,7 +835,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listIngressStreams();
+            return await client.video.listIngressStreams();
         }).rejects.toThrow(Lattice.video.ForbiddenError);
     });
 
@@ -861,7 +861,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listIngressStreams();
+            return await client.video.listIngressStreams();
         }).rejects.toThrow(Lattice.video.NotFoundError);
     });
 
@@ -887,7 +887,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listIngressStreams();
+            return await client.video.listIngressStreams();
         }).rejects.toThrow(Lattice.video.InternalServerError);
     });
 
@@ -913,7 +913,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.listIngressStreams();
+            return await client.video.listIngressStreams();
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
     });
 
@@ -943,7 +943,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.createIngressStream();
+        const response = await client.video.createIngressStream();
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -970,7 +970,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createIngressStream();
+            return await client.video.createIngressStream();
         }).rejects.toThrow(Lattice.video.BadRequestError);
     });
 
@@ -997,7 +997,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createIngressStream();
+            return await client.video.createIngressStream();
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
     });
 
@@ -1024,7 +1024,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createIngressStream();
+            return await client.video.createIngressStream();
         }).rejects.toThrow(Lattice.video.ForbiddenError);
     });
 
@@ -1051,7 +1051,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createIngressStream();
+            return await client.video.createIngressStream();
         }).rejects.toThrow(Lattice.video.NotFoundError);
     });
 
@@ -1078,7 +1078,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createIngressStream();
+            return await client.video.createIngressStream();
         }).rejects.toThrow(Lattice.video.ConflictError);
     });
 
@@ -1105,7 +1105,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createIngressStream();
+            return await client.video.createIngressStream();
         }).rejects.toThrow(Lattice.video.TooManyRequestsError);
     });
 
@@ -1132,7 +1132,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.createIngressStream();
+            return await client.video.createIngressStream();
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
     });
 
@@ -1169,7 +1169,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.getIngressStream({
+        const response = await client.video.getIngressStream({
             ingressId: "ingressId",
         });
         expect(response).toEqual(rawResponseBody);
@@ -1197,7 +1197,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getIngressStream({
+            return await client.video.getIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.BadRequestError);
@@ -1225,7 +1225,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getIngressStream({
+            return await client.video.getIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
@@ -1253,7 +1253,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getIngressStream({
+            return await client.video.getIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.ForbiddenError);
@@ -1281,7 +1281,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getIngressStream({
+            return await client.video.getIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.NotFoundError);
@@ -1309,7 +1309,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.getIngressStream({
+            return await client.video.getIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
@@ -1336,7 +1336,7 @@ describe("VideoClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.video.video.deleteIngressStream({
+        const response = await client.video.deleteIngressStream({
             ingressId: "ingressId",
         });
         expect(response).toEqual(rawResponseBody);
@@ -1364,7 +1364,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteIngressStream({
+            return await client.video.deleteIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.BadRequestError);
@@ -1392,7 +1392,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteIngressStream({
+            return await client.video.deleteIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.UnauthorizedError);
@@ -1420,7 +1420,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteIngressStream({
+            return await client.video.deleteIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.ForbiddenError);
@@ -1448,7 +1448,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteIngressStream({
+            return await client.video.deleteIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.NotFoundError);
@@ -1476,7 +1476,7 @@ describe("VideoClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.video.video.deleteIngressStream({
+            return await client.video.deleteIngressStream({
                 ingressId: "ingressId",
             });
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
