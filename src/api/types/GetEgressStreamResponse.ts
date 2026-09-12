@@ -3,6 +3,6 @@
 import type * as Lattice from "../index.js";
 
 export interface GetEgressStreamResponse {
-    /** The egress stream corresponding to the requested `egress_id`. */
+    /** The egress stream corresponding to the requested `egressId`. */
     egressStream?: Lattice.EgressStream | undefined;
 }

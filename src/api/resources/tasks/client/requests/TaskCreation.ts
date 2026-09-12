@@ -37,6 +37,8 @@ export interface TaskCreation {
     initialEntities?: Lattice.TaskEntity[];
     /** Any retry strategy for task execution or update. */
     retryStrategy?: Lattice.RetryStrategy;
-    /** Any scheduling constraints for Lattice delivery of the task. */
+    /** Describes scheduling constraints for Lattice when delivering the task to the agent. */
     deliveryConstraints?: Lattice.DeliveryConstraints;
+    /** Describes scheduling constraints for the agent executing the task after it has been delivered. */
+    executionConstraints?: Lattice.ExecutionConstraints;
 }

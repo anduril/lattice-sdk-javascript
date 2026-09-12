@@ -14,10 +14,10 @@ export interface CreateIngressStreamRequest {
      *  using underscore or dot as a separator, for example, `drone_1`, `vessel_2`, or
      *  `teamalpha.drone1`.
      *
-     *  When supplied, an ingress_id must be between 4 and 36 characters long and use only
+     *  When supplied, an ingressId must be between 4 and 36 characters long and use only
      *  printable ASCII characters with no spaces; the 36-character ceiling leaves room for a
      *  full GUID. A value outside that length range, or one containing spaces, control
-     *  characters, or non-ASCII characters, is rejected, as is an ingress_id that another
+     *  characters, or non-ASCII characters, is rejected, as is an ingressId that another
      *  ingress stream is already using.
      */
     ingressId?: string;
@@ -33,7 +33,7 @@ export interface CreateIngressStreamRequest {
      *
      *  MPEG-TS ingress is supported only at the edge, in closed networks. When Lattice
      *  runs in a cloud environment reached over the public internet, MPEG-TS ingress may
-     *  be disabled per deployment. When it is disabled, a request that selects mpeg_ts is
+     *  be disabled per deployment. When it is disabled, a request that selects `mpegTs` is
      *  rejected with a gRPC error rather than accepted, so callers should be prepared to
      *  fall back to RTSP or SRT. An MPEG-TS stream created at the edge can still be listed
      *  and inspected on the IngressStream read model even when cloud ingress is disabled.
@@ -42,7 +42,7 @@ export interface CreateIngressStreamRequest {
     /** Pull from a caller-supplied RTSP URL. */
     rtsp?: Lattice.RtspSettings;
     /**
-     * Receive an SRT push from the producer. The service returns a URL and session_id
+     * Receive an SRT push from the producer. The service returns a URL and sessionId
      *  in CreateIngressStreamResponse.
      */
     srt?: Lattice.SrtSettings;

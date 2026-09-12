@@ -59,6 +59,7 @@ describe("TasksClient", () => {
                     requireAcknowledgement: true,
                 },
             },
+            executionConstraints: { startAfter: "2024-01-15T09:30:00Z", completeBefore: "2024-01-15T09:30:00Z" },
         };
 
         server
@@ -181,6 +182,7 @@ describe("TasksClient", () => {
                     requireAcknowledgement: true,
                 },
             },
+            executionConstraints: { startAfter: "2024-01-15T09:30:00Z", completeBefore: "2024-01-15T09:30:00Z" },
         };
 
         server
@@ -334,6 +336,7 @@ describe("TasksClient", () => {
                     requireAcknowledgement: true,
                 },
             },
+            executionConstraints: { startAfter: "2024-01-15T09:30:00Z", completeBefore: "2024-01-15T09:30:00Z" },
         };
 
         server
@@ -491,6 +494,7 @@ describe("TasksClient", () => {
                     requireAcknowledgement: true,
                 },
             },
+            executionConstraints: { startAfter: "2024-01-15T09:30:00Z", completeBefore: "2024-01-15T09:30:00Z" },
         };
 
         server

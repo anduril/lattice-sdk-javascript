@@ -64,6 +64,7 @@ export * from "./Enu.js";
 export * from "./EnumType.js";
 export * from "./ErrorEllipse.js";
 export * from "./ExecuteRequest.js";
+export * from "./ExecutionConstraints.js";
 export * from "./FieldClassificationInformation.js";
 export * from "./FieldOfView.js";
 export * from "./Fixed.js";
