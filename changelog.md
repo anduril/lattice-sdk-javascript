@@ -2,6 +2,13 @@
 
 ## [5.1.0] - 2026-09-15
 
+### Added
+- **`ExecutionConstraints`** — new type describing task scheduling details via `startAfter` and `completeBefore` so the agent knows when to execute a task.
+- **`executionConstraints`** — new optional field added to `TaskCreation` and `Task` carrying scheduling constraints applied after task delivery.
+
+### Fixed
+- **Documentation** — doc comment field references now use camelCase names (e.g. `ingressId`, `sessionId`, `pageSize`) and pagination examples correctly `await page.getNextPage()`.
+
 ## [5.0.0] - 2026-09-04
 
 ### Breaking Changes
