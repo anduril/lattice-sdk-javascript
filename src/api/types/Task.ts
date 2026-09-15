@@ -59,4 +59,6 @@ export interface Task {
     retryStrategy?: Lattice.RetryStrategy | undefined;
     /** The current delivery state of a task. */
     deliveryState?: Lattice.DeliveryState | undefined;
+    /** Any execution-related scheduling constraints for the agent after task delivery. */
+    executionConstraints?: Lattice.ExecutionConstraints | undefined;
 }
