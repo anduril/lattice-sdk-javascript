@@ -2,6 +2,13 @@
 
 ## [5.1.0] - 2026-09-15
 
+### Added
+- **`ExecutionConstraints`** type describing scheduling constraints for the agent executing a task after delivery, with `startAfter` and `completeBefore` fields.
+- **`executionConstraints`** optional field on `TaskCreation` and `Task` for specifying post-delivery execution scheduling.
+
+### Changed
+- **Documentation comments** across video and task types now reference camelCase field names (e.g. `ingressId`, `mpegTs`, `sessionId`, `pageToken`) instead of snake_case.
+
 ## [5.0.0] - 2026-09-04
 
 ### Breaking Changes
