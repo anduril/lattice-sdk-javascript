@@ -11,7 +11,7 @@ export interface ListEgressStreamsRequest {
      */
     pageSize?: number;
     /**
-     * To retrieve the next page, pass the `next_page_token` from the previous
+     * To retrieve the next page, pass the `nextPageToken` from the previous
      *  response. Leave empty for the first page.
      *
      *  Keep the rest of the request identical between pages, otherwise the
