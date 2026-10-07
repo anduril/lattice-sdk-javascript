@@ -25,6 +25,11 @@ export interface TaskStatus {
     estimate?: Lattice.GoogleProtobufAny | undefined;
     /** Any allocated agents of the task. */
     allocation?: Lattice.Allocation | undefined;
+    /**
+     * Last time the task status changed.
+     *  Used to guard against out of order updates.
+     */
+    lastUpdateTime?: string | undefined;
 }
 
 export namespace TaskStatus {
