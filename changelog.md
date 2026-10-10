@@ -1,5 +1,14 @@
 # Changelog
 
+## [5.3.0] - 2026-10-10
+### Added
+- **`envelopeEvents`** — new optional SSE stream option that wraps the `data:` payload as `{ <eventDiscriminator>, data }` for the named events.
+
+### Changed
+- **Request timeouts** — the configured timeout now also covers reading the response body for non-streamed responses, so slow body reads can time out as expected.
+- **Timeout errors** — passthrough request timeouts now reject with an `Error` named `TimeoutError` to match native `fetch` behavior.
+- **Retry behavior** — retry delays are now cancelled when the request's `abortSignal` fires instead of running to completion.
+
 ## [5.2.0] - 2026-10-07
 ### Added
 - **`lastUpdateTime`** — new optional field on `TaskStatus` carrying the last time the task status changed, used to guard against out-of-order updates.
