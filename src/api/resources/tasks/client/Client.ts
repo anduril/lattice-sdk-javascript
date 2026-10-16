@@ -152,7 +152,7 @@ export class TasksClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}`,
+                `api/v1/tasks/${core.url.encodePathParam(taskId, errors.LatticeError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -237,7 +237,7 @@ export class TasksClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}/status`,
+                `api/v1/tasks/${core.url.encodePathParam(taskId, errors.LatticeError)}/status`,
             ),
             method: "PUT",
             headers: _headers,
@@ -324,7 +324,7 @@ export class TasksClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}/cancel`,
+                `api/v1/tasks/${core.url.encodePathParam(taskId, errors.LatticeError)}/cancel`,
             ),
             method: "PUT",
             headers: _headers,
@@ -740,7 +740,7 @@ export class TasksClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/tasks/${core.url.encodePathParam(taskId)}/manual-control/stream`,
+                `api/v1/tasks/${core.url.encodePathParam(taskId, errors.LatticeError)}/manual-control/stream`,
             ),
             method: "POST",
             headers: _headers,
