@@ -153,7 +153,7 @@ export class ObjectsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
+                `api/v1/objects/${core.url.encodePathParam(objectPath, errors.LatticeError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -236,7 +236,7 @@ export class ObjectsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
+                `api/v1/objects/${core.url.encodePathParam(objectPath, errors.LatticeError)}`,
             ),
             method: "POST",
             headers: _headers,
@@ -326,7 +326,7 @@ export class ObjectsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
+                `api/v1/objects/${core.url.encodePathParam(objectPath, errors.LatticeError)}`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -408,7 +408,7 @@ export class ObjectsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/objects/${core.url.encodePathParam(objectPath)}`,
+                `api/v1/objects/${core.url.encodePathParam(objectPath, errors.LatticeError)}`,
             ),
             method: "HEAD",
             headers: _headers,

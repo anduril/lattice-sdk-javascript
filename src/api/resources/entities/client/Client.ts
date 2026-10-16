@@ -142,7 +142,7 @@ export class EntitiesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/entities/${core.url.encodePathParam(entityId)}`,
+                `api/v1/entities/${core.url.encodePathParam(entityId, errors.LatticeError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -224,7 +224,7 @@ export class EntitiesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/entities/${core.url.encodePathParam(entityId)}/override/${core.url.encodePathParam(fieldPath)}`,
+                `api/v1/entities/${core.url.encodePathParam(entityId, errors.LatticeError)}/override/${core.url.encodePathParam(fieldPath, errors.LatticeError)}`,
             ),
             method: "PUT",
             headers: _headers,
@@ -308,7 +308,7 @@ export class EntitiesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/entities/${core.url.encodePathParam(entityId)}/override/${core.url.encodePathParam(fieldPath)}`,
+                `api/v1/entities/${core.url.encodePathParam(entityId, errors.LatticeError)}/override/${core.url.encodePathParam(fieldPath, errors.LatticeError)}`,
             ),
             method: "DELETE",
             headers: _headers,

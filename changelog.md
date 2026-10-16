@@ -1,5 +1,7 @@
 # Changelog
 
+## [5.2.1] - 2026-10-16
+
 ## [5.2.0] - 2026-10-07
 ### Added
 - **`lastUpdateTime`** — new optional field on `TaskStatus` carrying the last time the task status changed, used to guard against out-of-order updates.
