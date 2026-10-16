@@ -278,7 +278,7 @@ export class VideoClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/video/egress_streams/${core.url.encodePathParam(egressId)}`,
+                `api/v1/video/egress_streams/${core.url.encodePathParam(egressId, errors.LatticeError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -380,7 +380,7 @@ export class VideoClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/video/egress_streams/${core.url.encodePathParam(egressId)}`,
+                `api/v1/video/egress_streams/${core.url.encodePathParam(egressId, errors.LatticeError)}`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -706,7 +706,7 @@ export class VideoClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/video/ingress_streams/${core.url.encodePathParam(ingressId)}`,
+                `api/v1/video/ingress_streams/${core.url.encodePathParam(ingressId, errors.LatticeError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -808,7 +808,7 @@ export class VideoClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.LatticeEnvironment.Default,
-                `api/v1/video/ingress_streams/${core.url.encodePathParam(ingressId)}`,
+                `api/v1/video/ingress_streams/${core.url.encodePathParam(ingressId, errors.LatticeError)}`,
             ),
             method: "DELETE",
             headers: _headers,
