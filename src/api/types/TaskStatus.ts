@@ -30,6 +30,8 @@ export interface TaskStatus {
      *  Used to guard against out of order updates.
      */
     lastUpdateTime?: string | undefined;
+    /** Time the Task finished execution. */
+    endTime?: string | undefined;
 }
 
 export namespace TaskStatus {
