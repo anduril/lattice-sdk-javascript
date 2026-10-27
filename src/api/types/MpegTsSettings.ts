@@ -12,4 +12,6 @@
  *  still be listed and inspected on the IngressStream read model even when cloud ingress
  *  is disabled.
  */
-export type MpegTsSettings = Record<string, unknown>;
+export type MpegTsSettings = {
+    [key: string]: unknown;
+};
