@@ -1093,4 +1093,153 @@ describe("TasksClient", () => {
             });
         }).rejects.toThrow(Lattice.UnauthorizedError);
     });
+
+    test("sendManualControlFrame (1)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { sessionEpochMicros: "sessionEpochMicros" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/frames")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tasks.sendManualControlFrame({
+            taskId: "taskId",
+            sessionEpochMicros: "sessionEpochMicros",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("sendManualControlFrame (2)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { sessionEpochMicros: "sessionEpochMicros" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/frames")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.sendManualControlFrame({
+                taskId: "taskId",
+                sessionEpochMicros: "sessionEpochMicros",
+            });
+        }).rejects.toThrow(Lattice.BadRequestError);
+    });
+
+    test("sendManualControlFrame (3)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { sessionEpochMicros: "sessionEpochMicros" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/frames")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.sendManualControlFrame({
+                taskId: "taskId",
+                sessionEpochMicros: "sessionEpochMicros",
+            });
+        }).rejects.toThrow(Lattice.UnauthorizedError);
+    });
+
+    test("sendManualControlFrame (4)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { sessionEpochMicros: "sessionEpochMicros" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/frames")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.sendManualControlFrame({
+                taskId: "taskId",
+                sessionEpochMicros: "sessionEpochMicros",
+            });
+        }).rejects.toThrow(Lattice.NotFoundError);
+    });
+
+    test("sendManualControlFrame (5)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { sessionEpochMicros: "sessionEpochMicros" };
+        const rawResponseBody = { code: "code", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/tasks/taskId/manual-control/frames")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.tasks.sendManualControlFrame({
+                taskId: "taskId",
+                sessionEpochMicros: "sessionEpochMicros",
+            });
+        }).rejects.toThrow(Lattice.ConflictError);
+    });
 });

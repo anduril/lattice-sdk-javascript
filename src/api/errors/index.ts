@@ -1,4 +1,5 @@
 export * from "./BadRequestError.js";
+export * from "./ConflictError.js";
 export * from "./ContentTooLargeError.js";
 export * from "./InsufficientStorageError.js";
 export * from "./InternalServerError.js";
