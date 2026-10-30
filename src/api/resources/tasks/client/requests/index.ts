@@ -1,6 +1,7 @@
 export type { AgentListener } from "./AgentListener.js";
 export type { AgentStreamRequest } from "./AgentStreamRequest.js";
 export type { GetTaskRequest } from "./GetTaskRequest.js";
+export type { ManualControlFrameRequest } from "./ManualControlFrameRequest.js";
 export type { ManualControlStreamRequest } from "./ManualControlStreamRequest.js";
 export type { TaskCancellation } from "./TaskCancellation.js";
 export type { TaskCreation } from "./TaskCreation.js";

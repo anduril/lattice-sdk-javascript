@@ -1094,6 +1094,81 @@ for await (const item of response) {
 </dl>
 </details>
 
+<details><summary><code>client.tasks.<a href="/src/api/resources/tasks/client/Client.ts">sendManualControlFrame</a>({ ...params }) -> Lattice.ManualControlFrameResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a single manual control frame, for example, joystick input, for a manual control task.
+
+Call this endpoint repeatedly to control the asset executing the task. Lattice forwards each
+frame to the executing agent, which receives it using the stream manual control frames endpoint.
+The task must be in `STATUS_EXECUTING`.
+
+The client manages the control session. When it begins controlling, it generates a
+`sessionEpochMicros` and includes it in every request, along with a `sequence` that increases
+with each frame. A higher epoch replaces the current session, which allows another operator to
+take over control. A lower epoch is rejected as stale.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tasks.sendManualControlFrame({
+    taskId: "taskId",
+    sessionEpochMicros: "sessionEpochMicros"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Lattice.ManualControlFrameRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TasksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Objects
 <details><summary><code>client.objects.<a href="/src/api/resources/objects/client/Client.ts">listObjects</a>({ ...params }) -> core.Page&lt;Lattice.PathMetadata, Lattice.ListResponse&gt;</code></summary>
 <dl>

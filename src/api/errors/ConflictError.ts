@@ -1,0 +1,24 @@
+//  This file was auto-generated from our API Definition.
+
+import type * as core from "../../core/index.js";
+import * as errors from "../../errors/index.js";
+import type * as Lattice from "../index.js";
+
+export class ConflictError extends errors.LatticeError {
+    public declare readonly body: Lattice.task.Error_;
+
+    constructor(body: Lattice.task.Error_, rawResponse?: core.RawResponse) {
+        super({
+            message: "ConflictError",
+            statusCode: 409,
+            body: body,
+            rawResponse: rawResponse,
+        });
+        Object.setPrototypeOf(this, new.target.prototype);
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, this.constructor);
+        }
+
+        this.name = "ConflictError";
+    }
+}

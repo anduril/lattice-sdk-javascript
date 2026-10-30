@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.4.0] - 2026-10-30
+### Added
+- **`sendManualControlFrame`** — new `TasksClient` method that sends a single manual control frame to an executing task, using `sessionEpochMicros` and `sequence` to manage control sessions and operator handoffs.
+- **`ManualControlFrameRequest`** and **`ManualControlFrameResponse`** — new request and response types for the manual control frame endpoint.
+- **`ConflictError`** — new error class thrown on HTTP 409, for example when a frame carries a stale session epoch.
+
 ## [5.3.0] - 2026-10-27
 ### Added
 - **`endTime`** — new optional field on `TaskStatus` carrying the time the task finished execution.

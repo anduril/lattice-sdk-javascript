@@ -112,6 +112,7 @@ export * from "./LocationGeodetic.js";
 export * from "./LocationUncertainty.js";
 export * from "./ManualControlFrame.js";
 export * from "./ManualControlFrameEvent.js";
+export * from "./ManualControlFrameResponse.js";
 export * from "./MeanKeplerianElements.js";
 export * from "./Measurement.js";
 export * from "./Media.js";

@@ -791,4 +791,100 @@ export class TasksClient {
             "/api/v1/tasks/{taskId}/manual-control/stream",
         );
     }
+
+    /**
+     * Sends a single manual control frame, for example, joystick input, for a manual control task.
+     *
+     * Call this endpoint repeatedly to control the asset executing the task. Lattice forwards each
+     * frame to the executing agent, which receives it using the stream manual control frames endpoint.
+     * The task must be in `STATUS_EXECUTING`.
+     *
+     * The client manages the control session. When it begins controlling, it generates a
+     * `sessionEpochMicros` and includes it in every request, along with a `sequence` that increases
+     * with each frame. A higher epoch replaces the current session, which allows another operator to
+     * take over control. A lower epoch is rejected as stale.
+     *
+     * @param {Lattice.ManualControlFrameRequest} request
+     * @param {TasksClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Lattice.BadRequestError}
+     * @throws {@link Lattice.UnauthorizedError}
+     * @throws {@link Lattice.NotFoundError}
+     * @throws {@link Lattice.ConflictError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
+     *
+     * @example
+     *     await client.tasks.sendManualControlFrame({
+     *         taskId: "taskId",
+     *         sessionEpochMicros: "sessionEpochMicros"
+     *     })
+     */
+    public sendManualControlFrame(
+        request: Lattice.ManualControlFrameRequest,
+        requestOptions?: TasksClient.RequestOptions,
+    ): core.HttpResponsePromise<Lattice.ManualControlFrameResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__sendManualControlFrame(request, requestOptions));
+    }
+
+    private async __sendManualControlFrame(
+        request: Lattice.ManualControlFrameRequest,
+        requestOptions?: TasksClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Lattice.ManualControlFrameResponse>> {
+        const { taskId, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LatticeEnvironment.Default,
+                `api/v1/tasks/${core.url.encodePathParam(taskId, errors.LatticeError)}/manual-control/frames`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Lattice.ManualControlFrameResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Lattice.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Lattice.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Lattice.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Lattice.ConflictError(_response.error.body as Lattice.task.Error_, _response.rawResponse);
+                default:
+                    throw new errors.LatticeError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/api/v1/tasks/{taskId}/manual-control/frames",
+        );
+    }
 }
