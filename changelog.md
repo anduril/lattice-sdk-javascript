@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.5.0] - 2026-11-06
+### Added
+- **`queryIngressStreams`** — new `VideoClient` method that returns ingress streams matching a filter, newest first, with `pageSize`/`pageToken` pagination via `QueryIngressStreamsRequest` and `QueryIngressStreamsResponse`.
+- **`IngressStreamFilter`**, **`CreatorFilter`**, and **`StringFilter`** — new filter types for matching streams by creator, ingress ID, title (exact, prefix, or contains), and status.
+- **`cameraConfiguration`** — new optional field on `Sensor` carrying camera zoom state via the new `CameraConfiguration` type.
+
 ## [5.4.0] - 2026-10-30
 ### Added
 - **`sendManualControlFrame`** — new `TasksClient` method that sends a single manual control frame to an executing task, using `sessionEpochMicros` and `sequence` to manage control sessions and operator handoffs.

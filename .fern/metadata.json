@@ -1,14 +1,14 @@
 {
-    "cliVersion": "5.186.0",
+    "cliVersion": "5.197.0",
     "generatorName": "fernapi/fern-typescript-node-sdk",
-    "generatorVersion": "3.108.0",
+    "generatorVersion": "3.108.9",
     "generatorConfig": {
         "namespaceExport": "Lattice"
     },
-    "originGitCommit": "ed40f72a7fa266532a565e043adfa01f1698c55b",
+    "originGitCommit": "df58dad73baeecf1a2af10fc7bc10a02df58691f",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "AUTO",
     "ciProvider": "circleci",
-    "sdkVersion": "5.4.0"
+    "sdkVersion": "5.5.0"
 }
