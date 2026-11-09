@@ -25,6 +25,7 @@ export * from "./Bandwidth.js";
 export * from "./BandwidthRange.js";
 export * from "./BooleanType.js";
 export * from "./BoundedShapeType.js";
+export * from "./CameraConfiguration.js";
 export * from "./CancelRequest.js";
 export * from "./Classification.js";
 export * from "./ClassificationInformation.js";
