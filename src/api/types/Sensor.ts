@@ -19,6 +19,8 @@ export interface Sensor {
     lastDetectionTimestamp?: string | undefined;
     /** Multiple fields of view for a single sensor component */
     fieldsOfView?: Lattice.FieldOfView[] | undefined;
+    /** Camera zoom state, for camera sensors. */
+    cameraConfiguration?: Lattice.CameraConfiguration | undefined;
 }
 
 export namespace Sensor {

@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.5.0] - 2026-11-09
+### Added
+- **`CameraConfiguration`** — new type describing a camera sensor's zoom state through an optional `zoomPercentage` (0–100, where 0 is fully zoomed out and 100 is fully zoomed in).
+- **`cameraConfiguration`** — new optional field on `Sensor` that reports the camera zoom state for camera sensors.
+
+### Changed
+- **`ingressId`** — documentation on `CreateIngressStreamRequest` now states that only letters, digits, and the characters `.`, `_`, `-`, and `/` are accepted.
+
 ## [5.4.0] - 2026-10-30
 ### Added
 - **`sendManualControlFrame`** — new `TasksClient` method that sends a single manual control frame to an executing task, using `sessionEpochMicros` and `sequence` to manage control sessions and operator handoffs.
