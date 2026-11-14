@@ -41,4 +41,11 @@ export interface TaskCreation {
     deliveryConstraints?: Lattice.DeliveryConstraints;
     /** Describes scheduling constraints for the agent executing the task after it has been delivered. */
     executionConstraints?: Lattice.ExecutionConstraints;
+    /**
+     * If set, then the service will not deliver this request. Useful for reporting a task
+     * that the assignee already holds. Requires an assignee, and cannot be combined with
+     * isExecutedElsewhere. The task is stored with STATUS_SENT. A later cancel is delivered
+     * as expected.
+     */
+    suppressDelivery?: boolean;
 }
