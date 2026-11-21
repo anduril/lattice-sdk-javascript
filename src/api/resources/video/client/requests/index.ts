@@ -6,3 +6,4 @@ export type { GetEgressStreamRequest } from "./GetEgressStreamRequest.js";
 export type { GetIngressStreamRequest } from "./GetIngressStreamRequest.js";
 export type { ListEgressStreamsRequest } from "./ListEgressStreamsRequest.js";
 export type { ListIngressStreamsRequest } from "./ListIngressStreamsRequest.js";
+export type { QueryIngressStreamsRequest } from "./QueryIngressStreamsRequest.js";

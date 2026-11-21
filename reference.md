@@ -1965,6 +1965,72 @@ await client.video.createIngressStream();
 </dl>
 </details>
 
+<details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">queryIngressStreams</a>({ ...params }) -> Lattice.QueryIngressStreamsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the ingress streams that match the filter, newest first. Streams
+ created through this API come first, then streams discovered on the mesh, and
+ each group starts with its newest stream. For a discovered stream, "created"
+ means when Video Manager first saw it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.video.queryIngressStreams();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Lattice.QueryIngressStreamsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VideoClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.video.<a href="/src/api/resources/video/client/Client.ts">getIngressStream</a>({ ...params }) -> Lattice.GetIngressStreamResponse</code></summary>
 <dl>
 <dd>

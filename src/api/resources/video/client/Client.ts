@@ -664,6 +664,110 @@ export class VideoClient {
     }
 
     /**
+     * Returns the ingress streams that match the filter, newest first. Streams
+     *  created through this API come first, then streams discovered on the mesh, and
+     *  each group starts with its newest stream. For a discovered stream, "created"
+     *  means when Video Manager first saw it.
+     *
+     * @param {Lattice.QueryIngressStreamsRequest} request
+     * @param {VideoClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Lattice.video.BadRequestError}
+     * @throws {@link Lattice.video.UnauthorizedError}
+     * @throws {@link Lattice.video.ForbiddenError}
+     * @throws {@link Lattice.video.InternalServerError}
+     * @throws {@link Lattice.video.ServiceUnavailableError}
+     * @throws {@link errors.LatticeError}
+     * @throws {@link errors.LatticeTimeoutError}
+     *
+     * @example
+     *     await client.video.queryIngressStreams()
+     */
+    public queryIngressStreams(
+        request: Lattice.QueryIngressStreamsRequest = {},
+        requestOptions?: VideoClient.RequestOptions,
+    ): core.HttpResponsePromise<Lattice.QueryIngressStreamsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__queryIngressStreams(request, requestOptions));
+    }
+
+    private async __queryIngressStreams(
+        request: Lattice.QueryIngressStreamsRequest = {},
+        requestOptions?: VideoClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Lattice.QueryIngressStreamsResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LatticeEnvironment.Default,
+                "api/v1/video/ingress_streams/query",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Lattice.QueryIngressStreamsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Lattice.video.BadRequestError(
+                        _response.error.body as Lattice.GoogleRpcStatus,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new Lattice.video.UnauthorizedError(
+                        _response.error.body as Lattice.GoogleRpcStatus,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new Lattice.video.ForbiddenError(
+                        _response.error.body as Lattice.GoogleRpcStatus,
+                        _response.rawResponse,
+                    );
+                case 500:
+                    throw new Lattice.video.InternalServerError(
+                        _response.error.body as Lattice.GoogleRpcStatus,
+                        _response.rawResponse,
+                    );
+                case 503:
+                    throw new Lattice.video.ServiceUnavailableError(
+                        _response.error.body as Lattice.GoogleRpcStatus,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.LatticeError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/api/v1/video/ingress_streams/query",
+        );
+    }
+
+    /**
      * Retrieves a top level ingress stream object and its associated metadata. This includes
      *  ingress streams and internal Anduril streams.
      *

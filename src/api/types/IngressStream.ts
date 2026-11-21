@@ -16,7 +16,11 @@ export interface IngressStream {
     mpegTs?: Lattice.MpegTsIngress | undefined;
     rtsp?: Lattice.RtspIngress | undefined;
     srt?: Lattice.SrtIngress | undefined;
-    /** Wall-clock time the stream was created. */
+    /**
+     * When the stream was created. For a stream discovered on the mesh rather than
+     *  created through this API, this is when Video Manager first saw it, which can
+     *  reset if Video Manager restarts.
+     */
     createdAt?: string | undefined;
     /**
      * Wall-clock time the stream's status (STREAM_STATUS) was changed. The status can change based on the activity or

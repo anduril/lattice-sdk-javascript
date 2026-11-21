@@ -1136,6 +1136,179 @@ describe("VideoClient", () => {
         }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
     });
 
+    test("queryIngressStreams (1)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            ingressStreams: [
+                {
+                    ingressId: "ingressId",
+                    title: "title",
+                    status: "STREAM_STATUS_UNSPECIFIED",
+                    createdAt: "2024-01-15T09:30:00Z",
+                    updatedAt: "2024-01-15T09:30:00Z",
+                    egressIds: ["egressIds"],
+                },
+            ],
+            nextPageToken: "nextPageToken",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/video/ingress_streams/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.video.queryIngressStreams();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("queryIngressStreams (2)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/video/ingress_streams/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.video.queryIngressStreams();
+        }).rejects.toThrow(Lattice.video.BadRequestError);
+    });
+
+    test("queryIngressStreams (3)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/video/ingress_streams/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.video.queryIngressStreams();
+        }).rejects.toThrow(Lattice.video.UnauthorizedError);
+    });
+
+    test("queryIngressStreams (4)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/video/ingress_streams/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.video.queryIngressStreams();
+        }).rejects.toThrow(Lattice.video.ForbiddenError);
+    });
+
+    test("queryIngressStreams (5)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/video/ingress_streams/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(500)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.video.queryIngressStreams();
+        }).rejects.toThrow(Lattice.video.InternalServerError);
+    });
+
+    test("queryIngressStreams (6)", async () => {
+        const server = mockServerPool.createServer();
+        mockOAuth(server);
+
+        const client = new LatticeClient({
+            maxRetries: 0,
+            clientId: "test_client_id",
+            clientSecret: "test_client_secret",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .post("/api/v1/video/ingress_streams/query")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(503)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.video.queryIngressStreams();
+        }).rejects.toThrow(Lattice.video.ServiceUnavailableError);
+    });
+
     test("getIngressStream (1)", async () => {
         const server = mockServerPool.createServer();
         mockOAuth(server);
