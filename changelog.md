@@ -1,5 +1,9 @@
 # Changelog
 
+## [5.6.0] - 2026-11-26
+### Added
+- **`suppressDelivery`** — new optional field on `TaskCreation` that records a task without delivering it, for reporting a task the assignee already holds. It requires an assignee, cannot be combined with `isExecutedElsewhere`, and stores the task with STATUS_SENT.
+
 ## [5.5.0] - 2026-11-09
 ### Added
 - **`CameraConfiguration`** — new type describing a camera sensor's zoom state through an optional `zoomPercentage` (0–100, where 0 is fully zoomed out and 100 is fully zoomed in).
